@@ -1,0 +1,455 @@
+= MUnit Maven Plugin Configuration
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The MUnit Maven Plugin offers a set of optional parameters that can be configured.
+
+.Maven Plugin Parameters
+[%header,cols="3,^2,4"]
+|===
+|Name    |Type | Description
+|<<Additional Classpath Elements,additionalClasspathElements>>       |List  |Additional entries to be appended to the classpath.
+|<<Additional argument lines,argLines>>       |List  |Additional JVM argument lines to set on the test run.
+|<<Exclude Dependencies from the Classpath,classpathDependencyExcludes>>       |List  |Dependencies to be excluded from the classpath. Must follow the format `groupId:artifactId`.
+|<<Coverage,coverage>>     | Configuration | Coverage configuration to be set on the test run.
+|<<Dynamic Ports,dynamicPorts>>       |List  |Dynamic ports to be set on the test run.
+|<<Enable surefire reports,enableSurefireReports>>       |boolean  |Set value to `true` to generate MUnit test results in the surefire format. +
+*Default value: `true`*
+|<<Environment Variables,environmentVariables>>       |Map  |Additional environment variables to be set on the test run.
+|<<Mule Working Directory,muleWorkingDirectory >>     |File  |Directory to be used as Mule working directory. +
+*Default value: `${project.build.directory}/.mule`*
+|<<Redirect Test Output to File,redirectTestOutputToFile>>      |boolean  |Set value to `true` to redirect the MUnit tests standard output to a file. +
+*Default value: `false`*
+|<<System Properties Variables,systemPropertyVariables>>       |Map  |System properties to be set on the test run.
+|<<Test Output Directory,testOutputDirectory>>       |File  |Directory where the test outputs will be written to. +
+*Default value: `${project.build.directory}/munit-reports/output/`*
+|===
+
+== Additional Classpath Elements
+
+During a test run, you may want to add additional elements to the classpath such as a resource or an external library. The path of this entry must be specified, and it will be added at the end of the classpath. The path specified can be absolute or written as a maven placeholder.
+
+.Additional Classpath Element using absolute paths
+[source,xml,linenums]
+----
+<additionalClasspathElements>
+    <additionalClasspathElement>/path/to/myfile.jar</additionalClasspathElement>
+</additionalClasspathElements>
+----
+
+.Additional Classpath Element using a maven placeholder
+[source,xml,linenums]
+----
+<additionalClasspathElements>
+    <additionalClasspathElement>${project.basedir}/lib/myfile.jar</additionalClasspathElement>
+</additionalClasspathElements>
+----
+
+== Additional argument lines
+
+Since the tests are being run in a new JVM, additional argument lines can be specified
+to the JVM. Each argument should be specified in separate `argLine`.
+
+.Argument lines
+[source,xml,linenums]
+----
+<argLines>
+    <argLine>-XX:MaxPermSize=512m</argLine>
+    <argLine>-Xmx1024m</argLine>
+</argLines>
+----
+
+== Exclude Dependencies from the Classpath
+
+In contrast to adding elements to the classpath, there is a way of excluding dependencies from
+the classpath by specifying its `groupId` and `artifactId` with the format `groupId:artifactId`.
+
+.Exclude dependency from classpath
+[source,xml,linenums]
+----
+<classpathDependencyExcludes>
+    <classpathDependencyExclude>com.example:myproject</classpathDependencyExclude>
+</classpathDependencyExcludes>
+----
+
+== Coverage
+
+MUnit used to have a basic coverage feature only available from Anypoint Studio.
+Since MUnit version `1.2.0` this feature is also available from the command line by the use of the MUnit Maven Plugin.
+
+=== Configuration
+
+The following section covers how to configure MUnit Coverage.
+
+A basic set of Coverage related features is in Anypoint Studio. However, the full set of features is only
+available when running from Maven. Thus all of the configuration is done through the `pom.xml` file.
+
+==== Enabling Coverage
+
+To enable MUnit Coverage, add the following configuration to the MUnit Plugin:
+
+.MUnit Coverage - Minimal Configuration
+[source,xml,linenums]
+----
+<plugin>
+  <groupId>com.mulesoft.munit.tools</groupId>
+  <artifactId>munit-maven-plugin</artifactId>
+  <version>${project.version}</version>
+  ...
+  <configuration>
+    <coverage>
+      <runCoverage>true</runCoverage>   //<1>
+    </coverage>
+  </configuration>
+</plugin>
+----
+<1> This enables the coverage feature
+
+When enabling MUnit Coverage, you only see a summary report in the console.
+By default no other action is taken so it's merely informative.
+
+This is how a summary report looks like:
+
+[source,console,linenums]
+----
+[INFO] [CoverageManager] Printing Coverage Report...
+[INFO] ===============================================================================
+[INFO] MUnit Coverage Summary
+[INFO] ===============================================================================
+[INFO]  * Resources: 3 - Flows: 6 - Message Processors: 7
+[INFO]  * Application Coverage: 71.43%
+----
+
+
+To configure the JSON report generation for the MUnit Plugin, you need to add the following configuration in your `pom.xml` file:
+
+[source,xml,linenums]
+----
+<coverage>
+<runCoverage>true</runCoverage>
+  <formats>
+    <format>json</format>
+  </formats>
+</coverage>
+----
+
+==== Failing Build
+
+One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
+
+To make the build fail, add the following lines to the configuration:
+
+.MUnit Coverage - Fail Build
+[source,xml,linenums]
+----
+<coverage>
+  <runCoverage>true</runCoverage>
+  <failBuild>true</failBuild>       //<1>
+</coverage>
+----
+<1> Enable *Fail Build Feature*
+
+Now, the next logical step is to define the coverage levels.
+
+MUnit Coverage handles three different levels:
+
+* Application
+* Resource
+* Flow
+
+Here is how to define the required coverage level:
+
+.MUnit Coverage - Require Coverage
+[source,xml,linenums]
+----
+<coverage>
+  <runCoverage>true</runCoverage>
+  <failBuild>true</failBuild>
+
+  <requiredApplicationCoverage>20</requiredApplicationCoverage>
+  <requiredResourceCoverage>10</requiredResourceCoverage>
+  <requiredFlowCoverage>5</requiredFlowCoverage>
+</coverage>
+----
+
+TIP: Each value represents a percentage.
+
+If you define coverage levels, but set the property `failBuild` to *false*, and if the levels are not reached, a warning shows up in the MUnit Coverage summary.
+
+Something like this:
+
+[source,console,linenums]
+----
+INFO] [CoverageManager] Printing Coverage Report...
+[INFO] ===============================================================================
+[INFO] MUnit Coverage Summary
+[INFO] ===============================================================================
+[INFO]  * Resources: 3 - Flows: 6 - Message Processors: 7
+[INFO]  * Application Coverage: 71.43%
+[NOTE]
+[WARNING] ----------------------------- WARNING --------------------------------------
+[WARNING]  * Application coverage is below defined limit. Required: 100.0% - Current: 71.43%  //<1>
+----
+<1> Warning detailing which coverage level wasn't meet
+
+TIP: If no level is defined, -1 is assumed, which indicates that the build won't fail due to lack of coverage.
+
+==== Ignoring Flows
+
+Another feature we provide is the ability to ignore a flow. This way the flow:
+
+* Doesn't count as coverage data.
+* Doesn't affect the overall number of message processors.
+* Doesn't cause a build to fail if the flow is not tested or if the flow doesn't reach coverage metrics.
+
+To ignore a flow, add the following lines to the configuration:
+
+.MUnit Coverage - Ignoring Flows
+[source,xml,linenums]
+----
+<coverage>
+  <ignoreFlows>
+	  <ignoreFlow>the-name-of-your-flow</ignoreFlow>       //<1>
+  </ignoreFlows>
+</coverage>
+----
+<1> The name of the flow you want to ignore.
+
+This is a list, so you can ignore as many flows as you need.
+
+==== Reports
+
+As we've shown before by default, MUnit Coverage shows summary report in the console. But that's not the only option.
+MUnit Coverage currently offers two types of reports:
+
+* Console
+* HTML
+* JSON
+
+The *Console* report is printed in the console. It works with the summary report and
+shows details of each resource, flow, sub-flow, and batch, and its coverage level.
+
+The *HTML* report shows the same information, which you can view in any web browser.
+To access the *HTML* report, browse your application folder structure:
+
+* `${application.path}/target/munit-reports/coverage`
+
+Locate the file *summary.html*, which is the starting point of the report and lets you navigate through all the data.
+
+The *JSON* report shows the same information as the _HTML_ report, in a JSON format. +
+To access the JSON report file, browse your application folder structure:
+
+----
+${application.path}/target/munit-reports/coverage-json/report.json
+----
+
+To enable the reports, add the following configuration:
+
+.MUnit Coverage - Report Configuration
+[source,console,linenums]
+----
+<coverage>
+  <runCoverage>true</runCoverage>
+
+  <formats>
+    <format>console</format>  //<1>
+    <format>html</format>     //<2>
+    <format>json</format>     //<3>
+  </formats>
+</coverage>
+----
+<1> Console report
+<2> HTML report
+<3> JSON report
+
+TIP: You can have none, one, or all the report types added to your configuration.
+
+== Dynamic Ports
+
+When testing a Mule application in a continuous integration (CI) environment, you might encounter the following scenario:
+
+`Your application tries to open a specific port. The port is already in use. The application fails with a port binding exception.`
+
+The easy solution to this problem is to have your application use a free port.
+The MUnit Maven Plugin comes with a built-in feature to do just that.
+
+`MUnit Dynamic Ports` instructs the MUnit Maven Plugin to look for unbound ports and reserve them before running the tests over the Mule application. Each port selected is placed in a system property under the name indicated in the configuration.
+The application can acquire the port number through the use of placeholders afterward.
+
+TIP: The Ports to be selected by the plugin are taken from the following range: `[40000,50000)`
+
+[CAUTION]
+--
+Dynamic Ports feature is only available as part of the MUnit Maven Plugin. +
+You can not expect this feature to work when running tests from inside Anypoint Studio.
+--
+
+=== Enabling Dynamic Ports
+
+To enable the feature, you need to add the following code to the `configuration` section of the MUnit Maven Plugin:
+
+.Dynamic Ports Configuration
+[source,xml,linenums]
+----
+<dynamicPorts>
+  <dynamicPort>a.dynamic.port</dynamicPort>
+</dynamicPorts>
+----
+
+If you have the `${http.port}` placeholder in your application, the configuration looks something like:
+
+.Example
+[source,xml,linenums]
+----
+<dynamicPorts>
+  <dynamicPort>http.port</dynamicPort>
+</dynamicPorts>
+----
+
+==== Preparing Your Application
+
+A placeholder must parametrize the part of the application trying to make use of a port. +
+For instance, you may want to have your Mule application listening for HTTP traffic. To do that you should provide the following configuration:
+
+.HTTP Simple Application
+[source,xml,linenums]
+----
+<http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081"/>
+<flow name="httpFlow">
+    <http:listener config-ref="HTTP_Listener_Configuration" path="/"/>
+</flow>
+----
+
+Now this application always listens in port `8081`. To make it dynamic, change it to:
+
+.HTTP Simple Application with dynamic port
+[source,xml,linenums]
+----
+<http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${http.port}"/> //<1>
+<flow name="httpFlow">
+    <http:listener config-ref="HTTP_Listener_Configuration" path="/" />
+</flow>
+----
+<1> Notice the placeholder `${http.port}`.
+
+With the application coded in this way and the configuration of Dynamic Ports in place, your application starts each run listening on a different port.
+
+== Enable surefire reports
+
+MUnit has built-in support for Surefire. No additional configuration is needed for this but it can be disabled if not needed.
+
+.Disabling surefire reports
+[source,xml,linenums]
+----
+<enableSurefireReports>false</enableSurefireReports>
+----
+
+The reports can be found under `${project.build.directory}/surefire-reports`.
+
+By default, it is set to `true`.
+
+== Environment Variables
+
+To set additional environment variables during the test run, you can specify
+them with the respective key and value.
+
+.Additional Environment Variables
+[source,xml,linenums]
+----
+<environmentVariables>
+  <MY_ENV>exampleValue</MY_ENV>
+</environmentVariables>
+----
+
+Environment variables can be used to replace placeholders such as `${MY_ENV}`
+(using the example above).
+
+== Mule Working Directory
+
+Changing the mule working directory can be useful if there is a need to specify
+a different directory that won't be overridden by another run. +
+The path specified can be absolute or written as a maven placeholder.
+
+.Mule Working Directory using an absolute path
+[source,xml,linenums]
+----
+<muleWorkingDirectory>/My/Absolute/Path</muleWorkingDirectory>
+----
+
+.Mule Working Directory using maven placeholder
+[source,xml,linenums]
+----
+<muleWorkingDirectory>${project.build.directory}/mymulefolder</muleWorkingDirectory>
+----
+
+By default, the mule working directory is `${project.build.directory}/.mule`.
+
+== Redirect Test Output to File
+
+When running several tests, the build output can get very complex to read. You may want
+to redirect the output of each Test suite to a file. This way what remains in the build
+output will be the test results and to check the standard output of each test suite you can find it
+in its respective file.
+
+These files will be located in the `testOutputDirectory` folder following this naming convention:
+`munit.${suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the
+MUnit test folder.
+
+The test run output that doesn't belong to a particular suite won't be printed to keep the build output clean, but it can be enabled by running maven in _debug_ mode.
+
+.Redirect test output to file
+[source,xml,linenums]
+----
+<redirectTestOutputToFile>true</redirectTestOutputToFile>
+----
+
+By default, it is set to `false`
+
+== System Properties Variables
+
+You may wish to define specific system variables needed for your MUnit test to run successfully. The example below shows how you can send them.
+
+.Setting system property variables
+[source,xml,linenums]
+----
+    <systemPropertyVariables>
+      <my.property.key>my.property.value</my.property.key>
+    </systemPropertyVariables>
+----
+System Property variables override any property set in the `mule-
+app.properties` file or with a property placeholder.
+
+[TIP]
+====
+Depending on the execution context, the system properties values may vary. When referencing these properties, it is a good practice to override their value to enforce test reproducibility.
+
+You can do so using the ­`-D` argument when running MUnit with Maven. +
+Variables passed with the `-D` argument take full priority over any other property.
+
+For example:
+
+`-Dmy.property.key=my.property.another.value`
+====
+
+
+
+
+== Test Output Directory
+
+You may want to choose the location where the test output files will be created.
+The path specified can be absolute or written as a maven placeholder.
+
+.Test output directory with absolute path
+[source,xml,linenums]
+----
+<testOutputDirectory>/my/absolute/path</testOutputDirectory>
+----
+
+.Test output directory using maven placeholders
+[source,xml,linenums]
+----
+<testOutputDirectory>${project.build.directory}/my/output/folder</testOutputDirectory>
+----
+
+By default, the files will be created in `${project.build.directory}/munit-reports/output/`.

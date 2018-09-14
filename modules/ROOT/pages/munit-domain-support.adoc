@@ -1,0 +1,109 @@
+= MUnit Domain Support
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+
+Mule allows you to define connectors and libraries in a _Mule Domain_, to which you can deploy different Mule applications. +
+These _domain based applications_ can xref:3.8@mule-runtime::shared-resources.adoc[share the resources configured in the domain] to which they were deployed.
+
+With *Domain Support*, MUnit allows you to test applications that run referencing a mule domain.
+
+[NOTE]
+--
+MUnit Domain Support in Anypoint Studio is available since Anypoint Studio 6.1 (which comes shipped with MUnit Studio Plugin 1.3).
+--
+
+== Using MUnit to Test Domain Based Applications
+
+This section assumes that you are testing a Mule application for which you xref:3.8@mule-runtime::shared-resources.adoc#creating-a-new-domain[created a domain project], and xref:3.8@mule-runtime::shared-resources.adoc#associating-applications-with-the-domain[associated said application to that domain].
+
+MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account based on the characteristics of your application and domain, for example, if such projects are link:/mule-user-guide/v/3.8/enabling-maven-support-for-a-studio-project[Mavenized].
+
+[WARNING]
+--
+Regardless if your application is Maven based or not, when working in Anypoint Studio your Mule Domain must *always* be part of your workspace.
+--
+
+=== Testing Non Mavenized Domain Based Applications
+
+Domain Support in MUnit for non mavenized projects works without the need of applying any extra configurations.
+
+When running a test for a non mavenized project in Studio 6.0.1, MUnit searches your domain settings and checks if such configuration exists:
+
+The following log example shows up every time you run an MUnit test from Studio 6.0.1:
+
+----
+INFO  2016-06-09 15:51:28,253 [main] org.mule.munit.runner.domain.MunitDomainContextBuilder: Loading mule-deploy.properties ...
+----
+
+=== Testing Mavenized Domain Based Applications
+
+When working with mavenized applications, there are a couple of considerations you need to have before running the test:
+
+==== Your Folder Must Have the Same Name as Your Artifact
+
+The folder in your workspace containing your Mule project (regardless if it's a Mule application or a Mule domain) must have the same name as the artifact ID defined in your pom file.
+
+If your mule project's artifact Id is:
+
+[source,xml,linenums]
+----
+<artifactId>mule-project</artifactId>
+----
+
+Then, the folder in your Studio workspace must be named `mule-project`. +
+This is case sensitive. If your folder is named `Mule-Project`, MUnit won't recognize your project.
+
+==== Your Domain Needs to be Mavenized
+
+The domain is a mavenizable artifact and you can link:/mule-user-guide/v/3.8/enabling-maven-support-for-a-studio-project#mavenizing-an-existing-mule-project[mavenize it directly from Studio]. +
+If you are working on an application and choose to mavenize it, Mule checks if its associated domain is also mavanized. If not, it will prompt you to mavenize it as well.
+
+image::munit-domain-support-6f395.png[]
+
+Mavenizing your Mule application and your Mule Domain allows you to expose both *resources* as dependencies for other Maven projects.
+
+==== Your Resources Need to be Installed in an M2 Repository
+
+Remember that when you mavenize your domain, you need to install it in an .M2 repository.
+
+[CAUTION]
+--
+When working with Maven, you need to handle domains and mule apps as regular dependencies. +
+Setting them as an artifact requires for them to be installed in an .M2 repository.
+--
+
+==== Your Resources Need to be In Your Test Suite pom File
+
+When mavenizing your Mule application, Studio automatically adds your mavenized domain to your application's `pom` file.
+
+If your Mule domain project looks like this:
+
+[source,xml,linenums]
+----
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.mulesoft</groupId>
+<artifactId>domain-project</artifactId>
+<packaging>mule-domain</packaging>
+<version>1.0.0-SNAPSHOT</version>
+<name>Domain domain-project Project</name>
+----
+
+Then your dependency in your Mule application should look like this:
+
+[source,xml,linenums]
+----
+<dependency>
+<groupId>com.mulesoft</groupId>
+<artifactId>domain-project</artifactId>
+<version>1.0.0-SNAPSHOT</version>
+<scope>test</scope>
+<type>zip</type>
+</dependency>
+----
+
+[NOTE]
+--
+Remember to keep consistency with `<version>` artifact in your repository and in your test suite's pom file
+--

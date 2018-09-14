@@ -1,0 +1,160 @@
+= MUnit Coverage Reports
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+== Objective
+
+The MUnit Coverage feature provides a metric on how much of a Mule application has been executed by a set of MUnit tests.
+This lets the users obtain a quality metric for the application.
+For more information, see this https://en.wikipedia.org/wiki/Code_coverage[Wikipedia article on Code Coverage].
+
+It's worth noticing, MUnit Coverage is based on the amount of message processors executed.
+MUnit Coverage provides metrics for:
+
+* *Application overall coverage*: An average of the items below.
+* *Resource coverage*: Refers to each Mule configuration file under `src/main/app`. Each of is considered a resource by MUnit Coverage.
+* *Flow coverage*: Refers to any of the following `Flows`, `Sub-flows`, and `Batch jobs`.
+
+[NOTE]
+Coverage report runs only for EE edition runtimes
+
+== Calculating Coverage
+
+The MUnit Coverage Module unit of measure is the link:/mule-fundamentals/v/3.8/begin-with-the-basics#message-processors[message processor]. +
+MUnit calculates coverage by counting all the message processors that have been executed as result of the MUnit test being run and comparing that number with the amount of message processors that compose the whole application. +
+Although the reports arrange the resulting information by flow and configuration file, the calculations are run against the number of message processors.
+
+As a general rule each XML node inside a top-level XML node is a message processor. That is each node inside a flow, sub-flow, catch, batch. +
+_Top-level elements_ are not message processors.
+
+Given the nature of XML structure this definition might lead to confusion, mostly when it comes to _container elements_ (XML containing child elements). +
+In order to avoid such confusion here is a list of the most common message processors that are containers in Mule and how they are accounted by the MUnit Coverage:
+
+* *Container Elements Considered Message Processors*
+** Enricher
+** Processor chain
+** Choice Router (but not the _when_ or _otherwise_ conditions)
+** Until Successful
+** First Successful
+** Scatter Gather
+** For Each
+** Round Robin
+** Splitter
+* *Container Elements Not Considered Message Processors*
+** Batch Step
+** Catch
+** Catch ref
+** Choice Exception Strategy
+
+== Coverage Report Sample
+
+The following is a coverage report sample in JSON format. +
+Use the code callouts below to understand each field in the report:
+
+[source,json,linenums]
+----
+{
+ "coverage" : 75.0, //<1>
+ "requiredApplicationCoverage" : 40.0, //<2>
+ "requiredResourceCoverage" : 30.0,
+ "requiredFlowCoverage" : 25.0,
+ "flowCount" : 3, //<3>
+ "messageProcessorCount" : 4, //<4>
+ "files" : [ {
+   "coverage" : 100.0, //<5>
+   "flowCount" : 1, //<6>
+   "messageProcessorCount" : 2, //<7>
+   "weight" : 100.0, //<8>
+   "flows" : [ {
+     "coverage" : 100.0, //<9>
+     "messageProcessorCount" : 2, //<10>
+     "name" : "file1Flow1" //<11>
+   } ],
+   "name" : "file1.xml" //<12>
+ }, {
+   "coverage" : 50.0,
+   "flowCount" : 2,
+   "messageProcessorCount" : 2,
+   "flows" : [ {
+     "coverage" : 0.0,
+     "messageProcessorCount" : 1,
+     "name" : "file2Flow1"
+   }, {
+     "coverage" : 100.0,
+     "messageProcessorCount" : 1,
+     "name" : "file2Flow2"
+   } ],
+   "name" : "file2.xml"
+ } ]
+}
+----
+
+<1> Coverage percentage of the whole application
+<2> Required coverages for application, resources and flow, if the
+user did not configure any value it defaults to -1
+<3> Amount of flows in the application
+<4> Amount of message processors in the application
+<5> Coverage percentage of that file
+<6> Amount of flows in that file
+<7> Amount of message processors in that file
+<8> Contribution of that file to the coverage percentage of the whole application
+<9> Coverage percentage of that flow
+<10> Amount of message processors in that flow
+<11> Name of that flow
+<12> Name of that file
+
+
+=== Considerations For Calculating Coverage
+
+==== Not Drawable Nodes
+
+If you are using older versions of the Mule Runtime, some older message processors might not have a graphical representation in the studio canvas. +
+For example, using a ´processor-chain´ component (deprecated since Mule 3.2), in a xref:3.8@mule-runtime::routers.adoc#first-successful[first successful] router displays only two from the three message processors that MUnit considers to calculate coverage:
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::munit-coverage-report-494f6.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+<flow name="tomFlow">
+   <first-successful>
+       <processor-chain name="chain">
+   	    <logger level="INFO"/>
+       </processor-chain>
+   </first-successful>
+</flow>
+=====
+
+Comparing the example above, the `processor-chain` message processor is omitted from the Studio canvas.
+
+==== Catch Exception Strategies
+
+Since this release, `Catch Exception Strategies` are being accounted for coverage calculation. +
+A flow with a catch exception strategy that is not executed by the MUnit tests, will not reach 100% percent coverage.
+
+Global Catch Exception Strategies are going to be listed in the reports at the same level as the Flows/Sub-flows. However, Global Catch Exception Strategies that are not referenced, will not be accounted for coverage. +
+If no component refers to the global catch exception strategy coverage will still be 100%.
+
+==== Known Issues
+
+So far we have found only a couple of scenarios where coverage may not be reported properly. +
+Unfortunately those cases cannot be fixed from MUnit. Issues were created in the proper products in order to address them.
+
+In order to make them easy to ID we list the scenarios where coverage might be reported incorrectly:
+
+* First Successful component (with no processor chain in all its paths)
+* Sub-flow containing scatter gather
+
+
+== Coverage in Maven
+You can run coverage reports for your Mule application using the MUnit Maven Pluging by following the instructions in xref:munit-maven-support.adoc#coverage[Munit Maven Plugin section].
+
+== Coverage in Anypoint Studio
+
+You can run coverage reports for your MUnit tests from Studio by following the steps detailed in the xref:using-munit-in-anypoint-studio.adoc#viewing-coverage-reports[MUnit in Studio section].

@@ -1,0 +1,367 @@
+= The MUnit Maven Plugin
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The MUnit Maven Plugin makes it possible to run the XML-based tests. +
+This section is dedicated to show how to run your tests using the plugin.
+
+The MUnit Maven Plugin also offers a set of configurations that you can tune. Learn how to configure such parameters in the xref:munit-maven-plugin-configuration.adoc[reference documentation].
+
+== Running MUnit Tests From Maven
+
+.Running MUnit tests in a project example
+[source,console]
+----
+mvn clean test
+----
+
+[NOTE]
+Since MUnit 1.3 the test suites run in a new JVM, providing a set of additional features
+
+=== Running a Specific MUnit Test Suite
+
+You can instruct MUnit Maven Plugin to run only tests that belong to a specific test suite.
+
+To do this, we use the property `munit.test`.
+
+.Running a specific MUnit Test Suite example
+[source,console]
+----
+mvn clean test -Dmunit.test=<regex-test-suite>
+----
+
+The property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation.
+
+The following is a valid example:
+[source,console]
+----
+mvn clean test -Dmunit.test=.*my-test.*
+----
+
+You can leverage this feature by adding naming conventions to your MUnit Test suites.
+
+=== Running Specific MUnit Tests
+
+In the same way that you instruct MUnit to run one test suite, you can also tell it to run a specific test inside that test suite. To do so, we again make use of the property `munit.test`, with one addition:
+
+[source,console]
+----
+mvn clean test -Dmunit.test=<regex-test-suite>#<regex-test-name>
+----
+
+The addition is the special character `#`. To the right of it you should type the test name. It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test. +
+Regular expressions must be enclosed between double quotes.
+
+The following is a valid example:
+[source,console]
+----
+mvn clean test -Dmunit.test=".*my-test.*#.*test-scenario-1.*"
+----
+
+[TIP]
+--
+The tests inside the MUnit Test Suite that don't match the regular expression is flagged as *ignored*.
+--
+
+== Skip MUnit Tests
+
+=== Skipping All Tests
+
+When building your application, you may want to prevent a test from running. MUnit leverages the same mechanism as Maven, so if you wish to skip tests, you can make use of the parameter `skipTests`.
+
+.Skipping Tests example
+[source,console]
+----
+mvn clean package -DskipTests
+----
+
+=== Skipping Only MUnit Tests
+
+MUnit also comes with another property that only prevents MUnit tests from running.
+While at the same time allowing any other test, like JUnit tests, to keep running.
+
+If you wish to skip only MUnit tests, you can make use of the parameter `skipMunitTests`.
+
+.Skipping MUnit Tests example
+[source,console]
+----
+mvn clean package -DskipMunitTests
+----
+
+TIP: The property `skipMunitTests` applies only to the XML based MUnit tests.
+
+
+== Working With Parent POMs
+
+You can declare the MUnit plugin in a parent POM file and every child project under this file can choose to reference this definition.
+
+In order to make a proper use of the MUnit plugin in a parent-child POM relationship, you need to include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file:
+
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.pirate</groupId>
+    <artifactId>pirate-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <munit.version>1.3.5-SNAPSHOT</munit.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.mulesoft.munit.tools</groupId>
+                    <artifactId>munit-maven-plugin</artifactId>
+                    <version>${munit.version}</version>
+                    <executions>
+                        <execution>
+                            <id>test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <coverage>
+                            <runCoverage>true</runCoverage>
+                            <failBuild>false</failBuild>
+                            <requiredApplicationCoverage>0</requiredApplicationCoverage>
+                            <requiredResourceCoverage>0</requiredResourceCoverage>
+                            <requiredFlowCoverage>0</requiredFlowCoverage>
+                            <formats>
+                                <format>console</format>
+                                <format>html</format>
+                            </formats>
+                        </coverage>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
+----
+
+This *pirate-pom* project declares the MUnit Maven plugin in its _plugin management_ section, which defines a global configuration that each child under this parent can choose to <<inherit, reference>>, <<override,override>> or even <<ignore,ignore>>.
+
+[[inherit]]
+=== Inherit Parent's Plugin
+
+If you choose to inherit the MUnit plugin in your child POM files, you need to reference it in a _<plugin>_ section of each child _POM_ file individually:
+
+.POM child file sample
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.pirate</groupId>
+        <artifactId>pirate-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>ninja</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>mule</packaging>
+    <name>Mule ninja Application</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mule.version>3.8.0</mule.version>
+        <mule.tools.version>1.1</mule.tools.version>
+        <munit.version>1.3.5</munit.version>
+        <mule.munit.support.version>3.8.0</mule.munit.support.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    </project>
+----
+
+This quick sample references _pirate-pom_ file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because MUnit plugin configuration is being inherited from the `<pluginManagement>` section in the parent.
+
+[[override]]
+==== Inherit Plugin and Override Parent's Configuration
+
+When inheriting the plugin from a parent POM file, you can also choose to override the parent's configuration, but keep in mind that overriding completely suppresses the original configuration, requiring you to declare all necessary configurations again:
+
+.POM child file overriding coverage report's format
+[source,xml,linenums]
+----
+<plugin>
+	<groupId>com.mulesoft.munit.tools</groupId>
+	<artifactId>munit-maven-plugin</artifactId>
+	<configuration>
+		<coverage>
+			<runCoverage>true</runCoverage>
+			<formats>
+				<format>html</format>
+			</formats>
+		</coverage>
+	</configuration>
+</plugin>
+----
+
+In this example, this child project is overriding the console coverage report, replacing it only by the HTML one, but since the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) are not being referenced, this child file won't inherit them and the default values will apply.
+
+[[ignore]]
+=== Ignore Parent's Plugin
+
+Each child project under a parent `pom` file can choose to ignore the plugin referenced in the  parent's plugin management section and not implement the plugin declared there.
+
+By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriting the plugin declared in *pirate-pom*:
+
+.Child POM file not inheriting the MUnit Maven Plugin
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.pirate</groupId>
+        <artifactId>pirate-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>ninja</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>mule</packaging>
+    <name>Mule ninja Application</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mule.version>3.8.0</mule.version>
+        <mule.tools.version>1.1</mule.tools.version>
+        <munit.version>1.3.5</munit.version>
+        <mule.munit.support.version>3.8.0</mule.munit.support.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-app-maven-plugin</artifactId>
+                <version>${mule.tools.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <copyToAppsDirectory>true</copyToAppsDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>project</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    </project>
+----
+
+== Reading MUnit Test Results
+
+This section briefly explains how to read the MUnit console logs.
+
+.Successful Build
+[source,console,linenums]
+----
+=======================================================
+===========  Running  test-config.xml  test ===========
+=======================================================
+Running testingEchoFlow
+SUCCESS - Test testingEchoFlow finished Successfully.
+
+===========================================================================
+Number of tests run: 1 - Failed: 0 - Errors: 0 - Skipped: 0
+===========================================================================
+
+    =====================================
+      Munit Summary
+    =====================================
+     >> test-config.xml test result: Errors: 0, Failures:0
+----
+
+.Failed Build
+[source,console,linenums]
+----
+=======================================================
+===========  Running  test-config.xml  test ===========
+=======================================================
+Running testingEchoFlow
+FAILURE - The test testingEchoFlow finished with a Failure.
+expected:< Bye world!> but was:< Hello world!>
+java.lang.AssertionError: expected:< Bye world!> but was:< Hello world!>
+    at testingEchoFlow.munit:assert-payload-equals{payloadIs-ref= Bye world!}(test-config.xml:22)
+    at testingEchoFlow.munit:assert-not-null{}(test-config.xml:21)
+    at echoFlow .mule:echo-component{}(mule-config.xml:8)
+    at testingEchoFlow.munit:set{payload-ref= Hello world!}(test-config.xml:19)
+
+
+===========================================================================
+Number of tests run: 1 - Failed: 1 - Errors: 0 - Skipped: 0
+===========================================================================
+
+    =====================================
+      Munit Summary
+    =====================================
+     >> test-config.xml test result: Errors: 0, Failures:1
+         ---testingEchoFlow <<< FAILED
+----
+
+.Build Error
+[source,console,linenums]
+----
+=======================================================
+===========  Running  test-config.xml  test ===========
+=======================================================
+Running testingEchoFlow
+ERROR - The test testingEchoFlow finished with an Error.
+Failed to invoke set. Message payload is of type: NullPayload
+org.mule.api.MessagingException: Failed to invoke set. Message payload is of type: NullPayload
+    at testingEchoFlow.munit:set{payload-ref=#[string: Hello world!]}(test-config.xml:19)
+Caused by: org.mule.api.expression.InvalidExpressionException: [Error: unknown class or illegal statement: org.mvel2.ParserContext@b6ba69]
+[Near : {... string: Hello world! ....}]
+                               ^
+[Line: 1, Column: 19]
+    at org.mule.el.mvel.MVELExpressionLanguage.validate(MVELExpressionLanguage.java:244)
+    at org.mule.el.mvel.MVELExpressionLanguage.evaluateInternal(MVELExpressionLanguage.java:195)
+    at org.mule.el.mvel.MVELExpressionLanguage.evaluate(MVELExpressionLanguage.java:169)
+
+
+===========================================================================
+Number of tests run: 1 - Failed: 0 - Errors: 1 - Skipped: 0
+===========================================================================
+
+    =====================================
+      Munit Summary
+    =====================================
+     >> test-config.xml test result: Errors: 1, Failures:0
+         ---testingEchoFlow <<< ERROR
+----

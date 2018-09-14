@@ -1,0 +1,8 @@
+= MUnit Utilities
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+MUnit provides a set of utilities for you to write your tests in a portable way and mock external system connections from your tests.
+
+You can start a xref:munit-database-server.adoc[Database] and an xref:munit-ftp-server.adoc[FTP] server in your local environment and open a xref:run-and-wait-scope.adoc[Run and Wait Scope] to configure your automated tests to start just after the threads opened by your production code have finished processing.

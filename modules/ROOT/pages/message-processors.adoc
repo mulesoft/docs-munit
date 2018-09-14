@@ -1,0 +1,14 @@
+= MUnit Message Processors
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+MUnit has a set of dedicated link:/mule-fundamentals/v/3.8/begin-with-the-basics#message-processors[message processors] aimed to validate, assert and mock the content and status of the Mule message so you can run automatic tests against your Mule application.
+
+The *MUnit message processors* allow you to:
+
+. Simulate a specific behavior for a message processor with a xref:mock-message-processor.adoc[Mock Message Processor].
+. Lay out a Mule message using the xref:set-message-processor.adoc[Set Message Processor].
+. Define a verification to validate a message processor's call with a xref:verify-message-processor.adoc[Verify Message Processor].
+. Inspect the status of the mule message before and after it reaches certain Message Processor through a  xref:spy-message-processor.adoc[Spy Message Processor].
+. Validate the content and status of the Mule message with the xref:assertion-message-processor.adoc[Assert Message Processor].
