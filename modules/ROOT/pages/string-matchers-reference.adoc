@@ -1,0 +1,108 @@
+= String Matchers Reference
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+== containsString(String)
+
+Checks that the expression contains the specified String.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="`#[MunitTools::containsString('example')]`"/>
+----
+
+
+== startsWith(String)
+
+Checks that the expression starts with the specified String.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::startsWith('exam')]"/>
+----
+
+== endsWith(String)
+
+Checks that the expression ends with the specified String.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::endsWith('ple')]"/>
+----
+
+== isEmptyString()
+
+Checks that the expression has zero length.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::isEmptyString()]"/>
+----
+
+== isEmptyOrNullString()
+
+Checks that the expression is null, or has zero length.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::isEmptyOrNullString()]"/>
+----
+
+== equalToIgnoringCase(String)
+
+Checks that the expression is equal to the specified String, ignoring case.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::equalToIgnoringCase('Example')]"/>
+----
+
+== equalToIgnoringWhiteSpace(String)
+
+Checks that the expression is equal to the string disregarding leading and trailing white spaces, and compression all inner white spaces to a single space.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::equalToIgnoringWhiteSpace('An Example')]"/>
+----
+
+== stringContainsInOrder(Array<String>)
+
+Checks that the expression contains all of the specified substrings, regardless of the order of their appearance.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::stringContainsInOrder(['an', 'example'])]"/>
+----
+
+== See Also
+
+* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:core-matchers-reference.adoc[Core Matchers Reference]
+* xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]
+* xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

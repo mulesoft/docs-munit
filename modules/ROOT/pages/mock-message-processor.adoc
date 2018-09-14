@@ -5,9 +5,9 @@ endif::[]
 :version-info: 2.0 and later
 :keywords: munit, testing, unit testing
 
-The Mock When event processor allows you to mock an Event Processor when it matches the defined Mock When Event Processor name and attributes.
+The Mock When processor allows you to mock an Event Processor when it matches the defined name and attributes.
 
-The following example shows you how to mock the payload of an HTTP Request.
+For example, you can use the Mock Event processor to mock a POST request with a mocked payload:
 
 [source,xml,linenums]
 ----
@@ -21,6 +21,114 @@ The following example shows you how to mock the payload of an HTTP Request.
 </munit-tools:mock-when>
 ----
 
+You can set the `processor` attribute to define the processor to mock and the `with-attribute` element to define the attribute's name and value. In the example above you are defining a POST method. +
+Finally you can configure a then-return element to define the type of response the mocked processor should return. It could be a payload, a variable, attributes, or even an error. +
+In the example above, your mocked HTTP requester is returning 'mockPayload'.
+
+You can apply this structure to any other processor in Mule 4.
+
+For example, you can mock a web service consumer such as this one:
+
+[source,xml,linenums]
+----
+<wsc:config name="Web_Service_Consumer_Config">
+  <wsc:connection wsdlLocation="tshirt.wsdl" service="TshirtService" port="TshirtServicePort" address="http://tshirt-service.cloudhub.io"/>
+</wsc:config>
+
+<wsc:consume config-ref="Web_Service_Consumer_Config" operation="OrderTshirt"/>
+----
+
+By configuring the mock-when processor like the example below:
+
+[source,xml,linenums]
+----
+<munit-tools:mock-when processor="wsc:consume">
+    <munit-tools:with-attributes>
+        <munit-tools:with-attribute attributeName="operation" whereValue="#['OrderTshirt']"/>
+    </munit-tools:with-attributes>
+</munit-tools:mock-when>
+----
+
+This mock-when processor mocks a call to the OrderTshirt operation in the WSDL definition.
+
+
+You can also mock specific variables:
+
+[source,xml,linenums]
+----
+<munit-tools:mock-when processor="http:request">
+	<munit-tools:with-attributes>
+	    <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/>
+	</munit-tools:with-attributes>
+	<munit-tools:then-return>
+	  <munit-tools:variables>
+	  	<munit-tools:variable key="#['aVariable']" value="#[aValue]"/>
+	  </munit-tools:variables>
+	</munit-tools:then-return>
+</munit-tools:mock-when>
+----
+
+== Mocking Errors
+
+The Mock When processor also allows you to mock errors in your operations. For example, assume you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails. A sample application with this scenario would look like this:
+
+[source,xml,linenums]
+----
+<http:request-config name="HTTP_Request_configuration">
+	<http:request-connection host="myHost" port="8888" />
+</http:request-config>
+
+<http:listener-config name="HTTP_Listener_config" >
+	<http:listener-connection host="0.0.0.0" port="8081" />
+</http:listener-config>
+
+
+<flow name="myFlow">
+	<http:listener config-ref="HTTP_Listener_config" path="/"/>
+	<http:request method="GET" config-ref="HTTP_Request_configuration" path="/api"/>
+	<error-handler >
+		<on-error-continue enableNotifications="true" logException="true" type="HTTP:CONNECTIVITY">
+			<set-payload value="#['Connection Error']" />
+		</on-error-continue>
+	</error-handler>
+</flow>
+----
+
+You can assert that every time the HTTP request fails, your application returns your custom payload:
+
+
+[source,xml,linenums]
+----
+<munit:test name="new-test-suiteTest" description="Asserts Custom Payload in HTTP Connectivity errors.">
+
+  <munit:behavior >
+    <munit-tools:mock-when processor="http:request">
+        <munit-tools:with-attributes>
+            <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/> // <1>
+        </munit-tools:with-attributes>
+        <munit-tools:then-return>
+          <munit-tools:error typeId="#['HTTP:CONNECTIVITY']"/> // <2>
+        </munit-tools:then-return>
+    </munit-tools:mock-when>
+  </munit:behavior>
+
+  <munit:execution>
+      <flow-ref name="myFlow"/> // <3>
+  </munit:execution>
+
+  <munit:validation>
+    <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalToIgnoringCase('Connection  Error')]"/> // <4>
+  </munit:validation>
+
+</munit:test>
+----
+
+
+<1> Mock an HTTP Requester with the configuration of the requester in your flow.
+<2> Configure a then-return element to throw an HTTP:CONNECTIVITY error. +
+This triggers the On-error scope in your application.
+<3> Execute the flow containing the requester.
+<4> Assert that the returned payload is the one you set inside the On-error scope.
 
 
 == See Also

@@ -1,0 +1,119 @@
+= Core Matchers Reference
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+== nullValue()
+
+Checks that the expression is null.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::nullValue()]"/>
+----
+
+== notNullValue()
+
+Checks that the expression is not null.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::notNullValue()]"/>
+----
+
+== withMediaType(String)
+
+Checks that the expression's media type is the one specified.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::withMediaType('text/xml')]"/>
+----
+
+== withEncoding(String)
+
+Checks that the expression's encoding is the one specified.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::withEncoding('UTF-8')]"/>
+----
+
+== both(, Matcher)
+
+Checks that both provided matchers are successful.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::both(MunitTools::notNullValue(),MunitTools::equalTo('example'))]"/>
+----
+
+== either(Matcher,Matcher)
+
+Checks that at least one of the matchers is successful.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::either(MunitTools::nullValue(),MunitTools::equalTo(0))]"/>
+----
+
+== not(Matcher)
+
+Checks if the provided matcher is not successful.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::not(MunitTools::equalTo(0))]"/>
+----
+
+== anyOf(Array<Matchers>)
+
+Checks if any of the matchers are successful.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]"/>
+----
+
+== allOf(Array<Matchers>)
+
+Checks if all of the matchers are successful.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())"/>
+----
+
+== See Also
+
+* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:string-matchers-reference.adoc[String Matchers Reference]
+* xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]
+* xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

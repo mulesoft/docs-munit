@@ -3,26 +3,69 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-This section is dedicated to show how to run your tests using the plugin.
+This section is dedicated to showing you how to run your tests using the plugin.
 
-== To Run MUnit Tests From Maven
+== To Run MUnit Tests for a Mule Application (MUnit Maven Plugin)
 
-.Running MUnit tests in a project example
+.Running MUnit tests in a Single Resource Mule project.
 [source,console]
 ----
 mvn clean test
 ----
 
-== To Run a Specific MUnit Test Suite
+If your application is a multi-module application:
+
+. Make sure your mule-domain dependency is marked as provided in your application's POM file.
++
+.Add your Mule Domain as a Dependency in your Mule Application POM File.
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>org.mule.app</groupId>
+    <artifactId>domain-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <classifier>mule-domain</classifier>
+    <scope>provided</scope>
+</dependency>
+----
+. Run `mvn install`, instead of `mvn test`.
++
+[source,console]
+----
+mvn clean install
+----
+
+== To Run a Specific MUnit Test Suite (MUnit Maven Plugin)
 
 You can instruct MUnit Maven Plugin to run only tests that belong to a specific test suite.
 
 To do this, we use the property `munit.test`.
 
-.Running a specific MUnit Test Suite example
 [source,console]
 ----
 mvn clean test -Dmunit.test=<regex-test-suite>
+----
+
+If your application is a multi-module application:
+
+. Make sure your mule-domain dependency is marked as provided in your application's POM file.
++
+.Add your Mule Domain as a Dependency in your Mule Application POM File.
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>org.mule.app</groupId>
+    <artifactId>domain-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <classifier>mule-domain</classifier>
+    <scope>provided</scope>
+</dependency>
+----
+. Run `mvn install`, instead of `mvn test`.
++
+[source,console]
+----
+mvn clean install -Dmunit.test=<regex-test-suite>
 ----
 
 The property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation. +
@@ -36,7 +79,7 @@ mvn clean test -Dmunit.test=.*my-test.*
 
 You can leverage this feature by adding naming conventions to your MUnit Test suites.
 
-== To Run Specific MUnit Tests
+== To Run Specific MUnit Tests (MUnit Maven Plugin)
 
 In the same way that you instruct MUnit to run one test suite, you can also tell it to run a specific test inside that test suite. To do so, we again make use of the property `munit.test`, with one addition:
 
@@ -45,7 +88,29 @@ In the same way that you instruct MUnit to run one test suite, you can also tell
 mvn clean test -Dmunit.test=<regex-test-suite>#<regex-test-name>
 ----
 
-The addition is the special character `#`. To the right of it you should type the test name. It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test.
+If your application is a multi-module application:
+
+. Make sure your mule-domain dependency is marked as provided in your application's POM file.
++
+.Add your Mule Domain as a Dependency in your Mule Application POM File.
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>org.mule.app</groupId>
+    <artifactId>domain-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <classifier>mule-domain</classifier>
+    <scope>provided</scope>
+</dependency>
+----
+. Run `mvn install`, instead of `mvn test`.
++
+[source,console]
+----
+mvn clean install -Dmunit.test=<regex-test-suite>#<regex-test-name>
+----
+
+The addition is the special character `#`. To the right of it, you should type the test name. It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test.
 
 The following is a valid example:
 [source,console]
@@ -58,7 +123,7 @@ mvn clean test -Dmunit.test=.*my-test.*#.*test-scenario-1.*
 The tests inside the MUnit Test Suite that don't match the regular expression is flagged as *ignored*.
 --
 
-== To Run Tests Using a Specific Tag
+== To Run Tests Using a Specific Tag (MUnit Maven Plugin)
 
 You can choose to run only the tests that you grouped under one specific tag.
 
@@ -67,7 +132,30 @@ You can choose to run only the tests that you grouped under one specific tag.
 mvn clean test -Dmunit.tags=<munit-tag>
 ----
 
-== To Skip All Tests
+If your application is a multi-module application:
+
+. Make sure your mule-domain dependency is marked as provided in your application's POM file.
++
+.Add your Mule Domain as a Dependency in your Mule Application POM File.
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>org.mule.app</groupId>
+    <artifactId>domain-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <classifier>mule-domain</classifier>
+    <scope>provided</scope>
+</dependency>
+----
+. Run `mvn install`, instead of `mvn test`.
++
+[source,console]
+----
+mvn clean install -Dmunit.tags=<munit-tag>
+----
+
+
+== To Skip All Tests (MUnit Maven Plugin)
 
 When building your application, you may want to prevent a test from running. MUnit leverages the same mechanism as Maven, so if you wish to skip tests, you can make use of the parameter `skipTests`.
 
@@ -77,20 +165,65 @@ When building your application, you may want to prevent a test from running. MUn
 mvn clean package -DskipTests
 ----
 
-== To Skip Only MUnit Tests
+If your application is a multi-module application:
 
-MUnit also comes with another property that only prevents MUnit tests from running.
-While at the same time allowing any other test, like JUnit tests, to keep running.
-
-If you wish to skip only MUnit tests, you can make use of the parameter `skipMunitTests`.
-
-.Skipping MUnit Tests example
+. Make sure your mule-domain dependency is marked as provided in your application's POM file.
++
+.Add your Mule Domain as a Dependency in your Mule Application POM File.
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>org.mule.app</groupId>
+    <artifactId>domain-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <classifier>mule-domain</classifier>
+    <scope>provided</scope>
+</dependency>
+----
+. Run `mvn install`, instead of `mvn test`.
++
 [source,console]
 ----
-mvn clean package -DskipMunitTests
+mvn clean install -DskipTests
 ----
 
-TIP: The property `skipMunitTests` applies only to the XML based MUnit tests.
+// _COMBAK: No Java test for now.
+// == To Skip Only MUnit Tests (MUnit Maven Plugin)
+//
+// MUnit also comes with another property that only prevents MUnit tests from running.
+// While at the same time allowing any other test, like JUnit tests, to keep running.
+//
+// If you wish to skip only MUnit tests, you can make use of the parameter `skipMunitTests`.
+//
+// [source,console]
+// .Skipping MUnit Tests example
+// ----
+// mvn clean package -DskipMunitTests
+// ----
+//
+// If your application is a multi-module application:
+//
+// . Make sure your mule-domain dependency is marked as provided in your application's POM file.
+// +
+// .Add your Mule Domain as a Dependency in your Mule Application POM File.
+// [source,xml,linenums]
+// ----
+// <dependency>
+//     <groupId>org.mule.app</groupId>
+//     <artifactId>domain-project</artifactId>
+//     <version>1.0.0-SNAPSHOT</version>
+//     <classifier>mule-domain</classifier>
+//     <scope>provided</scope>
+// </dependency>
+// ----
+// . Run `mvn install`, instead of `mvn test`.
+// +
+// [source,console]
+// ----
+// mvn clean install -DskipMunitTests
+// ----
+//
+// TIP: The property `skipMunitTests` applies only to the XML based MUnit tests.
 
 == See Also
 

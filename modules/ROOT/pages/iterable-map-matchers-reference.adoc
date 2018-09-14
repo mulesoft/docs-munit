@@ -1,0 +1,124 @@
+= Iterable and Map Matchers Reference
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+== everyItem(Matcher)
+
+Checks that every element in the expression matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::everyItem(MunitTools::notNullValue())]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::everyItem(MunitTools::startsWith('a'))]"/>
+----
+
+== hasItem(Matcher)
+
+Checks that any element in the expression matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasItem(MunitTools::notNullValue())]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasItem(MunitTools::startsWith('a'))]"/>
+----
+
+== hasSize(Matcher)
+
+Checks that the size of the expression matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasSize(MunitTools::equalTo(5))]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasSize(MUnitTools::greaterThan(2))]"/>
+----
+
+
+== isEmpty()
+
+Checks that the expression is an empty collection.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::isEmpty()]"/>
+----
+
+== hasKey(Matcher)
+
+Checks that the expression has a key that matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasKey(MunitTools::equalTo('myKey'))]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasKey(MunitTools::startsWith('a'))]"/>
+----
+
+== hasValue(Matcher)
+
+Checks that the expression has a value that matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasValue(MunitTools::equalTo('myValue')]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasValue(MunitTools::startsWith('a'))]"/>
+----
+
+== See Also
+
+* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:core-matchers-reference.adoc[Core Matchers Reference]
+* xref:string-matchers-reference.adoc[String Matchers Reference]
+* xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]

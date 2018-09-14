@@ -20,6 +20,7 @@ For example, to assert that a payload is equal to a certain value, you can confi
 
 Or you can also check if the payload is null using the nullValue() matcher.
 
+
 [source,xml,linenums]
 ----
 <munit-tools:assert-that

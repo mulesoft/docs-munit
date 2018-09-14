@@ -13,7 +13,7 @@ In order to make a proper use of the MUnit plugin in a parent-child POM relation
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.1.0</modelVersion>
 
     <groupId>org.pirate</groupId>
     <artifactId>pirate-pom</artifactId>
@@ -21,7 +21,7 @@ In order to make a proper use of the MUnit plugin in a parent-child POM relation
     <packaging>pom</packaging>
 
     <properties>
-        <munit.version>2.0.0</munit.version>
+        <munit.version>2.1.0</munit.version>
     </properties>
 
     <build>

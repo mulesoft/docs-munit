@@ -1,0 +1,178 @@
+= Comparable Matchers Reference
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+== greaterThan(Comparable)
+
+[NOTE]
+`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
+Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone  that you can pass any primitive value such as an integer or a date.
+
+Checks that the expression is greater than the specified value.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::greaterThan(|2017-08-09|)]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::greaterThan(20)]"/>
+----
+
+
+== greaterThanOrEqualTo(Comparable)
+
+[NOTE]
+`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
+Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
+
+Checks that the expression is greater than or equal to the specified value.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::greaterThanOrEqualTo(20)]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::greaterThanOrEqualTo(|2017-08-09|)]"/>
+----
+
+== lessThan(Comparable)
+
+[NOTE]
+`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
+Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::lessThan(20)]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::lessThan(|2017-08-09|)]"/>
+----
+
+== lessThanOrEqualTo(Comparable)
+
+[NOTE]
+`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
+Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
+
+Checks that the expression is less than or equal to the specified value.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::lessThanOrEqualTo(20)]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::lessThanOrEqualTo(|2017-08-09|)]"/>
+----
+
+== closeTo(Number, Number)
+
+Checks that the expression is close to the first number, using the second number as a delta value. +
+In other words, checks that the expression belongs to the range defined by the first number +/- the second number.
+
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::closeTo(1, 0.01)]"/>
+
+<!--
+  This evaluates if the expression is between 0.99 (1 - 0.01) and 1.01 (1 + 0.01)
+-->
+----
+
+== equalTo(Object)
+
+Checks that the expression is equal to a specific value.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::equalTo(0)]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::equalTo('example')]"/>
+----
+
+This matcher also accepts Dataweave objects.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[{example1: 1 , example2: 2}]"
+is="#[MunitTools::equalTo({example1: 1 , example2: 2})]"/>
+----
+
+The matcher validates that the keys and their respective values are the same. +
+The order in the matcher must be the same as the one in the expression or the assertion fails.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[{example1: 1 , example2: 2}]"
+is="#[MunitTools::equalTo({example2: 2 , example1: 1})]"/>
+
+<!-- This assertion fails -->
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[[1, 2, 3]]"
+is="#[MunitTools::equalTo([3, 2, 1])]"/>
+
+<!-- This assertion fails -->
+----
+
+== See Also
+
+* xref:4.1@mule4-runtime::dataweave-types.adoc#dw_type_comparable[DataWeave Comparable Type]
+* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:core-matchers-reference.adoc[Core Matchers Reference]
+* xref:string-matchers-reference.adoc[String Matchers Reference]
+* xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

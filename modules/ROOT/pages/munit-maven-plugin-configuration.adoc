@@ -5,6 +5,8 @@ endif::[]
 
 The MUnit Maven Plugin offers a set of optional parameters that can be configured.
 
+//_NOTE: This params are taken from MUnitMojo.java in munit-runtime code.
+
 .Maven Plugin Parameters
 [%header,cols="3,^2,4"]
 |===

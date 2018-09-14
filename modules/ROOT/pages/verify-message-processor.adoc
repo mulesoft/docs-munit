@@ -17,7 +17,7 @@ You can define verifications over any message processor, even if you haven't cre
 ----
 <munit-tools:verify-call processor="http:request*" atLeast="1">
    <munit-tools:with-attributes>
-       <munit-tools:with-attribute attributeName="doc:id" whereValue="#['bdac4beb-858f-4049-b8e8-db50f7bf5db6']"/>
+       <munit-tools:with-attribute attributeName="method" whereValue="#['GET']" />
    </munit-tools:with-attributes>
 </munit-tools:verify-call>
 ----
