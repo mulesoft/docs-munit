@@ -1,0 +1,48 @@
+= To Override a Parent's Plugin
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+When inheriting the plugin from a parent POM file, you can also choose to override the parent's configuration, but keep in mind that overriding completely suppresses the original configuration, requiring you to declare all necessary configurations again:
+
+.Coverage configuration in parent POM file
+[source,xml,linenums]
+----
+<coverage>
+	<runCoverage>true</runCoverage>
+	<failBuild>false</failBuild>
+	<requiredApplicationCoverage>0</requiredApplicationCoverage>
+	<requiredResourceCoverage>0</requiredResourceCoverage>
+	<requiredFlowCoverage>0</requiredFlowCoverage>
+	<formats>
+		<format>console</format>
+		<format>html</format>
+	</formats>
+</coverage>
+----
+
+
+.POM child file overriding coverage report's format
+[source,xml,linenums]
+----
+<plugin>
+	<groupId>com.mulesoft.munit.tools</groupId>
+	<artifactId>munit-maven-plugin</artifactId>
+	<configuration>
+		<coverage>
+			<runCoverage>true</runCoverage>
+			<formats>
+				<format>html</format>
+			</formats>
+		</coverage>
+	</configuration>
+</plugin>
+----
+
+In this example, this child project is overriding the console coverage report, replacing it only by the HTML one, but since the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) are not being referenced, this child file won't inherit them and the default values will apply.
+
+== See Also
+
+* xref:faq-working-with-parent-pom.adoc[FAQ: How To Handle Parent POM Files]
+* xref:to-inherit-parent-plugin.adoc[To Inherit Parent's Plugin]
+* xref:to-ignore-parent-plugin.adoc[To Ignore a Parent's Plugin]

@@ -59,7 +59,7 @@ image::test1-flow-specific.png[]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
     <munit:config name="munit" doc:name="MUnit configuration"/>
@@ -91,12 +91,6 @@ If you want to create a test that does not reference a specific flow, click the 
 
 [TIP]
 You can also create a new test via the wizard by right-clicking the desired application in the Package Explorer pane, then selecting *MUnit* > *Create new suite*.
-
-
-[NOTE]
---
-Since version 1.2.0, MUnit supports xref:munit-domain-support.adoc[testing for domain based applications].
---
 
 == Configuring Your Test
 
@@ -202,43 +196,6 @@ Pay attention to the icons in the top right corner of your _MUnit tab_:
 . Click the *re-debug* button to debug all the tests that were debugged in the previous run +
 . Click the *re-run failed* button to rerun only the tests that failed in the previous run +
 . Click the *re-debug failed* button to debug all the tests that failed in the previous run
-
-=== Viewing Coverage Reports
-
-You can run xref:munit-coverage-report.adoc[coverage reports] in Studio.
-
-The *Coverage* button in the image above allows you to see which flows, and which percentage of message processors in those flows were covered by the test:
-
-image::using-munit-in-anypoint-studio-b3762.png[]
-
-The _Overall coverage_ value represents the percentage of the Mule application message processors that have been executed by the MUnit test.
-
-You can click the *Generate Report* button to get the report detailing the flows and message processors contained by the Mule configuration files that were included in the MUnit test.
-
-image::using-munit-in-anypoint-studio-acd3b.png[]
-
-[%header,cols="20a,80a"]
-|===
-|Column |Description
-|Resource   | The name of the Mule Configuration file.
-|Flows | Number of Flows inside the Mule configuration field.
-|Weight | This field represents how much of your application is contained inside a configuration file. +
-It is calculated as a percentage of the overall number of message processors in the documentation and the amount of message processors contained in the Mule configuration file.
-|Coverage | This field represents the percentage of the message processors inside the Mule Configuration file that are being executed in the MUnit test.
-|===
-
-
-Additionally you can click in each _Resource_, to get a more specific and granular report of the message processors executed in that resource:
-
-image::using-munit-in-anypoint-studio-1e4ee.png[]
-
-==== Disabling Coverage Reports
-
-If you choose so, you can disable the coverage report generation from your project's run configuration.
-
-Right click in your Package Explorer, and choose *Run As* and *Run Configurations...*, Select your munit XML file to access your suite's configuration, and deselect the "Run coverage" option under your Coverage Settings.
-
-image::using-munit-in-anypoint-studio-2cd78.png[]
 
 == Debugging Tests
 

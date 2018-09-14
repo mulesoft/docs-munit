@@ -2,7 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:version-info: 3.8.0 and newer
+:version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
 
 [[scenario]]
@@ -295,7 +295,7 @@ image::full-test.png[]
 [[conclusion]]
 === Conclusion
 
-This example shows how to trigger hits to the endpoint exposed by APIkit, and why it is important to test the endpoint in this manner. As always, you can make your test as sophisticated as you deem necessary by using the tools that MUnit offers: xref:mock-message-processor.adoc[Mock], xref:spy-message-processor.adoc[Spy], xref:verify-message-processor.adoc[Verification], xref:assertion-message-processor.adoc[Assertion], etc.
+This example shows how to trigger hits to the endpoint exposed by APIkit, and why it is important to test the endpoint in this manner. As always, you can make your test as sophisticated as you deem necessary by using the tools that MUnit offers: xref:mock-message-processor.adoc[Mock], xref:spy-processor-concept.adoc[Spy], xref:verify-message-processor.adoc[Verification], xref:assertion-message-processor.adoc[Assertion], etc.
 
 == Create a Test Suite Automatically
 
@@ -459,5 +459,3 @@ In any case there is no monitoring/reporting tool that shows you how much of you
 == Last Minute Comment
 
 You can use APIkit in Mule runtime with or without API Gateway. API Gateway Runtime 1.3 - 2.x has a link:/api-manager/api-gateway-domain[domain named api-gateway].
-
-Learn how to work with domains xref:munit-domain-support.adoc[here].

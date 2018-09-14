@@ -1,0 +1,79 @@
+= To Set Up MUnit Maven Plugin (Maven)
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+For MUnit to run properly with Maven, you need to add a few sections to your pom.xml file.
+
+This documentation assumes you have the <munit.version> property in your pom.xml.
+
+
+
+* Enable the MUnit Maven plugin, by adding the following section to your pom.xml.
++
+.MUnit Maven Plugin
+[source,xml,linenums]
+----
+<build>
+  <plugins>
+  ...
+
+    <plugin>
+      <groupId>com.mulesoft.munit.tools</groupId>
+      <artifactId>munit-maven-plugin</artifactId>
+      <version>${munit.version}</version>
+      <executions>
+        <execution>
+          <id>test</id>
+          <phase>test</phase>
+          <goals>
+            <goal>test</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+
+  ...
+  </plugins>
+</build>
+----
+
+* Finally, you need to add the MUnit Maven Plugin, and the MUnit Plugin repositories:
++
+.Repositories
+[source,xml,linenums]
+----
+<repositories>
+  <repository>
+    <id>mulesoft-releases</id>
+      <name>MuleSoft Releases Repository</name>
+      <url>http://repository.mulesoft.org/releases/</url>
+      <layout>default</layout>
+    </repository>
+</repositories>
+----
++
+.Plugin Repositories
+[source,xml,linenums]
+----
+<pluginRepositories>
+  <pluginRepository>
+    <id>mulesoft-release</id>
+    <name>mulesoft release repository</name>
+    <layout>default</layout>
+    <url>http://repository.mulesoft.org/releases/</url>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+  </pluginRepository>
+</pluginRepositories>
+----
+
+
+MUnit has Surefire support built in. No additional configuration is needed. +
+The reports can be found under target/surefire-reports.
+
+== See Also
+
+* xref:faq-working-with-parent-pom.adoc[FAQ: How To Handle Parent POM Files]
+* xref:munit-maven-support.adoc[About MUnit Maven Plugin]

@@ -1,0 +1,53 @@
+= About Run Custom Event Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:version-info: 2.0 and later
+:keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+
+The Run Custom Event Processor allows you to assert the Mule Event content against a custom assertion.
+
+For example, you can define the following assertion in JAVA:
+
+[source,java,linenums]
+----
+public class CustomAssertion implements MunitAssertion {
+
+    @Override
+    public void execute(TypedValue expression, Object params) throws AssertionError { // <1>
+        if (!"Hello World".equals(expression.getValue())) { // <2>
+            throw new AssertionError("Error the payload is incorrect");
+        }
+     }
+
+}
+----
+<1> Implement the only method in the interface `public void execute(TypedValue expression, Object params) throws AssertionError`
+<2> Run your custom logic, which in this case validates that the message's payload is `Hello World`.
+
+And then use the Run Custom Event Processor to run it:
+
+[source,xml,linenums]
+----
+<munit-tools:run-custom
+  assertion="com.example.customAssertion" // <1>
+  expression="#[payload]"/>
+----
+<1> The assertion field needs to have the canonical class name of your custom assertion.
+
+// _TODO:Comment out and check with the team
+// [CAUTION]
+// --
+// Implement your custom assertions with care. Modifying the message payload or variables could affect subsequent assertions in your test. Normal MUnit assertions guarantee that this does not happens unless specified
+// --
+
+
+
+== See Also
+
+* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:set-message-processor.adoc[About Set Event Processor]
+* xref:mock-message-processor.adoc[About Mock When Event Processor]
+* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:fail-event-processor.adoc[About Fail Event Processor]

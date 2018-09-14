@@ -1,0 +1,168 @@
+= Set Message Processors
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+. New name for the message processor:
++
+.MUnit 1.x
+[source,xml]
+----
+<munit:set />
+----
++
+.MUnit 2.x
+[source,xml]
+----
+<munit:set-event />
+----
++
+. New attribute to the parent node cloneOriginalEvent:
++
+.MUnit 2.x
+[source,xml]
+----
+<munit:set-event cloneOriginalEvent="[false/true]" />
+----
++
+[NOTE]
+--
+This attribute is optional and by default set to false so it won’t change previous behavior.
+--
++
+. Payload from attributes to child node:
++
+.MUnit 1.x
+[source,xml,linenums]
+----
+<munit:set payload="a simple payload"  mimeType="text/plain" encoding="UTF-8" >
+</munit:set>
+----
++
+.MUnit 2.x
+[source,xml,linenums]
+----
+<munit:set-event>
+  <munit:payload value="payload_value" mediaType="text/plain" encoding="UTF-8" />
+</munit:set-event>
+----
++
+[NOTE]
+--
+Payload is now optional, if not present it should be null.
+--
++
+. New child node attributes:
++
+.MUnit 2.x
+[source,xml,linenums]
+----
+<munit:attributes value="" />
+----
++
+[NOTE]
+--
+This element is new so no migration required.
+--
++
+. Invocation properties to variables (it reflect the actual names):
++
+.MUnit 1.x
+[source,xml,linenums]
+----
+<munit:invocation-properties>
+    <munit:invocation-property key="prop_key" value="prop_value" mimeType="text/plain" encoding="UTF-8" />
+</munit:invocation-properties>
+----
++
+.MUnit 2.x
+[source,xml,linenums]
+----
+<munit:variables>
+  <munit:variable key="variable_key" value="variable_value" mediaType="text/plain" encoding="UTF-8" />
+</munit:variables>
+----
++
+. Add support for inbound and outbound attachments:
++
+.MUnit 1.x
+[source,xml,linenums]
+----
+<munit:inbound-attachments>
+  <munit:inbound-attachment key="prop_key" value="prop_value" mimeType="text/plain" encoding="UTF-8" />
+</munit:inbound-attachments>
+----
++
+.MUnit 2.x
+[source,xml,linenums]
+----
+<munit:outbound-attachments>
+  <munit:outbound-attachment key="prop_key" value="prop_value" mediaType="text/plain" encoding="UTF-8" />
+</munit:outbound-attachments>
+----
++
+. Session, Inbound, Outbound properties will remain as are.
+. Change the attribute name mimeType to mediaType whenever used.
+. New child node error:
++
+.MUnit 2.x
+[source,xml,linenums]
+----
+<munit:error id="" exception=""/>
+----
+
+.Set message processor syntax in MUnit 1.x:
+[source,xml,linenums]
+----
+<munit:set payload="a simple payload" encoding="UTF-8" mimeType="text/plain">
+  <munit:invocation-properties>
+    <munit:invocation-property key="prop_key" value="prop_value" encoding="UTF-8" mimeType="text/plain"/>
+  </munit:invocation-properties>
+
+  <munit:inbound-properties>
+    <munit:inbound-property key="prop_key" value="prop_value" encoding="UTF-8" mimeType="text/plain"/>
+  </munit:inbound-properties>
+
+  <munit:session-properties>
+    <munit:session-property key="prop_key" value="prop_value" encoding="UTF-8" mimeType="text/plain"/>
+  </munit:session-properties>
+
+  <munit:outbound-properties>
+    <munit:outbound-property key="prop_key" value="prop_value" encoding="UTF-8" mimeType="text/plain"/>
+  </munit:outbound-properties>
+</munit:set>
+----
+
+.Set message processor syntax in MUnit 2.x:
+[source,xml,linenums]
+----
+<munit:set-event cloneOriginalEvent="[false|true]">
+  <munit:payload value="payload_value" mediaType="text/plain" encoding="UTF-8"/>
+  <munit:variables>
+    <munit:variable key="variable_key" value="variable_value" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:variables>
+  <munit:attributes value=""/>
+  <munit:error id="" exception=""/>
+  <munit:session-properties>
+    <munit:session-property key="prop_key" value="prop_value" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:session-properties>
+  <munit:inbound-properties>
+    <munit:inbound-property key="prop_key" value="prop_value" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:inbound-properties>
+  <munit:outbound-properties>
+    <munit:outbound-property key="prop_key" value="prop_value" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:outbound-properties>
+  <munit:inbound-attachments>
+    <munit:inbound-property key="prop_key" value="prop_value" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:inbound-attachments>
+  <munit:outbound-attachments>
+    <munit:outbound-property key="prop_key" value="prop_value" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:outbound-attachments>
+</munit:set-event>
+----
+
+== See Also
+
+* xref:munit-2-changes.adoc[MUnit 2.0 Changes]
+* xref:mock-processor-changes.adoc[Mock Processor Changes]
+* xref:assert-processor-changes.adoc[Assert Processors Changes]

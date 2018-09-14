@@ -1,0 +1,52 @@
+= To Inherit Parent's Plugin
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+To inherit the MUnit plugin in your child POM files, you need to reference it in a _<plugin>_ section of each child _POM_ file individually:
+
+.POM child file sample
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.pirate</groupId>
+        <artifactId>pirate-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>ninja</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>mule</packaging>
+    <name>Mule ninja Application</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <app.runtime>4.0.0</app.runtime>
+        <munit.version>2.0.0</munit.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    </project>
+----
+
+This quick sample references _pirate-pom_ file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because MUnit plugin configuration is being inherited from the `<pluginManagement>` section in the parent.
+
+== See Also
+
+* xref:faq-working-with-parent-pom.adoc[FAQ: How To Handle Parent POM Files]
+* xref:to-ignore-parent-plugin.adoc[To Ignore a Parent's Plugin]
+* xref:to-override-parent-plugin.adoc[To Override a Parent's Plugin]

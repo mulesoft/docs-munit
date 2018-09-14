@@ -2,15 +2,18 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:version-info: 3.7.0 and newer
+:version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
 
 == Functionality
 
 The Run and Wait scope provided by MUnit allows you to instruct MUnit to wait until all asynchronous executions have completed. Hence, test execution does not start until all threads opened by production code have finished processing.
 
+[NOTE]
+--
+One consideration to have if you are using Maven:
 
-If you are using Maven, you need to add the MUnit Synchronize module artifact to your `pom` file:
+You need to add the MUnit Synchronize module artifact to your `pom` file:
 
 [source,xml,linenums]
 ----
@@ -18,23 +21,12 @@ If you are using Maven, you need to add the MUnit Synchronize module artifact to
 <dependency>
           <groupId>com.mulesoft.munit.utils</groupId>
           <artifactId>munit-synchronize-module</artifactId>
-          <version>1.1.0</version>
+          <version>1.0.0</version>
 </dependency>
 ----
 
 If you choose to xref:6@studio::enabling-maven-support-for-a-studio-project.adoc[mavenize] your project, Studio will notify you that the Synchronize module dependency will be added.
-
-Additionally, if you are not using Anypoint Studio you also need to install the mule-module-batch-ee dependency by adding this to your pom file:
-
-[source,xml,linenums]
-----
-<dependency>
- <groupId>com.mulesoft.muleesb.modules</groupId>
- <artifactId>mule-module-batch-ee</artifactId>
- <version>${mule.version}</version>
- <scope>provided</scope>
-</dependency>
-----
+--
 
 
 == Defining Run and Wait
@@ -43,10 +35,15 @@ In some cases, your production code may launch threads that produce key results.
 
 For the purposes of this document, we assume that we are testing the following Mule code:
 
+
+[.ex]
+=====
+[discrete.view]
 === Studio Visual Editor
 
 image::run-and-wait-thread-sleep.png[]
 
+[discrete.view]
 === XML or Standalone Editor
 
 [source,xml,linenums]
@@ -59,9 +56,13 @@ image::run-and-wait-thread-sleep.png[]
   </async>
 </flow>
 ----
+=====
 
 The goal is to make your test wait until the `exampleFlow` has finished. To do so, implement the test as shown below.
 
+[.ex]
+=====
+[discrete.view]
 === Studio Visual Editor
 
 image::run-and-wait-flow-ref.png[]
@@ -69,6 +70,7 @@ image::run-and-wait-flow-ref.png[]
 . Define `run-and-wait` scope.
 . Call the actual production code to test.
 
+[discrete.view]
 === XML or Standalone Editor
 
 [source,xml,linenums]
@@ -83,6 +85,8 @@ image::run-and-wait-flow-ref.png[]
 <1> Define `run-and-wait` scope.
 <2> Call the actual production code to test.
 
+=====
+
 
 [%header%autowidth.spread]
 |===
@@ -92,7 +96,7 @@ image::run-and-wait-flow-ref.png[]
 | Defines the time (in milliseconds) to wait for all the threads to complete.
 
 |`runAsync`
-| _Boolean_. When runAsync is set to _true_, the synchronize module copies the triggering MuleEvent and sets its `messageexchangepattern` automatically to ONE_WAY, menaing that your MUnit test handles your Mule application's requests using a ONE_WAY messaging style. +
+| _Boolean_. When runAsync is set to _true_, the synchronize module copies the triggering MuleEvent and sets its `messageexchangepattern` automatically to ONE_WAY, meaning that your MUnit test handles your Mule application's requests using a ONE_WAY messaging style. +
 This allows your test suite to take the events triggered by the Mule application and put them in a SEDA queue. The callee thread returns and the message is processed by the SEDA thread pool.
 
 |===

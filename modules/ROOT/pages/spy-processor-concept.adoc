@@ -1,0 +1,95 @@
+= About the Spy Event Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:keywords: munit, testing, unit testing
+
+The Spy Processor allows you to spy what happens before and after an event processor is called. +
+This allows you to validate, for example that a selected Mule Event reaches a specific event processor containing a specific payload or variable.
+
+Setting a spy processor tells MUnit to run a set of instructions (usually assertions or verifications) before and/or after the execution of the spied event processor.
+
+Assume that you have this Mule Application
+
+[source,xml,linenums]
+----
+<http:listener-config name="HTTP_Listener_config">
+  <http:listener-connection host="0.0.0.0" port="${http.port}" />
+</http:listener-config>
+
+<flow name="testFlow">
+
+  <http:listener config-ref="HTTP_Listener_config" path="/"/>
+  <set-payload value="#['Real_Payload']"/>
+
+</flow>
+----
+
+You can configure the spy processor to spy any HTTP Listener and assert that they payload is null before reaching the component, and not null after it's been processed:
+
+[source,xml,linenums]
+----
+<munit:test name="suiteTest" >
+
+  <munit:enable-flow-sources >
+    <munit:enable-flow-source value="testFlow" />
+  </munit:enable-flow-sources>
+
+  <munit:behavior >
+
+    <munit-tools:spy processor="http:listener">
+
+      <munit-tools:before-call >
+        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::nullValue()]"/>
+      </munit-tools:before-call>
+
+      <munit-tools:after-call >
+        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+      </munit-tools:after-call>
+
+    </munit-tools:spy>
+
+  </munit:behavior>
+
+</munit:test>
+----
+
+Or even to spy any HTTP Listener, whose path is configured to be "/"
+
+[source,xml,linenums]
+----
+<munit:test name="suiteTest" >
+
+  <munit:enable-flow-sources >
+    <munit:enable-flow-source value="testFlow" />
+  </munit:enable-flow-sources>
+
+  <munit:behavior >
+
+    <munit-tools:spy processor="http:listener">
+      <munit-tools:with-attributes >
+        <munit-tools:with-attribute attributeName="path" whereValue="/" />
+      </munit-tools:with-attributes>
+
+      <munit-tools:before-call >
+        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::nullValue()]"/>
+      </munit-tools:before-call>
+
+      <munit-tools:after-call >
+        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+      </munit-tools:after-call>
+
+    </munit-tools:spy>
+
+  </munit:behavior>
+
+</munit:test>
+----
+
+As shown above, this processor allows you to define actions for before and after calling the spied processor. However, keep in mind that the spy processor does not modify the original Mule Event. +
+If you set variables, attributes, or modify the payload inside a Spy, these changes won't persist outside the processor. +
+Overall, you should use the Spy processor to verify or assert.
+
+== See Also
+
+** xref:message-processors.adoc[About MUnit Event Processors]

@@ -1,0 +1,15 @@
+= To Disable Coverage Reports (Studio)
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+If you choose so, you can disable the coverage calculation from your project's run configuration.
+
+* Right click in your Package Explorer, and choose *Run As* and *Run Configurations...*, Select your munit run configuration file to access your suite's configuration, and deselect the "Run coverage" option under your Coverage Settings.
+
+image::using-munit-in-anypoint-studio-2cd78.png[]
+
+== See Also
+
+* xref:munit-coverage-report.adoc[About Coverage Report]
+* xref:coverage-studio-concept.adoc[About Coverage Report in Anypoint Studio]

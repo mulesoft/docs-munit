@@ -1,0 +1,47 @@
+= FAQ: How Does MUnit Calculate Coverage
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The MUnit Coverage Module unit of measure is the Event processor. +
+MUnit calculates coverage by counting all the event processors that have been executed as result of the MUnit test being run and comparing that number with the amount of event processors that compose the whole application. +
+Although the reports arrange the resulting information by flow and configuration file, the calculations are run against the number of event processors.
+
+As a general rule each XML node inside a top-level XML node is an event processor. That is each node inside a flow, sub-flow, catch, batch. +
+Top-level elements are not event processors.
+
+Given the nature of XML structure this definition might lead to confusion, mostly when it comes to container elements (XML containing child elements). +
+In order to avoid such confusion here is a list of the most common event processors that are containers in Mule and how they are accounted by the MUnit Coverage:
+
+
+//_TODO: Commenting Out. check with the team
+* *Container Elements Considered event processors*
+// ** Enricher
+// ** Processor chain
+** Choice Router
+** Until Successful
+** First Successful
+** Scatter Gather
+** For Each
+// ** Round Robin
+// ** Splitter
+* *Container Elements Not Considered event processors*
+** Batch Step
+// ** Catch
+// ** Catch ref
+** Error Handlers
+
+//_TODO: Check with QA If these Known Issues are still valid
+// == Known Issues
+//
+// So far we have found only a couple of scenarios where coverage may not be reported properly. +
+// Unfortunately those cases cannot be fixed from MUnit. Issues were created in the proper products in order to address them.
+//
+// In order to make them easy to ID we list the scenarios where coverage might be reported incorrectly:
+//
+// * First Successful component (with no processor chain in all its paths)
+// * Sub-flow containing scatter gather
+
+== See Also
+
+* xref:munit-coverage-report.adoc[Coverage Report]

@@ -1,0 +1,66 @@
+= Before/After Scopes Reference
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+== Before Suite Reference
+
+[cols="30,70"]
+|===
+|Attribute Name |Description
+
+|`name`
+|Defines the name of the Before suite. The name must be unique inside the suite.
+
+|`description`
+|Describes the actions performed.
+
+|===
+
+
+== After Suite Reference
+
+[cols="30,70"]
+|===
+|Attribute Name |Description
+
+|`name`
+|Defines the name of the After suite. The name must be unique inside the suite.
+
+|`description`
+|Describes the actions performed.
+
+|===
+
+== Before Test Reference
+
+[cols="30,70"]
+|===
+|Attribute Name |Description
+
+|name
+|Defines the name of the Before test. The name must be unique inside the suite.
+
+|description
+|Describes the actions performed.
+
+|===
+
+
+== After Test Reference
+
+[cols="30,70"]
+|===
+|Attribute Name |Description
+
+|name
+|Defines the name of the After test. The name must be unique inside the suite.
+
+|description
+|Describes the actions performed.
+
+|===
+
+== See Also
+
+* xref:before-after-scopes-concept.adoc[About Before/After Scopes]

@@ -1,0 +1,34 @@
+= About Coverage Report (Studio)
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The Coverage button in the image above allows you to see which flows, and which percentage of event processors in those flows were covered by the test:
+
+image::using-munit-in-anypoint-studio-b3762.png[]
+
+The Overall Coverage value represents the percentage of the Mule application event processors that have been executed by the MUnit test.
+
+You can click the Generate Report button to get the report detailing the flows and event processors contained by the Mule configuration files that were included in the MUnit test.
+
+image::using-munit-in-anypoint-studio-acd3b.png[]
+
+[%header,cols="20a,80a"]
+|===
+|Column |Description
+|Resource   | The name of the Mule Configuration file.
+|Flows | Number of Flows inside the Mule configuration field.
+|Weight | This field represents how much of your application is contained inside a configuration file. +
+It is calculated as a percentage of the overall number of event processors in the documentation and the amount of event processors contained in the Mule configuration file.
+|Coverage | This field represents the percentage of the event processors inside the Mule Configuration file that are being executed in the MUnit test.
+|===
+
+Additionally you can click in each Resource, to get a more specific and granular report of the Event Processors executed in that resource:
+
+image::using-munit-in-anypoint-studio-1e4ee.png[]
+
+
+== See Also
+
+* xref:munit-coverage-report.adoc[Coverage Report]
+* xref:faq-how-munit-coverage.adoc[FAQ: How Does MUnit Calculate Coverage]
