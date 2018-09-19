@@ -42,7 +42,7 @@ By default, MUnit runs in studio with the version of the project’s server. You
 +
 image::runtime-patching-7d385.png[]
 +
-:: If you already set the runtimeVersion attribute in the pom as shown in the “From Maven” section, you can click the *Load configuration from pom file* option to automatically load this version into the *Mule Runtime Version* field.
+ If you already set the runtimeVersion attribute in the pom as shown in the “From Maven” section, you can click the *Load configuration from pom file* option to automatically load this version into the *Mule Runtime Version* field.
 
 
 == See Also
