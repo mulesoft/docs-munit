@@ -1,4 +1,5 @@
 .xref:index.adoc[About MUnit]
+* xref:index.adoc[About MUnit]
 * xref:munit-suite.adoc[About MUnit Test Suite]
  ** xref:munit-test-concept.adoc[About Munit Test]
   *** xref:munit-scaffold-test-task.adoc[To Generate an MUnit Test Suite from RAML]
