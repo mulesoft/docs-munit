@@ -1,4 +1,5 @@
 .xref:index.adoc[MUnit]
+* xref:index.adoc[About MUnit]
 * xref:munit-suite.adoc[Test Suite]
 * xref:using-munit-in-anypoint-studio.adoc[Using MUnit in Anypoint Studio]
 * xref:munit-maven-support.adoc[Maven Support]
