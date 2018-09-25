@@ -83,6 +83,21 @@ Now, the next logical step is to define the coverage levels.
 
 This is a list, so you can ignore as many flows as you need.
 
+== To Ignore Files for Coverage Report
+
+.MUnit Coverage - Ignoring Files
+[source,xml,linenums]
+----
+<coverage>
+  <ignoreFiles>
+	  <ignoreFile>the-name-of-the-file.xml</ignoreFile>       //<1>
+  </ignoreFiles>
+</coverage>
+----
+<1> The name of the file you want to ignore.
+
+This is a list, so you can ignore as many files as you need.
+
 == Dynamic Ports
 
 When testing a Mule application in a continuous integration (CI) environment, you might encounter the following scenario:
