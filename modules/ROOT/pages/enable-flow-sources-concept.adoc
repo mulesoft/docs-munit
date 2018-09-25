@@ -46,7 +46,7 @@ In order for MUnit to be able to reach the endpoint, you need to enable the http
     </munit:execution>
 
     <munit:validation>
-        <munit-tools:assert-that expression="#[payload]" is="#[equalTo('Hello World')]" />
+        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalTo('Hello World')]" />
     </munit:validation>
 
 </munit:test>
