@@ -276,7 +276,7 @@ If not specified, this value is false by default.
 </plugins>
 ----
 
-== To Specify the Runtime Product
+== To Specify the Runtime Version
 
 MUnit allows you to specify the runtime version in which your applications being tested will run.
 
@@ -295,7 +295,7 @@ MUnit allows you to specify the runtime version in which your applications being
 </plugins>
 ----
 
-== To Specify The Runtime
+== To Specify The Runtime Product
 
 MUnit allows you to specify the type of runtime in which your applications being tested will run. +
 The two possible values are MULE for community edition, and MULE_EE for Enterprise Edition.
