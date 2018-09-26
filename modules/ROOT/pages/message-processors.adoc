@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-MUnit has a set of dedicated link:/mule-fundamentals/v/3.8/begin-with-the-basics#message-processors[message processors] aimed to validate, assert and mock the content and status of the Mule message so you can run automatic tests against your Mule application.
+MUnit has a set of dedicated xref:3.8@mule-runtime::index.adoc#message-processors[message processors] aimed to validate, assert and mock the content and status of the Mule message so you can run automatic tests against your Mule application.
 
 The *MUnit message processors* allow you to:
 

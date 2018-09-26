@@ -21,7 +21,7 @@ Coverage report runs only for EE edition runtimes
 
 == Calculating Coverage
 
-The MUnit Coverage Module unit of measure is the link:/mule-fundamentals/v/3.8/begin-with-the-basics#message-processors[message processor]. +
+The MUnit Coverage Module unit of measure is the xref:3.8@mule-runtime::index.adoc#message-processors[message processor]. +
 MUnit calculates coverage by counting all the message processors that have been executed as result of the MUnit test being run and comparing that number with the amount of message processors that compose the whole application. +
 Although the reports arrange the resulting information by flow and configuration file, the calculations are run against the number of message processors.
 
