@@ -18,7 +18,7 @@ MUnit Domain Support in Anypoint Studio is available since Anypoint Studio 6.1 (
 
 This section assumes that you are testing a Mule application for which you xref:3.8@mule-runtime::shared-resources.adoc#creating-a-new-domain[created a domain project], and xref:3.8@mule-runtime::shared-resources.adoc#associating-applications-with-the-domain[associated said application to that domain].
 
-MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account based on the characteristics of your application and domain, for example, if such projects are link:/mule-user-guide/v/3.8/enabling-maven-support-for-a-studio-project[Mavenized].
+MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account based on the characteristics of your application and domain, for example, if such projects are xref:6@studio::enabling-maven-support-for-a-studio-project.adoc[Mavenized].
 
 [WARNING]
 --
@@ -57,7 +57,7 @@ This is case sensitive. If your folder is named `Mule-Project`, MUnit won't reco
 
 ==== Your Domain Needs to be Mavenized
 
-The domain is a mavenizable artifact and you can link:/mule-user-guide/v/3.8/enabling-maven-support-for-a-studio-project#mavenizing-an-existing-mule-project[mavenize it directly from Studio]. +
+The domain is a mavenizable artifact and you can xref:6@studio::enabling-maven-support-for-a-studio-project.adoc#mavenizing-an-existing-mule-project[mavenize it directly from Studio]. +
 If you are working on an application and choose to mavenize it, Mule checks if its associated domain is also mavanized. If not, it will prompt you to mavenize it as well.
 
 image::munit-domain-support-6f395.png[]
