@@ -11,65 +11,6 @@ One of the main problems of testing production code are external system connecti
 
 To enable you to avoid this issue, MUnit allows you to implement a database server in your local environment.
 
-== Creating a Test Using MUnit DB Server
-
-For the purpose of this documentation we are going to assume we are testing the following Mule code:
-
-[.ex]
-=====
-[discrete.view]
-=== Studio Visual Editor
-
-image::testdbflow.png[]
-
-[discrete.view]
-=== XML or Standalone Editor
-
-[source,xml,linenums]
-----
-<!-- Set Up a default Java Data Base Connection  -->
-<spring:beans>
-        <spring:bean id="jdbcDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-            <spring:property name="driverClass" value="${db.driver}"/>
-            <spring:property name="url" value="${db.url}"/>
-            <spring:property name="username" value="${db.user}"/>
-            <spring:property name="password" value="${db.password}"/>
-        </spring:bean>
-    </spring:beans>
-
-<!-- Configure your DB connector referencing your JDBC specs -->
-    <db:generic-config name="Generic_Database_Configuration"  doc:name="Generic Database Configuration" dataSource-ref="jdbcDataSource"/>
-
-    <flow name="testDbFlow">
-        <!-- Perform a query based on a value passed by a flow variable -->
-        <db:select config-ref="Generic_Database_Configuration" doc:name="Database" >
-            <db:parameterized-query><![CDATA[SELECT * FROM jobtitlelookup WHERE jobtitleid = #[variable:jobid]]]></db:parameterized-query>
-        </db:select>
-
-        <!-- Set two conditions depending on the query result -->
-        <choice doc:name="Choice">
-            <!-- If there is one or more values resulting from the query set those values as the payload -->
-            <when expression="#[payload.size()>0]">
-                <set-payload value="#[payload[0].get('jobtitle')]" doc:name="Set Payload if True"></set-payload>
-            </when>
-            <!-- If the query throws no results, inform it in the payload  -->
-            <otherwise>
-                <set-payload value="No job title for #[flowVars.jobid] was found" doc:name="Set Payload if False"></set-payload>
-            </otherwise>
-        </choice>
-
-        <!-- Finally, pass the payload content as a Flow variable  -->
-        <set-variable value="#[payload]" variableName="job" doc:name="Variable"></set-variable>
-    </flow>
-----
-=====
-
-We need to create a test that:
-
-. Contains a Database Server with a `jobtitlelookup` table.
-. Provides a valid Database Structure for the Database connector to perform its' query.
-. Passes a value for the `jobid` variable that the Database connector uses
-
 == Install MUnit DB Server Module
 
 For this example, you need to install  the *DB server Module* provided by MUnit. +
