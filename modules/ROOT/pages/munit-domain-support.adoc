@@ -7,29 +7,29 @@ endif::[]
 Mule allows you to define connectors and libraries in a _Mule Domain_, to which you can deploy different Mule applications. +
 These _domain based applications_ can xref:3.8@mule-runtime::shared-resources.adoc[share the resources configured in the domain] to which they were deployed.
 
-With *Domain Support*, MUnit allows you to test applications that run referencing a mule domain.
+With *Domain Support*, MUnit allows you to test applications that run referencing a Mule Domain.
 
 [NOTE]
 --
-MUnit Domain Support in Anypoint Studio is available since Anypoint Studio 6.1 (which comes shipped with MUnit Studio Plugin 1.3).
+MUnit Domain Support in Anypoint Studio is available since Anypoint Studio 6.1 (which ships with MUnit Studio Plugin 1.3).
 --
 
 == Using MUnit to Test Domain Based Applications
 
 This section assumes that you are testing a Mule application for which you xref:3.8@mule-runtime::shared-resources.adoc#creating-a-new-domain[created a domain project], and xref:3.8@mule-runtime::shared-resources.adoc#associating-applications-with-the-domain[associated said application to that domain].
 
-MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account based on the characteristics of your application and domain, for example, if such projects are xref:6@studio::enabling-maven-support-for-a-studio-project.adoc[Mavenized].
+MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However, if your Mule application depends on a Mule Domain, there are a few considerations to take into account based on the characteristics of your application and domain, for example, if such projects are xref:6@studio::enabling-maven-support-for-a-studio-project.adoc[Mavenized].
 
 [WARNING]
 --
-Regardless if your application is Maven based or not, when working in Anypoint Studio your Mule Domain must *always* be part of your workspace.
+Regardless of whether your application is Maven based, when working in Anypoint Studio your Mule Domain must *always* be part of your workspace.
 --
 
 === Testing Non Mavenized Domain Based Applications
 
 Domain Support in MUnit for non mavenized projects works without the need of applying any extra configurations.
 
-When running a test for a non mavenized project in Studio 6.0.1, MUnit searches your domain settings and checks if such configuration exists:
+When running a test for a non mavenized project in Studio 6.0.1, MUnit searches your domain settings and checks for an existing configuration.
 
 The following log example shows up every time you run an MUnit test from Studio 6.0.1:
 
@@ -39,11 +39,11 @@ INFO  2016-06-09 15:51:28,253 [main] org.mule.munit.runner.domain.MunitDomainCon
 
 === Testing Mavenized Domain Based Applications
 
-When working with mavenized applications, there are a couple of considerations you need to have before running the test:
+When working with mavenized applications, there are a couple of considerations to take into account before running the test:
 
 ==== Your Folder Must Have the Same Name as Your Artifact
 
-The folder in your workspace containing your Mule project (regardless if it's a Mule application or a Mule domain) must have the same name as the artifact ID defined in your pom file.
+The folder in your workspace containing your Mule project (regardless of whether it's a Mule application or a Mule domain) must have the same name as the artifact ID defined in your pom file.
 
 If your mule project's artifact Id is:
 
@@ -58,27 +58,27 @@ This is case sensitive. If your folder is named `Mule-Project`, MUnit won't reco
 ==== Your Domain Needs to be Mavenized
 
 The domain is a mavenizable artifact and you can xref:6@studio::enabling-maven-support-for-a-studio-project.adoc#mavenizing-an-existing-mule-project[mavenize it directly from Studio]. +
-If you are working on an application and choose to mavenize it, Mule checks if its associated domain is also mavanized. If not, it will prompt you to mavenize it as well.
+If you are working on an application and choose to mavenize it, Mule checks if its associated domain is also mavenized. If not, it will prompt you to mavenize it as well.
 
 image::munit-domain-support-6f395.png[]
 
 Mavenizing your Mule application and your Mule Domain allows you to expose both *resources* as dependencies for other Maven projects.
 
-==== Your Resources Need to be Installed in an M2 Repository
+==== Your Resources Need to be Installed in a Maven Repository
 
-Remember that when you mavenize your domain, you need to install it in an .M2 repository.
+Remember that when you mavenize your domain, you need to install it in a Maven repository. Note that building the domain and the application for testing in the same execution (for example, `mvn clean test -pl 'mydomain,myapp'``) will not work.
 
 [CAUTION]
 --
-When working with Maven, you need to handle domains and mule apps as regular dependencies. +
-Setting them as an artifact requires for them to be installed in an .M2 repository.
+When working with Maven, you need to handle domains and Mule apps as regular dependencies. +
+Setting them as an artifact requires them to be installed in a Maven repository.
 --
 
 ==== Your Resources Need to be In Your Test Suite pom File
 
 When mavenizing your Mule application, Studio automatically adds your mavenized domain to your application's `pom` file.
 
-If your Mule domain project looks like this:
+If your Mule Domain project looks like this:
 
 [source,xml,linenums]
 ----
@@ -105,5 +105,5 @@ Then your dependency in your Mule application should look like this:
 
 [NOTE]
 --
-Remember to keep consistency with `<version>` artifact in your repository and in your test suite's pom file
+Remember to keep the `<version>` artifact in your repository and in your test suite's `pom` file consistent.
 --
