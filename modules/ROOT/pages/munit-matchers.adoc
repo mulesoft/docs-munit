@@ -51,19 +51,19 @@ These matchers are:
 
 | xref:core-matchers-reference.adoc#either-matcher-matcher[either(Matcher,Matcher)]
 | Checks that at least one of the matchers is successful.
-| *  `#[MunitTools::either(MunitTools::nullValue(),MunitTools::equalTo(0))]`
+| * `#[MunitTools::either(MunitTools::nullValue(),MunitTools::equalTo(0))]`
 
 | xref:core-matchers-reference.adoc#not-matcher[not(Matcher)]
 | Checks if the provided matcher is not successful.
-| *  `#[MunitTools::not(MunitTools::equalTo(0))]`
+| * `#[MunitTools::not(MunitTools::equalTo(0))]`
 
-| xref:core-matchers-reference.adoc#anyof-matchers[anyOf(Matchers[])]
+| xref:core-matchers-reference.adoc#anyof-matchers[anyOf(Matchers[\])]
 | Checks if any of the matchers are successful.
-| *  `#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]`
+| * `#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]`
 
-| xref:core-matchers-reference.adoc#allof-matchers[allOf(Matchers[])]
+| xref:core-matchers-reference.adoc#allof-matchers[allOf(Matchers[\])]
 | Checks if all of the matchers are successful.
-| *  `#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]`
+| * `#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]`
 |===
 
 
@@ -112,7 +112,7 @@ These matchers are:
 | Checks that the expression is equal to the string disregarding leading and trailing white spaces, and compression all inner white spaces to a single space.
 | * `#[MunitTools::equalToIgnoringWhiteSpace('An Example')]`
 
-| xref:string-matchers-reference.adoc#stringcontainsinorder-array-string[stringContainsInOrder(>)]
+| xref:string-matchers-reference.adoc#stringcontainsinorder-array-string[stringContainsInOrder(Array<String>)]
 | Checks that the expression contains all of the specified substrings, regardless of the order of their appearance.
 | * `#[MunitTools::stringContainsInOrder('an', 'example')]`
 
@@ -139,34 +139,34 @@ These matchers are:
 | Matcher | Description | Example
 | xref:comparable-matchers-reference.adoc#greaterthan-comparable[greaterThan(Comparable)]
 | Checks that the expression is greater than the specified value.
-| *  `#[MunitTools::greaterThan(20)]`
-* `#[MunitTools::greaterThan(\|2017-08-09\|)]`
+| * `#[MunitTools::greaterThan(20)]`
+//formatting broken * `#[MunitTools::greaterThan(\|2017-08-09\|)]`
 
 | xref:comparable-matchers-reference.adoc#greaterthanorequalto-comparable[greaterThanOrEqualTo(Comparable)]
-| Checks that the expression is greater than or equal to the specified value.
-| *  `#[MunitTools::greaterThanOrEqualTo(20)]`
-* `#[MunitTools::greaterThanOrEqualTo(\|2017-08-09\|)]`
+| Checks that the expression is greater than or equal to the specified value. 
+| * `#[MunitTools::greaterThanOrEqualTo(20)]`
+//formatting broken * `#[MunitTools::greaterThanOrEqualTo(\|2017-08-09\|)]`
 
 | xref:comparable-matchers-reference.adoc#lessthan-comparable[lessThan(Comparable)]
-| Checks that the expression is less than the specified value.
-| *  `#[MunitTools::lessThan(20)`
-* `#[MunitTools::lessThan(\|2017-08-09\|)]`
+| Checks that the expression is less than the specified value. 
+| * `#[MunitTools::lessThan(20)`
+//formatting broken * `#[MunitTools::lessThan(\|2017-08-09\|)]`
 
 | xref:comparable-matchers-reference.adoc#lessthanorequalto-comparable[lessThanOrEqualTo(Comparable)]
 | Checks that the expression is less than or equal to the specified value.
-| *  `#[MunitTools::lessThanOrEqualTo(20)]`
-* `#[MunitTools::lessThanOrEqualTo(\|2017-08-09\|)]`
+| * `#[MunitTools::lessThanOrEqualTo(20)]`
+//formatting broken * `#[MunitTools::lessThanOrEqualTo(\|2017-08-09\|)]`
 
 | xref:comparable-matchers-reference.adoc#closeto-number-number[closeTo(Number, Number)]
 | Checks that the expression is close to the first number, using the second number as a delta value. +
 In other words, checks that the expression belongs to the range defined by the first number +/- the second number.
-| *  `#[MunitTools::closeTo(1, 0.01)]`
+| * `#[MunitTools::closeTo(1, 0.01)]`
 
 | xref:comparable-matchers-reference.adoc#equalto-object[equalTo(Object)]
 | Checks that the expression is equal to a specific value. +
 This matcher also accepts Dataweave objects.
 | * `#[MunitTools::equalTo('example')]`
-* `#[MunitTools::equalTo({example1: 1 , example2: 2}]`
+//formatting broken * `#[MunitTools::equalTo({example1: 1 , example2: 2}]`
 
 |===
 
@@ -201,7 +201,7 @@ These matchers are:
 This matcher only works for Arrays.
 --
 
-| *  `#[MunitTools::everyItem(MunitTools::notNullValue())]`
+| * `#[MunitTools::everyItem(MunitTools::notNullValue())]`
 * `#[MunitTools::everyItem(MunitTools::startsWith('a'))]`
 
 
@@ -213,12 +213,12 @@ This matcher only works for Arrays.
 This matcher only works for Arrays.
 --
 
-| *  `#[MunitTools::hasItem(MunitTools::notNullValue())]`
+| * `#[MunitTools::hasItem(MunitTools::notNullValue())]`
 * `#[MunitTools::hasItem(MunitTools::startsWith('a'))]`
 
 | xref:iterable-map-matchers-reference.adoc#hassize-matcher[hasSize(Matcher)]
 | Checks that the size of the expression matches the specified matcher.
-| *  `#[MunitTools::hasSize(MunitTools::equalTo(5))]`
+| * `#[MunitTools::hasSize(MunitTools::equalTo(5))]`
 * `#[MunitTools::hasSize(MunitTools::startsWith('a'))]`
 
 | xref:iterable-map-matchers-reference.adoc#isempty[isEmpty()]
@@ -234,7 +234,7 @@ This matcher only works for Arrays.
 This matcher only works for Maps.
 --
 
-| *  `#[MunitTools::hasKey(MunitTools::equalTo('myKey'))]`
+| * `#[MunitTools::hasKey(MunitTools::equalTo('myKey'))]`
 * `#[MunitTools::hasKey(MunitTools::startsWith('a'))]`
 
 | xref:iterable-map-matchers-reference.adoc#hasvalue-matcher[hasValue(Matcher)]
@@ -245,7 +245,7 @@ This matcher only works for Maps.
 This matcher only works for Maps.
 --
 
-| *  `#[MunitTools::hasValue(MunitTools::equalTo('myValue')]`
+| * `#[MunitTools::hasValue(MunitTools::equalTo('myValue')]`
 * `#[MunitTools::hasValue(MunitTools::startsWith('a'))]`
 
 |===
