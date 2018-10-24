@@ -136,14 +136,14 @@ The Mock When processor also allows you to mock errors specifying the cause (exc
 
 [source,xml,linenums]
 ----
-    <munit-tools:mock-when processor="http:request">
-        <munit-tools:with-attributes>
-            <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/> // <1>
-        </munit-tools:with-attributes>
-        <munit-tools:then-return>
-          <munit-tools:error cause="#[java!org::mule::runtime::api::connection::ConnectionException::new('MyMessage')]"/>
-        </munit-tools:then-return>
-    </munit-tools:mock-when>
+<munit-tools:mock-when processor="http:request">
+  <munit-tools:with-attributes>
+    <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/>
+  </munit-tools:with-attributes>
+  <munit-tools:then-return>
+    <munit-tools:error cause="#[java!org::mule::runtime::api::connection::ConnectionException::new('MyMessage')]"/>
+  </munit-tools:then-return>
+</munit-tools:mock-when>
 ----
 
 == See Also
