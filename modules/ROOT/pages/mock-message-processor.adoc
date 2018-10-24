@@ -130,6 +130,21 @@ This triggers the On-error scope in your application.
 <3> Execute the flow containing the requester.
 <4> Assert that the returned payload is the one you set inside the On-error scope.
 
+=== Mocking Errors with exceptions
+
+The Mock When processor also allows you to mock errors specifying the cause (exception instance). A sample mock instantiating the cause through Dataweave would look like this:
+
+[source,xml,linenums]
+----
+    <munit-tools:mock-when processor="http:request">
+        <munit-tools:with-attributes>
+            <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/> // <1>
+        </munit-tools:with-attributes>
+        <munit-tools:then-return>
+          <munit-tools:error cause="#[java!org::mule::runtime::api::connection::ConnectionException::new('MyMessage')]"/>
+        </munit-tools:then-return>
+    </munit-tools:mock-when>
+----
 
 == See Also
 
