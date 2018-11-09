@@ -28,8 +28,8 @@ To inherit the MUnit plugin in your child POM files, you need to reference it in
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.runtime>4.1.0</app.runtime>
-        <munit.version>2.1.0</munit.version>
+        <app.runtime>4.1.1</app.runtime>
+        <munit.version>2.2.0-BETA</munit.version>
     </properties>
 
     <build>

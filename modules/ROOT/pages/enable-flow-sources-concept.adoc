@@ -46,13 +46,16 @@ In order for MUnit to be able to reach the endpoint, you need to enable the http
     </munit:execution>
 
     <munit:validation>
-        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalTo('Hello World')]" />
+        <munit-tools:assert-that expression="#[payload]" is="#[equalTo('Hello World')]" />
     </munit:validation>
 
 </munit:test>
 ----
 
 If the http-transportFlow is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the http-listener configuration.
+
+NOTE: Since MUnit 2.2, flow sources are *started at the beginning of the test*, and *stopped at the end of the test*. This means
+that during the before-suite/before-test flow sources will be stopped, and also during the after-test/after-suite.
 
 == To Enable Flow Sources from Studio
 

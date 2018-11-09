@@ -1,0 +1,47 @@
+= About Storage Event Processors
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:version-info: 2.0 and newer
+:keywords: munit, testing, unit testing, storage
+
+The Storage Processors allows you to manage temporary storage during  your tests.
+All storage is *cleared as soon as the test ends*.
+
+== Store operation
+
+Stores the given data associated with the given key. If `value` not set, it defaults to the `payload`.
+
+[source,xml,linenums]
+----
+<munit-tools:store key="myKey">
+    <munit-tools:value>#[person : { name: 'John', lastName: 'Smith' }]</munit-tools:value>
+</munit-tools:store>
+----
+
+== Retrieve operation
+
+Retrieves the data associated with the given key
+
+[source,xml,linenums]
+----
+<munit-tools:retrieve key="myKey"/>
+----
+
+== Remove operation
+
+Removes and returns the data associated with the given key
+
+[source,xml,linenums]
+----
+<munit-tools:remove key="myKey"/>
+----
+
+== Clear stored data operation
+
+Clears all stored data
+
+[source,xml,linenums]
+----
+<munit-tools:clear-stored-data/>
+----

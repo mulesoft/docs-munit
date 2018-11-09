@@ -23,7 +23,7 @@ expression="#[payload]"
 is="#[MunitTools::everyItem(MunitTools::startsWith('a'))]"/>
 ----
 
-== hasItem(Matcher)
+== hasItem(Object)
 
 Checks that any element in the expression matches the specified matcher.
 
@@ -32,7 +32,7 @@ Checks that any element in the expression matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasItem(MunitTools::notNullValue())]"/>
+is="#[MunitTools::hasItem('example')]"/>
 ----
 
 .Example
@@ -43,7 +43,7 @@ expression="#[payload]"
 is="#[MunitTools::hasItem(MunitTools::startsWith('a'))]"/>
 ----
 
-== hasSize(Matcher)
+== hasSize(Matcher|Integer)
 
 Checks that the size of the expression matches the specified matcher.
 
@@ -52,7 +52,7 @@ Checks that the size of the expression matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasSize(MunitTools::equalTo(5))]"/>
+is="#[MunitTools::hasSize(5)]"/>
 ----
 
 .Example
@@ -76,7 +76,7 @@ expression="#[payload]"
 is="#[MunitTools::isEmpty()]"/>
 ----
 
-== hasKey(Matcher)
+== hasKey(Matcher|String)
 
 Checks that the expression has a key that matches the specified matcher.
 
@@ -85,7 +85,7 @@ Checks that the expression has a key that matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasKey(MunitTools::equalTo('myKey'))]"/>
+is="#[MunitTools::hasKey('myKey')]"/>
 ----
 
 .Example
@@ -96,7 +96,7 @@ expression="#[payload]"
 is="#[MunitTools::hasKey(MunitTools::startsWith('a'))]"/>
 ----
 
-== hasValue(Matcher)
+== hasValue(Object)
 
 Checks that the expression has a value that matches the specified matcher.
 
@@ -105,7 +105,7 @@ Checks that the expression has a value that matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasValue(MunitTools::equalTo('myValue')]"/>
+is="#[MunitTools::hasValue('myValue')]"/>
 ----
 
 .Example

@@ -1,0 +1,74 @@
+= About Assert Expression Event Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:version-info: 2.0 and later
+:keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+
+The Assert Expression Event Processor allows you evaluate a DW expression that asserts the state of a Mule Event's content. +
+This Event Processor can be used to validate the Mule Event after the production code runs, using the xref:weave-assertions.adoc[DW Assertions Library]
+
+For example, to assert that a payload is equal to a certain value, you can configure the Assert-Expression processor using the equalTo() matcher.
+
+[source,xml,linenums]
+----
+<munit-tools:assert>
+    <munit-tools:that>#[ import * from dw::test::Asserts ---
+        payload must equalTo('example') ]
+    </munit-tools:that>
+</munit-tools:assert>
+----
+
+== Perform complex assertions
+
+The DW assertions library allows you to assert the state of the Mule Event's content in a deeper way.
+
+[source,xml,linenums]
+----
+<munit-tools:assert>
+    <munit-tools:that>#[ import * from dw::test::Asserts ---
+        vars.attributes must [beObject(), $.statusCode must equalTo(200), $.method must equalTo('GET')] ]
+    </munit-tools:that>
+</munit-tools:assert>
+----
+
+
+== Create your own Matcher
+To create your own matcher, you can add DW files to your `src/test/resources` folder. For example, a file called
+`MyMatcher.dwl` with the following content:
+
+[source,dataweave,linenums]
+----
+import * from dw::test::Asserts
+
+fun beEven(): Matcher<Number> =
+     (actual:Number) -> do {
+         var matchesEven = (actual mod 2) == 0
+         ---
+         {
+             matches: matchesEven,
+             description: {expected: " to be an even number.", actual: write(actual) as String}
+         }
+     }
+
+----
+
+And then use it in your Assert-Expression processor:
+[source,xml,linenums]
+----
+<munit-tools:assert>
+    <munit-tools:that>#[ import * from dw::test::Asserts ---
+        payload must MyMatcher::beEven() ]
+    </munit-tools:that>
+</munit-tools:assert>
+----
+
+If this assertion fails, the processor throws a `java.lang.AssertionError`.
+
+WARNING: Matchers from the `dw::test::Asserts` library are not compatible with the `MunitTools` matchers.
+This means, you *can't* use `dw::test::Asserts` with the Assert-That processor, and you *can't* use `MunitTools` matchers with the Assert-Expression processor.
+
+== See Also
+
+* xref:assert-equals-processor.adoc[About Assert Equals Event Processor]
+* xref:assertion-message-processor.adoc[About Assert That Event Processor]

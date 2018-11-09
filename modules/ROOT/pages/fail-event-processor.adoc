@@ -19,6 +19,6 @@ The message field is optional and defines the error message to print when the as
 
 * xref:munit-matchers.adoc[About MUnit Matchers]
 * xref:assertion-message-processor.adoc[About Assert That Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
 * xref:mock-message-processor.adoc[About Mock When Event Processor]
 * xref:verify-message-processor.adoc[About Verify Event Processor]

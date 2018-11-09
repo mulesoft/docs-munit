@@ -11,7 +11,7 @@ endif::[]
 |*Mandatory.* Defines the name of the test. The name must be unique inside the test suite.
 
 |description
-|*Mandatory.* Describes the scenario being tested.
+|Describes the scenario being tested.
 
 |ignore
 |Defines if the test should be ignored. If not present, the test is not ignored.

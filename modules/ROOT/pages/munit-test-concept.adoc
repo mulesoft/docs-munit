@@ -52,7 +52,7 @@ image::munit-test-concept-9c736.png[munit-test]
 
 == About MUnit Test Description Attribute
 
-In MUnit, it's mandatory that you write a description in your test. +
+Since MUnit 2.2.0, its optional that you write a description in your test. +
 Ideally, you should write a useful, representative description of the scenario you are testing. This description displays in the test console before running the test, and also in the reports. +
 The more representative the description, the easier to read and troubleshoot any failures.
 
@@ -117,7 +117,7 @@ You can add the attribute expectedErrorType and expectException, as shown below:
 image::munit-test-concept-e7280.png[]
 
 * The attribute expectedErrorType expects an error ID that needs to be defined inside the application being tested.
- This attribute allows you to validate that a defined error type in your application is thrown. If you define an errorType that does not exists in your application, the test does not run.
+:: This attribute allows you to validate that a defined error type in your application is thrown. If you define an errorType that does not exists in your application, the test does not run.
 +
 [source,xml,linenums]
 ----
@@ -135,7 +135,7 @@ If none of your flows are using using an FTP connector, then the error type is n
 ErrorTypes that belong to the Mule Runtime does not need to be typified. For example, MULE:RETRY_EXHAUSTED can be defined as simply RETRY_EXHAUSTED.
 
 * The attribute expectException expects a literal exception class name (canonical form).
- When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
+:: When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
 +
 [source,xml,linenums]
 ----

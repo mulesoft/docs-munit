@@ -31,7 +31,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mule.version>4.1.0</mule.version>
-        <munit.version>2.1.0</munit.version>
+        <munit.version>2.2.0-BETA</munit.version>
     </properties>
 
     <build>

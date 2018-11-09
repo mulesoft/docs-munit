@@ -29,12 +29,12 @@ Or you can also check if the payload is null using the nullValue() matcher.
   message="The payload is null"/>
 ----
 
-If these assertion fails, the processor throws a `java.lang.AssertionError`.
+If this assertion fails, the processor throws a `java.lang.AssertionError`.
 
 == See Also
 
 * xref:munit-matchers.adoc[About MUnit Matchers]
 * xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
 * xref:mock-message-processor.adoc[About Mock When Event Processor]
 * xref:verify-message-processor.adoc[About Verify Event Processor]
