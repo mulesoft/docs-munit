@@ -4,9 +4,9 @@ include::_attributes.adoc[]
 endif::[]
 :keywords: munit, test, flow sources
 
-The Enable Flow Sources element within the MUnit Test tells MUnit which sources to load and execute for the test.
+The Enable Flow Sources element within the MUnit Test tells MUnit which Event Sources to load and execute for the test.
 
-MUnit does not load any of your flows endpoints. It's up to you to configure which endpoints to initialize for your tests.
+By default, MUnit does not start any of the Event Sources (triggers, listeners or otherwise). It's up to you to configure which of those to start for your tests.
 
 For example, assume that you have an application whose HTTP listener returns a specific payload:
 
@@ -21,12 +21,11 @@ For example, assume that you have an application whose HTTP listener returns a s
 
   <http:listener config-ref="HTTP_Listener_config" path="/"/>
   <set-payload value='#["Hello World!"]'/>
-
-
+  
 </flow>
 ----
 
-In order for MUnit to be able to reach the endpoint, you need to enable the http-transportFlow in your enable-flow-source property:
+In order for MUnit to be able to reach that listener, you need to enable the http-transportFlow in your enable-flow-source property:
 
 [source,xml,linenums]
 ----
@@ -46,7 +45,7 @@ In order for MUnit to be able to reach the endpoint, you need to enable the http
     </munit:execution>
 
     <munit:validation>
-        <munit-tools:assert-that expression="#[payload]" is="#[equalTo('Hello World')]" />
+        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalTo('Hello World')]" />
     </munit:validation>
 
 </munit:test>
