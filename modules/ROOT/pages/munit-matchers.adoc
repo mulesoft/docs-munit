@@ -5,251 +5,372 @@ endif::[]
 :version-info: 2.0 and later
 :keywords: munit, testing, unit testing
 
-MUnit matchers are a set of DataWeave functions to define assertion conditions in terms of general values instead of specific hardcoded values.
-
-[TIP]
-When defining matchers you need to add the `MunitTools::` prefix to the expression.
-
-Matchers are grouped according to the type of conditions you want to validate. +
-You can find:
-
-== Core Matchers
-
-These matchers evaluate core values in the expression. +
-You can use these matchers to evaluate:
-
-* Whether the expression is null or not.
-* Media Type or Encoding of the expression.
-* Whether the returns false.
-* Whether two evaluations were successful.
-
-These matchers are:
-
-[%header%autowidth.spread,cols="a,a,a"]
-|===
-| Matcher | Description | Example
-
-| xref:core-matchers-reference.adoc#nullvalue[nullValue()]
-|  Checks that the expression is null.
-|  * `#[MunitTools::nullValue()]`
-
-| xref:core-matchers-reference.adoc#notnullvalue[notNullValue()]
-| Checks that the expression is not null.
-| * `#[MunitTools::notNullValue()]`
-
-| xref:core-matchers-reference.adoc#withmediatype-string[withMediaType(String)]
-| Checks that the expression’s media type is the one specified.
-| *  `#[MunitTools::withMediaType('text/xml')]`
-
-| xref:core-matchers-reference.adoc#withencoding-string[withEncoding(String)]
-| Checks that the expression’s encoding is the one specified.
-| *  `#[MunitTools::withEncoding('UTF-8')]`
-
-| xref:core-matchers-reference.adoc#both-matcher-matcher[both(Matcher, Matcher)]
-| Checks that both provided matchers are successful.
-| *  `#[MunitTools::both(MunitTools::notNullValue(),MunitTools::equalTo('example'))]`
-
-| xref:core-matchers-reference.adoc#either-matcher-matcher[either(Matcher,Matcher)]
-| Checks that at least one of the matchers is successful.
-| *  `#[MunitTools::either(MunitTools::nullValue(),MunitTools::equalTo(0))]`
-
-| xref:core-matchers-reference.adoc#not-matcher[not(Matcher)]
-| Checks if the provided matcher is not successful.
-| *  `#[MunitTools::not(MunitTools::equalTo(0))]`
-
-| xref:core-matchers-reference.adoc#anyof-matchers[anyOf(Matchers[])]
-| Checks if any of the matchers are successful.
-| *  `#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]`
-
-| xref:core-matchers-reference.adoc#allof-matchers[allOf(Matchers[])]
-| Checks if all of the matchers are successful.
-| *  `#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]`
-|===
-
-
-== String Matchers
-
-These Matchers are meant to perform assertions over String expressions. +
-You can use these matchers to evaluate:
-
-* Whether the expression contains a specific String.
-* Whether the expression starts or ends with a specific String.
-* Whether the String in the expression has zero length.
-* Compare the String in the expression against a String determined by you.
-
-These matchers are:
-
-[%header%autowidth.spread,cols="a,a,a"]
-|===
-| Matcher | Description | Example
-
-| xref:string-matchers-reference.adoc#containsstring-string[containsString(String)]
-| Checks that the expression contains the specified String.
-| *  `#[MunitTools::containsString('example')]`
-
-| xref:string-matchers-reference.adoc#startswith-string[startsWith(String)]
-| Checks that the expression starts with the specified String.
-| * `#[MunitTools::startsWith('exam')]`
-
-| xref:string-matchers-reference.adoc#endswith-string[endsWith(String)]
-| Checks that the expression ends with the specified String.
-| * `#[MunitTools::endsWith('ple')]`
-
-
-| xref:string-matchers-reference.adoc#isemptystring[isEmptyString()]
-| Checks that the expression has zero length.
-| * `#[MunitTools::isEmptyString()]`
-
-| xref:string-matchers-reference.adoc#isemptyornullstring[isEmptyOrNullString()]
-| Checks that the expression is null, or has zero length.
-| * `#[MunitTools::isEmptyOrNullString()]`
-
-| xref:string-matchers-reference.adoc#equaltoignoringcase-string[equalToIgnoringCase(String)]
-| Checks that the expression is equal to the specified String, ignoring case.
-| * `#[MunitTools::equalToIgnoringCase('Example')]`
-
-| xref:string-matchers-reference.adoc#equaltoignoringwhitespace-string[equalToIgnoringWhiteSpace(String)]
-| Checks that the expression is equal to the string disregarding leading and trailing white spaces, and compression all inner white spaces to a single space.
-| * `#[MunitTools::equalToIgnoringWhiteSpace('An Example')]`
-
-| xref:string-matchers-reference.adoc#stringcontainsinorder-array-string[stringContainsInOrder(>)]
-| Checks that the expression contains all of the specified substrings, regardless of the order of their appearance.
-| * `#[MunitTools::stringContainsInOrder('an', 'example')]`
-
-|===
-
-
-== Comparable Matchers
-
-These matchers compare the expression against any provided Value. +
-You can use these matchers to evaluate:
-
-* Whether the expression's value is greater or smaller than a specified value.
-* Whether the expression's value is closer to a specific number.
-
-[TIP]
-Some comparable matchers  take a `Comparable` type. +
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
-Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
-
-These matchers are:
-
-[%header%autowidth.spread,cols="a,a,a"]
-|===
-| Matcher | Description | Example
-| xref:comparable-matchers-reference.adoc#greaterthan-comparable[greaterThan(Comparable)]
-| Checks that the expression is greater than the specified value.
-| *  `#[MunitTools::greaterThan(20)]`
-* `#[MunitTools::greaterThan(\|2017-08-09\|)]`
-
-| xref:comparable-matchers-reference.adoc#greaterthanorequalto-comparable[greaterThanOrEqualTo(Comparable)]
-| Checks that the expression is greater than or equal to the specified value.
-| *  `#[MunitTools::greaterThanOrEqualTo(20)]`
-* `#[MunitTools::greaterThanOrEqualTo(\|2017-08-09\|)]`
-
-| xref:comparable-matchers-reference.adoc#lessthan-comparable[lessThan(Comparable)]
-| Checks that the expression is less than the specified value.
-| *  `#[MunitTools::lessThan(20)`
-* `#[MunitTools::lessThan(\|2017-08-09\|)]`
-
-| xref:comparable-matchers-reference.adoc#lessthanorequalto-comparable[lessThanOrEqualTo(Comparable)]
-| Checks that the expression is less than or equal to the specified value.
-| *  `#[MunitTools::lessThanOrEqualTo(20)]`
-* `#[MunitTools::lessThanOrEqualTo(\|2017-08-09\|)]`
-
-| xref:comparable-matchers-reference.adoc#closeto-number-number[closeTo(Number, Number)]
-| Checks that the expression is close to the first number, using the second number as a delta value. +
-In other words, checks that the expression belongs to the range defined by the first number +/- the second number.
-| *  `#[MunitTools::closeTo(1, 0.01)]`
-
-| xref:comparable-matchers-reference.adoc#equalto-object[equalTo(Object)]
-| Checks that the expression is equal to a specific value. +
-This matcher also accepts Dataweave objects.
-| * `#[MunitTools::equalTo('example')]`
-* `#[MunitTools::equalTo({example1: 1 , example2: 2}]`
-
-|===
-
-
-== Iterable and Maps Matchers
-
-You can use these matchers when your expression is either an Array or a Map of data. +
-
-Some of these matchers evaluate keys and values in the expression. +
-For example, you can evaluate:
-
-* Whether the map/array in the expression is empty.
-* Whether the map/array in the expression has a specific key.
-
-You can also use some of these matchers to iterate inside the expression and evaluate each key and value using any other matcher. +
-Some examples are:
-
-* Whether every item in the map/array from the expression are greater than or less than a specific number.
-* Whether any item in the map/array from the expression starts or ends with a specific String.
-
-These matchers are:
-
-[%header%autowidth.spread,cols="a,a,a"]
-|===
-| Matcher | Description | Example
-
-| xref:iterable-map-matchers-reference.adoc#everyitem-matcher[everyItem(Matcher)]
-| Checks that every element in the expression matches the specified matcher.
+MUnit matchers are a set of DataWeave functions to define assertion conditions for any value in an expression instead of a specific value.
 
 [NOTE]
 --
-This matcher only works for Arrays.
+When defining matchers, include the prefix `MunitTools::` in the expression, as illustrated in the following examples.
 --
 
-| *  `#[MunitTools::everyItem(MunitTools::notNullValue())]`
-* `#[MunitTools::everyItem(MunitTools::startsWith('a'))]`
+Matchers are grouped according to the type of conditions you want to validate.
 
+== Match Core Values
 
-| xref:iterable-map-matchers-reference.adoc#hasitem-matcher[hasItem(Matcher)]
-| Checks that any element in the expression matches the specified matcher.
+Core matchers evaluate core values in the expression:
 
-[NOTE]
+* Is the expression is null?
+* What is the media Ttpe or encoding of the expression.
+* Does the expression return false?
+* Are two evaluations successful?
+
+Core Matchers:
+
+* xref:core-matchers-reference.adoc#nullvalue[nullValue()] checks that the expression is null.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::nullValue()]
+----
+
+* xref:core-matchers-reference.adoc#notnullvalue[notNullValue()] checks that the expression is not null.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::notNullValue()]
+----
+
+* xref:core-matchers-reference.adoc#withmediatype-string[withMediaType(String)] checks that the expression’s media type is the one specified.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::withMediaType('text/xml')]
+----
+
+* xref:core-matchers-reference.adoc#withencoding-string[withEncoding(String)] checks that the expression’s encoding is the one specified.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::withEncoding('UTF-8')]
+----
+
+* xref:core-matchers-reference.adoc#both-matcher-matcher[both(Matcher, Matcher)] checks that both provided matchers are successful.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::both(MunitTools::notNullValue(),MunitTools::equalTo('example'))]
+----
+
+* xref:core-matchers-reference.adoc#either-matcher-matcher[either(Matcher,Matcher)] checks that at least one of the matchers is successful.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::either(MunitTools::nullValue(),MunitTools::equalTo(0))]
+----
+
+* xref:core-matchers-reference.adoc#not-matcher[not(Matcher)] checks if the provided matcher is not successful.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::not(MunitTools::equalTo(0))]
+----
+* xref:core-matchers-reference.adoc#anyof-matchers[anyOf(Matchers[\])] checks if any of the matchers are successful.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]
+----
+
+* xref:core-matchers-reference.adoc#allof-matchers[allOf(Matchers[\])] Checks if all of the matchers are successful.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]
+----
+
+== Match Strings
+
+String Matchers perform assertions on String expressions:
+
+* Does the expression contain a specified string?
+* Does the expression start or end with a specified string?
+* Does the string in the expression have zero length?
+* Does the string in the expression match a specified string?
+
+String Matchers:
+
+* xref:string-matchers-reference.adoc#containsstring-string[containsString(String)] checks that the expression contains the specified String.
+++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::containsString('example')]
+----
+
+* xref:string-matchers-reference.adoc#startswith-string[startsWith(String)] checks that the expression starts with the specified String.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::startsWith('exam')]
+----
+
+* xref:string-matchers-reference.adoc#endswith-string[endsWith(String)] checks that the expression ends with the specified String.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::endsWith('ple')]
+----
+
+* xref:string-matchers-reference.adoc#isemptystring[isEmptyString()] checks that the expression has zero length.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::isEmptyString()]
+----
+
+* xref:string-matchers-reference.adoc#isemptyornullstring[isEmptyOrNullString()] checks that the expression is null, or has zero length.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::isEmptyOrNullString()]
+----
+
+* xref:string-matchers-reference.adoc#equaltoignoringcase-string[equalToIgnoringCase(String)] checks that the expression is equal to the specified String, ignoring case.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::equalToIgnoringCase('Example')]
+----
+
+* xref:string-matchers-reference.adoc#equaltoignoringwhitespace-string[equalToIgnoringWhiteSpace(String)] checks that the expression is equal to the string disregarding leading and trailing white spaces, and compression all inner white spaces to a single space.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::equalToIgnoringWhiteSpace('An Example')]
+----
+
+* xref:string-matchers-reference.adoc#stringcontainsinorder-array-string[stringContainsInOrder(String, String,...)] checks that the expression contains all of the specified substrings, regardless of the order of their appearance.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::stringContainsInOrder('an', 'example')]
+----
+
+== Match Comparable Expressions
+
+Comparable matchers compare the expression against a specified value:
+
+* Is the expression's value greater or smaller than a specified value?
+* Is the expression's value closer to a specific number?
+
+[Note]
 --
-This matcher only works for Arrays.
+Some comparable matchers take a `Comparable` type.
+`Comparable` is a DataWeave type that represents all the types that can be compared to each other. 
+Allowed primitives are `String`, `Number`, `Boolean`, `DateTime`, `LocalDateTime`, `LocalTime`, `Time`, and `TimeZone`.
 --
+Comparable Matchers:
 
-| *  `#[MunitTools::hasItem(MunitTools::notNullValue())]`
-* `#[MunitTools::hasItem(MunitTools::startsWith('a'))]`
+* xref:comparable-matchers-reference.adoc#greaterthan-comparable[greaterThan(Comparable)] checks that the expression is greater than the specified value.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::greaterThan(20)]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::greaterThan(|2017-08-09|)]
+----
 
-| xref:iterable-map-matchers-reference.adoc#hassize-matcher[hasSize(Matcher)]
-| Checks that the size of the expression matches the specified matcher.
-| *  `#[MunitTools::hasSize(MunitTools::equalTo(5))]`
-* `#[MunitTools::hasSize(MunitTools::startsWith('a'))]`
+* xref:comparable-matchers-reference.adoc#greaterthanorequalto-comparable[greaterThanOrEqualTo(Comparable)] checks that the expression is greater than or equal to the specified value.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::greaterThanOrEqualTo(20)]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::greaterThanOrEqualTo(|2017-08-09|)]
+----
 
-| xref:iterable-map-matchers-reference.adoc#isempty[isEmpty()]
-| Checks that the expression is an empty collection.
-| * `#[MunitTools::isEmpty()]`
+* xref:comparable-matchers-reference.adoc#lessthan-comparable[lessThan(Comparable)] checks that the expression is less than the specified value.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::lessThan(20)
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::lessThan(|2017-08-09|)]
+----
 
+* xref:comparable-matchers-reference.adoc#lessthanorequalto-comparable[lessThanOrEqualTo(Comparable)] checks that the expression is less than or equal to the specified value.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::lessThanOrEqualTo(20)]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::lessThanOrEqualTo(|2017-08-09|)]
+----
 
-| xref:iterable-map-matchers-reference.adoc#haskey-matcher[hasKey(Matcher)]
-| Checks that the expression has a key that matches the specified matcher.
+* xref:comparable-matchers-reference.adoc#closeto-number-number[closeTo(Number, Number)] checks that the expression is in the range defined by the first and second number.
++
+Example:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::closeTo(1, 0.01)]
+----
 
-[NOTE]
---
-This matcher only works for Maps.
---
+* xref:comparable-matchers-reference.adoc#equalto-object[equalTo(Object)] checks that the expression is equal to a specified value. This matcher also accepts DataWeave objects.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::equalTo('example')]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::equalTo({example1: 1 , example2: 2}]
+----
 
-| *  `#[MunitTools::hasKey(MunitTools::equalTo('myKey'))]`
-* `#[MunitTools::hasKey(MunitTools::startsWith('a'))]`
+== Match Maps and Iterations
 
-| xref:iterable-map-matchers-reference.adoc#hasvalue-matcher[hasValue(Matcher)]
-| Checks that the expression has a value that matches the specified matcher.
+Use iterable matchers and maps matchers when your expression is an array or a map of data:
 
-[NOTE]
---
-This matcher only works for Maps.
---
+* Is the map or array in the expression empty?
+* Does the map or array in the expression have a specific key.
+* Is every item in the map or array from the expression greater than or less than a specific number?
+* Does any item in the map or array from the expression start or end with a specified string?
 
-| *  `#[MunitTools::hasValue(MunitTools::equalTo('myValue')]`
-* `#[MunitTools::hasValue(MunitTools::startsWith('a'))]`
+Iterable and Map Matchers:
 
-|===
+* xref:iterable-map-matchers-reference.adoc#everyitem-matcher[everyItem(Matcher)] checks that every element in the expression matches the specified matcher. This matcher only works for Arrays.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::everyItem(MunitTools::notNullValue())]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::everyItem(MunitTools::startsWith('a'))]
+----
 
+* xref:iterable-map-matchers-reference.adoc#hasitem-matcher[hasItem(Matcher)] checks that any element in the expression matches the specified matcher. This matcher only works for Arrays.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasItem(MunitTools::notNullValue())]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasItem(MunitTools::startsWith('a'))]
+----
+
+* xref:iterable-map-matchers-reference.adoc#hassize-matcher[hasSize(Matcher)] checks that the size of the expression matches the specified matcher.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasSize(MunitTools::equalTo(5))]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasSize(MunitTools::startsWith('a'))]
+----
+
+* xref:iterable-map-matchers-reference.adoc#isempty[isEmpty()] checks that the expression is an empty collection.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::isEmpty()]
+----
+
+* xref:iterable-map-matchers-reference.adoc#haskey-matcher[hasKey(Matcher)] checks that the expression has a key that matches the specified matcher. This matcher only works for Maps.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasKey(MunitTools::equalTo('myKey'))]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasKey(MunitTools::startsWith('a'))]
+----
+
+* xref:iterable-map-matchers-reference.adoc#hasvalue-matcher[hasValue(Matcher)] checks that the expression has a value that matches the specified matcher. This matcher only works for Maps.
++
+Examples:
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasValue(MunitTools::equalTo('myValue')]
+----
++
+[source,DataWeave,options="nowrap"]
+----
+#[MunitTools::hasValue(MunitTools::startsWith('a'))]
+----
 
 == See Also
 
