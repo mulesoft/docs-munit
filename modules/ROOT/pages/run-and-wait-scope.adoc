@@ -9,13 +9,43 @@ endif::[]
 
 The Run and Wait scope provided by MUnit allows you to instruct MUnit to wait until all asynchronous executions have completed. Hence, test execution does not start until all threads opened by production code have finished processing.
 
+[NOTE]
+--
+One consideration to have if you are using Maven:
+
+You need to add the MUnit Synchronize module artifact to your `pom` file:
+
+[source,xml,linenums]
+----
+<!-- Synchronize Scope Dependency -->
+<dependency>
+          <groupId>com.mulesoft.munit.utils</groupId>
+          <artifactId>munit-synchronize-module</artifactId>
+          <version>1.0.0</version>
+</dependency>
+----
+
+If you choose to https://docs.mulesoft.com/anypoint-studio/v/6/enabling-maven-support-for-a-studio-project[mavenize] your project, Studio will notify you that the Synchronize module dependency will be added.
+--
+
+
 == Defining Run and Wait
 
 In some cases, your production code may launch threads that produce key results. Usually, these are the results that you want to validate. But if those results are being processed in a separate thread, your test runs and finishes before that separate thread completes, that is, before the results that you want to validate are available. To avoid this problem, you can use the `run-and-wait` scope.
 
 For the purposes of this document, we assume that we are testing the following Mule code:
 
-.Test code
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::run-and-wait-thread-sleep.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <flow name="exampleFlow">
@@ -26,8 +56,22 @@ For the purposes of this document, we assume that we are testing the following M
   </async>
 </flow>
 ----
+=====
 
 The goal is to make your test wait until the `exampleFlow` has finished. To do so, implement the test as shown below.
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::run-and-wait-flow-ref.png[]
+
+. Define `run-and-wait` scope.
+. Call the actual production code to test.
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -37,19 +81,29 @@ The goal is to make your test wait until the `exampleFlow` has finished. To do s
     </synchronize:run-and-wait>
 </flow>
 ----
+
 <1> Define `run-and-wait` scope.
 <2> Call the actual production code to test.
+
+=====
+
 
 [%header%autowidth.spread]
 |===
 |Attribute Name |Description
 
 |`timeout`
-|Defines the time (in milliseconds) to wait for all the threads to complete.
+| Defines the time (in milliseconds) to wait for all the threads to complete.
+
+|`runAsync`
+| _Boolean_. When runAsync is set to _true_, the synchronize module copies the triggering MuleEvent and sets its `MessageExchangePattern` automatically to ONE_WAY, menaing that your MUnit test handles your Mule application's requests using a ONE_WAY messaging style. +
+This allows your test suite to take the events triggered by the Mule application and put them in a SEDA queue. The callee thread returns and the message is processed by the SEDA thread pool.
 
 |===
 
 TIP: Using this tool is the only way to run an MUnit test on Mule batch jobs.
+
+
 
 == Defining Run and Wait With Java Code
 

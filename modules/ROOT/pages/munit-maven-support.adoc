@@ -7,7 +7,7 @@ endif::[]
 
 MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment.
 
-NOTE: For information on redirecting logs to a file, see /munit/v/1.2/logging-in-munit#redirecting-logs-to-a-file[Logging in MUnit].
+NOTE: For information on redirecting logs to a file, see xref:logging-in-munit.adoc#redirecting-logs-to-a-file[Logging in MUnit].
 
 == Setting Up Your pom.xml File
 
@@ -15,15 +15,23 @@ MUnit is a composition of several modules, all of which are necessary to run you
 
 For MUnit to run properly with Maven, you need to add a few sections to your `pom.xml` file.
 
-TIP: If you are using Anypoint Studio, Maven integration is already solved for you. See https://docs.mulesoft.com/anypoint-studio/v/5/using-maven-in-anypoint-studio[Using Maven in Anypoint Studio] for details.
+TIP: If you are using Anypoint Studio, Maven integration is already solved for you. See https://docs.mulesoft.com/anypoint-studio/v/6/using-maven-in-anypoint-studio[Using Maven in Anypoint Studio] for details.
 
-NOTE: This documentation assumes you have the following properties in your `pom.xml`: `<munit.version>` and `<mule.munit.support.version>`.
+[NOTE]
+--
+This documentation assumes you have the `<munit.version>` and `<mule.munit.support.version>` properties in your `pom.xml`. +
+For example:
+
+[source,xml,linenums]
+----
+<munit.version>1.2.0</munit.version>
+<mule.munit.support.version>3.7.1</mule.munit.support.version>
+----
+--
 
 Do not combine MUnit modules of different versions. That is, the `munit.version` should be the same across all MUnit artifacts in your `pom.xml`, like the plugin or the runner.
 
 Regarding the Mule MUnit support module, the `mule.munit.support.version` should match the `mule.version`. For example, `3.7.0` version of the support module would be compatible with `3.7.0`, `3.7.1`, `3.7.2` and other versions of Mule, but not necessarily with `3.6.0`.
-
-NOTE: For information on redirecting logs to a file, see xref:logging-in-munit.adoc#redirecting-logs-to-a-file[Logging in MUnit].
 
 === MUnit Maven Plugin
 
@@ -169,7 +177,7 @@ To do this, we use the property `munit.test`.
 mvn clean test -Dmunit.test=<regex-test-suite>
 ----
 
-As you can see, the property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation.
+The property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation.
 
 The following is a valid example:
 [source,console]
@@ -188,13 +196,15 @@ In the same way that you instruct MUnit to run one test suite, you can also tell
 mvn clean test -Dmunit.test=<regex-test-suite>#<regex-test-name>
 ----
 
-The addition is the special character `#`. To the right of it you should type the test name. As you can see, it also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test.
+The addition is the special character `#`. To the right of it you should type the test name. It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test. +
+Regular expressions must be enclosed between double quotes.
 
 The following is a valid example:
 [source,console]
 ----
-mvn clean test -Dmunit.test=.*my-test.*#.*test-scenario-1.*
+mvn clean test -Dmunit.test=".*my-test.*#.*test-scenario-1.*"
 ----
+
 
 TIP: The tests inside the MUnit Test Suite that don't match the regular expression is flagged as *ignored*.
 
@@ -252,7 +262,7 @@ You may wish to define specific system variables needed for your MUnit test to r
   </executions>
   <configuration>
     <systemPropertyVariables>   //<1>
-      <my.property.key>my.property.value</my.property.key>
+      <my.property.key>my.property.value></my.property.key>
     </systemPropertyVariables>
   </configuration>
 </plugin>
@@ -311,7 +321,6 @@ If you have the `${http.port}` placeholder in your application, the configuratio
 
 ==== Preparing Your Application
 
-Of course all this comes with a trade off.
 The part of the application trying to make use of a port must be parametrized by use of a placeholder.
 For instance, you may want to have your Mule application listening for HTTP traffic. In order to do that you should provide the following configuration:
 
@@ -341,31 +350,18 @@ With the application coded in this way, and the configuration of Dynamic Ports i
 === Coverage
 
 MUnit used to have a basic coverage feature only available from Anypoint Studio.
-Since MUnit version `1.1.0` this feature is also available from the command line by the use of the MUnit Maven Plugin.
-
-==== Objective
-
-The MUnit Coverage feature provides a metric on how much of a Mule application has been executed by a set of MUnit tests.
-This lets the users obtain a quality metric for the application.
-For more information, see this https://en.wikipedia.org/wiki/Code_coverage[Wikipedia article on Code Coverage].
-
-It's worth noticing, MUnit Coverage is based on the amount of message processors executed.
-MUnit Coverage provides metrics for:
-
-* *Application overall coverage*: An average of the items below.
-* *Resource coverage*: Refers to each Mule configuration file under `src/main/app`. Each of is considered a resource by MUnit Coverage.
-* *Flow coverage*: Refers to any of the following `Flows`, `Sub-flows`, and `Batch jobs`.
+Since MUnit version `1.2.0` this feature is also available from the command line by the use of the MUnit Maven Plugin.
 
 ==== Configuration
 
-The following section covers how to configure MUnit Coverage.
+The following section covers how to configure xref:munit-coverage-report.adoc[MUnit Coverage].
 
 A basic set of Coverage related features is in Anypoint Studio. However, the full set of features is only
 available when running from Maven. Thus all of the configuration is done through the `pom.xml` file.
 
 ===== Enabling Coverage
 
-To enable MUnit Coverage, add the following configuration to the MUnit Plugin:
+To enable xref:munit-coverage-report.adoc[MUnit Coverage], add the following configuration to the MUnit Plugin:
 
 .MUnit Coverage - Minimal Configuration
 [source,xml,linenums]
@@ -397,6 +393,18 @@ This is how a summary report looks like:
 [INFO] ===============================================================================
 [INFO]  * Resources: 3 - Flows: 6 - Message Processors: 7
 [INFO]  * Application Coverage: 71.43%
+----
+
+To configure the JSON report generation for the MUnit Plugin, you need to add the following configuration in your `pom.xml` file:
+
+[source,xml,linenums]
+----
+<coverage>
+<runCoverage>true</runCoverage>
+  <formats>
+    <format>json</format>
+  </formats>
+</coverage>
 ----
 
 ===== Failing Build
@@ -477,15 +485,16 @@ To ignore a flow, add the following lines to the configuration:
 ----
 <1> The name of the flow you want to ignore.
 
-As you can see this is a list, so you can ignore as many flows as you need.
+This is a list, so you can ignore as many flows as you need.
 
 ===== Reports
 
-As we've shown before by default, MUnit Coverage shows summary report in the console. But that's not the only option.
+As we've shown before by default, xref:munit-coverage-report.adoc[MUnit Coverage] shows summary report in the console. But that's not the only option.
 MUnit Coverage currently offers two types of reports:
 
 * Console
 * HTML
+* JSON
 
 The *Console* report, is printed in the console. It works with the summary report and
 shows details of each resource, flow, sub-flow, and batch, and its coverage level.
@@ -496,6 +505,13 @@ To access the *HTML* report, browse your application folder structure:
 * `${application.path}/target/munit-reports/coverage`
 
 Locate the file *summary.html*, which is the starting point of the report and lets you navigate through all the data.
+
+The *JSON* report shows the same information as the _HTML_ report, in a JSON format. +
+To access the JSON report file, browse your application folder structure:
+
+----
+${application.path}/target/munit-reports/coverage-json/report.json
+----
 
 To enable the reports, add the following configuration:
 
@@ -508,13 +524,208 @@ To enable the reports, add the following configuration:
   <formats>
     <format>console</format>  //<1>
     <format>html</format>     //<2>
+    <format>json</format>     //<3>
   </formats>
 </coverage>
 ----
 <1> Console report
 <2> HTML report
+<3> JSON report
 
 TIP: You can have none, one, or all the report types added to your configuration.
+
+== Working With Parent POMs
+
+You can declare the MUnit plugin in a parent POM file and every child project under this file can choose to reference this definition.
+
+In order to make a proper use of the MUnit plugin in a parent-child POM relationship, you need to include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file:
+
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.pirate</groupId>
+    <artifactId>pirate-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <munit.version>1.2.0-SNAPSHOT</munit.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.mulesoft.munit.tools</groupId>
+                    <artifactId>munit-maven-plugin</artifactId>
+                    <version>${munit.version}</version>
+                    <executions>
+                        <execution>
+                            <id>test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <coverage>
+                            <runCoverage>true</runCoverage>
+                            <failBuild>false</failBuild>
+                            <requiredApplicationCoverage>0</requiredApplicationCoverage>
+                            <requiredResourceCoverage>0</requiredResourceCoverage>
+                            <requiredFlowCoverage>0</requiredFlowCoverage>
+                            <formats>
+                                <format>console</format>
+                                <format>html</format>
+                            </formats>
+                        </coverage>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
+----
+
+This *pirate-pom* project declares the MUnit Maven plugin in its _plugin management_ section, which defines a global configuration that each child under this parent can choose to <<inherit, reference>>, <<override,override>> or even <<ignore,ignore>>.
+
+[[inherit]]
+=== Inherit Parent's Plugin
+
+If you choose to inherit the MUnit plugin in your child POM files, you need to reference it in a _<plugin>_ section of each child _POM_ file individually:
+
+.POM child file sample
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.pirate</groupId>
+        <artifactId>pirate-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>ninja</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>mule</packaging>
+    <name>Mule ninja Application</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mule.version>3.8.0</mule.version>
+        <mule.tools.version>1.1</mule.tools.version>
+        <munit.version>1.2.0</munit.version>
+        <mule.munit.support.version>3.8.0</mule.munit.support.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    </project>
+----
+
+This quick sample references _pirate-pom_ file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because MUnit plugin configuration is being inherited from the `<pluginManagement>` section in the parent.
+
+[[override]]
+==== Inherit Plugin and Override Parent's Configuration
+
+When inheriting the plugin from a parent POM file, you can also choose to override the parent's configuration, but keep in mind that overriding completely suppresses the original configuration, requiring you to declare all necessary configurations again:
+
+.POM child file overriding coverage report's format
+[source,xml,linenums]
+----
+<plugin>
+	<groupId>com.mulesoft.munit.tools</groupId>
+	<artifactId>munit-maven-plugin</artifactId>
+	<configuration>
+		<coverage>
+			<runCoverage>true</runCoverage>
+			<formats>
+				<format>html</format>
+			</formats>
+		</coverage>
+	</configuration>
+</plugin>
+----
+
+In this example, this child project is overriding the console coverage report, replacing it only by the HTML one, but since the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) are not being referenced, this child file won't inherit them and the default values will apply.
+
+[[ignore]]
+=== Ignore Parent's Plugin
+
+Each child project under a parent `pom` file can choose to ignore the plugin referenced in the  parent's plugin management section and not implement the plugin declared there.
+
+By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriting the plugin declared in *pirate-pom*:
+
+.Child POM file not inheriting the MUnit Maven Plugin
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.pirate</groupId>
+        <artifactId>pirate-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>ninja</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>mule</packaging>
+    <name>Mule ninja Application</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mule.version>3.8.0</mule.version>
+        <mule.tools.version>1.1</mule.tools.version>
+        <munit.version>1.2.0</munit.version>
+        <mule.munit.support.version>3.8.0</mule.munit.support.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-app-maven-plugin</artifactId>
+                <version>${mule.tools.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <copyToAppsDirectory>true</copyToAppsDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>project</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    </project>
+----
 
 == Reading MUnit Test Results
 
@@ -602,22 +813,3 @@ Number of tests run: 1 - Failed: 0 - Errors: 1 - Skipped: 0
 MUnit has Surefire support built in. No additional configuration is needed.
 
 The reports can be found under `target/surefire-reports`.
-
-== MUnit Maven Archetype
-
-If you wish to create a Mule application project with MUnit support directly from Maven, you can use the Maven archetype.
-
-.MUnit Maven archetype
-[source,console,linenums]
-----
-mvn archetype:generate
-  -DarchetypeGroupId=com.mulesoft.munit.tools
-  -DarchetypeArtifactId=mule-munit-archetype-mule-app
-  -DarchetypeVersion=3.6.0
-  -DgroupId=org.mule
-  -DartifactId=mule-test-archetype
-  -Dversion=1.0-SNAPSHOT
-  -DmuleVersion=3.6.0
-  -Dpackage=org.mule
-  -DarchetypeRepository=http://repository.mulesoft.org/releases
-----

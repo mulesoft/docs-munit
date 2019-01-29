@@ -5,29 +5,42 @@ endif::[]
 :version-info: 3.7.0 and later
 :keywords: munit, testing, unit testing
 
-TIP: This page and related MUnit pages are focused on XML; however, MUnit is fully compatible with Anypoint Studio's graphical user interface. Within the Studio environment, you can create, design and run MUnit tests just like you would Mule applications. You can even use https://docs.mulesoft.com/anypoint-studio/v/5/studio-visual-debugger[Studio's Visual Debugger] to debug your MUnit tests. For an overview of MUnit in Studio, see xref:using-munit-in-anypoint-studio.adoc[Using MUnit in Anypoint Studio].
-
 == Definition
 
-The base of the MUnit Framework consists of *MUnit Test Suite files*. These files are the `.xml` files located under the `src/test/munit` folder in your Mule application's folder structure. Each MUnit Test Suite file is a collection of MUnit tests. It is meant to work on its own, and should be able to run independently from any other MUnit test suite files.
+The base file in the MUnit Framework is the *MUnit Test Suite file*. These files are the `.xml` files located under the `src/test/munit` folder in your Mule application's folder structure. Each MUnit Test Suite file is a collection of MUnit tests. It is meant to work on its own, and should be able to run independently from other MUnit test suite files.
 
 == Components of an MUnit Test Suite
 
 An MUnit test suite file should contain any combination of the following components:
 
-* Imports
+* <<Imports>>
 * Bean Definitions
-* Before/After Suites
-* Before/After Tests
-* MUnit Tests
+* <<Before/After Suites>>
+* <<Before/After Tests>>
+* <<MUnit Tests>>
 
-TIP: Each MUnit test suite file is, behind the scenes, no different than a Mule application XML file. You can use several of the Mule top level elements such as flow, sub-flow, scripts, etc.
+TIP: Each MUnit test suite file is, behind the scenes, no different than a Mule
+application XML file. You can use several of the Mule top level elements such as https://docs.mulesoft.com/mule-user-guide/v/3.8/flows-and-subflows[flow, sub-flow], https://docs.mulesoft.com/mule-management-console/v/3.8/automating-tasks-using-scripts[scripts], etc.
 
-== Defining Imports
+== Imports
+=== Defining Imports
 
-Each MUnit suite is meant to test a particular set of Mule flows. To do that, you need to tell MUnit where those flows are defined in your application structure. For this we use _imports_, which are in fact https://docs.mulesoft.com/mule-user-guide/v/3.7/adding-and-removing-user-libraries#adding-user-libraries[spring imports].
+Each MUnit suite is meant to test a particular set of Mule flows. To do that, you need to tell MUnit where those flows are defined in your application structure. For this we use _imports_, which are in fact _spring imports_.
 
-*Note*: MUnit does not support Mule Domains.
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+In the *Global Elements Tab* of your _MUnit Test Suite_, go to your *Import (Configuration)* element, and double-click it to show the *Global Element Properties*:
+
+image::munit-import-global-element.png[]
+
+Edit the *Resource:* field with the reference of the .xml file name of the application you are testing.
+
+[discrete.view]
+=== XML or Standalone Editor
 
 .Spring Import Example
 [source,xml,linenums]
@@ -36,20 +49,21 @@ Each MUnit suite is meant to test a particular set of Mule flows. To do that, yo
   <spring:import resource="classpath:your-production-code.xml"/>
 </spring:beans>
 ----
+=====
+
 
 WARNING: If your application is spread across multiple files and the components in those files cross-reference each other, you need to import all of the files.
 
-WARNING: Currently, MUnit Suite doesn't support the use of components defined in Shared Resources. It's required to define those components explicitly in the test suit file in order to execute the test.
-
 TIP: Ideally, your production code and your flows should be arranged in a cohesive way -- this improves readability, maintainability and testability.
 
-== Defining Before and After Suites
+== Before/After Suites
+=== Defining Before and After Suites
 
 As with other testing frameworks, MUnit provides certain features around the test suite concept.
 In particular, you can add processing/actions to be run _before_ and/or _after_ the entire
 MUnit Test Suite executions.
 
-=== Defining a Before Suite
+==== Defining a Before Suite
 
 The MUnit Before Suite is a scope. It can contain code that is meant to be executed *_before_* the whole suite.
 
@@ -59,14 +73,34 @@ The MUnit Before Suite is a __top level scope__, so you can have as many Before 
 
 WARNING: If there is more than one Before Suite, MUnit does not guarantee the order in which the Before Suites run amongst themselves.
 
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::before-suite.png[]
+
+Note that the `before-suite` is located outside the MUnit test.
+
+[discrete.view]
+=== XML or Standalone Editor
+
 .Before Suite example
 [source,xml,linenums]
 ----
 <munit:before-suite name="before.suite" description="A description">
-  <!-- some mule code here --> //<1>
+  <!-- some mule code here -->
 </munit:before-suite >
+
+<munit:test name="munit.test" description="Test">
+  <!-- some more mule code here -->
+</munit:test>
 ----
-<1> Define the code you want to run
+
+Note that the `before-suite` is located outside the MUnit test.
+=====
 
 [cols="30,70"]
 |===
@@ -82,7 +116,7 @@ WARNING: If there is more than one Before Suite, MUnit does not guarantee the or
 
 TIP: One instance in which the MUnit Before Suite is useful is when you need to set up a test environment before the whole test runs.
 
-=== Defining an After Suite
+==== Defining an After Suite
 
 The MUnit After Suite is a scope. It can contain code that is meant to be executed _after_ the whole suite.
 
@@ -93,14 +127,37 @@ They all follow the same execution rule: _Run after the tests, just once_.
 
 WARNING: If there is more than one After Suite, MUnit does not guarantee the order in which the After Suites run amongst themselves.
 
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::after-suite.png[]
+
+Note that the `after-suite` is located outside the MUnit test
+
+[discrete.view]
+=== XML or Standalone Editor
+
 .After Suite example
 [source,xml,linenums]
 ----
+<munit:before-suite name="before.suite" description="A description">
+  <!-- some mule code here -->
+</munit:before-suite >
+
+<munit:test name="munit.test" description="Test">
+  <!-- some more mule code here -->
+</munit:test>
+
 <munit:after-suite  name="after.suite" description="A description">
-  <!-- some Mule code here --> //<1>
+  <!-- some Mule code here -->
 </munit:after-suite >
 ----
-<1> Define the code you want to run
+
+Note that the `after-suite` is located outside the MUnit test
+=====
+
 
 [cols="30,70"]
 |===
@@ -116,11 +173,12 @@ WARNING: If there is more than one After Suite, MUnit does not guarantee the ord
 
 TIP: One instance in which the MUnit After Suite is useful is when you need to set up a test environment after the whole test runs.
 
-== Defining Before and After Tests
+== Before/After Tests
+=== Defining Before and After Tests
 
 MUnit provides the ability to perform _Before_ and _After_ tests. These are similar to the concepts defined by JUnit. You can add processing/actions to be run _before_ and/or _after_ the execution of each MUnit Test suite.
 
-=== Defining a Before Test
+==== Defining a Before Test
 
 The MUnit Before Test is a scope. It can contain code that is meant to be executed _before each_ test.
 
@@ -130,14 +188,32 @@ The MUnit Before Test is a __top-level scope__, thus you can have as many Before
 
 WARNING: If there is more than one Before test, MUnit does not guarantee the order in which the Before tests run amongst themselves.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::before-test.png[]
+
+Note that the `before.test` is located outside the MUnit test
+
+[discrete.view]
+=== XML or Standalone Editor
+
 .Before Test example
 [source,xml,linenums]
 ----
 <munit:before-test name="before.tests" description="A description">
-  <!-- some mule code here --> //<1>
+  <!-- some mule code here -->
 </munit:before-test>
+
+<munit:test name="munit.test" description="Test">
+  <!-- some more mule code here -->
+</munit:test>
 ----
-<1> Define the code you want to run
+Note that the `before.test` is located outside the MUnit test
+=====
 
 [cols="30,70"]
 |===
@@ -153,7 +229,7 @@ WARNING: If there is more than one Before test, MUnit does not guarantee the ord
 
 TIP: One instance in which the MUnit After Suite is useful is when you need to set up a test environment after the whole test runs.
 
-=== Defining an After Test
+==== Defining an After Test
 
 The MUnit After Test is a scope. It can contain code that is meant to be executed _after each_ test.
 
@@ -164,14 +240,38 @@ They all follow the same execution rule: _Run after each test_.
 
 WARNING: If there is more than one After test, MUnit does not guarantee the order in which the After Tests run amongst themselves.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::after-test.png[]
+
+Note that the `after.suite` is located outside the MUnit test
+
+[discrete.view]
+=== XML or Standalone Editor
+
 .After Test example
 [source,xml,linenums]
 ----
+<munit:before-test name="before.tests" description="A description">
+  <!-- some mule code here -->
+</munit:before-test>
+
+<munit:test name="munit.test" description="Test">
+  <!-- some more mule code here -->
+</munit:test>
+
 <munit:after-test  name="after.test" description="A description">
-  <!-- some mule code here --> //<1>
+  <!-- some mule code here -->
 </munit:after-test>
 ----
-<1> Define the code you want to run
+
+Note that the `after.suite` is located outside the MUnit test
+=====
+
 
 [cols="30,70"]
 |===
@@ -185,19 +285,29 @@ WARNING: If there is more than one After test, MUnit does not guarantee the orde
 
 |===
 
-
 TIP: One instance in which the MUnit After test is useful is when you need to set up a test environment after the whole test runs.
 
-== Defining an MUnit Test
+== MUnit Tests
+=== Defining an MUnit Test
 
 The *MUnit Test* is the basic building block of an MUnit Test Suite. It represents each test scenario you want to try.
 
-.MUnit Test example
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::defining-munit-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:test name="my-flow-Test" description="Test to verify scenario 1">
 </munit:test>
 ----
+=====
 
 .MUnit Test Attributes
 [cols="30,70"]
@@ -218,13 +328,13 @@ The *MUnit Test* is the basic building block of an MUnit Test Suite. It represen
 
 |===
 
-=== Defining Properties
+==== Defining Properties
 
 In MUnit, you can load properties from the `mule­-app.properties` file as well as using the `context:property-placeholder` to load properties from an additional file.
 
 MUnit provides several ways to override these properties when running MUnit with Anypoint Studio. Properties for the `mule-app.properties` file are loaded as System properties.
 
-=== Defining an MUnit Test Description
+==== Defining an MUnit Test Description
 
 In MUnit, it's mandatory that you write a description in your test, that is, the `description` attribute is mandatory.
 
@@ -232,60 +342,99 @@ Ideally, you should write a useful, representative description of the scenario y
 
 TIP: The more representative the description, the more easy to read and troubleshoot any failures.
 
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::defining-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:test name="testingEchoFlow"
     description="We want to test that the flow always returns the same payload as we had before calling it.">
 ----
+=====
 
-=== Defining an MUnit Test To Ignore
+==== Defining an MUnit Test To Ignore
 
-There may be scenarios where you need to shoot-down a test. Whether this be
-because the test is failing or because it has nasty side effect. The point is you
-shouldn't have to comment out the code.
+There may be scenarios where you need to shoot-down a test. Whether this be because the test is failing or because it has nasty side effects. +
+The point is you shouldn't have to comment out the code.
 
-In some scenarios, you may find it necessary to bypass a defined test, for example if the test fails or produces unwanted side-effects. In this case, MUnit allows you to ignore a specific test so you don't have to comment out the code.
+In this case, MUnit allows you to ignore a specific test.
 
 You can ignore any of your tests by adding the `ignore` boolean to the test definition, as shown below.
 
-.MUnit ignore test example
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::ignore-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:test name="my-flow-Test"
-      ignore="true"               //<1>
+      ignore="true"
       description="Test to verify scenario 1">
 </munit:test>
 ----
-<1> Ignore test _my-flow-Test_
-
 TIP: Valid values for `ignore` are *true* and *false*. If the attribute is not present, the default is false.
+=====
 
-=== Defining an Expected Exception
+==== Defining an Expected Exception
 
 Sometimes, the only thing you want to validate is that the flow or sub-flow you are testing fails and throws a specific exception, which depends on the business logic being tested. In these cases, MUnit provides a simple way to validate the scenario.
 
-You can validate a specific scenario by adding the attribute `expectException`, as shown below.
+In these cases you can add the attribute `expectException`, as shown below.
 
-.MUnit test expect exception example
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::expect-exception.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:test name="testExceptions" description="Test Exceptions" expectException="">
   <flow-ref name="exceptionFlow"/>
 </munit:test>
 ----
+=====
 
 The attribute `expectException` expects one of the following:
 
 * A literal exception class name (canonical form)
 * A MEL expression
 
-.MUnit test expected exception _class name_ example
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::expect-exception-literal.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:test name="testExceptions" description="Test Exceptions" expectException="java.lang.RuntimeException">
   <flow-ref name="exceptionFlow"/>
 </munit:test>
 ----
+=====
 
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 

@@ -70,11 +70,17 @@ We need to create a test that:
 . Provides a valid Database Structure for the Database connector to perform its' query.
 . Passes a value for the `jobid` variable that the Database connector uses
 
+== Install MUnit DB Server Module
+
+For this example, you need to install  the *DB server Module* provided by MUnit. +
+From Anypoint Studio, go to *Help* and *Install New Software...*. +
+In the *Work with:* panel look for *MUnit Update Site*, and from the *MUnit Tools for Mule* section, select *DB Server Module (Mule 3.4.0+)*
+
 [NOTE]
 --
-This page assumes that you have `<munit.version></munit.version>` property defined in your `pom.xml`.
+A few considerations if you are using Maven:
 
-When running from Maven, you need to add the MUnit DB server artifact to your `pom` file:
+You need to add the MUnit DB server artifact to your `pom` file:
 
 [source,xml,linenums]
 ----
@@ -82,7 +88,7 @@ When running from Maven, you need to add the MUnit DB server artifact to your `p
 <dependency>
 	<groupId>com.mulesoft.munit.utils</groupId>
 	<artifactId>munit-dbserver-module</artifactId>
-	<version>${munit.version}</version>
+	<version>1.1.0</version>
 </dependency>
 ----
 
@@ -97,8 +103,66 @@ Also this code example uses Spring for the Database configuration. When running 
   <version>4.1.6.RELEASE</version>
 </dependency>
 ----
-
 --
+
+== Creating a Test Using MUnit DB Server
+
+For the purpose of this documentation we are going to assume we are testing the following Mule code:
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::testdbflow.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+[source,xml,linenums]
+----
+<!-- Set Up a default Java Data Base Connection  -->
+<spring:beans>
+        <spring:bean id="jdbcDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+            <spring:property name="driverClass" value="${db.driver}"/>
+            <spring:property name="url" value="${db.url}"/>
+            <spring:property name="username" value="${db.user}"/>
+            <spring:property name="password" value="${db.password}"/>
+        </spring:bean>
+    </spring:beans>
+
+<!-- Configure your DB connector referencing your JDBC specs -->
+    <db:generic-config name="Generic_Database_Configuration"  doc:name="Generic Database Configuration" dataSource-ref="jdbcDataSource"/>
+
+    <flow name="testDbFlow">
+        <!-- Perform a query based on a value passed by a flow variable -->
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database" >
+            <db:parameterized-query><![CDATA[SELECT * FROM jobtitlelookup WHERE jobtitleid = #[variable:jobid]]]></db:parameterized-query>
+        </db:select>
+
+        <!-- Set two conditions depending on the query result -->
+        <choice doc:name="Choice">
+            <!-- If there is one or more values resulting from the query set those values as the payload -->
+            <when expression="#[payload.size()>0]">
+                <set-payload value="#[payload[0].get('jobtitle')]" doc:name="Set Payload if True"></set-payload>
+            </when>
+            <!-- If the query throws no results, inform it in the payload  -->
+            <otherwise>
+                <set-payload value="No job title for #[flowVars.jobid] was found" doc:name="Set Payload if False"></set-payload>
+            </otherwise>
+        </choice>
+
+        <!-- Finally, pass the payload content as a Flow variable  -->
+        <set-variable value="#[payload]" variableName="job" doc:name="Variable"></set-variable>
+    </flow>
+----
+=====
+
+We need to create a test that:
+
+. Contains a Database Server with a `jobtitlelookup` table.
+. Provides a valid Database Structure for the Database connector to perform its' query.
+. Passes a value for the `jobid` variable that the Database connector uses
 
 === Defining The MUnit DB Server
 
@@ -121,6 +185,9 @@ The DB Server can take the following parameters:
 |`csv`
 |Specifies the path of the-comma separated file used to define the DB structure/contents. This parameter is used to create the DB at startup. Find out more about this in the <<Defining the DB Structure from a CSV File>> section.
 
+|`connectionStringParameters`
+| Defines the connection string for your database. You can concatenate the parameters with a semicolon.
+
 |===
 
 For this example we define the DB structure and content using a .csv file.
@@ -134,15 +201,57 @@ Developer,10,DEV
 In order for this csv file to be visible within your project, make sure you locate it in the `src/test/resources` directory from your application.
 
 Proceed to define your DB Server configuration in a new xref:munit-suite.adoc[MUnit Suite].
+
+First, you need to set `both mock connectors` and `mock inbounds` options to false:
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+Navigate to your *Global Elements* tab, and select your *MUnit Configuration* element. Click *Edit* and uncheck both *Mock Mule transport connectors* and *Mock Inbound endpoints*.
+
+image::munit-configuration-mock-false.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
-<munit:config mock-inbounds="false" mock-connectors="false"/>   //<1>
-
-<dbserver:config  name="DB_Server" database="DATABASE_NAME"  doc:name="DBServerConfig" csv="jobtitlelookup.csv" />    //<2>
+<munit:config mock-inbounds="false" mock-connectors="false"/>
 ----
-<1> Defines MUnit configuration. Notice that `mock-connectors` is set to `false`.
-<2> Defines the DB server configuration.
 
+Defines MUnit configuration. Notice that `mock-connectors` and `mock-inbounds` properties are set to `false`.
+=====
+
+Next, define your DB configuration:
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+Navigate to your *Global Elements* tab, and select your *DB Server* element. Click *Edit* and complete the fields:
+
+_Name_: DB_Server +
+_csv_.: jobtitlelookup.csv +
+_Database_: DATABASE_NAME +
+
+_Connection String Parameters_:MODE=MySQL
+
+image::dbconfiguration.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+[source,xml,linenums]
+----
+<dbserver:config  name="DB_Server" database="DATABASE_NAME"  doc:name="DBServerConfig" connectionStringParameters="MODE=MySQL" csv="jobtitlelookup.csv" />
+----
+
+Defines the DB server configuration.
+=====
 
 ==== DB Server Connection Parameters
 
@@ -153,7 +262,8 @@ The MUnit DB server has the following default set of connection parameters:
 [source,console,linenums]
 ----
 db.driver=org.h2.Driver
-db.url=jdbc:h2:mem:DATABASE_NAME;MODE=MySQL
+db.url=jdbc:h2:mem:DATABASE_NAME
+db.connection=MODE=MySQL
 db.user=
 db.password=
 ----
@@ -175,10 +285,22 @@ The MUnit DB server is based on http://www.h2database.com/html/main.html[H2]. Co
 
 To define you DB structure and content from an SQL file,  provide a valid set of ANSI SQL DDL (Data Definition Language) instructions.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::create-db-structure-from-sql.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
-<dbserver:config  name="DB_Server" database="DATABASE_NAME" sqlFile="FILE_NAME.sql" />
+<dbserver:config  name="DB_Server" database="DATABASE_NAME" sqlFile="FILE_NAME.sql" connectionStringParameters="MODE=MySQL" />
 ----
+=====
 
 ===== Defining the DB Structure from a CSV File
 
@@ -187,23 +309,47 @@ You can create your DB from CSV files.
 * The name of the table is the name of the file (in the example below, `customers`).
 * The name of the columns are the headers of your CSV file.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::configure-db-using-csv.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
-<dbserver:config name="DB_Server" database="DATABASE_NAME" csv="FILE_NAME.csv"/>
+<dbserver:config name="DB_Server" database="DATABASE_NAME" csv="FILE_NAME.csv connectionStringParameters="MODE=MySQL""/>
 ----
+=====
 
 You can also split your DB structure among several CSV files. In this case, include the file names as a list separated by a semicolon, as shown below.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::define-db-several-csv.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
-<dbserver:config name="DB_Server" database="DATABASE_NAME" csv="FILE_NAME.csv;FILE_NAME_1.csv"/>
+<dbserver:config name="DB_Server" csv="FILE_NAME.csv;FILE_NAME_1.csv" database="DATABASE_NAME" connectionStringParameters="MODE=MySQL" doc:name="DB Server"/>
 ----
+=====
+
 This creates two tables `FILE_NAME` and `FILE_NAME_1`
 
 === Starting The MUnit DB Server
 
 In order for it to run, the database server must be started in a xref:munit-suite.adoc#defining-a-before-suite[before-suite]. You start the server using the `start-db-server` message processor.
-
 
 [.ex]
 =====
@@ -238,6 +384,7 @@ If you are running from Maven and are getting a `java.lang.ClassNotFoundExceptio
 ----
 
 If you are getting this exception and you are not using Maven, you need to add the `h2-v.sv.vvv.jar` file to your project's build path. To do this:
+
 . Download the .jar file from the project's website
 . From Studio, right click in your project's folder, and go to *Properties*
 . Go to *Java Build Path*, *Libraries* and *Add External JARs...*
@@ -283,7 +430,6 @@ We are just validating that the query ran in our production code is correct, and
 
 To stop the DB server gracefully, it needs to be stopped in an xref:munit-suite.adoc#defining-an-after-suite[After Suite], using a `db-server` message processor with the `Stop db server` operation.
 
-
 [.ex]
 =====
 [discrete.view]
@@ -312,7 +458,6 @@ The MUnit DB server also offers a few other features, outlined in this section.
 The MUnit DB Server allows you to validate that the results of a query are as expected.
 
 To do this, you use the `validate-that` operation. Set the `results` property to CSV with rows separated by a newline character (`\n`), as shown below.
-
 
 [.ex]
 =====
@@ -350,6 +495,7 @@ If you are running from Maven and are getting a `java.lang.NoClassDefFoundError`
 ----
 
 If you are getting this exception and you are not using Maven, you need to add the `opencsv-v.v.jar` file to your project's build path. To do this:
+
 . Download the .jar file from the project's website
 . From Studio, right click in your project's folder, and go to *Properties*
 . Go to *Java Build Path*, *Libraries* and *Add External JARs...*
@@ -357,7 +503,6 @@ If you are getting this exception and you are not using Maven, you need to add t
 
 This adds open csv libraries to your build path allowing your project to properly render the csv into your payload.
 --
-
 
 ==== Executing SQL instructions and SQL Queries
 

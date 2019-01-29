@@ -17,20 +17,44 @@ TIP: You can define a spy over any message processor (even if you haven't create
 
 For the purposes of this document, we assume we are testing the following Mule code:
 
-.Test code
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-processor-code-to-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <flow name="exampleFlow">
   <set-payload value="#['real_payload']" doc:name="Real Set Payload"/>
 </flow>
 ----
+=====
 
 === Defining which Message Processor to Spy
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::spy-message-processor.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
 <mock:spy messageProcessor="mule:set-payload"/>
 ----
+=====
+
 
 [%header%autowidth.spread]
 |===
@@ -43,11 +67,22 @@ For the purposes of this document, we assume we are testing the following Mule c
 
 Since the `messageProcessor` attribute accepts regular expressions, you could create the same verification as shown below.
 
-.Verify Using Regular Expressions
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::spy-using-mel.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:spy messageProcessor=".*:set-payload"/>
 ----
+=====
 
 In the example above we define a spy for a message processor named `set-payload`, disregarding which namespace the message processor belongs to.
 
@@ -57,6 +92,17 @@ NOTE: Use regular expressions in Spy only if strictly necessary. Regular express
 
 A Spy definition is based on _matchers_, that is, parameters that match features of the desired message processor. Defining a spy solely on the name of the message processor largely limits your scope and actions regarding the mock. For this reason, MUnit allows you to define a spy by defining matchers over the value of a message processor's attributes.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::spy-with-attributes.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:spy messageProcessor="mule:set-payload" doc:name="Spy">
@@ -65,6 +111,7 @@ A Spy definition is based on _matchers_, that is, parameters that match features
   </mock:with-attributes>
 </mock:spy>
 ----
+=====
 
 You can define as many attributes as you deem necessary to make the verification
 as representative as possible.
@@ -89,23 +136,41 @@ TIP: If the attribute you wish the Spy message processor to match is similar to 
 
 Spy's power resides on its ability to run actions before or after a message processor call.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::spy-before-and-after.png[]
+
+. The actions inside `assertions-before-call` are run _before_ the message processor call.
+. The actions inside `assertions-after-call` are run _after_ the message processor call.
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
-<mock:spy messageProcessor="mule:set-payload">
-  <mock:with-attributes>
-    <mock:with-attribute whereValue="#['Real Set Payload']" name="doc:name"/>
-  </mock:with-attributes>
-  <mock:assertions-before-call>   // <1>
-    <!-- Define actions -->
-  </mock:assertions-before-call>
-  <mock:assertions-after-call>    // <2>
-    <!-- Define actions -->
-  </mock:assertions-after-call>
+<mock:spy messageProcessor="mule:set-payload" doc:name="Spy">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['Real Set Payload']"/>
+            </mock:with-attributes>
+            <mock:assertions-before-call>   // <1>
+                <munit:assert-null message="Ooops! Payload Is not Null" doc:name="Assert Null Payload"/>
+            </mock:assertions-before-call>
+            <mock:assertions-after-call>   // <2>
+                <munit:assert-not-null message="Ooops! Payload is Null" doc:name="Assert Not Null Payload"/>
+            </mock:assertions-after-call>
 </mock:spy>
+
 ----
 
 <1> The actions inside `assertions-before-call` are run _before_ the message processor call.
 <2> The actions inside `assertions-after-call` are run _after_ the message processor call.
+=====
+
+
 
 TIP: It makes no sense to define a spy _after_ a mocked message processor, since you would end up validating your own mock.
 

@@ -19,22 +19,47 @@ TIP: You can define verifications over any message processor, even if you haven'
 
 For the purposes of this document, we assume we are testing the following Mule code:
 
-.Test code
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-processor-code-to-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <flow name="exampleFlow">
   <set-payload value="#['real_payload']" doc:name="Real Set Payload"/>
 </flow>
 ----
+=====
+
 
 === Defining Message Processor To Verify
 
 When defining a verify, we make use of the `verify-call` message processor.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::verify-call.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:verify-call messageProcessor="mule:set-payload" times="1"/>
 ----
+
+=====
 
 [%header%autowidth.spread]
 |===
@@ -60,11 +85,22 @@ NOTE: The attributes `times`, `atLeast`, `atMost`, are mutually exclusive. Only 
 
 The `messageProcessor` attribute accepts regular expressions. You could create the same verification as follows:
 
-.Verify using regular expressions
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::verify-call-mule-exp.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:verify-call messageProcessor=".*:set-payload" times="1"/>
 ----
+=====
 
 In the example above, we define a verification for a message processor named `set-payload`, disregarding which namespace the message processor belongs to.
 
@@ -72,7 +108,18 @@ TIP: The regular expression language is the same as Java.
 
 === Defining Verifications with Message Processor Attributes
 
-The definition of a verification is based on matchers, that is, parameters that match features of the desired message processor. Defining a verification solely on the name of the message processor largely limits your scope and actions. For this reason, MUnit allows you to verify by defining matchers over the value of a message processor's attributes.
+The definition of a verification is based on matchers, that is, parameters that match features of the desired message processor. Defining a verification solely on the name of the message processor largely limits your scope and actions. For this reason, MUnit allows you to define a verify by defining matchers over the value of a message processor's attributes.
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::verify-call-attribute.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -82,6 +129,8 @@ The definition of a verification is based on matchers, that is, parameters that 
   </mock:with-attributes>
 </mock:verify-call>
 ----
+=====
+
 
 You can define as many attributes as you deem necessary to make the verification as representative as possible. When defining an attribute, you do so by defining:
 

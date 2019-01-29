@@ -7,33 +7,62 @@ endif::[]
 
 == Overview
 
-One of the main problems of testing production code are external system connections. If we create a test of a piece of code that connects with an FTP server, we need to install an FTP server in our local environment in order to run the tests. Another option is to have an external FTP server for testing only, but the major problem with this approach is that our Maven project would not portable -- we would not be able to send it to a third party because they would not be able to compile it without installing the FTP server first.
+One of the main problems of testing production code are external system connections. If we create a test of a piece of code that connects with an FTP server, we need to install an FTP server in our local environment in order to run the tests. Another option is to have an external FTP server for testing only, but the major problem with this approach is that our Maven project would not be portable -- we would not be able to send it to a third party because they would not be able to compile it without installing the FTP server first.
 
 To enable you to avoid this issue, MUnit allows you to implement an FTP server in your local environment.
 
-== Maven Dependency
+== Install MUnit FTP Server Module
 
-NOTE: This page assumes you have the following property defined in your `pom.xml`: `<munit.version></munit.version>` .
+For this example, you need to install  the *FTP server Module* provided by MUnit. +
+From Anypoint Studio, go to *Help* and *Install New Software...*. +
+In the *Work with:* panel look for *MUnit Update Site*, and from the *MUnit Tools for Mule* section, select *FTP server Module (Mule 3.4.0+)*
 
-When running from Maven, you need to add the following artifact to your `.pom`:
+[NOTE]
+--
+A few considerations if you are using Maven:
 
-.FTP Server module Maven dependency
-[source,console]
+You need to add the MUnit FTP server artifact to your `pom` file:
+
+[source,xml,linenums]
 ----
+<!-- ftpServer Dependency -->
 <dependency>
-  <groupId>com.mulesoft.munit.utils</groupId>
-  <artifactId>ftpserver</artifactId>
-  <version>${munit.version}</version>
-  <scope>test</scope>
+	<groupId>com.mulesoft.munit.utils</groupId>
+	<artifactId>munit-ftpserver-module</artifactId>
+		<version>1.1.0</version>
+	<scope>test</scope>
 </dependency>
 ----
 
-== Defining The MUnit FTP Server
+Also this code example uses Spring for the Database configuration. When running from Maven, you should add Spring's dependencies to your `pom.xml` file.
+
+[source,xml,linenums]
+----
+<!-- Spring Dependency -->
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-jdbc</artifactId>
+  <version>4.1.6.RELEASE</version>
+</dependency>
+----
+--
+
+
+== Creating a Test Using MUnit FTP Server
 
 For the purpose of this documentation we are going to assume we are testing the
 following Mule code:
 
-.Code to be tested
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::ftp-code-to-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <flow name="exampleFlow">
@@ -43,55 +72,130 @@ following Mule code:
   </ftp:outbound-endpoint>
 </flow>
 ----
+=====
+
+[NOTE]
+--
+For this example, we are using properties `${host}` and `${ftp.port}`. +
+Remember to add these properties in your `mule-app.properties` file:
+
+ftp.port=22 +
+host=localhost/
+
+It is also required for you to set a user and a password for the FTP configuration. +
+For this example, any credentials work, so add the following lines in your `mule-app.properties` file:
+
+ftp.user=max +
+ftp.password=munittest
+--
+
+[CAUTION]
+--
+The username field cannot be empty. +
+If you do not have a username/password pair, set the username to `anonymous` and don't set any password since, by default, the `anonymous` attribute is set to true. +
+Learn more about this in the attributes table for <<Defining the FTP Server, defining the FTP server>>
+--
 
 === Defining the FTP Server
 
-We start by defining the FTP server parameters:
+Define the FTP server using the `FTP Server` connector from the `MUnit Integration Test Tools` in your Mule Pallet. +
+The DB Server can take the following parameters:
 
-.Define FTP server
-[source,xml,linenums]
-----
-<munit:config mock-inbounds="false" mock-connectors="false"/>   //<1>
-
-<ftpserver:config port="${ftp.port}" name="ftpServer"/>         //<2>
-----
-<1> Defines the MUnit configuration. Notice that `mock-connectors` is set to `false`.
-<2> Define the FTP server configuration.
-
-
-[%header%autowidth.spread]
-.FTP server config parameters
+[%header,cols="30,70"]
 |===
 |Attribute Name |Description
-
-|`name`
-|Defines the configuration name of this FTP server. The value must be unique.
-
-|`port`
-|Defines the port on which the FTP server should listen.
-
-|`secure`
-|(Boolean.) Defines the FTP protocol. Accepted values are `true` for SFTP or `false` for FTP. The default is `false`.
-
+|`name` |Defines the configuration name of this FTP server. The value must be unique.
+|`port` |Defines the port on which the FTP server should listen.
+|`Anonymous` | (Boolean.) Sets anonymous access to the FTP Server. If Anonymous is set to true, by setting the username to "anonymous" you don't need to set a password to access the FTP server. Default value is true.
+|`secure`|(Boolean.) Defines the FTP protocol. When the secure parameter is set to true, the server behaves as a SFTP server and connections are allowed only through authentication. If it is set to false, the server behaves as a FTP server and allows either authenticated or anonymous connections. Default value is false.
+|`homeDir`|Defines the user home directory. The default value is the filesystem root. +
+It is possible to define the FTP user home directory using the "~" character to represent the home directory on the file system.
 |===
+
+Proceed to define your FTP Server configuration in a new xref:munit-suite.adoc[MUnit Suite].
+
+First, you need to set `both mock connectors` and `mock inbounds` options to false:
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::munit-configuration-mock-false.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+[source,xml,linenums]
+----
+<munit:config mock-inbounds="false" mock-connectors="false"/>
+----
+=====
+
+Next, define your FTP configuration:
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+Navigate to your *Global Elements* tab, and select your *FTP Server* element. Click *Edit* and complete the fields:
+
+_Name_: ftpServer +
+_port_.: ${ftp.port} +
+_Username_.: ${ftp.user} +
+_Password_.: ${ftp.password} +
+
+
+image::ftp-server-config.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+[source,xml,linenums]
+----
+<ftpserver:config port="${ftp.port}" name="ftpServer"/>
+----
+=====
 
 === Starting the FTP Server
 
 In order to run, the FTP server must be started in the `before-suite`. You start the server using the `start-server` message processor.
 
-.Start FTP server
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::ftp-server-start.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:before-suite name="before.suite" description="Starting FTP server">
   <ftpserver:start-server config-ref="ftpServer"/>
 </munit:before-suite>
 ----
+=====
+
 
 === Running the Test
 
 Once our FTP server is up and running we can run our test.
 
-.Testing FTP example
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::run-ftp-server-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:test name="testFTPServer" description="Data must be stored in the ftp server">
@@ -99,6 +203,7 @@ Once our FTP server is up and running we can run our test.
   <ftpserver:contains-files file="ftp-jsonResult.txt" path="/tmp" config-ref="ftpServer"/>
 </munit:test>
 ----
+=====
 
 NOTE: This FTP accepts any user, so there is no need to set up a user database or list.
 
@@ -107,7 +212,6 @@ As you can see in the test, we make use of the `contains-file` message processor
 This message processor attempts to validate the existence of a file in the FTP server. If the file is not present, the message processor fails, thus causing the test to fail.
 
 [%header%autowidth.spread]
-.Contains parameters
 |===
 |Attribute Name |Description
 
@@ -115,7 +219,8 @@ This message processor attempts to validate the existence of a file in the FTP s
 |Defines the FTP server configuration.
 
 |`path`
-|Defines in which folder to search.
+|Defines in which folder to search based on the user home directory defined previously.
+
 
 |`file`
 |Defines the name of the file to look for.
@@ -124,14 +229,26 @@ This message processor attempts to validate the existence of a file in the FTP s
 
 The `remove` message processor provides another operation that may be of use. This operation instructs the FTP server to remove a file from storage.
 
-.Removing files from FTP server example
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::ftp-server-delete.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <ftpserver:remove config-ref="ftpServer" path="/tmp/ftp-jsonResult.txt"/>
 ----
 
+=====
+
 [%header%autowidth.spread]
-.Remove parameters
 |===
 |Attribute Name |Description
 
@@ -149,7 +266,17 @@ TIP: This feature is of use when we are creating the same file name several time
 
 To stop the FTP server gracefully, it needs to be stopped in the `after-suite`, using the `stop-server` message processor.
 
-.Stop FTP server
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::stop-ftp-server.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <munit:after-suite name="after.suite" description="Stoping FTP server">
@@ -157,11 +284,12 @@ To stop the FTP server gracefully, it needs to be stopped in the `after-suite`, 
 </munit:after-suite>
 ----
 
+=====
+
 == Execution Environments
 
 You may have noticed that our production code example makes extensive use of placeholders for certain parameters, such as `host`, `port` etc. in the example below:
 
-.Parameterized Production Code
 [source,xml,linenums]
 ----
 <ftp:outbound-endpoint host="${host}" port="${ftp.port}" user="${ftp.user}" password="${ftp.password}" outputPattern="ftp-jsonResult.txt" path="/tmp"/>
@@ -169,7 +297,6 @@ You may have noticed that our production code example makes extensive use of pla
 
 The reason for this is that properties allow us to create code that is more configurable. Compare the example above with:
 
-.Hardcoded Production Code
 [source,xml,linenums]
 ----
 <ftp:outbound-endpoint host="some.host" port="myPort" user="myUser" password="myPassword" outputPattern="ftp-jsonResult.txt" path="/tmp"/>
@@ -184,7 +311,6 @@ On the other hand, the first example code allows us to define two different prop
 
 This is used in combination with the Mule property placeholder, shown below with `${env}`:
 
-.Parameterized Production Code
 [source,xml,linenums]
 ----
 <global-property value="mule.${env}.property"/>

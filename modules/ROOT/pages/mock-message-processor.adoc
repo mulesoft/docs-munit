@@ -19,22 +19,45 @@ Defining a mock entails several tasks, listed in the sections below.
 
 Using the parameters entailed in the above tasks, you can tell MUnit how to replace the normal behavior of the message processor with the one you define.
 
-NOTE: It is not possible to mock flow control message processors, such as Filter or Choice.
+NOTE: It is not possible to mock flow control message processors, such as Filter, Choice or APIKit Router.
 
 For the purpose of this documentation, we assume we are testing the following Mule code:
 
-.Test code
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-processor-code-to-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <flow name="exampleFlow">
   <set-payload value="#['real_payload']" doc:name="Real Set Payload"/>
 </flow>
 ----
+=====
+
 
 [[define]]
 === Defining the Message Processor to Mock
 
 When defining a mock, we make use of the `when` message processor, as shown below.
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-set-payload.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -42,17 +65,27 @@ When defining a mock, we make use of the `when` message processor, as shown belo
 
 </mock:when>
 ----
+=====
 
-[%header%autowidth.spread]
+
+[%autowidth.spread]
 |===
 |Attribute Name |Description
-
-|`messageProcessor`
-|Specifies which message processor to mock. The definition takes the form `{name-space}:{message-processor-name}`. Regular expressions are allowed.
-
+|`messageProcessor` |Specifies which message processor to mock. The definition takes the form `{name-space}:{message-processor-name}`. Regular expressions are allowed.
 |===
 
 The `messageProcessor` attribute accepts regular expressions. For example, you can create a mock as follows:
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-when-mel.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -60,6 +93,7 @@ The `messageProcessor` attribute accepts regular expressions. For example, you c
 
 </mock:when>
 ----
+=====
 
 The example above defines a mock for a message processor named `set-payload`, disregarding which namespace the message processor belongs to.
 
@@ -70,7 +104,17 @@ NOTE: The regular expression language is the same as Java.
 
 A mock definition is based on _matchers_, that is, parameters that match features of the desired message processor. Defining a mock solely on the name of the message processor largely limits your scope and actions regarding the mock. For this reason, MUnit allows you to define a mock by defining matchers over the value of a message processor's attributes.
 
-.Defining a mock by attributes
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-when-message-processor-attributes.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:when messageProcessor="mule:set-payload">
@@ -79,6 +123,8 @@ A mock definition is based on _matchers_, that is, parameters that match feature
   </mock:with-attributes>
 </mock:when>
 ----
+=====
+
 
 You can define as many attributes as you deem necessary to make the mock as representative as possible. When defining an attribute, you do so by defining:
 
@@ -101,6 +147,18 @@ TIP: If the attribute you wish to use when mocking is similar to `config-ref` an
 Several attributes in Mule's message processors support expressions, which are evaluated at runtime. MUnit is smart enough to understand this.
 
 Suppose we change the test code to:
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::complex-mule-flow-example.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <flow name="exampleFlow">
@@ -110,8 +168,20 @@ Suppose we change the test code to:
     value="#['some value']" doc:name="Variable"/>
 </flow>
 ----
+=====
 
 In this example, we are going to mock _only_ the first `set-variable`. To specify this, we use _attributes_, as shown below:
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-when-var-true.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -121,18 +191,44 @@ In this example, we are going to mock _only_ the first `set-variable`. To specif
   </mock:with-attributes>
 </mock:when>
 ----
+=====
+
 
 === A Word About Mocking Flow-ref
 
 In MUnit, you don't mock or verify a `flow-ref` message processor, but the flow or sub-flow that would be invoked by `flow-ref`.
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-sub-flow.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
 <mock:when messageProcessor="mule:sub-flow">
 </mock:when>
 ----
+=====
 
 Notice that neither `flow` or `sub-flow` have the attribute `doc:name`; the attribute `name` is used instead. So, to mock a `flow-ref` to a `flow`:
+
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-when-flow-test-sample.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -142,8 +238,20 @@ Notice that neither `flow` or `sub-flow` have the attribute `doc:name`; the attr
   </mock:with-attributes>
 </mock:when>
 ----
+=====
 
 Also, note that to mock a `sub-flow` you can't just type the name of the `sub-flow`. Instead, you need to use the MUnit matcher `matchContains`:
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-when-match-contains.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -153,6 +261,7 @@ Also, note that to mock a `sub-flow` you can't just type the name of the `sub-fl
   </mock:with-attributes>
 </mock:when>
 ----
+=====
 
 
 [source,mel,linenums]
@@ -169,16 +278,27 @@ NOTE: When mocking or verifying a sub-flow and using the `name` attribute, alway
 
 When mocking a message processor, you can define the Mule message that the mocked message processor should return.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-then-return-real-payload.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:when messageProcessor="mule:set-payload">
   <mock:with-attributes>
     <mock:with-attribute whereValue="#['Real Set Payload']" name="doc:name"/>
   </mock:with-attributes>
-  <mock:then-return payload="#['mocked_payload']"/> //<1>
+  <mock:then-return payload="#['mocked_payload']"/>
 </mock:when>
 ----
-<1> Define the message response.
+=====
 
 [%header%autowidth.spread]
 |===
@@ -200,36 +320,57 @@ When mocking a message processor, you can define the Mule message that the mocke
 If you don't want to mock the payload of the message processor and want to return
 the original payload, you can use the function `samePayload()`.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-return-same-payload.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:when messageProcessor="mule:set-payload">
   <mock:with-attributes>
     <mock:with-attribute whereValue="#['Real Set Payload']" name="doc:name"/>
   </mock:with-attributes>
-  <mock:then-return payload="#[samePayload()]"/> //<1>
+  <mock:then-return payload="#[samePayload()]"/>
 </mock:when>
 ----
-<1> Return the same payload
+=====
 
 Omitting the `mock:then-return` property also returns the original payload
 but if you want to return the original payload and mock message properties you can use the
 `samePayload` function to achieve this.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-message-property-return-same-payload.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:when messageProcessor="mule:set-payload">
   <mock:with-attributes>
     <mock:with-attribute whereValue="#['Real Set Payload']" name="doc:name"/>
   </mock:with-attributes>
-  <mock:then-return payload="#[samePayload()]"> //<1>
+  <mock:then-return payload="#[samePayload()]">
     <mock:inbound-properties>
-      <mock:inbound-property key="property" value="#['propertyValue']"/> //<2>
+      <mock:inbound-property key="property" value="#['propertyValue']"/>
     </mock:inbound-properties>
   </mock:then-return>
 </mock:when>
 ----
-<1> Return the same payload
-<2> Mock message property
+=====
 
 
 ==== Loading Payloads From Files and Scripts
@@ -247,24 +388,48 @@ Sometimes it's easier to load complex payloads from a file. MUnit offers a set o
 |`resultOfScript()`
 |Name of a declared script bean.
 |Executes a script that is registered in the application, either in the MUnit suite or in one of the imported files.
-
 |===
 
-.Example: getResource
-[source,xml,linenums]
-----
-<mock:then-return payload="#[getResource('users.xml').asStream()]"/>    //<1>
-<mock:then-return payload="#[getResource('users.xml').asString()]"/>    //<2>
-<mock:then-return payload="#[getResource('users.xml').asByteArray()]"/> //<3>
-----
-<1> Return the content of `users.xml` as an input stream.
-<2> Return the content of `users.xml` as a string.
-<3> Return the content of `users.xml` as a byte array.
 
-.Example: resultOfScript
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::munit-mock-get-resource.png[]
+
+. Return the content of `users.xml` as an input stream.
+. Return the content of `users.xml` as a string.
+. Return the content of `users.xml` as a byte array.
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
-<script:script name="groovyScriptPayloadGenerator" engine="groovy"><![CDATA[  //<1>
+<mock:when doc:name="Mock">
+	<mock:then-return payload="#[getResource('users.xml').asStream()]"/>
+</mock:when>
+
+<mock:when doc:name="Mock">
+	<mock:then-return payload="#[getResource('users.xml').asString()]"/>
+</mock:when>
+
+<mock:when doc:name="Mock">
+	<mock:then-return payload="#[getResource('users.xml').asByteArray()]"/>
+ </mock:when>
+----
+
+. Return the content of `users.xml` as an input stream.
+. Return the content of `users.xml` as a string.
+. Return the content of `users.xml` as a byte array.
+=====
+
+Assume you have the following script in your classpath:
+
+[source,xml,linenums]
+----
+<script:script name="groovyScriptPayloadGenerator" engine="groovy"><![CDATA[
   List<String> lists = new ArrayList<String>();
   lists.add("item1");
   lists.add("item2");
@@ -272,17 +437,43 @@ Sometimes it's easier to load complex payloads from a file. MUnit offers a set o
 
   return lists;]]>
 </script:script>
-
-  ...
-<mock:then-return payload="#[resultOfScript('groovyScriptPayloadGenerator')]"/> //<2>
-  ...
 ----
-<1> Script definition.
-<2> Return mock payload as the result of the `groovyScriptPayloadGenerator` script.
+
+In order to return the mock payload as the result of the `groovyScriptPayloadGenerator` script.
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-match-script-result.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+[source,xml,linenums]
+----
+<mock:when doc:name="Mock" messageProcessor="mule:set-payload">
+  <mock:then-return payload="#[resultOfScript('groovyScriptPayloadGenerator')]"/>
+</mock:when>
+----
+=====
 
 === Defining the Properties of a Mock Response
 
 With MUnit you can also define the properties of the message to be returned by a mock. The following code expands on the example <<def_payload,above>> to modify the returned payload:
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-define-properties.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -297,6 +488,8 @@ With MUnit you can also define the properties of the message to be returned by a
   </mock:then-return>
 </mock:when>
 ----
+=====
+
 
 [%autowidth.spread]
 |===
@@ -330,6 +523,17 @@ In some scenarios, you may want to validate how your flow behaves if a message p
 
 This feature is offered through a different message processor: `mock:throw-an`.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-trhow-an.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:config name="mock_config" doc:name="Mock configuration"/>
@@ -337,6 +541,7 @@ This feature is offered through a different message processor: `mock:throw-an`.
 <mock:throw-an whenCalling="mule:set-payload" exception-ref="#[new java.lang.Exception()]">
 </mock:throw-an>
 ----
+=====
 
 In the structure of the `throw-an` message processor, you define which message processor you wish to mock, just like the `when` message processor. However, here you also need to define the exception that should be thrown by the mocked message processor.
 
@@ -358,6 +563,17 @@ Message Processor Attributes
 
 You can use <<matchers,matchers>> -- parameters that match features of the desired message processor -- to create a mock to throw an exception.
 
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::mock-throw-an-attribute.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
 <mock:throw-an whenCalling="mule:set-payload" exception-ref="#[new java.lang.Exception()]">
@@ -366,6 +582,8 @@ You can use <<matchers,matchers>> -- parameters that match features of the desir
   </mock:with-attributes>
 </mock:throw-an>
 ----
+=====
+
 
 You can define as many attributes as you deem necessary to make the mock as
 representative as possible. When defining an attribute, you do so by defining:
