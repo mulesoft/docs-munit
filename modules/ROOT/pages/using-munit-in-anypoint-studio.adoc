@@ -44,10 +44,8 @@ MUnit Studio integration is mainly built around XML-based tests. Most of the MUn
 
 There are two basic ways to create a new MUnit test in Studio:
 
-* Right-click a specific flow by right clicking the flow and selecting *MUnit*.
+* Choose a specific flow by right clicking the flow and selecting *MUnit*.
 * Use the wizard, which allows you to create a test for any flow or application in the workspace.
-
-The most basic ones are by right-clicking the flow you want to test, or by using the wizard.
 
 === Creating a Test for a Specific Flow
 
@@ -65,10 +63,6 @@ image::tabs.png[]
 * Creates a new MUnit test like the one shown below:
 
 image::test1-flow-specific.png[]
-
-To add an MUnit message processor to the test shown above, drag it from the Palette to the *Test* area after the flow-ref.
-
-image::test1-flow-specific2.png[]
 
 Below is the XML file automatically generated for the new test suite.
 
@@ -88,6 +82,38 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </munit:test>
 </mule>
 ----
+
+To add an MUnit message processor to the test shown above, drag it from the Palette to the *Test* area after the flow-ref.
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::test1-flow-specific2.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:munit2.xml"/>
+    </spring:beans>
+    <munit:test name="munit2-test-suite-munit2FlowTest" description="Test">
+        <flow-ref name="munit2Flow" doc:name="Flow-ref to munit2Flow"/>
+        <munit:assert-not-same expectedValue="#[]" actualValue="#[]" doc:name="Assert Not Equals"/>
+    </munit:test>
+</mule>
+----
+=====
 
 === Creating a Test Via the Wizard
 
@@ -110,7 +136,7 @@ Studio displays the newly-created test suite in its own canvas. Here you can tai
 
 image::canvas.png[]
 
-You can edit run configurations for your suites/tests in Studio, just like any other run configuration. A run configuration must contain at least the project and the suite; additionally, you can specify a test if you want to run only that test.
+You can edit _run configurations_ for your suites/tests in Studio, just like any other _run configuration_. A _run configuration_ must contain at least the project and the suite; additionally, you can specify a test if you want to run only that test.
 
 To edit the configuration for your suit or test in Studio, follow these steps:
 
@@ -137,6 +163,10 @@ WARNING: If your path contains a space followed by a dash, anything after the da
 Finally, you can also define environment variables. You can create your own variables and also use existing variables, such as `HOME`.
 
 image::run-config-env.png[]
+
+In MUnit, you can load properties from the `mule­-app.properties` file as well as using the `context:property-placeholder` to load properties from an additional file.
+
+Environment variables override any property that is set in the `mule­-app.properties` file, or by using a property placeholder.
 
 == Running Your Test
 
@@ -187,7 +217,7 @@ image::copy-stac.png[]
 
 As you can see in the image above, you can also use the MUnit tab to <<Running Your Test>> or debug your test, by selecting the appropriate menu option.
 
-Clicking the debug button image:debug-icon.png[] or the play button image:play-icon.png[] on the top right causes the last run or debug to be rerun. This rerun includes all tests that were run on the previous run. You can also select a single test from the previous run to rerun on its own.
+Clicking the debug button image:debug-icon.png[] or the play button image:play-icon.png[] on the top right causes the last run or debug to be rerun. This rerun includes all tests that were run on the previous one. You can also select a single test from the previous run to rerun on its own.
 
 == Debugging Tests
 

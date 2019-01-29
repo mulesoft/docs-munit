@@ -42,7 +42,6 @@ TIP: The configuration file must reside in the classpath to work correctly. Pref
 
 NOTE: If you don't create a `log4j2-test.xml` file, Mule looks for a file called `log4j2.xml`. For additional information about the priority in which the log configuration files are selected, see https://docs.mulesoft.com/mule-user-guide/v/3.7/logging-in-mule[Logging in Mule].
 
-
 == See Also
 
 * https://support.mulesoft.com[Contact MuleSoft]

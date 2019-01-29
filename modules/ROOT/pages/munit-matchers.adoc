@@ -15,11 +15,11 @@ A matcher does not receive parameters; rather, it's a parameter itself.
 
 The table bellow lists the available MUnit matchers.
 
-
-[%header,cols="2*a"]
+[%header%autowidth.spread]
 .MUnit Matcher Functions
 |===
 | Matcher Name | Description
+
 |`isNull()`
 |Matches if the evaluated object is `Null`.
 

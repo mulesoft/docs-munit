@@ -1,11 +1,11 @@
-= MUnit Migration Guide
+= MUnit 1.1 Migration Guide
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :version-info: 3.7.0 and later
 :keywords: munit, testing, unit testing, migration
 
-To upgrade to MUnit 1.0.0, you need to modify the `pom.xml` file.
+To upgrade to MUnit 1.1.1, you mostly need to modify the `pom.xml` file.
 
 == New Maven groupId for MUnit Artifacts
 
@@ -76,7 +76,7 @@ Artifacts in old MUnit versions:
 </dependency>
 ----
 
-MUnit 1.0.0 requires only the following artifacts:
+MUnit 1.1.1 requires only the following artifacts:
 
 [source,xml,linenums]
 ----
@@ -94,19 +94,19 @@ MUnit 1.0.0 requires only the following artifacts:
 </dependency>
 ----
 
-Note that the groupIds have changed from `org.mule.munit` to `com.mulesoft.munit`, and that the `mule-munit-support` version artifact is new.
+*Note*: The groupIds have changed from `org.mule.munit` to `com.mulesoft.munit`, and that the `mule-munit-support` version artifact is new.
 
 == Properties
 
-MUnit 1.0.0 requires the following properties in the `pom.xml` file:
+MUnit 1.1.1 requires the following properties in the `pom.xml` file:
 
 [source,xml,linenums]
 ----
-<munit.version>1.0.0</munit.version>
+<munit.version>1.1.1</munit.version>
 <mule.munit.support.version>3.7.0</mule.munit.support.version>
 ----
 
-Note that `${mule.munit.support.version}` should match the Mule ESB version, i.e.:
+*Note*: `${mule.munit.support.version}` should match the Mule ESB version:
 
 * 3.6.0 for Mule 3.6.x
 * 3.7.0 for Mule 3.7.x

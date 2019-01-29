@@ -7,6 +7,8 @@ endif::[]
 
 MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment.
 
+NOTE: For information on redirecting logs to a file, see /munit/v/1.2/logging-in-munit#redirecting-logs-to-a-file[Logging in MUnit].
+
 == Setting Up Your pom.xml File
 
 MUnit is a composition of several modules, all of which are necessary to run your MUnit test. Maven offers as much flexibility as possible.
@@ -16,10 +18,12 @@ For MUnit to run properly with Maven, you need to add a few sections to your `po
 TIP: If you are using Anypoint Studio, Maven integration is already solved for you. See https://docs.mulesoft.com/anypoint-studio/v/5/using-maven-in-anypoint-studio[Using Maven in Anypoint Studio] for details.
 
 NOTE: This documentation assumes you have the following properties in your `pom.xml`: `<munit.version>` and `<mule.munit.support.version>`.
-+
+
 Do not combine MUnit modules of different versions. That is, the `munit.version` should be the same across all MUnit artifacts in your `pom.xml`, like the plugin or the runner.
-+
+
 Regarding the Mule MUnit support module, the `mule.munit.support.version` should match the `mule.version`. For example, `3.7.0` version of the support module would be compatible with `3.7.0`, `3.7.1`, `3.7.2` and other versions of Mule, but not necessarily with `3.6.0`.
+
+NOTE: For information on redirecting logs to a file, see xref:logging-in-munit.adoc#redirecting-logs-to-a-file[Logging in MUnit].
 
 === MUnit Maven Plugin
 
@@ -225,34 +229,6 @@ TIP: The property `skipMunitTests` applies only to the XML based MUnit tests.
 
 The MUnit Maven Plugin offers a minor set of configurations.
 
-==== Redirecting Logs
-
-By default, logs are output to the console, but you can redirect them to a file.
-
-.Redirecting logs example
-[source,xml,linenums]
-----
-<plugin>
-  <groupId>com.mulesoft.munit.tools</groupId>
-  <artifactId>munit-maven-plugin</artifactId>
-  <version>${munit.version}</version>
-  <executions>
-    <execution>
-      <id>test</id>
-      <phase>test</phase>
-      <goals>
-        <goal>test</goal>
-      </goals>
-    </execution>
-  </executions>
-  <configuration>
-    <logToFile>true</logToFile> //<1>
-  </configuration>
-</plugin>
-----
-<1> Redirect logs.
-
-The log outputs to `target/surefire-reports/munit.-output.txt`.
 
 ==== Setting System Variables
 
@@ -283,6 +259,18 @@ You may wish to define specific system variables needed for your MUnit test to r
 ----
 <1> Sends variables.
 
+System Property variables override any property set in the `mule-
+app.properties` file or with a property placeholder.
+
+[TIP]
+====
+You can override these variables using the ­`-D` argument when running MUnit with Maven. This takes full priority over any other property.
+
+For example:
+
+`-Dmy.property.key=my.property.another.value`
+====
+
 === Dynamic Ports
 
 When testing a Mule application in a continuous integration (CI) environment, the following scenario is not uncommon:
@@ -298,7 +286,6 @@ Afterwards the port number can be acquired by the application by the use of plac
 TIP: The Ports to be selected by the plugin are taken from the following range: `[40000,50000)`
 
 NOTE: Dynamic Ports feature is only available as part of the MUnit Maven Plugin, thus you can not expect this feature to work when running tests from inside Anypoint Studio.
-
 
 ==== Enabling Dynamic Ports
 
@@ -354,7 +341,7 @@ With the application coded in this way, and the configuration of Dynamic Ports i
 === Coverage
 
 MUnit used to have a basic coverage feature only available from Anypoint Studio.
-Since MUnit version `1.2.0` this feature is also available from the command line by the use of the MUnit Maven Plugin.
+Since MUnit version `1.1.0` this feature is also available from the command line by the use of the MUnit Maven Plugin.
 
 ==== Objective
 
@@ -472,6 +459,25 @@ INFO] [CoverageManager] Printing Coverage Report...
 <1> Warning detailing which coverage level wasn't meet
 
 TIP: If no level is defined, -1 is assumed, which indicates that the build won't fail due to lack of coverage.
+
+===== Ignoring Flows
+
+Another feature we provide is the ability to ignore a flow. This means that a flow doesn't count as coverage data, doesn't affect the overall number of message processors, and doesn't cause a build to fail if the flow is not tested or if the flow doesn't reach coverage metrics.
+
+To ignore a flow, add the following lines to the configuration:
+
+.MUnit Coverage - Ignoring Flows
+[source,xml,linenums]
+----
+<coverage>
+  <ignoreFlows>
+	  <ignoreFlow>the-name-of-your-flow</ignoreFlow>       //<1>
+  </ignoreFlows>
+</coverage>
+----
+<1> The name of the flow you want to ignore.
+
+As you can see this is a list, so you can ignore as many flows as you need.
 
 ===== Reports
 

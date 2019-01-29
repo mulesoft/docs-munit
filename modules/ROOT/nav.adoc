@@ -15,4 +15,4 @@
 * xref:logging-in-munit.adoc[Logging in MUnit]
 * xref:run-and-wait-scope.adoc[Run and Wait Scope]
 * xref:munit-tests-with-java.adoc[MUnit Tests With Java]
-* xref:munit-1.0-migration-guide.adoc[MUnit 1.0 Migration Guide]
+* xref:munit-1.1-migration-guide.adoc[MUnit 1.1 Migration Guide]

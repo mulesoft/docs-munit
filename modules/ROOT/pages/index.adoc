@@ -1,4 +1,4 @@
-= MUnit (v1.0 Archives)
+= MUnit (v1.1 Archives)
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -30,12 +30,11 @@ With MUnit you can:
 
 == MUnit Versions
 
-See the https://docs.mulesoft.com/release-notes/munit-1.0.0-release-notes[Release Notes] to see what's new.
+See the https://docs.mulesoft.com/release-notes/munit-1.1.1-release-notes[Release Notes] to see what's new.
 
 [WARNING]
-MUnit 1.0.x works with Mule versions 3.6.x and 3.7.x (for 3.6.x minor limitations, see https://docs.mulesoft.com/release-notes/munit-1.1.1-release-notes#compatibility-information[MUnit Release Notes - Compatibility Information]).
+MUnit 1.1.x works with Mule versions 3.6.x and 3.7.x (for 3.6.x minor limitations, see https://docs.mulesoft.com/release-notes/munit-1.1.1-release-notes#compatibility-information[MUnit Release Notes - Compatibility Information]).
 In order to test Mule 3.8.x based applications you'll need to migrate to MUnit 1.2.x.
-
 
 == MUnit Compatibility
 
@@ -49,6 +48,7 @@ The important sub modules are:
 |===
 |MUnit Version |Mule MUnit Support Version
 |1.0.x |3.6.x, 3.7.x
+|1.1.x |3.6.x, 3.7.x
 |===
 * *Mule MUnit Support* - The Mule MUnit Support module is meant to follow Mule ESB releases:
 +
@@ -64,7 +64,6 @@ The *x* at the end of each version number refers to the latest version within th
 +
 [TIP]
 Currently the latest released versions of Mule MUnit Support are: *3.6.2*, *3.7.2*.
-
 
 [[studio]]
 == MUnit and Anypoint Studio
@@ -93,4 +92,4 @@ TIP: The examples in these pages are XML-only; however, as stated <<studio,above
 * xref:munit-short-tutorial.adoc[MUnit Short Tutorial]
 * xref:run-and-wait-scope.adoc[Run And Wait Scope]
 * xref:example-testing-apikit.adoc[Example: Testing APIKit]
-* xref:munit-1.0-migration-guide.adoc[MUnit 1.0 Migration Guide]
+* xref:munit-1.1-migration-guide.adoc[MUnit 1.0 Migration Guide]

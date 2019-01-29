@@ -9,7 +9,7 @@ endif::[]
 
 The Assert feature, provided by MUnit, allows the developer to run _assertions_ in order to validate the state of a Mule message's content.
 
-All the message processors listed bellow can be used either to validate the Mule message after the production code runs, or as part of the MUnit Spy message processor.
+All the message processors listed bellow can be used either to validate the Mule message after the production code runs, or as part of the MUnit xref:spy-message-processor.adoc[Spy message processor].
 
 TIP: Every MUnit Assertion message processor contains an attribute message. It is recommended to fill this optional attribute in order to easily identify a failing assertion.
 
@@ -299,7 +299,8 @@ You need to define your custom assertion as a bean.
 [discrete.view]
 === Studio Visual Editor
 
-Navigate to the *Global Elements* tab from your test Suite, click *Create*, select *Bean* and configure your custom bean assertion.
+Navigate to the *Global Elements* tab from your test Suite, click *Create*, select *Bean* and configure your custom bean assertion
+
 
 [%header%autowidth.spread]
 |===

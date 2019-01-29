@@ -27,7 +27,7 @@ To perform these tasks, the APIkit Router constantly reads the `api.raml` file. 
 
 Create a new Mule Studio project and create a RAML definition file in the `api` folder (for details on how to do this, see the https://docs.mulesoft.com/apikit/apikit-tutorial[APIkit Tutorial]).
 
-NOTE: This test only works on MUnit version *3.5-M3-SNAPSHOT* and above.
+NOTE: This test only works on MUnit version *3.5-M3-SNAPSHOT* and newer.
 
 [[the-raml-definition]]
 === The RAML Definition
@@ -72,54 +72,63 @@ Below is the result after you generate the flows for the RAML definition:
 
 [source,xml,linenums]
 ----
- <apikit:config name="api-config" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router" />
-    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping" doc:name="Mapping Exception Strategy">
+<apikit:config name="api-config" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router" />
+    <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="9090" connectionIdleTimeout="999999" doc:name="HTTP Listener Configuration" basePath="/api"/>
+    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping" >
         <apikit:mapping statusCode="404">
             <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
-            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload" />
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot;]" doc:name="Set Payload" />
         </apikit:mapping>
         <apikit:mapping statusCode="405">
             <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
-            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload" />
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot;]" doc:name="Set Payload" />
         </apikit:mapping>
         <apikit:mapping statusCode="415">
             <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
-            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload" />
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot;]" doc:name="Set Payload" />
         </apikit:mapping>
         <apikit:mapping statusCode="406">
             <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
-            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload" />
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot;]" doc:name="Set Payload" />
         </apikit:mapping>
         <apikit:mapping statusCode="400">
             <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
-            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload" />
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot;]" doc:name="Set Payload" />
         </apikit:mapping>
     </apikit:mapping-exception-strategy>
-    <flow name="api-main" doc:name="api-main">
-        <http:inbound-endpoint doc:name="HTTP" exchange-pattern="request-response" host="localhost" path="api" port="9090" responseTimeout="999999" />
+    <flow name="api-main" >
+        <http:listener config-ref="HTTP_Listener_Configuration" path="*" doc:name="HTTP"/>
         <apikit:router config-ref="api-config" doc:name="APIkit Router" />
         <exception-strategy ref="api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
     </flow>
-    <flow name="get:/munit:api-config" doc:name="get:/munit:api-config">
+    <flow name="get:/munit:api-config" >
         <set-payload value="#['GET RESPONSE']" doc:name="Set Payload" />
     </flow>
-    <flow name="put:/munit:api-config" doc:name="put:/munit:api-config">
+    <flow name="put:/munit:api-config" >
         <set-payload value="#['PUT RESPONSE']" doc:name="Set Payload"/>
     </flow>
-    <flow name="delete:/munit:api-config" doc:name="delete:/munit:api-config">
+    <flow name="delete:/munit:api-config" >
         <set-payload value="#['DELETE RESPONSE']" doc:name="Set Payload"/>
     </flow>
-    <flow name="post:/munit:api-config" doc:name="post:/munit:api-config">
+    <flow name="post:/munit:api-config" >
         <set-payload value="#['POST RESPONSE']" doc:name="Set Payload"/>
     </flow>
 ----
 
-NOTE: In the above code, the default inbound port has been changed to 9090.
+[WARNING]
+--
+When creating this example, make sure you add APIkit components to your project: +
+
+image::create-project-add-apikit-components.png[]
+
+--
+
+NOTE: In the above example, the default listener port of the HTTP global configuration has been changed to 9090.
 
 [[the-munit-test]]
 === The MUnit Test
@@ -127,6 +136,17 @@ NOTE: In the above code, the default inbound port has been changed to 9090.
 These sections contain a breakdown of the important parts of the test. You can find a complete version of the XML at the bottom of the page.
 
 *The MUnit configuration:*
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::munit-configuration-mock-false.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -137,24 +157,54 @@ These sections contain a breakdown of the important parts of the test. You can f
 ----
 
 NOTE: In the MUnit configuration, it is essential that you set `mock-connectors` and `mock-inbounds` to `false`. By default, MUnit sets these values to `true` (since usually you don't want to enable inbound endpoints), so you must manually set these values to false; otherwise the test does not work.
-
+=====
 
 *An actual test:*
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::test-get-sample.png[]
+
+
+image::test-get-sample-global.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
 <munit:test name="api-test-get" description="Test">
-        <munit:set payload="#['']" doc:name="Set Message"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="api/munit" method="GET" doc:name="HTTP"/>
-        <object-to-string-transformer doc:name="Object to String"/>
-        <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq('200'))]" doc:name="Assert True"/>
-        <munit:assert-on-equals message="The response payload is not correct!" expectedValue="#['\&quot;GET RESPONSE\&quot;']" actualValue="#[payload]" doc:name="Assert Equals"/>
+  <munit:set payload="#['']" doc:name="Set Message"/>
+  <http:request config-ref="HTTP_Request_Configuration" path="/munit" method="GET" doc:name="HTTP"/>
+  <object-to-string-transformer doc:name="Object to String"/>
+  <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq(200))]" doc:name="Assert True"/>
+  <munit:assert-on-equals message="The response payload is not correct!" expectedValue="&quot;GET RESPONSE&quot;" actualValue="#[payload]" doc:name="Assert Equals"/>
 </munit:test>
 ----
 
-As you can see, we are using an `http:outbound-endpoint` to trigger the test. Make sure that `exchange-pattern` is set to `request-response`. This enables you to use the HTTP outbound endpoint to define everything you need in order to hit a resource of your API (HTTP verbs, headers, paths, MIME types, etc.). In this example, we cover only the verb.
+=====
+
+As you can see, we are using an `http connector` to trigger the test. This enables you to use the HTTP outbound endpoint to define everything you need in order to hit a resource of your API (HTTP verbs, headers, paths, MIME types, etc.). In this example, we cover only the verb.
 
 *The two assertions in the test:*
+
+
+
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::test-get-sample-assert-true.png[]
+
+
+image::test-get-assert-equals.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
 
 [source,xml,linenums]
 ----
@@ -163,52 +213,71 @@ As you can see, we are using an `http:outbound-endpoint` to trigger the test. Ma
 <munit:assert-on-equals message="The response payload is not correct!" expectedValue="#['\&quot;GET RESPONSE\&quot;']" actualValue="#[payload]" doc:name="Assert Equals"/>
 ----
 
+=====
+
 This example illustrates one of the most basic assertions needed in a test like this:
 
-* Validate the HTTP status code
-* Validate the returned payload
+* To validate the HTTP status code
+* To validate the returned payload
 
 *Full test config XML:*
 
+[.ex]
+=====
+[discrete.view]
+=== Studio Visual Editor
+
+image::full-test.png[]
+
+[discrete.view]
+=== XML or Standalone Editor
+
 [source,xml,linenums]
 ----
- <munit:config doc:name="Munit configuration" mock-connectors="false" mock-inbounds="false"/>
-    <spring:beans>
-        <spring:import resource="classpath:api.xml"/>
-    </spring:beans>
+<munit:config name="munit" doc:name="MUnit configuration" mock-connectors="false" mock-inbounds="false"/>
+<spring:beans>
+    <spring:import resource="classpath:apigwexample-docs.xml"/>
+</spring:beans>
 
-    <munit:test name="api-test-get" description="Test">
-        <munit:set payload="#['']" doc:name="Set Message"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="api/munit" method="GET" doc:name="HTTP"/>
-        <object-to-string-transformer doc:name="Object to String"/>
-        <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq('200'))]" doc:name="Assert True"/>
-        <munit:assert-on-equals message="The response payload is not correct!" expectedValue="#['\&quot;GET RESPONSE\&quot;']" actualValue="#[payload]" doc:name="Assert Equals"/>
-    </munit:test>
+<http:request-config name="HTTP_Request_Configuration" host="localhost" port="9090" basePath="/api" connectionIdleTimeout="999999" doc:name="HTTP Request Configuration">
+    <http:raml-api-configuration location="api.raml"/>
+</http:request-config>
 
-    <munit:test name="api-test-post" description="Test">
-        <munit:set payload="#['']" doc:name="Set Message"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="api/munit" method="POST" doc:name="HTTP"/>
-        <object-to-string-transformer doc:name="Object to String"/>
-        <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq('201'))]" doc:name="Assert True"/>
-        <munit:assert-on-equals message="The response payload is not correct!" expectedValue="#['\&quot;POST RESPONSE\&quot;']" actualValue="#[payload]" doc:name="Assert Equals"/>
-    </munit:test>
 
-    <munit:test name="api-test-put" description="Test">
-        <munit:set payload="#['']" doc:name="Set Message"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="api/munit" method="PUT" doc:name="HTTP"/>
-        <object-to-string-transformer doc:name="Object to String"/>
-        <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq('201'))]" doc:name="Assert True"/>
-        <munit:assert-on-equals message="The response payload is not correct!" expectedValue="#['\&quot;PUT RESPONSE\&quot;']" actualValue="#[payload]" doc:name="Assert Equals"/>
-    </munit:test>
+<munit:test name="api-test-get" description="Test">
+    <munit:set payload="#['']" doc:name="Set Message"/>
+    <http:request config-ref="HTTP_Request_Configuration" path="/munit" method="GET" doc:name="HTTP"/>
+    <object-to-string-transformer doc:name="Object to String"/>
+    <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq(200))]" doc:name="Assert True"/>
+    <munit:assert-on-equals message="The response payload is not correct!" expectedValue="&quot;GET RESPONSE&quot;" actualValue="#[payload]" doc:name="Assert Equals"/>
+</munit:test>
 
-    <munit:test name="api-test-delete" description="Test">
-        <munit:set payload="#['']" doc:name="Set Message"/>
-        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="api/munit" method="DELETE" doc:name="HTTP"/>
-        <object-to-string-transformer doc:name="Object to String"/>
-        <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq('200'))]" doc:name="Assert True"/>
-        <munit:assert-on-equals message="The response payload is not correct!" expectedValue="#['\&quot;DELETE RESPONSE\&quot;']" actualValue="#[payload]" doc:name="Assert Equals"/>
-    </munit:test>
+<munit:test name="api-test-post" description="Test">
+    <munit:set payload="#['']" doc:name="Set Message"/>
+    <http:request config-ref="HTTP_Request_Configuration" path="/munit" method="POST" doc:name="HTTP"/>
+    <object-to-string-transformer doc:name="Object to String"/>
+    <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq(201))]" doc:name="Assert True"/>
+    <munit:assert-on-equals message="The response payload is not correct!" expectedValue="&quot;POST RESPONSE&quot;" actualValue="#[payload]" doc:name="Assert Equals"/>
+</munit:test>
+
+<munit:test name="api-test-put" description="Test">
+    <munit:set payload="#['']" doc:name="Set Message"/>
+    <http:request config-ref="HTTP_Request_Configuration" path="/munit" method="PUT" doc:name="HTTP"/>
+    <object-to-string-transformer doc:name="Object to String"/>
+    <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq(201))]" doc:name="Assert True"/>
+    <munit:assert-on-equals message="The response payload is not correct!" expectedValue="&quot;PUT RESPONSE&quot;" actualValue="#[payload]" doc:name="Assert Equals"/>
+</munit:test>
+
+<munit:test name="api-test-delete" description="Test">
+    <munit:set payload="#['']" doc:name="Set Message"/>
+    <http:request config-ref="HTTP_Request_Configuration" path="/munit" method="DELETE" doc:name="HTTP"/>
+    <object-to-string-transformer doc:name="Object to String"/>
+    <munit:assert-true message="The HTTP Status code is not correct!" condition="#[messageInboundProperty('http.status').is(eq(200))]" doc:name="Assert True"/>
+    <munit:assert-on-equals message="The response payload is not correct!" expectedValue="&quot;DELETE RESPONSE&quot;" actualValue="#[payload]" doc:name="Assert Equals"/>
+</munit:test>
 ----
+
+=====
 
 [[conclusion]]
 == Conclusion

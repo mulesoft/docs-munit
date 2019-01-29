@@ -72,7 +72,7 @@ TIP: The regular expression language is the same as Java.
 
 === Defining Verifications with Message Processor Attributes
 
-The definition of a verification is based on matchers, that is, parameters that match features of the desired message processor. Defining a verification solely on the name of the message processor largely limits your scope and actions. For this reason, MUnit allows you to define a verify by defining matchers over the value of a message processor's attributes.
+The definition of a verification is based on matchers, that is, parameters that match features of the desired message processor. Defining a verification solely on the name of the message processor largely limits your scope and actions. For this reason, MUnit allows you to verify by defining matchers over the value of a message processor's attributes.
 
 [source,xml,linenums]
 ----
