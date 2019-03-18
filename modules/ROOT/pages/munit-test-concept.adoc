@@ -16,7 +16,7 @@ The MUnit Test is divided in three scopes:
 Mocks and Spies should go in this section.
 
 | Execution
-| The execution scope is meant to have the testing logic which will be wait for all processes to finish before executing the next scope.
+| The execution scope is meant to have the testing logic which will wait for all processes to finish before executing the next scope.
 
 | Validation
 | The validation scope is meant to have all the validations regarding the result of the execution scope. +
@@ -132,7 +132,7 @@ This Error Type test expects that an FTP operation will throw an FTP:ILLEGAL_PAT
 If none of your flows are using using an FTP connector, then the error type is not defined within your application and the test will not run.
 +
 [TIP]
-ErrorTypes that belong to the Mule Runtime does not need to be typified. For example, MULE:RETRY_EXHAUSTED can be defined as simply RETRY_EXHAUSTED.
+ErrorTypes that belong to the Mule Runtime do not need to be typified. For example, MULE:RETRY_EXHAUSTED can be defined as simply RETRY_EXHAUSTED.
 
 * The attribute expectException expects a literal exception class name (canonical form).
  When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
