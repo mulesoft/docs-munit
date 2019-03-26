@@ -68,6 +68,49 @@ To make the build fail, add the following lines to the configuration:
 
 Now, the next logical step is to define the coverage levels.
 
+MUnit Coverage handles three different levels:
+
+* Application
+* Resource
+* Flow
+
+Here is how to define the required coverage level:
+
+.MUnit Coverage - Require Coverage
+[source,xml,linenums]
+----
+<coverage>
+  <runCoverage>true</runCoverage>
+  <failBuild>true</failBuild>
+
+  <requiredApplicationCoverage>20</requiredApplicationCoverage>
+  <requiredResourceCoverage>10</requiredResourceCoverage>
+  <requiredFlowCoverage>5</requiredFlowCoverage>
+</coverage>
+----
+
+TIP: Each value represents a percentage.
+
+If you define coverage levels but set the property `failBuild` to *false*, if the levels are not reached, a warning shows up in the MUnit Coverage summary.
+
+Something like this:
+
+[source,console,linenums]
+----
+INFO] [CoverageManager] Printing Coverage Report...
+[INFO] ===============================================================================
+[INFO] MUnit Coverage Summary
+[INFO] ===============================================================================
+[INFO]  * Resources: 3 - Flows: 6 - Message Processors: 7
+[INFO]  * Application Coverage: 71.43%
+[INFO]
+[WARNING] ----------------------------- WARNING --------------------------------------
+[WARNING]  * Application coverage is below defined limit. Required: 100.0% - Current: 71.43%  //<1>
+----
+<1> Warning detailing which coverage level wasn't met
+
+TIP: If no level is defined, -1 is assumed, which indicates that the build won't fail due to lack of coverage.
+
 == To Ignore Flows for Coverage Report
 
 .MUnit Coverage - Ignoring Flows
