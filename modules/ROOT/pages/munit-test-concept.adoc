@@ -12,15 +12,13 @@ The MUnit Test is divided in three scopes:
 |Scope |Description
 
 | Behavior
-| The behavior scope is meant to set all the preconditions before executing the test logic. +
-Mocks and Spies should go in this section.
+| The behavior scope is meant to set all the preconditions before executing the test logic.
 
 | Execution
 | The execution scope is meant to have the testing logic which will be wait for all processes to finish before executing the next scope.
 
 | Validation
-| The validation scope is meant to have all the validations regarding the result of the execution scope. +
-Assertions and Verifications should go here.
+| The validation scope is meant to have all the validations regarding the result of the execution scope.
 |===
 
 
@@ -32,7 +30,7 @@ All these scopes are optional.
 <munit:test name="exampleTest" description="Test to verify scenario 1">>
 
      <munit:behavior>
-         <munit-tools:mock-when.../>
+         <!-- Processors to set preconditions for the test -->
      </munit:behavior>
 
      <munit:execution>
@@ -40,7 +38,7 @@ All these scopes are optional.
      </munit:execution>
 
      <munit:validation>
-         <munit-tools:assert-that ...>
+         <!-- Processors to validate result -->
      </munit:validation>
  </munit:test>
 
