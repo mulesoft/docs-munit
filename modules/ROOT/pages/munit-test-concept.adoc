@@ -79,6 +79,26 @@ Valid values for `ignore` are true and false. If the attribute is not present, t
 .In Anypoint Studio, you can check the Ignore Test option.
 image::munit-test-concept-de4c9.png[ignore-test]
 
+=== Using expressions to ignore a test
+
+Since MUnit 2.2, the `ignore` attribute allows expression to be used. This allows you to ignore a test based on the
+current mule version or on the current OS.
+
+.Ignoring a test based on the mule version
+[source,xml]
+----
+<munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
+----
+
+.Ignoring a test based on the Operating System
+[source,xml]
+----
+<munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
+----
+
+This test will be ignored if the Mule version is prior to `4.1.4`. Other possible functions are `muleVersionEqualTo` and
+`muleVersionNewerThan`.
+
 == About MUnit Test Tag Attribute
 
 MUnit also allows you to tag your tests, so you can choose to run tests under a specific tag. For example:
