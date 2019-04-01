@@ -1,0 +1,69 @@
+= About Queue Event Processors
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:version-info: 2.0 and newer
+:keywords: munit, testing, unit testing, queue
+
+Allows you to manage temporary queues during your test runs.
+All queues will be *emptied as soon as the test ends*.
+
+=== Queue
+
+Adds the value to the queue. If not specified, the value is taken from the `payload`.
+
+[source,xml,linenums]
+----
+<munit-tools:queue>
+    <munit-tools:value>#[1]</munit-tools:value>
+</munit-tools:queue>
+----
+
+You can specify the queue from which to the dequeue. If not specified, the default queue will be used.
+
+[source,xml,linenums]
+----
+<munit-tools:queue queueName="CUSTOM_QUEUE_1">
+    <munit-tools:value>#[1]</munit-tools:value>
+</munit-tools:queue>
+----
+
+=== Dequeue
+Removes the last element of the queue, if queue is empty, it waits until an element
+is queued.
+
+[source,xml,linenums]
+----
+<munit-tools:dequeue/>
+----
+
+You can specify a timeout when waiting for an element to be queued:
+
+[source,xml,linenums]
+----
+<munit-tools:dequeue timeout="1000" timeoutUnit="SECONDS"/>
+----
+
+Like the queue operation, you can specify the queue from which to the dequeue.
+If not specified, the default queue will be used.
+
+[source,xml,linenums]
+----
+<munit-tools:dequeue queueName="CUSTOM_QUEUE_1"/>
+----
+
+=== Queue Size
+Function that obtains the queue size.
+
+[source,xml,linenums]
+----
+<munit-tools:assert-that expression=#[MunitTools::queueSize()] is="#[MunitTools::equalTo(2)]" />
+----
+
+Like the other operations, you can specify the queue from which to the get the size.
+If not specified, the default queue will be used.
+
+[source,xml,linenums]
+----
+<munit-tools:assert-that expression=#[MunitTools::queueSize('CUSTOM_QUEUE_1')] is="#[MunitTools::equalTo(2)]" />
+----
