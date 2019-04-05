@@ -85,6 +85,11 @@ This is a list, so you can ignore as many flows as you need.
 
 == Dynamic Ports
 
+[IMPORTANT]
+MUnit 2.2 and later introduce the `dynamic-port` global element, that allows you to define dynamic ports at the MUnit suite level. +
+Using this element instead of the plugin configuration described below allows you to set the dynamic port both from Maven and Studio. +
+See xref:dynamic-ports.adoc[Dynamic Ports] to learn how to configure this element.
+
 When testing a Mule application in a continuous integration (CI) environment, you might encounter the following scenario:
 
 `Your application tries to open a specific port. The port is already in use. The application fails with a port binding exception.`
