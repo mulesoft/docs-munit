@@ -96,7 +96,7 @@ Checks if any of the matchers are successful.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]"/>
+is="#[MunitTools::anyOf([MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString()])]"/>
 ----
 
 == allOf(Array<Matchers>)
@@ -108,7 +108,7 @@ Checks if all of the matchers are successful.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())"/>
+is="#[MunitTools::allOf([MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString()])]"/>
 ----
 
 == See Also
