@@ -6,7 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing, queue
 
 Allows you to manage temporary queues during your test runs.
-All queues will be *emptied as soon as the test ends*.
+All queues will be emptied as soon as the test ends.
 
 === Queue
 

@@ -52,7 +52,7 @@ image::munit-test-concept-9c736.png[munit-test]
 
 == About MUnit Test Description Attribute
 
-Since MUnit 2.2.0, its optional that you write a description in your test. +
+In MUnit 2.2.0 and later, it is optional that you write a description in your test. +
 Ideally, you should write a useful, representative description of the scenario you are testing. This description displays in the test console before running the test, and also in the reports. +
 The more representative the description, the easier to read and troubleshoot any failures.
 
