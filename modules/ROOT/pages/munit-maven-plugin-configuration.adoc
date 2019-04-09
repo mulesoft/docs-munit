@@ -63,6 +63,10 @@ By default it runes with the mule-version defined in the pom.xml file of the mul
 | Type of runtime. Expected values are MULE for community edition, and MULE_EE for enterprise edition. +
 By default, this value is taken from the requiredProduct parameter in the mule-artifact.json file.
 
+| jvm
+| String
+| Option to specify the jvm (or path to the java executable) to use.
+By default, the jvm will the same VM as the one used to run Maven.
 
 |environmentVariables
 |Map

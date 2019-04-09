@@ -348,6 +348,28 @@ The two possible values are MULE for community edition, and MULE_EE for Enterpri
 </plugins>
 ----
 
+== To Specify The JVM
+
+MUnit allows you to specify the jvm (or the java executable) in which your applications being tested will run.
+The property should be populated with the path to the executable.
+
+[source,xml,linenums]
+----
+<plugins>
+  <plugin>
+    <groupId>com.mulesoft.munit.tools</groupId>
+    <artifactId>munit-maven-plugin</artifactId>
+    <configuration>
+      ...
+      <jvm>/path/to/jdk/bin/java</jvm>
+      ...
+    </configuration>
+  </plugin>
+</plugins>
+----
+
+From the command line, the property is `-Dmunit.jvm`
+
 == Environment Variables
 
 To set additional environment variables during the test run, you can specify
