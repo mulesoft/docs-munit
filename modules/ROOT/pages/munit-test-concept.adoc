@@ -98,8 +98,8 @@ image::munit-test-concept-c2d9f.png[test-tags]
 
 == About MUnit Test TimeOut Attribute
 
-MUnit tests will automatically fail if they take more than 2 minutes to complete. Sometimes, that time can be too long or too short. +
-In that case, you can use the timeOut attribute, where you can set the desired maximum time -in milliseconds- that the test can run before fail. For example:
+Each MUnit test will automatically fail if it takes more than 2 minutes to complete. Sometimes, that time can be too long or too short. +
+In that case, you can use the `timeOut` attribute, where you can set the desired maximum time -in milliseconds- that the test can run before failing. For example:
 
 [source,xml,linenums]
 ----
