@@ -96,6 +96,21 @@ MUnit also allows you to tag your tests, so you can choose to run tests under a 
 .In Anypoint Studio, you can define tags in the proper field.
 image::munit-test-concept-c2d9f.png[test-tags]
 
+== About MUnit Test TimeOut Attribute
+
+MUnit tests will automatically fail if they take more than 2 minutes to complete. Sometimes, that time can be too long or too short. +
+In that case, you can use the timeOut attribute, where you can set the desired maximum time -in milliseconds- that the test can run before fail. For example:
+
+[source,xml,linenums]
+----
+<munit:test
+  name="custom-timeout-test"
+  description="This test has a timeout of 10 seconds"
+  timeOut="10000" >
+  ....
+</munit:test>
+----
+
 == About MUnit Test Expected Error and Exception Attributes
 
 Sometimes, the only thing you want to validate is that the flow or sub-flow you are testing fails and throws a specific error, which depends on the business logic being tested. In these cases, MUnit provides a simple way to validate the scenario. +
