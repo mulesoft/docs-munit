@@ -93,7 +93,7 @@ Example:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::anyOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]
+#[MunitTools::anyOf([MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString()])]
 ----
 
 * xref:core-matchers-reference.adoc#allof-matchers[allOf(Matchers[\])] checks if all of the matchers are successful.
