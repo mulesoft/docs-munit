@@ -25,6 +25,16 @@ You can set the `processor` attribute to define the processor to mock and the `w
 Finally you can configure a then-return element to define the type of response the mocked processor should return. It could be a payload, a variable, attributes, or even an error. +
 In the example above, your mocked HTTP requester is returning 'mockPayload'.
 
+You can also take advantage of DataWeave functions and mappings to set the  attribute `value` in the `then-return` element to easily mock a more complex POST message. +
+As an example, just create a `mockPost.dwl` mapping file under `src\test\resources\sample_data` that creates the payload that you want to return in the POST and then use the `readUrl` DataWeave function to read the mapping file:
+
+[source,xml,linenums]
+----
+<munit-tools:then-return>
+  <munit-tools:payload value="#[readUrl('classpath://sample_data/mockPost.dwl')]" mediaType="application/java" encoding="UTF-8" />
+</munit-tools:then-return>
+----
+
 You can apply this structure to any other processor in Mule 4.
 
 For example, you can mock a web service consumer such as this one:
