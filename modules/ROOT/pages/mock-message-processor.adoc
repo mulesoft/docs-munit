@@ -44,7 +44,7 @@ This Dataweave file creates the payload that you want to send in the POST reques
 </munit-tools:then-return>
 ----
 
-Finally you can configure a `then-return` element to define the type of response the mocked processor should return. It could be a payload, a variable, attributes, or even an error.
+Finally, you can configure a `then-return` element to define the type of response the mocked processor should return. It could be a payload, a variable, attributes, or even an error.
 
 For example, you can mock a web service consumer such as this one:
 
