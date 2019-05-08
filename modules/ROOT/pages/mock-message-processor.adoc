@@ -35,7 +35,7 @@ output application/json
 }
 ----
 
-This Dataweave file creates the payload that you want to return in the POST and then use the `readUrl` DataWeave function to read the mapping file:
+This Dataweave file creates the payload that you want to send in the POST request and then use the `readUrl` DataWeave function to read the mapping file:
 
 [source,xml,linenums]
 ----
