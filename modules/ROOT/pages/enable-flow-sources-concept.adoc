@@ -3,80 +3,65 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :keywords: munit, test, flow sources
+:flow_name: http-example-flow
+:port: 1234
+:payload: 'Hello World!'
 
-The Enable Flow Sources element within the MUnit Test tells MUnit which sources to load and execute for the test.
+The Enable Flow Sources element within the MUnit Test tells MUnit which sources to load and execute for the test. MUnit
+does not load any of your flows endpoints by default, it is up to you to configure which endpoints to initialise for
+your tests.
 
-MUnit does not load any of your flows endpoints. It's up to you to configure which endpoints to initialize for your tests.
+For example, assume that in your application you have got a flow with an HTTP listener that returns a specific payload:
 
-For example, assume that you have an application whose HTTP listener returns a specific payload:
-
-[source,xml,linenums]
+[source,xml,linenums,subs="verbatim,attributes"]
 ----
-
 <http:listener-config name="HTTP_Listener_config">
-		<http:listener-connection host="localhost" port="${http.transport.port}" />
+    <http:listener-connection host="localhost" port="{port}"/>
 </http:listener-config>
 
-<flow name="http-transportFlow">
-
-  <http:listener config-ref="HTTP_Listener_config" path="/"/>
-  <set-payload value='#["Hello World!"]'/>
-
-
+<flow name="{flow_name}">
+    <http:listener path="/" config-ref="HTTP_Listener_config"/>
+    <set-payload value="#[{payload}]" mimeType="text/plain"/>
 </flow>
 ----
 
-In order for MUnit to be able to reach the endpoint, you need to enable the http-transportFlow in your enable-flow-source property:
+In order for MUnit to be able to reach the endpoint, you need to enable the {flow_name} in your enable-flow-source
+property:
 
-[source,xml,linenums]
+[source,xml,linenums,subs="verbatim,attributes"]
 ----
-
-<http:request-config name="HTTP_Request_configuration">
-  <http:request-connection host="localhost" port="${http.transport.port}" />
+<http:request-config name="HTTP_Request_config">
+    <http:request-connection host="localhost" port="{port}"/>
 </http:request-config>
 
-<munit:test name="http-request-test-validatePayload" description="test">
-
+<munit:test name="http-example-test">
     <munit:enable-flow-sources>
-        <munit:enable-flow-source value="http-transportFlow"/>
+        <munit:enable-flow-source value="{flow_name}"/> <!--1-->
     </munit:enable-flow-sources>
 
     <munit:execution>
-        <http:request method="GET" path="/" config-ref="HTTP_Request_configuration"/>
+        <http:request method="GET" path="/" config-ref="HTTP_Request_config"/>
     </munit:execution>
 
     <munit:validation>
-        <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalTo('Hello World')]" />
+        <munit-tools:assert-that expression="#[payload]"
+                                 is="#[MunitTools::equalTo({payload})]"/>
     </munit:validation>
-
 </munit:test>
 ----
-
-If the http-transportFlow is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the http-listener configuration.
+<1> If the {flow_name} is not listed as an enabled flow source, your MUnit test fails because it cannot initialise the
+HTTP listener configuration.
 
 == To Enable Flow Sources from Studio
 
 You can also define flow sources using the Mule Properties view of your MUnit Test in Anypoint studio:
 
-image::enable-flow-sources-concept-7f313.png[]
+image::enable-flow-sources-concept.png[]
 
 . Click the green Add icon.
-. Select the name of the flow you want to enable from the Name Of The Flow drop-down
+. Select the name of the flow you want to enable from the `Name of the flow` drop-down menu.
 
 
 == See Also
 
 * xref:munit-test-concept.adoc[About MUnit Test]
-
-
-// .This is how you would enable your APIKit resources
-// [source,xml,linenums]
-// ----
-// <munit:test name="test-flow" description="">
-//     <munit:enable-flow-sources>
-//         <munit:enable-flow-source value="apikit-test-main"/>
-//         <munit:enable-flow-source value="get:\resources:apikit-test-config"/>
-//         <munit:enable-flow-source value="put:\resources:application\json:apikit-test-config"/>
-//     </munit:enable-flow-source>
-// </munit:test>
-// ----
