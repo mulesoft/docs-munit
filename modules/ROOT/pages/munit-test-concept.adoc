@@ -187,8 +187,8 @@ If you define that your test expects an exception and none is thrown, the test f
 +
 [source,xml,linenums]
 ----
-<munit:test name="testErrorDescription"
-  description="Test Error Description"
+<munit:test name="testExpectedErrorDescription"
+  description="Test Expected Error Description Attribute"
   expectedErrorDescription="An error has occurred">
   ...
 </munit:test>
