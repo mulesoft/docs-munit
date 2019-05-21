@@ -112,14 +112,15 @@ image::munit-test-concept-c2d9f.png[test-tags]
 == About MUnit Test Expected Error and Exception Attributes
 
 Sometimes, the only thing you want to validate is that the flow or sub-flow you are testing fails and throws a specific error, which depends on the business logic being tested. In these cases, MUnit provides a simple way to validate the scenario. +
-You can add the attribute expectedErrorType and expectException, as shown below:
+You can add the attributes expectedErrorType, expectException and expectedErrorDescription, as shown below:
 
 [source,xml,linenums]
 ----
 <munit:test name="MUnit-test-suite"
   description="A test that works as an example"
   expectedErrorType="RETRY_EXHAUSTED"
-  expectedException="java.lang.RuntimeException">
+  expectedException="java.lang.RuntimeException"
+  expectedErrorDescription="retries exhausted">
   ...
 </munit:test>
 ----
@@ -159,6 +160,18 @@ ErrorTypes that belong to the Mule Runtime does not need to be typified. For exa
 +
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 
+* The attribute expectedErrorDescription expects an error description.
+:: This attribute allows you to validate that an error is thrown and this error has description that is equals or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
++
+[source,xml,linenums]
+----
+<munit:test name="testErrorDescription"
+  description="Test Error Description"
+  expectedErrorDescription="An error has occurred">
+  ...
+</munit:test>
+----
++
 
 //_BEFORE/AFTER
 
