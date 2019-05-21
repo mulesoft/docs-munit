@@ -193,7 +193,6 @@ If you define that your test expects an exception and none is thrown, the test f
   ...
 </munit:test>
 ----
-+
 
 == See Also
 
