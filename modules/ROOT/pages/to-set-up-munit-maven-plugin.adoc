@@ -37,8 +37,32 @@ This documentation assumes you have the <munit.version> property in your pom.xml
   </plugins>
 </build>
 ----
+* Add MUnit dependencies to your pom.xml.
++
+.Dependencies
+[source,xml,linenums]
+----
+<dependencies>
+  ...
+  <dependency>
+    <groupId>com.mulesoft.munit</groupId>
+    <artifactId>munit-runner</artifactId>
+    <version>${munit.version}</version>
+    <classifier>mule-plugin</classifier>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>com.mulesoft.munit</groupId>
+    <artifactId>munit-tools</artifactId>
+    <version>${munit.version}</version>
+    <classifier>mule-plugin</classifier>
+    <scope>test</scope>
+  </dependency>
+  ...
+</dependencies>
+----
 
-* Finally, you need to add the MUnit Maven Plugin, and the MUnit Plugin repositories:
+* Finally, you need to setup the repositories where Maven will download the MUnit dependencies and Plugin.
 +
 .Repositories
 [source,xml,linenums]
