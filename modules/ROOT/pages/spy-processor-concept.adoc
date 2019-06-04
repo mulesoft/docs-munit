@@ -25,7 +25,7 @@ Assume that you have this Mule Application
 </flow>
 ----
 
-You can configure the spy processor to spy any HTTP Listener and assert that they payload is null before reaching the component, and not null after it's been processed:
+You can configure the spy processor to spy any HTTP Listener and assert that the payload is null before reaching the component, and not null after it's been processed:
 
 [source,xml,linenums]
 ----
