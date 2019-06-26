@@ -1,4 +1,4 @@
-= About Enable Flow Sources
+= Enable Flow Sources
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,11 +7,9 @@ endif::[]
 :port: 1234
 :payload: 'Hello World!'
 
-The Enable Flow Sources element within the MUnit Test tells MUnit which sources to load and execute for the test. MUnit
-does not load any of your flows endpoints by default, it is up to you to configure which endpoints to initialise for
-your tests.
+Since MUnit does not load any of your flow endpoints by default, you need to use the *Enable Flow Sources* element within the *MUnit Test* to configure which endpoints the MUnit runtime should load and execute for your tests.
 
-For example, assume that in your application you have got a flow with an HTTP listener that returns a specific payload:
+For example, assume that in your application has a flow with an HTTP listener that returns a specific payload:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -25,8 +23,7 @@ For example, assume that in your application you have got a flow with an HTTP li
 </flow>
 ----
 
-In order for MUnit to be able to reach the endpoint, you need to enable the {flow_name} in your enable-flow-source
-property:
+For MUnit to reach the endpoint, you need to enable the `{flow_name}` in your `enable-flow-source` property:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -49,17 +46,17 @@ property:
     </munit:validation>
 </munit:test>
 ----
-<1> If the {flow_name} is not listed as an enabled flow source, your MUnit test fails because it cannot initialise the
+<1> If the `{flow_name}` is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the
 HTTP listener configuration.
 
-== To Enable Flow Sources from Studio
+== Enabling Flow Sources from Studio
 
-You can also define flow sources using the Mule Properties view of your MUnit Test in Anypoint studio:
+You can also define flow sources using the *Mule Properties* view of your MUnit test in Anypoint Studio:
 
 image::enable-flow-sources-concept.png[]
 
-. Click the green Add icon.
-. Select the name of the flow you want to enable from the `Name of the flow` drop-down menu.
+. Click the green *Add* icon.
+. Select the name of the flow you want to enable from the *Name of the flow* drop-down menu.
 
 
 == See Also
