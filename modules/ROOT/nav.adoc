@@ -41,6 +41,8 @@
  ** xref:verify-message-processor.adoc[About Verify Event Processor]
  ** xref:spy-processor-concept.adoc[About the Spy Event Processor]
  ** xref:storage-processors.adoc[About Storage Event Processors]
+ ** xref:munit-ftp-server.adoc[MUnit FTP Server]
+ ** xref:munit-database-server.adoc[MUnit Database Server] 
  ** xref:queue-processors.adoc[About Queue Event Processors]
  ** xref:dynamic-ports.adoc[About Dynamic Ports]
  ** xref:dynamic-directories.adoc[About Dynamic Directories]
