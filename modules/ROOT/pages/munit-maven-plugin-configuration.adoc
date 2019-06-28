@@ -12,37 +12,37 @@ The MUnit Maven Plugin offers a set of optional parameters that can be configure
 |===
 |Name    |Type | Description
 
-|argLines
+|xref:to-configure-munit-maven-plugin-maven.adoc#additional-argument-lines[argLines]
 |List
 |Additional JVM argument lines to set on the test run.
 
-| coverage
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-enable-coverage[coverage]
 | Configuration
 | Coverage configuration to be set on the test run.
 
-|dynamicPorts
+|xref:to-configure-munit-maven-plugin-maven.adoc#dynamic-ports[dynamicPorts]
 |List
 |Dynamic ports to be set on the test run.
 
-|enableSurefireReports
+|xref:to-configure-munit-maven-plugin-maven.adoc#enable-surefire-reports[enableSurefireReports]
 |boolean
 |Set value to `true` to generate MUnit test results in the surefire format. +
 *Default value: `true`*
 
-| munitTest
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-run-specific-tests[munitTest]
 | String
 | Name of the MUnit tests to run.
 
-| munitTags
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-run-tests-with-specific-tags[munitTags]
 | String
 | Name of the MUnit tags. Only tests tagged with these names will run.
 
-| skipMunitTests
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-skip-munit-tests[skipMunitTests]
 | boolean
 | Set to `true` when you want to skip all MUnit tests. +
 *Default value: `false`*
 
-| skipAfterFailure
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-skip-tests-after-one-suite-fails[skipAfterFailure]
 | boolean
 | Skip all tests if one fails. +
 *Default value: `false`*
@@ -53,31 +53,31 @@ The MUnit Maven Plugin offers a set of optional parameters that can be configure
 *Default value: `${project.build.directory}/test-mule/munit`*
 
 
-| runtimeVersion
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-specify-the-runtime-version[runtimeVersion]
 | String
 | Version of the Mule runtime in case
 By default it runes with the mule-version defined in the pom.xml file of the mule-artifact.json.
 
-| runtimeProduct
+| xref:to-configure-munit-maven-plugin-maven.adoc#to-specify-the-runtime-product[runtimeProduct]
 | String
 | Type of runtime. Expected values are MULE for community edition, and MULE_EE for enterprise edition. +
 By default, this value is taken from the requiredProduct parameter in the mule-artifact.json file.
 
 
-|environmentVariables
+|xref:to-configure-munit-maven-plugin-maven.adoc#environment-variables[environmentVariables]
 |Map
 |Additional environment variables to be set on the test run.
 
-|redirectTestOutputToFile
+|xref:to-configure-munit-maven-plugin-maven.adoc#redirect-test-output-to-file[redirectTestOutputToFile]
 |boolean
 |Set value to `true` to redirect the MUnit tests standard output to a file. +
 *Default value: `false`*
 
-|systemPropertyVariables
+|xref:to-configure-munit-maven-plugin-maven.adoc#system-properties-variables[systemPropertyVariables]
 |Map
 |System properties to be set on the test run.
 
-|testOutputDirectory
+|xref:to-configure-munit-maven-plugin-maven.adoc#test-output-directory[testOutputDirectory]
 |File
 |Directory where the test outputs will be written to. +
 *Default value: `${project.build.directory}/munit-reports/output/`*
