@@ -1,7 +1,18 @@
-= About MUnit Test
+= MUnit Test Structure Fundamentals
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+
+The base file in the MUnit Framework is the MUnit Test Suite file. These files are the XML files located under the src/test/munit folder in your Mule application's folder structure. Each MUnit Test Suite file is a collection of MUnit tests. It is meant to work on its own, and should be able to run independently from other MUnit test suite files.
+
+An MUnit test suite file should contain any combination of the following components:
+
+* Before/After Suite
+* Before/After Tests
+* MUnit Tests
+
+Each MUnit test suite file is, behind the scenes, no different than a Mule application XML file. +
+You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
 
 The MUnit Test is the basic processor of an MUnit Test Suite. It represents each test scenario you want to try.
 
@@ -147,6 +158,20 @@ ErrorTypes that belong to the Mule Runtime does not need to be typified. For exa
 ----
 +
 If you define that your test expects an exception and none is thrown, the test fails immediately.
+
+
+//_BEFORE/AFTER
+
+As with other testing frameworks, MUnit provides certain features around the test suite concept. +
+In particular, it provides a set of scopes that allow you to add processing or actions to be run before and/or after the entire MUnit Test or MUnit Suite executions:
+
+* Before and After Suite Scopes.
+* Before and After Test Scopes.
+
+The ID space from each component must be unique across all your application. +
+This means that before and after scopes cannot share the same name between them, nor have the same name as any flow in your application.
+
+
 
 
 == See Also
