@@ -1,4 +1,4 @@
-= About MUnit
+= Overview
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,6 +6,8 @@ endif::[]
 :keywords: munit, testing, unit testing
 
 MUnit is a Mule application testing framework that allows you to easily build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
+
+MUnit is fully integrated with Anypoint Studio, allowing you to create, design and run MUnit tests just like you would Mule applications.
 
 With MUnit you can:
 
@@ -22,43 +24,8 @@ With MUnit you can:
 * Generate coverage reports
 // * Debug your tests with Studio
 
-
 MUnit version 2.1, works with all Mule versions since 4.0
 
-MUnit is divided in two main sub modules:
-
-* MUnit
-* MUnit Tools
-
-Each module has its own dependency:
-
-.MUnit Dependencies
-[source,xml,linenums]
-----
-<dependency>
-	<groupId>com.mulesoft.munit</groupId>
-	<artifactId>munit-runner</artifactId>
-	<version>2.1.0</version>
-	<classifier>mule-plugin</classifier>
-	<scope>test</scope>
-</dependency>
-----
-
-
-.MUnit Tools dependencies
-[source,xml,linenums]
-----
-<dependency>
-	<groupId>com.mulesoft.munit</groupId>
-	<artifactId>munit-tools</artifactId>
-	<version>2.1.0</version>
-	<classifier>mule-plugin</classifier>
-	<scope>test</scope>
-</dependency>
-----
-
-
-MUnit is fully integrated with Anypoint Studio, allowing you to create, design and run MUnit tests just like you would Mule applications.
 
 
 == See Also

@@ -1,0 +1,6 @@
+= Best Practices
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+https://docs.google.com/document/d/1-x7Bf1jm8y3ta0_pcAVSku4UBEOxaxQb3GwTWYDu_9M/edit#heading=h.e419iz0r1d4

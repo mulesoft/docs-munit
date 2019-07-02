@@ -31,6 +31,20 @@ Or you can also check if the payload is null using the nullValue() matcher.
 
 If these assertion fails, the processor throws a `java.lang.AssertionError`.
 
+
+//.fail-event-processor.adoc
+== About Fail Event Processor
+
+The Fail Event Processor allows you to fail your test on purpose. This is useful to validate that a specific event should not happen.
+
+[source,xml,linenums]
+----
+<munit-tools:fail
+  message="This should fail"/>
+----
+
+The message field is optional and defines the error message to print when the assertion fails.
+
 == See Also
 
 * xref:munit-matchers.adoc[About MUnit Matchers]

@@ -1,4 +1,4 @@
-= About MUnit Matchers
+= MUnit Matchers
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -198,7 +198,7 @@ Comparable matchers compare the expression against a specified value:
 [Note]
 --
 Some comparable matchers take a `Comparable` type.
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other. 
+`Comparable` is a DataWeave type that represents all the types that can be compared to each other.
 Allowed primitives are `String`, `Number`, `Boolean`, `DateTime`, `LocalDateTime`, `LocalTime`, `Time`, and `TimeZone`.
 --
 Comparable Matchers:
