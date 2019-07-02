@@ -7,6 +7,17 @@
  ** xref:build-munit-tutorial-studio.adoc[Using Studio]
  ** xref:build-munit-tutorial-maven.adoc[Using Maven]
 
+* xref:munit-cookbook.adoc[MUnit Examples]
+  ** xref:coverage-config-cookbook.adoc[Configuring Coverage Limits]
+  ** xref:db-utils-cookbook.adoc[Using DB Utils]
+  ** xref:ftp-utils-cookbook.adoc[Using FTP Utils]
+  ** xref:mock-file-cookbook.adoc[Mocking from File ]
+  ** xref:mock-before-after-foreach-cookbook.adoc[Mocking Message before and inside a foreach]
+  ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
+  ** xref:environment-config-cookbook.adoc[Testing environment configurations]
+  ** xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave ... From a Test]
+  ** xref:poll-flow-cookbook.adoc[Testing a Flow With a Poll]
+  ** xref:flow-sources-enable-cookbook.adoc[Enabling flow sources]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:munit-test-reference.adoc[MUnit Test Parameters]
