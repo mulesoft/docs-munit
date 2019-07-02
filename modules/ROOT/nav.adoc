@@ -9,7 +9,6 @@
 
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
- ** xref:munit-bev.adoc[Defining BEV]
  ** xref:munit-test-reference.adoc[MUnit Test Parameters]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
  ** xref:before-after-scopes-reference.adoc[Before/After scopes]
