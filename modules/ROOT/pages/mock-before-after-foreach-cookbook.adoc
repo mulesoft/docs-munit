@@ -2,3 +2,49 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+
+Suppose you have a processor inside a foreach scope and you want to provide different values on each interation.
+
+[source,xml]
+----
+<flow name="foreachFlow">
+	<foreach doc:name="For Each">
+		<flow-ref doc:name="Flow Reference" name="FlowToMock"/>
+	</foreach>
+</flow>
+----
+
+You can use a munit-tools:mock-when to mock the processor and use the then-call to call a new flow that set payloads depending on the foreach status.
+
+[source,xml]
+----
+<munit-tools:mock-when doc:name="Mock when" processor="flow-ref">
+	<munit-tools:with-attributes >
+		<munit-tools:with-attribute attributeName="name" whereValue="FlowToMock" />
+	</munit-tools:with-attributes>
+	<munit-tools:then-call flow="MockedFlow" />
+</munit-tools:mock-when>
+----
+
+Inside the flow that is called by then-call you can use a Choice processor to evaluate some value and set a mocked payload. In this case the foreach counter is evaluated to decide what payload setup.
+
+[source,xml]
+----
+<flow name="MockedFlow" >
+	<choice doc:name="Choice">
+		<when expression="#[vars.counter == 1]">
+			<set-payload value='#["MOCKED1"]' doc:name="Set Payload" />
+		</when>
+		<when expression="#[vars.counter == 2]">
+			<set-payload value='#["MOCKED2"]' doc:name="Set Payload" />
+		</when>
+		<otherwise >
+			<set-payload value='#["DEFAULT"]' doc:name="Set Payload" />
+		</otherwise>
+	</choice>
+</flow>
+----
+
+== See Also
+
+* xref:mock-message-processor.adoc[About Mock When Event Processor]
