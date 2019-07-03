@@ -45,6 +45,33 @@ Inside the flow that is called by then-call you can use a Choice processor to ev
 </flow>
 ----
 
+= Mock a Mule Message
+
+To mock processors like file:list or ftp:list it needs to return as payload a Mule Message collections. MunitTools provides a function to these payloads:
+
+[source]
+----
+fun createMessage(payload: Any, attributes: Any = null)
+
+fun createMessage(payload: Any, mimeType: String|Null , attributes: Any, attributeMimeType: String|Null)
+----
+
+[source,xml]
+----
+<flow doc:name="Flow" >		
+	<file:list doc:name="List" config-ref="File_Config" directoryPath="/tmp/"/>
+</flow>
+
+<munit-tools:mock-when processor="file:list">
+   <munit-tools:with-attributes>
+       <munit-tools:with-attribute attributeName="doc:name" whereValue="List"/>
+   </munit-tools:with-attributes>
+   <munit-tools:then-return>
+       <munit-tools:payload value="#[[MunitTools::createMessage( &quot;ITEM-1&quot;,  &quot;text/plain&quot;, { property : 'ATTRIBUTE-1'}, null) , MunitTools::createMessage( &quot;ITEM-2&quot;,  &quot;text/plain&quot;, { property : 'ATTRIBUTE-2'}, null)]]" />
+   </munit-tools:then-return>
+</munit-tools:mock-when>
+----
+
 == See Also
 
 * xref:mock-message-processor.adoc[About Mock When Event Processor]
