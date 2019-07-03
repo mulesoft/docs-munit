@@ -112,7 +112,7 @@ image::munit-test-concept-c2d9f.png[test-tags]
 == About MUnit Test Expected Error and Exception Attributes
 
 Sometimes, the only thing you want to validate is that the flow or sub-flow you are testing fails and throws a specific error, which depends on the business logic being tested. In these cases, MUnit provides a simple way to validate the scenario. +
-You can add the attributes expectedErrorType, expectException and expectedErrorDescription, as shown below:
+You can add the attributes `expectedErrorType`, `expectException`, and `expectedErrorDescription`, as shown below:
 
 [source,xml,linenums]
 ----
@@ -128,8 +128,8 @@ You can add the attributes expectedErrorType, expectException and expectedErrorD
 .A visual representation on Anypoint Studio
 image::munit-test-concept-e7280.png[]
 
-* The attribute expectedErrorType expects an error ID that needs to be defined inside the application being tested.
- This attribute allows you to validate that a defined error type in your application is thrown. If you define an errorType that does not exists in your application, the test does not run.
+* The `expectedErrorType` attribute expects an error ID that needs to be defined inside the application being tested. +
+ This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exists in your application, the test does not run.
 +
 [source,xml,linenums]
 ----
@@ -140,7 +140,7 @@ image::munit-test-concept-e7280.png[]
 </munit:test>
 ----
 +
-This Error Type test expects that an FTP operation will throw an FTP:ILLEGAL_PATH error. +
+This Error Type test expects that an FTP operation will throw an `FTP:ILLEGAL_PATH` error. +
 If none of your flows are using using an FTP connector, then the error type is not defined within your application and the test will not run.
 +
 [TIP]
