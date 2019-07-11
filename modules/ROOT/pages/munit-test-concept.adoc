@@ -146,7 +146,7 @@ If none of your flows are using using an FTP connector, then the error type is n
 [TIP]
 ErrorTypes that belong to the Mule Runtime does not need to be typified. For example, MULE:RETRY_EXHAUSTED can be defined as simply RETRY_EXHAUSTED.
 
-* The attribute expectException expects a literal exception class name (canonical form).
+* The attribute `expectException` expects a literal exception class name (canonical form). +
  When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
 +
 [source,xml,linenums]
@@ -180,10 +180,7 @@ In particular, it provides a set of scopes that allow you to add processing or a
 * Before and After Suite Scopes.
 * Before and After Test Scopes.
 
-The ID space from each component must be unique across all your application. +
-This means that before and after scopes cannot share the same name between them, nor have the same name as any flow in your application.
-
-
+The ID space from each component must be unique across all your application. The before and after scopes cannot share the same name between them, nor have the same name as any flow in your application.
 
 
 == See Also
