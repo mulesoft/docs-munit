@@ -2,3 +2,84 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:version-info: 2.2 and later
+:keywords: munit, testing, unit testing
+
+A parameterized suite is a way of running the same tests but with different inputs.
+
+The suite parameterization is defined at a config level in the following way:
+
+[source,xml,linenums]
+----
+<munit:config>
+    <munit:parameterizations>
+        <munit:parameterization name="firstParameterization">
+            <munit:parameters>
+                <munit:parameter propertyName="name" value="Robert"/>
+                <munit:parameter propertyName="lastname" value="Plant"/>
+            </munit:parameters>
+        </munit:parameterization>
+        <munit:parameterization name="secondParameterization">
+            <munit:parameters>
+                <munit:parameter propertyName="name" value="Jimmy"/>
+                <munit:parameter propertyName="lastname" value="Page"/>
+            </munit:parameters>
+        </munit:parameterization>
+    </munit:parameterizations>
+</munit:config>
+----
+
+This means the suite will run twice, first with the `firstParameterization` parameters, and the second time with the `secondParameterization` parameters.
+
+For example if you have a test that sets a payload for a flow, and expects a result:
+
+.Example Parameterization
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+        http://www.mulesoft.org/schema/mule/munit-tools http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+
+    <munit:config name="parameterized-test.xml">
+        <munit:parameterizations>
+            <munit:parameterization name="sumThree">
+                <munit:parameters>
+                    <munit:parameter propertyName="input" value="#[1]"/>
+                    <munit:parameter propertyName="output" value="#[2]"/>
+                </munit:parameters>
+            </munit:parameterization>
+            <munit:parameterization name="sumFive">
+                <munit:parameters>
+                    <munit:parameter propertyName="input" value="#[2]"/>
+                    <munit:parameter propertyName="output" value="#[4]"/>
+                </munit:parameters>
+            </munit:parameterization>
+        </munit:parameterizations>
+    </munit:config>
+
+    <munit:test name="expectFlowResult">
+        <munit:behavior>
+            <set-payload value="${input}"/>
+        </munit:behavior>
+        <munit:execution >
+            <flow-ref name="myFlow"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-equals actual="#[payload]" expected="${output}" />
+        </munit:validation>
+    </munit:test>
+
+</mule>
+----
+
+== See Also
+
+* xref:before-after-scopes-concept.adoc[About Before/After Scopes]
+* xref:munit-suite.adoc[About MUnit Test Suite]
+* xref:munit-test-concept.adoc[About MUnit Test]
