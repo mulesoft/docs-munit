@@ -23,7 +23,6 @@
  ** xref:munit-test-reference.adoc[MUnit Test Parameters]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
  ** xref:before-after-scopes-reference.adoc[Before/After scopes]
- ** xref:parameterized.adoc[Parameterized]
 
 * xref:message-processors.adoc[MUnit Processors]
  ** xref:assertion-message-processor.adoc[Assert/Fail]
