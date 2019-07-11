@@ -1,4 +1,4 @@
-= Using Utility Classes with a DataWeave ... From a Test
+= Using Utility Classes with a DataWeave Expression From a Test
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
