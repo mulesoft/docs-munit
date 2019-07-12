@@ -57,7 +57,7 @@ Function that obtains the queue size.
 
 [source,xml,linenums]
 ----
-<munit-tools:assert-that expression=#[MunitTools::queueSize()] is="#[MunitTools::equalTo(2)]" />
+<munit-tools:assert-that expression="#[MunitTools::queueSize()]" is="#[MunitTools::equalTo(2)]" />
 ----
 
 Like the other operations, you can specify the queue from which to the get the size.
@@ -65,5 +65,5 @@ If not specified, the default queue will be used.
 
 [source,xml,linenums]
 ----
-<munit-tools:assert-that expression=#[MunitTools::queueSize('CUSTOM_QUEUE_1')] is="#[MunitTools::equalTo(2)]" />
+<munit-tools:assert-that expression="#[MunitTools::queueSize('CUSTOM_QUEUE_1')]" is="#[MunitTools::equalTo(2)]" />
 ----
