@@ -1,0 +1,13 @@
+= Fail
+
+The Fail processor allows you to fail your test on purpose. This is useful to validate that a specific event should not happen.
+
+[source,xml,linenums]
+----
+<munit-tools:fail
+  message="This should fail"/>
+----
+
+The message field is optional and defines the error message to print when the assertion fails.
+
+== See Also

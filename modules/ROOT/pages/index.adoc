@@ -24,7 +24,7 @@ With MUnit you can:
 * Generate coverage reports
 // * Debug your tests with Studio
 
-MUnit version 2.1, works with all Mule versions since 4.0
+MUnit version 2.2, works with all Mule versions since 4.1.1.
 
 
 

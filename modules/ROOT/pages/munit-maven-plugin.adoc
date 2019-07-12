@@ -13,28 +13,6 @@ This section is dedicated to showing you how to run your tests using the plugin.
 mvn clean test
 ----
 
-If your application is a multi-module application:
-
-. Make sure your mule-domain dependency is marked as provided in your application's POM file.
-+
-.Add your Mule Domain as a Dependency in your Mule Application POM File.
-[source,xml,linenums]
-----
-<dependency>
-    <groupId>org.mule.app</groupId>
-    <artifactId>domain-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <classifier>mule-domain</classifier>
-    <scope>provided</scope>
-</dependency>
-----
-. Run `mvn install`, instead of `mvn test`.
-+
-[source,console]
-----
-mvn clean install
-----
-
 == To Run a Specific MUnit Test Suite (MUnit Maven Plugin)
 
 You can instruct MUnit Maven Plugin to run only tests that belong to a specific test suite.
@@ -44,28 +22,6 @@ To do this, we use the property `munit.test`.
 [source,console]
 ----
 mvn clean test -Dmunit.test=<regex-test-suite>
-----
-
-If your application is a multi-module application:
-
-. Make sure your mule-domain dependency is marked as provided in your application's POM file.
-+
-.Add your Mule Domain as a Dependency in your Mule Application POM File.
-[source,xml,linenums]
-----
-<dependency>
-    <groupId>org.mule.app</groupId>
-    <artifactId>domain-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <classifier>mule-domain</classifier>
-    <scope>provided</scope>
-</dependency>
-----
-. Run `mvn install`, instead of `mvn test`.
-+
-[source,console]
-----
-mvn clean install -Dmunit.test=<regex-test-suite>
 ----
 
 The property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation. +
@@ -86,28 +42,6 @@ In the same way that you instruct MUnit to run one test suite, you can also tell
 [source,console]
 ----
 mvn clean test -Dmunit.test=<regex-test-suite>#<regex-test-name>
-----
-
-If your application is a multi-module application:
-
-. Make sure your mule-domain dependency is marked as provided in your application's POM file.
-+
-.Add your Mule Domain as a Dependency in your Mule Application POM File.
-[source,xml,linenums]
-----
-<dependency>
-    <groupId>org.mule.app</groupId>
-    <artifactId>domain-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <classifier>mule-domain</classifier>
-    <scope>provided</scope>
-</dependency>
-----
-. Run `mvn install`, instead of `mvn test`.
-+
-[source,console]
-----
-mvn clean install -Dmunit.test=<regex-test-suite>#<regex-test-name>
 ----
 
 The addition is the special character `#`. To the right of it, you should type the test name. It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test.
@@ -132,29 +66,6 @@ You can choose to run only the tests that you grouped under one specific tag.
 mvn clean test -Dmunit.tags=<munit-tag>
 ----
 
-If your application is a multi-module application:
-
-. Make sure your mule-domain dependency is marked as provided in your application's POM file.
-+
-.Add your Mule Domain as a Dependency in your Mule Application POM File.
-[source,xml,linenums]
-----
-<dependency>
-    <groupId>org.mule.app</groupId>
-    <artifactId>domain-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <classifier>mule-domain</classifier>
-    <scope>provided</scope>
-</dependency>
-----
-. Run `mvn install`, instead of `mvn test`.
-+
-[source,console]
-----
-mvn clean install -Dmunit.tags=<munit-tag>
-----
-
-
 == To Skip All Tests (MUnit Maven Plugin)
 
 When building your application, you may want to prevent a test from running. MUnit leverages the same mechanism as Maven, so if you wish to skip tests, you can make use of the parameter `skipTests`.
@@ -163,28 +74,6 @@ When building your application, you may want to prevent a test from running. MUn
 [source,console]
 ----
 mvn clean package -DskipTests
-----
-
-If your application is a multi-module application:
-
-. Make sure your mule-domain dependency is marked as provided in your application's POM file.
-+
-.Add your Mule Domain as a Dependency in your Mule Application POM File.
-[source,xml,linenums]
-----
-<dependency>
-    <groupId>org.mule.app</groupId>
-    <artifactId>domain-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <classifier>mule-domain</classifier>
-    <scope>provided</scope>
-</dependency>
-----
-. Run `mvn install`, instead of `mvn test`.
-+
-[source,console]
-----
-mvn clean install -DskipTests
 ----
 
 // _COMBAK: No Java test for now.

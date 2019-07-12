@@ -1,0 +1,29 @@
+= Dynamic Directories
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+When managing files and folders during a test, MUnit provides the `munit.temporary.directory` property to reference a temporary directory. You can create files and folders inside this directory to use in your tests.
+
+The temporary directory is deleted at the end of each test.
+
+For example, using the file connector, you could configure the working directory as follows:
+
+[source,xml,linenums]
+----
+<file:config name="tmpDir">
+    <file:connection workingDir="${munit.temporary.directory}"/>
+</file:config>
+----
+
+And then use it to create files/folders inside it:
+
+[source,xml,linenums]
+----
+<file:create-directory config-ref="tmpDir" directoryPath="example"/>
+----
+
+== See Also
+
+* xref:dynamic-ports.adoc[About Dynamic Ports]
+* xref:storage-processors.adoc[About Storage Processors]

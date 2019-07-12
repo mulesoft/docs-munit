@@ -46,6 +46,10 @@ This Dataweave file creates the payload that you want to send in the POST reques
 
 Finally, you can configure a `then-return` element to define the type of response the mocked processor should return. It could be a payload, a variable, attributes, or even an error.
 
+You can use either a `then-return` to return a static, constant value, or you can use a `then-call` to invoke a flow for cases where you might want the returned value to change over time, or to have different responses according to certain inputs.
+
+=== Mocking Using Then-Return
+
 For example, you can mock a web service consumer such as this one:
 
 [source,xml,linenums]
@@ -57,7 +61,7 @@ For example, you can mock a web service consumer such as this one:
 <wsc:consume config-ref="Web_Service_Consumer_Config" operation="OrderTshirt"/>
 ----
 
-By configuring the mock-when processor like the example below:
+By configuring the `mock-when` processor like the example below:
 
 [source,xml,linenums]
 ----
@@ -68,8 +72,7 @@ By configuring the mock-when processor like the example below:
 </munit-tools:mock-when>
 ----
 
-This mock-when processor mocks a call to the OrderTshirt operation in the WSDL definition.
-
+This `mock-when` processor mocks a call to the `OrderTshirt` operation in the WSDL definition.
 
 You can also mock specific variables:
 
@@ -87,83 +90,123 @@ You can also mock specific variables:
 </munit-tools:mock-when>
 ----
 
-== Mocking Errors
+=== Mocking Using Then-Call
 
-The Mock When processor also allows you to mock errors in your operations. For example, assume you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails. A sample application with this scenario would look like this:
+If you want to dynamically mock a variable, you can use `then-call` like so:
 
 [source,xml,linenums]
 ----
-<http:request-config name="HTTP_Request_configuration">
-	<http:request-connection host="myHost" port="8888" />
+<flow name="flow-to-be-mocked">
+    <set-variable variableName="count" value="#[0]"/>
+</flow>
+
+<flow name="flow-to-test">
+    <flow-ref name="flow-to-be-mocked"/> // <1>
+</flow>
+
+<flow name="count-to-3"> // <2>
+    <choice>
+        <when expression="#[vars.count == null]">
+            <set-variable variableName="count" value="#[1]" doc:name="Create counter"/>
+        </when>
+
+        <when expression="#[vars.count &lt; 3]">
+            <set-variable variableName="count" value="#[vars.count + 1]"
+                          doc:name="Increase count by 1, up to 3"/>
+        </when>
+    </choice>
+</flow>
+
+<munit:test name="variable-mock-test">
+    <munit:behavior>
+        <munit-tools:mock-when processor="mule:flow-ref">
+            <munit-tools:with-attributes>
+                <munit-tools:with-attribute attributeName="name" whereValue="#['flow-to-be-mocked']"/>
+            </munit-tools:with-attributes>
+
+            <munit-tools:then-call flow="count-to-3"/> // <3>
+        </munit-tools:mock-when>
+    </munit:behavior>
+
+    <munit:execution>
+        <flow-ref name="flow-to-test"/> <!-- 1 -->
+        <flow-ref name="flow-to-test"/> <!-- 2 -->
+        <flow-ref name="flow-to-test"/> <!-- 3 -->
+        <flow-ref name="flow-to-test"/> <!-- 3 -->
+    </munit:execution>
+
+    <munit:validation>
+        <munit-tools:assert-that expression="#[vars.count]" is="#[MunitTools::equalTo(3)]"/>
+    </munit:validation>
+</munit:test>
+----
+<1> This is the processor we wish to mock.
+<2> This flow will be called by the mock, which sets a variable that changes depending on the incoming event.
+<3> Configure the mock to call the desired flow.
+
+== Mocking Errors
+
+The Mock When processor also allows you to mock errors in your operations. For example, assume you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails.
+
+A sample application with this scenario would look like this:
+
+[source,xml,linenums]
+----
+<http:request-config name="HTTP_Request_Config">
+    <http:request-connection host="localhost" port="8888"/>
 </http:request-config>
 
-<http:listener-config name="HTTP_Listener_config" >
-	<http:listener-connection host="0.0.0.0" port="8081" />
+<http:listener-config name="HTTP_Listener_Config"
+    <http:listener-connection host="0.0.0.0" port="8081"/>
 </http:listener-config>
 
+<flow name="api-request">
+    <http:listener config-ref="HTTP_Listener_Config" path="/"/>
+    <http:request method="GET" config-ref="HTTP_Request_Config" path="/api"/>
 
-<flow name="myFlow">
-	<http:listener config-ref="HTTP_Listener_config" path="/"/>
-	<http:request method="GET" config-ref="HTTP_Request_configuration" path="/api"/>
-	<error-handler >
-		<on-error-continue enableNotifications="true" logException="true" type="HTTP:CONNECTIVITY">
-			<set-payload value="#['Connection Error']" />
-		</on-error-continue>
-	</error-handler>
+    <error-handler>
+        <on-error-continue enableNotifications="true" logException="true" type="HTTP:CONNECTIVITY">
+            <set-payload value="#['Connection Error']"/>
+        </on-error-continue>
+    </error-handler>
 </flow>
 ----
 
-You can assert that every time the HTTP request fails, your application returns your custom payload:
 
+You can assert that every time the HTTP request fails, your application returns your custom payload:
 
 [source,xml,linenums]
 ----
-<munit:test name="new-test-suiteTest" description="Asserts Custom Payload in HTTP Connectivity errors.">
+<munit:test name="HTTP-fail-test" description="Asserts Custom Payload in HTTP Connectivity errors.">
+    <munit:behavior>
+        <munit-tools:mock-when processor="http:request">
+            <munit-tools:with-attributes>
+                <munit-tools:with-attribute attributeName="config-ref"
+                                            whereValue="#['HTTP_Request_Config']"/> // <1>
+            </munit-tools:with-attributes>
 
-  <munit:behavior >
-    <munit-tools:mock-when processor="http:request">
-        <munit-tools:with-attributes>
-            <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/> // <1>
-        </munit-tools:with-attributes>
-        <munit-tools:then-return>
-          <munit-tools:error typeId="#['HTTP:CONNECTIVITY']"/> // <2>
-        </munit-tools:then-return>
-    </munit-tools:mock-when>
-  </munit:behavior>
+            <munit-tools:then-return>
+                <munit-tools:error typeId="#['HTTP:CONNECTIVITY']"/> // <2>
+            </munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
 
-  <munit:execution>
-      <flow-ref name="myFlow"/> // <3>
-  </munit:execution>
+    <munit:execution>
+        <flow-ref name="api-request"/> // <3>
+    </munit:execution>
 
-  <munit:validation>
-    <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalToIgnoringCase('Connection  Error')]"/> // <4>
-  </munit:validation>
-
+    <munit:validation>
+        <munit-tools:assert-that expression="#[payload]"
+                                 is="#[MunitTools::equalToIgnoringCase('Connection Error')]"/> // <4>
+    </munit:validation>
 </munit:test>
 ----
-
-
 <1> Mock an HTTP Requester with the configuration of the requester in your flow.
-<2> Configure a then-return element to throw an HTTP:CONNECTIVITY error. +
-This triggers the On-error scope in your application.
+<2> Configure a then-return element to throw an `HTTP:CONNECTIVITY` error. +
+    This triggers the On-error scope in your application.
 <3> Execute the flow containing the requester.
 <4> Assert that the returned payload is the one you set inside the On-error scope.
 
-=== Mocking Errors with exceptions
-
-The Mock When processor also allows you to mock errors specifying the cause (exception instance). A sample mock instantiating the cause through Dataweave would look like this:
-
-[source,xml,linenums]
-----
-<munit-tools:mock-when processor="http:request">
-  <munit-tools:with-attributes>
-    <munit-tools:with-attribute attributeName="config-ref" whereValue="#['HTTP_Request_configuration']"/>
-  </munit-tools:with-attributes>
-  <munit-tools:then-return>
-    <munit-tools:error cause="#[java!org::mule::runtime::api::connection::ConnectionException::new('MyMessage')]"/>
-  </munit-tools:then-return>
-</munit-tools:mock-when>
-----
 
 == See Also
 

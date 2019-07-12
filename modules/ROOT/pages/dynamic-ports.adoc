@@ -1,0 +1,34 @@
+= Dynamic Ports
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The Dynamic Ports global element allows you to bind a free port to a property. It searches for a free port available and can be narrowed to a specific range.
+
+For example, a dynamic port would look something like this:
+
+[source,xml,linenums]
+----
+<munit:dynamic-port propertyName="a.dynamic.port"/>
+----
+
+And it can be used in the http configuration:
+
+[source,xml,linenums]
+----
+<http:request-config name="httpRequestConfig">
+    <http:request-connection host="localhost" port="${a.dynamic.port}"/>
+</http:request-config>
+----
+
+Additionally you can set min and max values from where to get the port:
+
+[source,xml,linenums]
+----
+<munit:dynamic-port propertyName="a.dynamic.port" min="6000" max="7000"/>
+----
+
+== See Also
+
+* xref:dynamic-directories.adoc[About Dynamic Directories]
+* xref:storage-processors.adoc[About Storage Processors]

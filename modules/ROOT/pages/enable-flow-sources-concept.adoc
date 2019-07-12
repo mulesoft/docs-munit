@@ -7,7 +7,10 @@ endif::[]
 :port: 1234
 :payload: 'Hello World!'
 
-Because MUnit does not load any of your flow endpoints by default, you must use the *Enable Flow Sources* element within *MUnit Test* to configure which endpoints the MUnit runtime should load and execute for your tests.
+The Enable Flow Sources element within the MUnit Test tells MUnit which Event Sources to load and execute for the test.
+
+By default, MUnit does not start any of the Event Sources (triggers, listeners or otherwise). It's up to you to configure which of those to start for your tests.
+
 
 For example, assume that your application has a flow with an HTTP listener that returns a specific payload:
 
@@ -23,7 +26,7 @@ For example, assume that your application has a flow with an HTTP listener that 
 </flow>
 ----
 
-For MUnit to reach the endpoint, you must enable the `{flow_name}` in your `enable-flow-source` property:
+ You need to enable the `http-transportFlow` in your `enable-flow-source` property so that MUnit is able to reach that listener:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -48,6 +51,11 @@ For MUnit to reach the endpoint, you must enable the `{flow_name}` in your `enab
 ----
 <1> If the `{flow_name}` value is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the
 HTTP listener configuration.
+
+[NOTE]
+--
+MUnit starts flow sources at the beginning of the test, and stops them at the end of the test. Flow sources are not executed during the before-suite/before-test, nor during the after-test/after-suite.
+--
 
 == Enabling Flow Sources from Studio
 

@@ -97,7 +97,7 @@ Checks that the expression contains all of the specified substrings, regardless 
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::stringContainsInOrder(['an', 'example'])]"/>
+is="#[MunitTools::stringContainsInOrder('an', 'example')]"/>
 ----
 
 == See Also

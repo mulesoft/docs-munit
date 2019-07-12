@@ -26,20 +26,28 @@
  ** xref:parameterized.adoc[Parameterized]
 
 * xref:message-processors.adoc[MUnit Processors]
- ** xref:assertion-message-processor.adoc[Assert/Fail]
+ ** xref:assertion-message-processor.adoc[Assert That]
   *** xref:munit-matchers.adoc[Matchers]
    **** xref:core-matchers-reference.adoc[Core Matchers]
    **** xref:string-matchers-reference.adoc[String Matchers]
    **** xref:comparable-matchers-reference.adoc[Comparable Matchers]
    **** xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers]
+  ** xref:assertion-expression-processor.adoc[Assert Expression]
+   *** xref:dataweave-assertions-library.adoc[DataWeave Assertions Library]
+ ** xref:assertion-equals-processor.adoc[Assert Equals]
+ ** xref:fail-event-processor.adoc[Fail]
  ** xref:run-custom-event-processor.adoc[Run Custom Event]
- ** xref:set-message-processor.adoc[Set Event]
+ ** xref:set-event-processor.adoc[Set Event]
  ** xref:mock-message-processor.adoc[Mock When]
  ** xref:verify-message-processor.adoc[Verify]
  ** xref:spy-processor-concept.adoc[Spy Event]
+ ** xref:storage-event-processors.adoc[Storage Event Processors]
+ ** xref:dynamic-ports.adoc[Dynamic Ports]
+ ** xref:dynamic-directories.adoc[Dynamic Directories]
  ** xref:munit-utils.adoc[Utils]
   *** xref:db-util.adoc[Database]
   *** xref:ftp-util.adoc[FTP]
+  *** xref:queue-processors.adoc[Queue Event Processors]
 
 * xref:munit-in-studio.adoc[MUnit in Studio]
 ** xref:munit-update-site.adoc[Update Site]
@@ -48,12 +56,10 @@
 ** xref:munit-run-configurations.adoc[Run Configurations]
 ** xref:runtime-patching.adoc[Runtime Patching]
 
-
-
 * xref:munit-domain-support.adoc[MUnit Support for Domain Based Applications]
 
-* xref:munit-maven-support.adoc[MUnit Maven Plugin]
- ** xref:to-configure-munit-maven-plugin-maven.adoc[Configuring/Running]
+* xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
+ ** xref:munit-maven-support.adoc[Configuring/Running]
 
 * xref:munit-coverage-report.adoc[Coverage]
  ** xref:coverage-maven-concept.adoc[Maven Configuration for Coverage]

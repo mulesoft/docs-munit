@@ -14,7 +14,9 @@ MUnit Coverage provides metrics for:
 * Flow coverage: Refers to any of the following components: Flows, Sub-flows, and Batch jobs.
 
 [NOTE]
+--
 Coverage report runs only for EE edition runtimes. If your application has a `requiredProduct` of a Mule CE runtime you will see the following message: *Coverage is a EE only feature and you've selected to run over CE*. To run against an EE runtime see xref:to-configure-munit-maven-plugin-maven.adoc#to-specify-the-runtime-product[To Configure MUnit Maven Plugin From the POM File]
+--
 
 The following is a coverage report sample in JSON format. +
 Use the code callouts below to understand each field in the report:

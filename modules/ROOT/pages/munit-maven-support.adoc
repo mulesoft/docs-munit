@@ -16,8 +16,6 @@ For MUnit to run properly with Maven, you need to add a few sections to your pom
 
 This documentation assumes you have the <munit.version> property in your pom.xml.
 
-
-
 * Enable the MUnit Maven plugin, by adding the following section to your pom.xml.
 +
 .MUnit Maven Plugin
@@ -126,7 +124,7 @@ In order to make a proper use of the MUnit plugin in a parent-child POM relation
     <packaging>pom</packaging>
 
     <properties>
-        <munit.version>2.1.0</munit.version>
+        <munit.version>2.2.0</munit.version>
     </properties>
 
     <build>
@@ -194,8 +192,8 @@ To inherit the MUnit plugin in your child POM files, you need to reference it in
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.runtime>4.1.0</app.runtime>
-        <munit.version>2.1.0</munit.version>
+        <app.runtime>4.1.1</app.runtime>
+        <munit.version>2.2.0</munit.version>
     </properties>
 
     <build>
@@ -243,7 +241,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mule.version>4.1.0</mule.version>
-        <munit.version>2.1.0</munit.version>
+        <munit.version>2.2.0</munit.version>
     </properties>
 
     <build>
@@ -374,7 +372,50 @@ To make the build fail, add the following lines to the configuration:
 ----
 <1> Enable *Fail Build Feature*
 
-Now, the next logical step is to define the coverage levels.
+The next step is to define the coverage levels.
+
+MUnit Coverage handles three different levels:
+
+* Application
+* Resource
+* Flow
+
+Here is how to define the required coverage level:
+
+.MUnit Coverage - Require Coverage
+[source,xml,linenums]
+----
+<coverage>
+  <runCoverage>true</runCoverage>
+  <failBuild>true</failBuild>
+
+  <requiredApplicationCoverage>20</requiredApplicationCoverage>
+  <requiredResourceCoverage>10</requiredResourceCoverage>
+  <requiredFlowCoverage>5</requiredFlowCoverage>
+</coverage>
+----
+
+TIP: Each value represents a percentage.
+
+If you define coverage levels but set the property `failBuild` to *false*, if the levels are not reached, a warning shows up in the MUnit Coverage summary.
+
+Something like this:
+
+[source,console,linenums]
+----
+INFO] [CoverageManager] Printing Coverage Report...
+[INFO] ===============================================================================
+[INFO] MUnit Coverage Summary
+[INFO] ===============================================================================
+[INFO]  * Resources: 3 - Flows: 6 - Message Processors: 7
+[INFO]  * Application Coverage: 71.43%
+[INFO]
+[WARNING] ----------------------------- WARNING --------------------------------------
+[WARNING]  * Application coverage is below defined limit. Required: 100.0% - Current: 71.43%  //<1>
+----
+<1> Warning detailing which coverage level wasn't met
+
+TIP: If no level is defined, -1 is assumed, which indicates that the build won't fail due to lack of coverage.
 
 == To Ignore Flows for Coverage Report
 
@@ -391,22 +432,13 @@ Now, the next logical step is to define the coverage levels.
 
 This is a list, so you can ignore as many flows as you need.
 
-== To Ignore Files for Coverage Report
-
-.MUnit Coverage - Ignoring Files
-[source,xml,linenums]
-----
-<coverage>
-  <ignoreFiles>
-	  <ignoreFile>the-name-of-the-file.xml</ignoreFile>       //<1>
-  </ignoreFiles>
-</coverage>
-----
-<1> The name of the file you want to ignore.
-
-This is a list, so you can ignore as many files as you need.
-
 == Dynamic Ports
+
+[IMPORTANT]
+MUnit 2.2 and later introduce the `dynamic-port` global element, that allows you to define dynamic ports at the MUnit suite level. +
+Using this element instead of the plugin configuration described below allows you to set the dynamic port both from Maven and Studio. +
+See xref:dynamic-ports.adoc[Dynamic Ports] to learn how to configure this element.
+
 
 When testing a Mule application in a continuous integration (CI) environment, you might encounter the following scenario:
 
@@ -584,7 +616,7 @@ If not specified, this value is false by default.
 </plugins>
 ----
 
-== To Specify the Runtime Version
+== To Specify the Runtime Product
 
 MUnit allows you to specify the runtime version in which your applications being tested will run.
 
@@ -603,7 +635,7 @@ MUnit allows you to specify the runtime version in which your applications being
 </plugins>
 ----
 
-== To Specify The Runtime Product
+== To Specify The Runtime
 
 MUnit allows you to specify the type of runtime in which your applications being tested will run. +
 The two possible values are MULE for community edition, and MULE_EE for Enterprise Edition.
@@ -622,6 +654,28 @@ The two possible values are MULE for community edition, and MULE_EE for Enterpri
   </plugin>
 </plugins>
 ----
+
+== To Specify The JVM
+
+MUnit allows you to specify the jvm (or the java executable) in which your applications being tested will run.
+The property should be populated with the path to the executable.
+
+[source,xml,linenums]
+----
+<plugins>
+  <plugin>
+    <groupId>com.mulesoft.munit.tools</groupId>
+    <artifactId>munit-maven-plugin</artifactId>
+    <configuration>
+      ...
+      <jvm>/path/to/jdk/bin/java</jvm>
+      ...
+    </configuration>
+  </plugin>
+</plugins>
+----
+
+From the command line, the property is `-Dmunit.jvm`
 
 == Environment Variables
 
@@ -808,6 +862,11 @@ By default it runes with the mule-version defined in the pom.xml file of the mul
 | Type of runtime. Expected values are MULE for community edition, and MULE_EE for enterprise edition. +
 By default, this value is taken from the requiredProduct parameter in the mule-artifact.json file.
 
+| jvm
+| String
+| Option to specify the jvm (or path to the java executable) to use.
+
+By default, the JVM will the same VM as the one used to run Maven.
 
 |environmentVariables
 |Map
