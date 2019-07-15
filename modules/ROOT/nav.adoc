@@ -25,12 +25,13 @@
  ** xref:before-after-scopes-reference.adoc[Before/After scopes]
 
 * xref:message-processors.adoc[MUnit Processors]
- ** xref:assertion-message-processor.adoc[Assert/Fail]
+ ** xref:assertion-message-processor.adoc[Assert]
   *** xref:munit-matchers.adoc[Matchers]
    **** xref:core-matchers-reference.adoc[Core Matchers]
    **** xref:string-matchers-reference.adoc[String Matchers]
    **** xref:comparable-matchers-reference.adoc[Comparable Matchers]
    **** xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers]
+ ** xref:fail-event-processor.adoc[Fail]
  ** xref:run-custom-event-processor.adoc[Run Custom Event]
  ** xref:set-message-processor.adoc[Set Event]
  ** xref:mock-message-processor.adoc[Mock When]
@@ -51,8 +52,8 @@
 
 * xref:munit-domain-support.adoc[MUnit Support for Domain Based Applications]
 
-* xref:munit-maven-support.adoc[MUnit Maven Plugin]
- ** xref:to-configure-munit-maven-plugin-maven.adoc[Configuring/Running]
+* xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
+ ** xref:munit-maven-support.adoc[Configuring/Running]
 
 * xref:munit-coverage-report.adoc[Coverage]
  ** xref:coverage-maven-concept.adoc[Maven Configuration for Coverage]
