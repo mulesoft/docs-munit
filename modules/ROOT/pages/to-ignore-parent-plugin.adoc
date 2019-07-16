@@ -1,6 +1,0 @@
-
-== See Also
-
-* xref:faq-working-with-parent-pom.adoc[FAQ: How To Handle Parent POM Files]
-* xref:to-inherit-parent-plugin.adoc[To Inherit Parent's Plugin]
-* xref:to-override-parent-plugin.adoc[To Override a Parent's Plugin]

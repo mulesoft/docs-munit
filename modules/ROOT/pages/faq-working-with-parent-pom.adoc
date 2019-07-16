@@ -1,6 +1,0 @@
-
-== See Also
-
-* xref:to-inherit-parent-plugin.adoc[To Inherit Parent's Plugin]
-* xref:to-override-parent-plugin.adoc[To Override a Parent's Plugin]
-* xref:to-ignore-parent-plugin.adoc[To Ignore a Parent's Plugin]

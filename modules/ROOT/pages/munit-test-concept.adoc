@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-aliases: munit-suite.adoc
 
 The base file in the MUnit Framework is the MUnit Test Suite file. These files are the XML files located under the src/test/munit folder in your Mule application's folder structure. Each MUnit Test Suite file is a collection of MUnit tests. It is meant to work on its own, and should be able to run independently from other MUnit test suite files.
 
