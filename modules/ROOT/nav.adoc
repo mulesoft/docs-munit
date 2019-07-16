@@ -48,12 +48,9 @@
 ** xref:munit-run-configurations.adoc[Run Configurations]
 ** xref:runtime-patching.adoc[Runtime Patching]
 
-
-
 * xref:munit-domain-support.adoc[MUnit Support for Domain Based Applications]
 
 * xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
- ** xref:munit-maven-support.adoc[Configuring/Running]
 
 * xref:munit-coverage-report.adoc[Coverage]
  ** xref:coverage-maven-concept.adoc[Maven Configuration for Coverage]
