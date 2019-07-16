@@ -1,6 +1,0 @@
-
-== See Also
-
-* xref:to-configure-munit-maven-plugin-maven.adoc[To Configure MUnit Maven Plugin From the POM File]
-* xref:coverage-maven-concept.adoc[About Coverage in Maven]
-** xref:faq-how-munit-coverage.adoc[FAQ: How Does MUnit Calculate Coverage]
