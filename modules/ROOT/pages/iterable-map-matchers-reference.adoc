@@ -105,7 +105,7 @@ Checks that the expression has a value that matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasValue(MunitTools::equalTo('myValue')]"/>
+is="#[MunitTools::hasValue(MunitTools::equalTo('myValue'))]"/>
 ----
 
 .Example
