@@ -364,7 +364,7 @@ Examples:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::hasValue(MunitTools::equalTo('myValue')]
+#[MunitTools::hasValue(MunitTools::equalTo('myValue'))]
 ----
 +
 [source,DataWeave,options="nowrap"]
