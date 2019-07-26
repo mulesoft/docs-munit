@@ -2,3 +2,248 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+
+== Expecting an Error in your Test
+
+During the execution of a flow, components may throw errors which might be expected for the use case
+being tested. In these cases, you want to specify that your test expects a particular error type or exception.
+
+For example, lets look at the following Mule code:
+
+[source, xml, linenums]
+----
+<flow name="retrieveKey">
+    <os:retrieve key="#[payload.key]"/>
+    <set-variable value="#[payload.id]" variableName="userId"/>
+</flow>
+----
+
+The key is taken from the payload and if the key is `null`, the Object Store connector will throw an error with `OS:INVALID_KEY`
+error type.
+
+The test to validate this case would be something like this:
+
+[source, xml, linenums]
+----
+<munit:test name="retrieveNullKeyTest" description="Expect error when key is null" expectedErrorType="OS:INVALID_KEY">
+    <munit:behavior>
+        <munit:set-event>
+            <munit:payload value="#[ { key: null}]" />
+        </munit:set-event>
+    </munit:behavior>
+    <munit:execution>
+        <flow-ref name="retrieveKey"/>
+    </munit:execution>
+</munit:test>
+----
+
+
+==  Error Handlers Testing
+
+In many cases, errors are handled by the user. They may want to perform some actions when an error is thrown, and decide
+ to propagate the error or continue with the flow's execution.
+
+We can have different tests for each of the following possibilities:
+
+=== On Error Continue
+
+For example, lets look at the following mule code:
+
+[source, xml, linenums]
+----
+<flow name="retrieveKey">
+    <os:retrieve key="#[payload.key]"/>
+    <set-variable value="#[payload.id]" variableName="userId"/>
+    <error-handler >
+        <on-error-continue type="OS:INVALID_KEY">
+            <set-payload value="#[{ message : 'Key is null'}]" />
+        </on-error-continue>
+    </error-handler>
+</flow>
+----
+
+The `OS:INVALID_KEY` error is being handled and the execution continues with a specific payload.
+
+Since the error is not propagated, the execution resumes and the event can be verified:
+
+[source, xml, linenums]
+----
+<munit:test name="retrieveNullKeyTest" description="Expect message when key is null">
+    <munit:behavior>
+        <munit:set-event>
+            <munit:payload value="#[ { key: null}]" />
+        </munit:set-event>
+    </munit:behavior>
+    <munit:execution>
+        <flow-ref name="retrieveKey"/>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that expression="#[payload.message]" is="#[MunitTools::equalTo('Key is null')]"/>
+    </munit:validation>
+</munit:test>
+----
+
+As you can see, in this case you don't have to expect the `OS:INVALID_KEY` error type.
+
+=== On Error Propagate
+
+For example, if the user's code is the following:
+
+[source, xml, linenums]
+----
+<flow name="retrieveKey">
+    <os:retrieve key="#[payload.key]"/>
+    <set-variable value="#[payload.id]" variableName="userId"/>
+    <error-handler >
+        <on-error-propagate type="OS:INVALID_KEY">
+            <raise-error type="APP:NULL_KEY"/>
+        </on-error-propagate>
+    </error-handler>
+</flow>
+----
+
+The `OS:INVALID_KEY` error is being handled and the error `APP:NULL_KEY` is raised.
+
+Since the test will fail with the raised custom error type, the test should expect it:
+
+[source, xml, linenums]
+----
+<munit:test name="retrieveNullKeyTest" description="Expect APP:NULL_KEY is raised" expectedErrorType="APP:NULL_KEY">
+    <munit:behavior>
+        <munit:set-event>
+            <munit:payload value="#[ { key: null}]" />
+        </munit:set-event>
+    </munit:behavior>
+    <munit:execution>
+        <flow-ref name="retrieveKey"/>
+    </munit:execution>
+</munit:test>
+----
+
+== Mocking Errors
+
+When you don't want to trigger manually an error on a component (like the examples above), but you only want to
+make the processor fail with a specific error, you can use the `error` parameter of the mock-when processor.
+
+For example, if the user's code is the following:
+
+[source, xml, linenums]
+----
+<flow name="requestFlow">
+    <http:request method="GET" config-ref="HTTP_Request_configuration"/>
+    <set-variable value="#[payload.id]" variableName="userId"/>
+    <error-handler >
+        <on-error-continue type="HTTP:CONNECTIVITY">
+            <logger level="ERROR" message="AN ERROR OCCURRED"/>
+        </on-error-continue>
+    </error-handler>
+</flow>
+----
+
+and you want to make the `http:request` fail with an `HTTP:CONNECTIVITY` error and also check that the logger was actually
+executed, the test may look something like this:
+
+.Mock Error with On Error Continue
+[source, xml, linenums]
+----
+<munit:test name="requestFlowTest" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="http:request">
+            <munit-tools:then-return >
+                <munit-tools:error typeId="HTTP:CONNECTIVITY" />
+            </munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <flow-ref name="requestFlow"/>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+----
+
+If the On Error scope is an `on-error-propagate`, the verifications won't be executed since the flow will propagate the
+error and fail, then the `validation` section of the test will be skipped.
+
+In this case the error could be caught with a try scope and then the verifications can be performed:
+
+.Mock Error with On Error Propagate
+[source, xml, linenums]
+----
+<munit:test name="requestFlowTest" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="http:request">
+            <munit-tools:then-return >
+                <munit-tools:error typeId="HTTP:CONNECTIVITY" />
+            </munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="requestFlow"/>
+            <error-handler >
+                <on-error-continue type="HTTP:CONNECTIVITY"/>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+----
+
+== Setting an Event with an Error
+
+When extracting error handling logic into a separated flow or sub flow, the input event must have an error that can be
+used in the error handling logic.
+
+For example, lets look at the following mule code:
+
+[source, xml, linenums]
+----
+<flow name="retrieveFlow">
+    <os:retrieve key="#[payload.key]"/>
+    <error-handler >
+        <on-error-continue>
+            <flow-ref name="error-handlingSub_Flow"/>
+        </on-error-continue>
+    </error-handler>
+</flow>
+
+<sub-flow name="error-handlingSub_Flow">
+    <logger level="INFO" message="#['Execution failed with: $(error.description)']"/>
+</sub-flow>
+----
+
+If you wish to test the subFlow independently, you will need to set an error in the event.
+
+The test may look something like this:
+
+.Set Error in the Event
+[source, xml, linenums]
+----
+<munit:test name="error_handlingSub_FlowTest" description="Test subFlow" >
+    <munit:behavior >
+        <munit:set-event>
+            <munit:error id="OS:INVALID_KEY" exception="#[java!java::lang::Exception::new('Invalid Key')]"/>
+        </munit:set-event>
+    </munit:behavior>
+    <munit:execution >
+        <flow-ref name="error-handlingSub_Flow"/>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:verify-call processor="mule:logger">
+            <munit-tools:with-attributes >
+                <munit-tools:with-attribute attributeName="message" whereValue="#['Execution failed with: Invalid Key']" />
+            </munit-tools:with-attributes>
+        </munit-tools:verify-call>
+    </munit:validation>
+</munit:test>
+----
+
+== See Also
+
+* xref:mock-message-processor.adoc[About Mock When Event Processor]
+* xref:set-message-processor.adoc[About Set Event Processor]
+* xref:verify-message-processor.adoc[About Verify Event Processor]
