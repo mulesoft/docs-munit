@@ -2,3 +2,76 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+
+Suppose you have a processor inside a foreach scope and you want to provide different values on each interation.
+
+[source,xml]
+----
+<flow name="foreachFlow">
+	<foreach doc:name="For Each">
+		<flow-ref doc:name="Flow Reference" name="FlowToMock"/>
+	</foreach>
+</flow>
+----
+
+You can use a munit-tools:mock-when to mock the processor and use the then-call to call a new flow that set payloads depending on the foreach status.
+
+[source,xml]
+----
+<munit-tools:mock-when doc:name="Mock when" processor="flow-ref">
+	<munit-tools:with-attributes >
+		<munit-tools:with-attribute attributeName="name" whereValue="FlowToMock" />
+	</munit-tools:with-attributes>
+	<munit-tools:then-call flow="MockedFlow" />
+</munit-tools:mock-when>
+----
+
+Inside the flow that is called by then-call you can use a Choice processor to evaluate some value and set a mocked payload. In this case the foreach counter is evaluated to decide what payload setup.
+
+[source,xml]
+----
+<flow name="MockedFlow" >
+	<choice doc:name="Choice">
+		<when expression="#[vars.counter == 1]">
+			<set-payload value='#["MOCKED1"]' doc:name="Set Payload" />
+		</when>
+		<when expression="#[vars.counter == 2]">
+			<set-payload value='#["MOCKED2"]' doc:name="Set Payload" />
+		</when>
+		<otherwise >
+			<set-payload value='#["DEFAULT"]' doc:name="Set Payload" />
+		</otherwise>
+	</choice>
+</flow>
+----
+
+= Mock a Mule Message
+
+To mock processors like file:list or ftp:list it needs to return as payload a Mule Message collections. MunitTools provides a function to these payloads:
+
+[source]
+----
+fun createMessage(payload: Any, attributes: Any = null)
+
+fun createMessage(payload: Any, mimeType: String|Null , attributes: Any, attributeMimeType: String|Null)
+----
+
+[source,xml]
+----
+<flow doc:name="Flow" >		
+	<file:list doc:name="List" config-ref="File_Config" directoryPath="/tmp/"/>
+</flow>
+
+<munit-tools:mock-when processor="file:list">
+   <munit-tools:with-attributes>
+       <munit-tools:with-attribute attributeName="doc:name" whereValue="List"/>
+   </munit-tools:with-attributes>
+   <munit-tools:then-return>
+       <munit-tools:payload value="#[[MunitTools::createMessage( &quot;ITEM-1&quot;,  &quot;text/plain&quot;, { property : 'ATTRIBUTE-1'}, null) , MunitTools::createMessage( &quot;ITEM-2&quot;,  &quot;text/plain&quot;, { property : 'ATTRIBUTE-2'}, null)]]" />
+   </munit-tools:then-return>
+</munit-tools:mock-when>
+----
+
+== See Also
+
+* xref:mock-message-processor.adoc[About Mock When Event Processor]
