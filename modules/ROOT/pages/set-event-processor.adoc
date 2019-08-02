@@ -6,7 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing
 
 The Set Event Processor allows you to define a Mule Event. +
-This message processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.
+This processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.
 
 The example below shows how to define a simple payload of a Mule Message:
 
@@ -82,8 +82,8 @@ If you define two properties in the same scope with the _same_ key, be aware tha
 
 == See Also
 
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:assertion-event-processor.adoc[About Assert That Event Processor]
 * xref:fail-event-processor.adoc[About Fail Event Processor]
 * xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:verify-event-processor.adoc[About Verify Event Processor]

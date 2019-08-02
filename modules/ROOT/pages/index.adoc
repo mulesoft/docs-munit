@@ -30,4 +30,4 @@ MUnit version 2.1, works with all Mule versions since 4.0
 
 == See Also
 
-* xref:message-processors.adoc[About MUnit Event Processors]
+* xref:event-processors.adoc[About MUnit Event Processors]

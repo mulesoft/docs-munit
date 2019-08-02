@@ -52,11 +52,11 @@ The regular expression language is the same as Java.
 
 == See Also
 
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:assertion-event-processor.adoc[About Assert That Event Processor]
 * xref:fail-event-processor.adoc[About Fail Event Processor]
 * xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]
 
 // REVIEW: Needs review from ENG
 // === Defining Verifications with Message Processor Attributes
@@ -98,7 +98,7 @@ The regular expression language is the same as Java.
 //
 // |===
 //
-// TIP: If the attribute you wish the Verify message processor to match is similar to `config-ref` and resolves to an actual bean, you can use the MUnit MEL function `getBeanFromMuleContext('bean_name')`. This function inspects the Mule registry and returns the bean with the matching name if present. See xref:assertion-message-processor.adoc[Assertion] for details.
+// TIP: If the attribute you wish the Verify message processor to match is similar to `config-ref` and resolves to an actual bean, you can use the MUnit MEL function `getBeanFromMuleContext('bean_name')`. This function inspects the Mule registry and returns the bean with the matching name if present. See xref:assertion-event-processor.adoc[Assertion] for details.
 //
 // == Defining Verifications with Java Code
 //

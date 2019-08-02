@@ -92,4 +92,4 @@ Overall, you should use the Spy processor to verify or assert.
 
 == See Also
 
-** xref:message-processors.adoc[About MUnit Event Processors]
+** xref:event-processors.adoc[About MUnit Event Processors]
