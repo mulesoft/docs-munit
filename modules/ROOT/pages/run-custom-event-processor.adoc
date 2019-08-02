@@ -46,8 +46,8 @@ And then use the Run Custom Event Processor to run it:
 == See Also
 
 * xref:munit-matchers.adoc[About MUnit Matchers]
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:assertion-event-processor.adoc[About Assert That Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:verify-event-processor.adoc[About Verify Event Processor]
 * xref:fail-event-processor.adoc[About Fail Event Processor]

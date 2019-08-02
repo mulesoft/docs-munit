@@ -377,4 +377,4 @@ Examples:
 * xref:core-matchers-reference.adoc[Core Matchers Reference]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:assertion-event-processor.adoc[About Assert That Event Processor]

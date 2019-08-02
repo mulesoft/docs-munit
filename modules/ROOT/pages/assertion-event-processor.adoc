@@ -35,6 +35,6 @@ If these assertion fails, the processor throws a `java.lang.AssertionError`.
 
 * xref:munit-matchers.adoc[About MUnit Matchers]
 * xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:verify-event-processor.adoc[About Verify Event Processor]
