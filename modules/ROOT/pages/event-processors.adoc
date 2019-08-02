@@ -9,6 +9,6 @@ MUnit has a set of dedicated Event Processors aimed to validate, assert and mock
 
 * xref:assertion-event-processor.adoc[Assertion Event Processor]
 * xref:set-event-processor.adoc[Set Event Processor]
-* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:mock-event-processor.adoc[Mock When Event Processor]
 * xref:verify-event-processor.adoc[Verify Event Processor]
 * xref:spy-event-processor.adoc[Spy Event Processor]
