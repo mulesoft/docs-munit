@@ -132,7 +132,8 @@ NOTE: This FTP accepts any user, so there is no need to set up a user database o
 
 === Validating file existence
 
-The `contains-files` message processor attempts to validate the existence of a file in the FTP server. If the file is not present, the message processor fails, thus causing the test to fail.
+The `contains-files` processor attempts to validate the existence of a file in the FTP server. If the file is not present,
+the processor fails, thus causing the test to fail.
 
 [source,xml,linenums]
 ----
@@ -156,7 +157,7 @@ The `contains-files` message processor attempts to validate the existence of a f
 
 === Removing a file
 
-The `remove` message processor provides another operation that may be of use. This operation instructs the FTP server to remove a file from storage.
+The `remove` processor provides another operation that may be of use. This operation instructs the FTP server to remove a file from storage.
 
 [source,xml,linenums]
 ----

@@ -25,7 +25,7 @@ Or you can also check if the payload is null using the nullValue() matcher.
 <munit-tools:assert-that
   expression="#[payload]"
   is="#[MunitTools::nullValue()]"
-  message="The payload is null"/>
+  message="The payload should be null"/>
 ----
 
 If these assertion fails, the processor throws a `java.lang.AssertionError`.

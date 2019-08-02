@@ -7,7 +7,7 @@ endif::[]
 
 The Run Custom Event Processor allows you to assert the Mule Event content against a custom assertion.
 
-For example, you can define the following assertion in JAVA:
+For example, you can define the following assertion in Java:
 
 [source,java,linenums]
 ----
@@ -33,14 +33,7 @@ And then use the Run Custom Event Processor to run it:
   assertion="com.example.CustomAssertion" // <1>
   expression="#[payload]"/>
 ----
-<1> The assertion field needs to have the canonical class name of your custom assertion.
-
-// _TODO:Comment out and check with the team
-// [CAUTION]
-// --
-// Implement your custom assertions with care. Modifying the message payload or variables could affect subsequent assertions in your test. Normal MUnit assertions guarantee that this does not happens unless specified
-// --
-
+<1> The assertion field needs to have the canonical class name of your custom assertion and the class needs to be exported.
 
 
 == See Also

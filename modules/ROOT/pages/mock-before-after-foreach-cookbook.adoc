@@ -74,4 +74,4 @@ fun createMessage(payload: Any, mimeType: String|Null , attributes: Any, attribu
 
 == See Also
 
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]

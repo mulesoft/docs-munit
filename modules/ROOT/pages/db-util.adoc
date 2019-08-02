@@ -218,7 +218,7 @@ Once our DB server is configured we can run our test.
 
 ----
 
-We are not using any new message processor, since the database has already been initialized and loaded with the proper data.
+We are not using any new processor, since the database has already been initialized and loaded with the proper data.
 We are just validating that the query ran in our production code is correct, and that the payload returned is the expected one.
 
 ==== Defining the DB Structure
