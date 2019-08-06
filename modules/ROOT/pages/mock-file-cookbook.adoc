@@ -2,3 +2,56 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+
+When the tests suites start to grow in size and complexity, it’s a good practice to externalize some parts of the code to test resources, this will help you keep the code clean and organized as well as reuse the mocks without the need to have duplicated code.
+
+In this example we’ll see two ways of leverage DataWeave in order to accomplish this.
+
+One first and straightforward way is to create the mock files using DataWeave script that will return the data that we want to mock, save the file under a folder in `src\test\resources` and then use a DataWeave function to read this file. For this example we will define a `mockPost.dwl` file in a `sample_data` folder with the following content:
+
+[source]
+----
+%dw 2.0
+output application/json
+---
+{
+	"foo" : "var"
+}
+----
+
+This DataWeave file is just a sample that creates a mock payload that we want to return in an `http:request`. When configuring the `then-return` section in the `mock-when` we just use the `readUrl` function to read the mapping file:
+
+[source,xml,linenums]
+----
+<munit-tools:then-return>
+  <munit-tools:payload value="#[readUrl('classpath://sample_data/mockPost.dwl')]" mediaType="application/json" encoding="UTF-8" />
+</munit-tools:then-return>
+----
+
+Note: The classpath-based URL uses the `classpath:` protocol prefix to find the file we defined under `src/test/resources`.
+
+Now, a second way of doing this, is by creating a DataWeave module to centralize all our mocks using variables declarations in a single file.
+Continuing with this example, to create a DataWeave module we will create a `TestData.dwl` file under `src\test\resources` and we are going to add a couple of variables with references to different mocks (from file or inline).
+
+[source]
+----
+import getResourceAsString from MunitTools
+
+var mockPost = readUrl('classpath://sample_data/mockPost.dwl')
+var foo = "N123"
+var jsonFromFile = read(getResourceAsString('sample_data/mydata.json'), 'application/json')
+var jsonObject = { paymentID: "1B56925769601335TLQMIWVY" }
+----
+
+We can then access any of the defined variables in the DataWeave module by using an import Module and referencing the variables as follows:
+
+[source,xml,linenums]
+----
+<munit-tools:then-return >
+				<munit-tools:variables>
+        				<munit-tools:variable key="ticket" value="#[import TestData output application/json --- TestData::mockPost]" mediaType="application/json" />
+				</munit-tools:variables>
+</munit-tools:then-return>
+----
+
+Using this approach with a proper file naming convention and folder structure should help you have cleaner code and organized mocks for your MUnit test suites as well as provide you an easy way to reuse code.
