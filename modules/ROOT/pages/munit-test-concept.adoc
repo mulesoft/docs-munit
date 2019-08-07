@@ -235,8 +235,8 @@ When you provide a literal value, it should take the form of the canonical class
 +
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 
-* The attribute expectedErrorDescription expects an error description.
-:: This attribute allows you to validate that an error is thrown and this error has description that is equals or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
+* The attribute expectedErrorDescription expects an error description. +
+This attribute allows you to validate that an error is thrown and this error has description that is equals or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
 +
 [source,xml,linenums]
 ----
