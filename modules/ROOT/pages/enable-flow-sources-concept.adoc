@@ -26,7 +26,7 @@ For example, assume that your application has a flow with an HTTP listener that 
 </flow>
 ----
 
- You need to enable the `http-transportFlow` in your `enable-flow-source` property so that MUnit is able to reach that listener:
+You need to enable the `http-transportFlow` in your `enable-flow-source` property so that MUnit is able to reach that listener:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
