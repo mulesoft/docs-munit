@@ -78,6 +78,47 @@ For example if you have a test that sets a payload for a flow, and expects a res
 </mule>
 ----
 
+= Parameterization from file
+
+Sometimes you want to use the same parameterized values on differents test suites. In this case you can save your parameterizations values in a Yaml file on /test/resources folder.
+
+.Example Parameterization from file
+[source,xml]
+----
+<munit:config>
+    <munit:parameterizations file="parameterizations.yaml" />
+</munit:config>
+----
+
+You can combine both methods to add parameterized values to a test suite. In case of you define the same parameterization key in yaml file and munit:config, the munit:config parameterization will override your yaml parameterization.
+
+.Example Parameterization from file and munit:config
+[source,xml]
+----
+<munit:config name="parameterization-from-file-test.xml">
+    <munit:parameterizations file="parameterizations.yaml" >
+        <munit:parameterization name="thirdParameterization">
+            <munit:parameters>
+                <munit:parameter propertyName="name" value="John"/>
+                <munit:parameter propertyName="lastname" value="Bonham"/>
+            </munit:parameters>
+        </munit:parameterization>
+    </munit:parameterizations>
+</munit:config>
+----
+
+.Example parameterizations.yaml
+[source,yaml]
+----
+firstParameterization:
+    name: "Robert"
+    lastname: "Plant"
+
+secondParameterization:
+    name: "Jimmy"
+    lastname: "Page"
+----
+
 == See Also
 
 * xref:before-after-scopes-concept.adoc[About Before/After Scopes]
