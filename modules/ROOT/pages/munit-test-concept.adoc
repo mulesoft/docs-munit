@@ -138,17 +138,18 @@ The `ignore` attribute also allows you to use expressions to ignore a test based
 .Ignoring a test based on the mule version
 [source,xml]
 ----
-<munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
-----
-
-.Ignoring a test based on the Operating System
-[source,xml]
-----
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
 ----
 
 This test will be ignored if the Mule version is prior to `4.1.4`. Other possible functions are `muleVersionEqualTo` and
 `muleVersionNewerThan`.
+
+.Ignoring a test based on the Operating System
+[source,xml]
+----
+<munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
+----
+
 
 === Test TimeOut Attribute
 
