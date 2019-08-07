@@ -247,7 +247,7 @@ This attribute allows you to validate that an error is thrown and this error has
 </munit:test>
 ----
 
-//_BEFORE/AFTER
+==== Before / After Scopes
 
 As with other testing frameworks, MUnit provides certain features around the test suite concept. In particular, it provides a set of scopes that allow you to add processing or actions to be run before and/or after the entire MUnit Test or MUnit Suite executions:
 
