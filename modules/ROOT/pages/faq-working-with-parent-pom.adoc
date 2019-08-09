@@ -21,7 +21,7 @@ In order to make a proper use of the MUnit plugin in a parent-child POM relation
     <packaging>pom</packaging>
 
     <properties>
-        <munit.version>2.2.0-BETA2</munit.version>
+        <munit.version>2.2.1</munit.version>
     </properties>
 
     <build>
