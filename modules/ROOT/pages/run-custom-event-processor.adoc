@@ -7,6 +7,8 @@ endif::[]
 
 The Run Custom Event Processor allows you to assert the Mule Event content against a custom assertion.
 
+Although it's not necessary to add any extra dependencies to your `pom.xml` file, you must your custom assertion class to the `mule-artifact.json` file as an exported resource.
+
 For example, you can define the following assertion in JAVA:
 
 [source,java,linenums]
@@ -35,6 +37,23 @@ And then use the Run Custom Event Processor to run it:
 ----
 <1> The assertion field needs to have the canonical class name of your custom assertion.
 
+To export it when packaging your application, add the `CustomAssertion` to your `mule-artifact.json`
+
+[source,json,linenums]
+----
+{
+    "name": "mule-application",
+    "minMuleVersion": "4.2.0",
+    "classLoaderModelLoaderDescriptor": {
+        "id": "mule",
+        "attributes": {
+            "exportedResources": [
+                "resources/CustomAssertion.java"
+            ]
+        }
+    }
+}
+----
 // _TODO:Comment out and check with the team
 // [CAUTION]
 // --
