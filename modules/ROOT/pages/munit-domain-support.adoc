@@ -3,56 +3,12 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-MUnit allows you to test applications that run referencing a Mule Domain. +
-MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account:
-
-* When working in Anypoint Studio, your Mule Domain must always be part of your workspace.
-* Your Folder must have the same name as your artifact. +
-Regardless if it's a Mule application or a Mule domain if, the folder in your workspace containing your Mule project must have the same name as the artifact ID defined in your pom file.
-+
-For example, if your mule project's artifact Id is:
-+
-[source,xml,linenums]
-----
-<artifactId>mule-project</artifactId>
-----
-+
-Then, the folder in your Studio workspace must be named `mule-project`. +
-This is case sensitive. If your folder is named `Mule-Project`, MUnit won't recognize your project.
-* Your resources need to be installed in an M2 repository. +
-You need to handle domains and mule apps as regular dependencies. Setting them as an artifact requires for them to be installed in an .M2 repository.
-* Your resources need to be in your test suite pom file.
-+
-If your Mule domain project looks like this:
-+
-[source,xml,linenums]
-----
-<modelVersion>4.0.0</modelVersion>
-<groupId>org.mule.app</groupId>
-<artifactId>domain-project</artifactId>
-<packaging>mule-domain</packaging>
-<version>1.0.0-SNAPSHOT</version>
-<name>Domain domain-project Project</name>
-----
-+
-Then your dependency in your Mule application should look like this:
-+
-[source,xml,linenums]
-----
-<dependency>
-    <groupId>org.mule.app</groupId>
-    <artifactId>domain-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <classifier>mule-domain</classifier>
-    <scope>provided</scope>
-</dependency>
-----
-+
-[TIP]
---
-Remember to keep consistency with `<version>` artifact in your repository and in your test suite's pom file
---
+MUnit allows you to test your Mule Applications that run referencing a Mule Domain. Since Mule 4, testing these
+applications requires no special configuration, working the same way as testing a regular Mule Application. +
+MUnit handles running the domain automatically, so the test should be created as if the domain was part of your
+application.
 
 == See Also
 
-* xref:7.1@studio::domain-support-concept.adoc[About Domain Support (Anypoint Studio)]
+* xref:studio::domain-support-concept.adoc[About Domain Support (Anypoint Studio)]
+* xref:munit-test-concept.adoc[About MUnit Test]
