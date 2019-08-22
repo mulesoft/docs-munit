@@ -23,7 +23,7 @@ With MUnit you can:
 // * Debug your tests with Studio
 
 
-MUnit version 2.2, works with all Mule versions since 4.1.1
+MUnit version 2.2, works with all Mule versions since 4.1.4.
 
 MUnit is divided in two main sub modules:
 
