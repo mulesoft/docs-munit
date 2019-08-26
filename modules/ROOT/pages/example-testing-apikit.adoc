@@ -299,8 +299,7 @@ This example shows how to trigger hits to the endpoint exposed by APIkit, and wh
 
 == Create a Test Suite Automatically
 
-Although this example is meant to showcase how to build a test suite from the ground, MUnit allows you to automatically create a test Suite based on your RAML definitions. +
-This is illustrated in the xref:general:getting-started:implement-and-test.adoc[implementing and testing an API quickstart] section.
+Although this example is meant to showcase how to build a test suite from the ground, MUnit allows you to automatically create a test Suite based on your RAML definitions.
 
 Based on link:{attachmentsdir}/t-shirt.raml[complete t-shirt API definition], the MUnit's scaffolder automatically creates the following test Suite:
 
