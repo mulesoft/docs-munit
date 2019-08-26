@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 3.7.0 and newer
 :keywords: munit, testing, unit testing
+:page-aliases: munit:index.adoc
 
 == Overview
 
