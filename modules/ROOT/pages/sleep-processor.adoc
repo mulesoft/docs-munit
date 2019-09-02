@@ -1,0 +1,21 @@
+= Sleep Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The Sleep Processor allows you to wait current thread for specified time. This processor is normally used to simulate a delay in the processing of the flow.
+
+[source,xml,linenums]
+----
+<munit-tools:sleep time="100" timeUnit="MILLISECONDS"/>
+----
+
+[%header%autowidth.spread]
+|===
+|Attribute Name |Description
+
+|`time`
+|time period to sleep.
+
+|`timeUnit`
+|*(Default = MILLISECONDS)* specifies in which units the `time` is measured. Possible values: `MICROSECONDS`, `MILLISECONDS`, `MINUTES`, `NANOSECONDS`, `SECONDS`, `HOURS`.
