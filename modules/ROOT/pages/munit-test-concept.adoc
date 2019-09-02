@@ -85,13 +85,13 @@ current mule version or on the current OS.
 .Ignoring a test based on the mule version
 [source,xml]
 ----
-<munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
+<munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
 ----
 
 .Ignoring a test based on the Operating System
 [source,xml]
 ----
-<munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
+<munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
 ----
 
 This test will be ignored if the Mule version is prior to `4.1.4`. Other possible functions are `muleVersionEqualTo` and
