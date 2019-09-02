@@ -2,6 +2,77 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+<<<<<<< Updated upstream
+=======
+:page-aliases: munit-suite.adoc
+
+== MUnit Test Suite
+
+The base file in the MUnit Framework is the MUnit Test Suite file. These files are the XML files located under the src/test/munit folder in your Mule application's folder structure. Each MUnit Test Suite file is a collection of MUnit tests. It is meant to work on its own, and should be able to run independently from other MUnit test suite files.
+
+An MUnit test suite file should contain any combination of the following components:
+
+* Before/After Suite
+* Before/After Tests
+* MUnit Tests
+
+Each MUnit test suite file is, behind the scenes, no different than a Mule application XML file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
+
+=== MUnit Configuration
+
+The MUnit configuration identifies a Mule XML file as a MUnit Suite file. This means that a MUnit Suite file will look something like this:
+
+[source,xml,linenums]
+----
+
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+
+	<munit:config name="A MUnit Suite" />
+
+	<!-- Tests -->
+
+</mule>
+
+----
+
+==== Ignoring a suite
+
+To ignore a whole suite from running, you can use the `ignore` attribute of the configuration.
+
+[source,xml]
+----
+<munit:config name="A MUnit Suite" ignore="true"/>
+----
+
+==== Minimum Mule Version
+
+To specify that a suite should run if the Mule version is equal or newer than a specific version, you can use the
+`minMuleVersion` attribute of the configuration.
+
+[source,xml]
+----
+<munit:config name="A MUnit Suite" minMuleVersion="4.1.4"/>
+----
+
+==== Required Product
+
+To specify that a suite should run with a required Mule product, you can use the
+`requiredProduct` attribute of the configuration.
+
+[source,xml]
+----
+<munit:config name="A MUnit Suite" requiredProduct="MULE_EE"/>
+----
+
+== MUnit Test
+>>>>>>> Stashed changes
 
 The MUnit Test is the basic processor of an MUnit Test Suite. It represents each test scenario you want to try.
 
