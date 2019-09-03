@@ -4,9 +4,9 @@ include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-suite.adoc
 
-== MUnit test suite
+== MUnit Test Suite
 
-The base file in MUnit is the MUnit test suite file, the XML file located in the `src/test/munit` directory of your Mule application's folder structure. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application's project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
@@ -16,9 +16,33 @@ An MUnit test suite can contain any combination of the following components:
 
 Each MUnit test suite is, behind the scenes, no different than a Mule configuration file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
 
+=== MUnit Configuration
+
+The MUnit configuration element (`munit:config`) identifies a Mule configuration file as an MUnit suite file:
+
+[source,xml,linenums]
+----
+
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+
+	<munit:config name="An MUnit Suite" />
+
+	<!-- Tests -->
+
+</mule>
+
+----
+
 == MUnit Test
 
-The MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
+An MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
 
 The MUnit test is divided in three scopes. All of them are optional:
 
@@ -69,7 +93,7 @@ In MUnit, you must write a description for your test. Ideally, you should write 
 
 There may be scenarios where you need to shut down a test. Whether this be because the test is failing or because it has inconvenient side effects. MUnit allows you to ignore a specific test so that you don't have to manually comment out the code.
 
-You can ignore any of your tests by adding the ignore boolean to the test definition.
+You can ignore any of your tests by adding the ignore boolean to the test definition:
 
 [source,xml,linenums]
 ----
@@ -79,8 +103,7 @@ You can ignore any of your tests by adding the ignore boolean to the test defini
 </munit:test>
 ----
 
-[TIP]
-Valid values for `ignore` are true and false. If the attribute is not present, the default is false.
+The default value for the ignore attribute is `false`.
 
 .In Anypoint Studio, you can check the Ignore Test option.
 image::munit-test-concept-de4c9.png[ignore-test]
@@ -121,7 +144,7 @@ Assume that you want to validate that the flow or sub-flow you are testing fails
 .A visual representation on Anypoint Studio
 image::munit-test-concept-e7280.png[]
 
-* The `expectedErrorType` attribute expects an error ID that needs to be defined inside the application being tested. +
+* The `expectedErrorType` attribute expects an error ID defined inside the application being tested. +
  This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exists in your application, the test does not run.
 +
 [source,xml,linenums]
@@ -136,10 +159,9 @@ image::munit-test-concept-e7280.png[]
 This Error Type test expects that an FTP operation will throw an `FTP:ILLEGAL_PATH` error. +
 If none of your flows are using an FTP connector, then the error type is not defined within your application and the test will not run.
 +
-[TIP]
 ErrorTypes that belong to the Mule Runtime do not need to be typified. For example, `MULE:RETRY_EXHAUSTED` can be defined as `RETRY_EXHAUSTED`.
 
-* The attribute expectException expects a literal exception class name (canonical form).
+* The attribute expectException expects a literal exception class name (canonical form). +
  When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
 +
 [source,xml,linenums]
@@ -153,7 +175,7 @@ ErrorTypes that belong to the Mule Runtime do not need to be typified. For examp
 +
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 
-== Before / After Scopes
+== Before and After Scopes
 
 As with other testing frameworks, MUnit provides a set of scopes that allow you to add processing or actions to run before and/or after the entire MUnit test or MUnit test suite execute:
 
