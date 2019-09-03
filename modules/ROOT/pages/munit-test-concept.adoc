@@ -105,7 +105,8 @@ You can ignore any of your tests by adding the ignore boolean to the test defini
 
 The default value for the ignore attribute is `false`.
 
-.In Anypoint Studio, you can check the Ignore Test option.
+In Anypoint Studio, you can check the *Ignore Test* option.
+
 image::munit-test-concept-de4c9.png[ignore-test]
 
 === Test Tag Attribute
