@@ -4,23 +4,23 @@ include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-suite.adoc
 
-== MUnit Test Suite
+== MUnit test suite
 
-The base file in MUnit is the MUnit Test Suite file, the XML file located in the `src/test/munit` directory of your Mule application's folder structure. You can have as many MUnit Test Suite files as you need. Each MUnit Test Suite file is a collection of MUnit tests, and runs independently from other MUnit Test Suites.
+The base file in MUnit is the MUnit test suite file, the XML file located in the `src/test/munit` directory of your Mule application's folder structure. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
 
-An MUnit Test Suite can contain any combination of the following components:
+An MUnit test suite can contain any combination of the following components:
 
 * Before/After Suites
 * Before/After Tests
-* MUnit Tests
+* MUnit tests
 
-Each MUnit Test Suite is, behind the scenes, no different than a Mule configuration file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
+Each MUnit test suite is, behind the scenes, no different than a Mule configuration file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
 
 == MUnit Test
 
-The MUnit Test is the basic processor of an MUnit Test Suite. It represents each test scenario you want to try.
+The MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
 
-The MUnit Test is divided in three scopes. All of them are optional:
+The MUnit test is divided in three scopes. All of them are optional:
 
 [%header,cols="20,80"]
 |===
@@ -155,7 +155,7 @@ If you define that your test expects an exception and none is thrown, the test f
 
 == Before / After Scopes
 
-As with other testing frameworks, MUnit provides a set of scopes that allow you to add processing or actions to run before and/or after the entire MUnit Test or MUnit Test Suite execute:
+As with other testing frameworks, MUnit provides a set of scopes that allow you to add processing or actions to run before and/or after the entire MUnit test or MUnit test suite execute:
 
 * Before and After Suite Scopes.
 * Before and After Test Scopes.
