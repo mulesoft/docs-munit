@@ -15,7 +15,7 @@ This section links to examples that demonstrate common MUnit usages.
 | xref:mock-before-after-foreach-cookbook.adoc[Mocking Message before and inside a foreach] |
 | xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors] |
 | xref:environment-config-cookbook.adoc[Testing environment configurations] |
-| xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave ... From a Test] |
+| xref:utility-classes-cookbook.adoc[Using Utility Classes From a Test] |
 | xref:poll-flow-cookbook.adoc[Testing a Flow With a Poll] |
 | xref:flow-sources-enable-cookbook.adoc[Enabling flow sources] |
 |===
