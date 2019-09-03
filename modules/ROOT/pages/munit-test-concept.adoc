@@ -6,19 +6,19 @@ endif::[]
 
 == MUnit Test Suite
 
-The base file in the MUnit Framework is the MUnit Test Suite file. These files are the XML files located under the src/test/munit folder in your Mule application's folder structure. Each MUnit Test Suite file is a collection of MUnit tests. It is meant to work on its own, and should be able to run independently from other MUnit test suite files.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application's project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
 
-An MUnit test suite file should contain any combination of the following components:
+An MUnit test suite can contain any combination of the following components:
 
-* Before/After Suite
+* Before/After Suites
 * Before/After Tests
-* MUnit Tests
+* MUnit tests
 
-Each MUnit test suite file is, behind the scenes, no different than a Mule application XML file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
+Each MUnit test suite is, behind the scenes, no different than a Mule configuration file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
 
 === MUnit Configuration
 
-The MUnit configuration identifies a Mule XML file as a MUnit Suite file. This means that a MUnit Suite file will look something like this:
+The MUnit configuration element (`munit:config`) identifies a Mule configuration file as an MUnit suite file:
 
 [source,xml,linenums]
 ----
@@ -32,7 +32,7 @@ The MUnit configuration identifies a Mule XML file as a MUnit Suite file. This m
 		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 
-	<munit:config name="A MUnit Suite" />
+	<munit:config name="An MUnit Suite" />
 
 	<!-- Tests -->
 
@@ -42,7 +42,7 @@ The MUnit configuration identifies a Mule XML file as a MUnit Suite file. This m
 
 ==== Ignoring a suite
 
-To ignore a whole suite from running, you can use the `ignore` attribute of the configuration.
+To ignore a whole suite from running, you can use the `ignore` attribute of the configuration:
 
 [source,xml]
 ----
@@ -51,8 +51,8 @@ To ignore a whole suite from running, you can use the `ignore` attribute of the 
 
 ==== Minimum Mule Version
 
-To specify that a suite should run if the Mule version is equal or newer than a specific version, you can use the
-`minMuleVersion` attribute of the configuration.
+To specify that a suite should run if the Mule version that is equal or newer than a specific version, use the
+`minMuleVersion` attribute of the configuration:
 
 [source,xml]
 ----
@@ -61,22 +61,22 @@ To specify that a suite should run if the Mule version is equal or newer than a 
 
 == MUnit Test
 
-The MUnit Test is the basic processor of an MUnit Test Suite. It represents each test scenario you want to try.
+An MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
 
-The MUnit Test is divided in three scopes:
+The MUnit test is divided in three scopes:
 
 [%header,cols="20,80"]
 |===
 |Scope |Description
 
 | Behavior
-| The behavior scope is meant to set all the preconditions before executing the test logic.
+| The behavior scope sets all the preconditions before executing the test logic.
 
 | Execution
-| The execution scope is meant to have the testing logic which will wait for all processes to finish before executing the next scope.
+| The execution scope contains the testing logic which will wait for all processes to finish before executing the next scope.
 
 | Validation
-| The validation scope is meant to have all the validations regarding the result of the execution scope.
+| The validation scope contains all the validations for the results of the execution scope.
 |===
 
 All these scopes are optional.
@@ -117,7 +117,7 @@ The point is you shouldn't have to comment out the code.
 
 In this case, MUnit allows you to ignore a specific test.
 
-You can ignore any of your tests by adding the ignore boolean to the test definition.
+You can ignore any of your tests by adding the ignore boolean to the test definition:
 
 [source,xml,linenums]
 ----
@@ -127,13 +127,12 @@ You can ignore any of your tests by adding the ignore boolean to the test defini
 </munit:test>
 ----
 
-[TIP]
-Valid values for `ignore` are true and false. If the attribute is not present, the default is false.
+The default value for the ignore attribute is `false`.
 
 .In Anypoint Studio, you can check the Ignore Test option.
 image::munit-test-concept-de4c9.png[ignore-test]
 
-The `ignore` attribute also allows you to use expressions to ignore a test based on the current mule version or on the current OS.
+You can also use expressions to ignore a test based on your current mule version or on your current operative system:
 
 .Ignoring a test based on the mule version
 [source,xml]
@@ -152,8 +151,7 @@ This test will be ignored if the Mule version is prior to `4.1.4`. Other possibl
 
 === Test TimeOut Attribute
 
-Each MUnit test will automatically fail if it takes more than 2 minutes to complete. Sometimes, that time can be too long or too short. +
-In that case, you can use the `timeOut` attribute, where you can set the desired maximum time -in milliseconds- that the test can run before failing. For example:
+Each MUnit test automatically fails if it takes more than 2 minutes to complete. Use the `timeOut` attribute to set a custom maximum time --in milliseconds-- that the test can run before failing:
 
 [source,xml,linenums]
 ----
@@ -167,7 +165,7 @@ In that case, you can use the `timeOut` attribute, where you can set the desired
 
 == Test Tag Attribute
 
-MUnit also allows you to tag your tests, so you can choose to run tests under a specific tag. For example:
+MUnit allows you to tag your tests, so you can choose to run tests under a specific tag. For example:
 
 [source,xml,linenums]
 ----
@@ -185,8 +183,7 @@ image::munit-test-concept-c2d9f.png[test-tags]
 
 === MUnit Test Expected Error and Exception Attributes
 
-Sometimes, the only thing you want to validate is that the flow or sub-flow you are testing fails and throws a specific error, which depends on the business logic being tested. In these cases, MUnit provides a simple way to validate the scenario. +
-You can add the attributes `expectedErrorType`, `expectException`, and `expectedErrorDescription`, as shown below:
+Assume that you want to validate that the flow or sub-flow you are testing fails and throws a specific error. MUnit allows you to add the attributes `expectedErrorType`, `expectException`, and `expectedErrorDescription`, as follows:
 
 [source,xml,linenums]
 ----
@@ -202,7 +199,7 @@ You can add the attributes `expectedErrorType`, `expectException`, and `expected
 .A visual representation on Anypoint Studio
 image::munit-test-concept-e7280.png[]
 
-* The `expectedErrorType` attribute expects an error ID that needs to be defined inside the application being tested. +
+* The `expectedErrorType` attribute expects an error ID defined inside the application being tested. +
 This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exists in your application, the test does not run.
 +
 [source,xml,linenums]
@@ -217,7 +214,6 @@ This attribute allows you to validate that a defined error type in your applicat
 This Error Type test expects that an FTP operation will throw an `FTP:ILLEGAL_PATH` error. +
 If none of your flows are using using an FTP connector, then the error type is not defined within your application and the test will not run.
 +
-[TIP]
 ErrorTypes that belong to the Mule Runtime do not need to be typified. For example, `MULE:RETRY_EXHAUSTED` can be defined as simply `RETRY_EXHAUSTED`.
 
 * The attribute `expectException` expects a literal exception class name (canonical form). +
@@ -246,19 +242,13 @@ If you define that your test expects an exception and none is thrown, the test f
 </munit:test>
 ----
 
-//_BEFORE/AFTER
+== Before and After Scopes
 
-As with other testing frameworks, MUnit provides certain features around the test suite concept. In particular, it provides a set of scopes that allow you to add processing or actions to be run before and/or after the entire MUnit Test or MUnit Suite executions:
+As with other testing frameworks, MUnit provides a set of scopes that allow you to add processing or actions to run before and/or after the entire MUnit test or MUnit test suite execute:
 
 * Before and After Suite Scopes.
 * Before and After Test Scopes.
 
-The ID space from each component must be unique across all your application. The before and after scopes cannot share the same name between them, nor have the same name as any flow in your application.
+The ID field for each component must be unique across all your application. The before and after scopes cannot share the same name between them, nor have the same name as any flow in your application.
 
-
-== See Also
-
-* xref:enable-flow-sources-concept.adoc[About Enable Flow Sources]
-* xref:before-after-scopes-concept.adoc[About Before/After Scopes]
-* xref:before-after-scopes-reference.adoc[Before/After Scopes Reference]
-* xref:munit-test-reference.adoc[MUnit Test Reference]
+See xref:before-after-scopes-reference.adoc[Before/After scopes] reference for more information.
