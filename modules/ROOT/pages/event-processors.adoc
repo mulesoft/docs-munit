@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-MUnit has a set of dedicated Event Processors aimed to validate, assert and mock the content and status of the Mule event so you can run automatic tests against your Mule application.
+MUnit has a set of dedicated event processors to validate, assert, and mock the content and status of the Mule event so you can run automatic tests against your Mule applications.
 
 == See Also
 

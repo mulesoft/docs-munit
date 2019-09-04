@@ -7,10 +7,7 @@ endif::[]
 
 MUnit matchers are a set of DataWeave functions to define assertion conditions for any value in an expression.
 
-[NOTE]
---
-When defining matchers, include the prefix `MunitTools::` in the expression, as illustrated in the following examples.
---
+When defining matchers you must include the prefix `MunitTools::` in the expression, as shown in the following examples.
 
 Matchers are grouped according to the type of conditions you want to validate.
 

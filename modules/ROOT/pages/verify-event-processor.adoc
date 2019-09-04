@@ -5,7 +5,7 @@ endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
 
-The Verify Event Processor allows you to verify if a processor was called.
+The Verify Event processor allows you to verify if a processor was called.
 
 For example, you can validate if a specific message processor has been called with a particular set of attributes a specific number of times.
 
@@ -40,20 +40,6 @@ You can define verifications over any message processor, even if you haven't cre
 
 |===
 
-[NOTE]
---
-The attributes `times`, `atLeast`, `atMost`, are mutually exclusive. Only one should be used.
---
+The attributes `times`, `atLeast`, `atMost`, are mutually exclusive.
 
-The `eventProcessor` attribute accepts regular expressions. You could create the same verification as .*:request.
-In this example, we define a verification for a event processor named request, disregarding which namespace the event processor belongs to.
-
-The regular expression language is the same as Java.
-
-== See Also
-
-* xref:assertion-event-processor.adoc[About Assert That Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:set-event-processor.adoc[About Set Event Processor]
-* xref:mock-event-processor.adoc[About Mock When Event Processor]
+The `eventProcessor` attribute accepts regular expressions. For example, you can create the same verification as `.*:request` to verify for an event processor named request, disregarding which namespace the event processor belongs to. The regular expression language is the same as Java.
