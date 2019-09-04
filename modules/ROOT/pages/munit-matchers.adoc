@@ -7,10 +7,7 @@ endif::[]
 
 MUnit matchers are a set of DataWeave functions to define assertion conditions for any value in an expression.
 
-[NOTE]
---
 When defining matchers, include the prefix `MunitTools::` in the expression, as illustrated in the following examples.
---
 
 Matchers are grouped according to the type of conditions you want to validate.
 
@@ -195,12 +192,9 @@ Comparable matchers compare the expression against a specified value:
 * Is the expression's value bigger or smaller than a specified value?
 * Is the expression's value closer to a specific number?
 
-[Note]
---
-Some comparable matchers take a `Comparable` type.
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other.
-Allowed primitives are `String`, `Number`, `Boolean`, `DateTime`, `LocalDateTime`, `LocalTime`, `Time`, and `TimeZone`.
---
+
+Some comparable matchers take a `Comparable` type. `Comparable` is a DataWeave type that represents all the types that can be compared to each other. Allowed primitives are `String`, `Number`, `Boolean`, `DateTime`, `LocalDateTime`, `LocalTime`, `Time`, and `TimeZone`.
+
 Comparable Matchers:
 
 * xref:comparable-matchers-reference.adoc#greaterthan-comparable[greaterThan(Comparable)] checks that the expression is greater than the specified value.

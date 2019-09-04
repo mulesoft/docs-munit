@@ -5,9 +5,11 @@ endif::[]
 :version-info: 2.0 and later
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 
-The Assert That processor allows you to run assertions in order to validate the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs.
+The Assert That event processor allows you to run assertions to validate the state of a Mule event's content. You can use the Assert That processor to validate the Mule event after the production code runs.
 
-For example, to assert that a payload is equal to a certain value, you can configure the Assert-That processor using the equalTo() matcher.
+The Assert That processor uses a set of DataWeave functions called `MUnit matchers` to define the assertion conditions for any value in an expression.
+
+For example, to assert that a payload is equal to a certain value, configure the Assert That processor using the `equalTo()` matcher.
 
 [source,xml,linenums]
 ----
@@ -17,8 +19,7 @@ For example, to assert that a payload is equal to a certain value, you can confi
   message="The payload should be ‘example’"/>
 ----
 
-Or you can also check if the payload is null using the nullValue() matcher.
-
+Or you can also check if the payload is null using the `nullValue()` matcher.
 
 [source,xml,linenums]
 ----
@@ -28,13 +29,10 @@ Or you can also check if the payload is null using the nullValue() matcher.
   message="The payload should be null"/>
 ----
 
-If these assertion fails, the processor throws a `java.lang.AssertionError`.
+See xref:munit-matchers.adoc[MUnit Matchers] for more information.
 
+If these assertion fails, the processor throws a `java.lang.AssertionError`.
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:set-event-processor.adoc[About Set Event Processor]
-* xref:mock-event-processor.adoc[About Mock When Event Processor]
-* xref:verify-event-processor.adoc[About Verify Event Processor]
+* xref:munit-matchers.adoc[MUnit Matchers]

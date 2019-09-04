@@ -5,7 +5,7 @@ endif::[]
 :version-info: 2.0 and later
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 
-The Run Custom Event Processor allows you to assert the Mule Event content against a custom assertion.
+The Run Custom event processor allows you to assert the Mule event content against a custom assertion.
 
 For example, you can define the following assertion in Java:
 
