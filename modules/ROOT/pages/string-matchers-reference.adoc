@@ -12,7 +12,7 @@ Checks that the expression contains the specified String.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="`#[MunitTools::containsString('example')]`"/>
+is="#[MunitTools::containsString('example')]"/>
 ----
 
 
@@ -73,7 +73,7 @@ Checks that the expression is equal to the specified String, ignoring case.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::equalToIgnoringCase('Example')]"/>
+is="#[MunitTools::equalToIgnoringCase('example')]"/>
 ----
 
 == equalToIgnoringWhiteSpace(String)
