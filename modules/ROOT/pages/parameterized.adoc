@@ -5,9 +5,9 @@ endif::[]
 :version-info: 2.2 and later
 :keywords: munit, testing, unit testing
 
-A parameterized suite is a way of running the same tests but with different inputs.
+A parameterized test suite runs the same tests but with different inputs.
 
-The suite parameterization is defined at a config level in the following way:
+The test suite parameterization is defined at a configuration level as follows:
 
 [source,xml,linenums]
 ----
@@ -29,11 +29,11 @@ The suite parameterization is defined at a config level in the following way:
 </munit:config>
 ----
 
-This means the suite will run twice, first with the `firstParameterization` parameters, and the second time with the `secondParameterization` parameters.
+The Test Suite will run twice, first with the `firstParameterization` parameters, and then time with the `secondParameterization` parameters.
 
-For example if you have a test that sets a payload for a flow, and expects a result:
+For example, if you have a test that sets a payload for a flow and expects a result:
 
-.Example Parameterization
+.Parameterization Example
 [source,xml,linenums]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
@@ -78,8 +78,47 @@ For example if you have a test that sets a payload for a flow, and expects a res
 </mule>
 ----
 
-== See Also
+= Parameterization From File
 
-* xref:before-after-scopes-concept.adoc[About Before/After Scopes]
-* xref:munit-suite.adoc[About MUnit Test Suite]
-* xref:munit-test-concept.adoc[About MUnit Test]
+To use the same parameterized values on different test suites you must save your parameterizations values in a YAML file in the `/test/resources` directory of your Mule application project:
+
+.parameterizations.yaml Example
+[source,yaml]
+----
+firstParameterization:
+    name: "Robert"
+    lastname: "Plant"
+
+secondParameterization:
+    name: "Jimmy"
+    lastname: "Page"
+----
+
+And reference it from your test suite configuration:
+
+.Example Parameterization From File
+[source,xml]
+----
+<munit:config>
+    <munit:parameterizations file="parameterizations.yaml" />
+</munit:config>
+----
+
+You can combine both methods to add parameterized values to a test suite:
+
+.Example Parameterization From File and in the Test Suite Configuration
+[source,xml]
+----
+<munit:config name="parameterization-from-file-test.xml">
+    <munit:parameterizations file="parameterizations.yaml" >
+        <munit:parameterization name="thirdParameterization">
+            <munit:parameters>
+                <munit:parameter propertyName="name" value="John"/>
+                <munit:parameter propertyName="lastname" value="Bonham"/>
+            </munit:parameters>
+        </munit:parameterization>
+    </munit:parameterizations>
+</munit:config>
+----
+
+If you define the same parameterization key in a YAML file and your test suite configuration, the test suite parameterization overrides your YAML parameterization.
