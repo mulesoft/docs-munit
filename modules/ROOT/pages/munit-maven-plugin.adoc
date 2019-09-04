@@ -4,7 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
-:page-aliases: munit-maven-support.adoc, to-set-up-munit-maven-plugin.adoc, faq-working-with-parent-pom.adoc, to-inherit-parent-plugin.adoc, to-ignore-parent-plugin.adoc, to-override-parent-plugin.adoc, munit-maven-plugin-configuration.adoc, 
+:page-aliases: munit-maven-support.adoc, to-set-up-munit-maven-plugin.adoc, faq-working-with-parent-pom.adoc, to-inherit-parent-plugin.adoc, to-ignore-parent-plugin.adoc, to-override-parent-plugin.adoc, munit-maven-plugin-configuration.adoc,
 
 MUnit is a composition of several modules, all of which are necessary to run your MUnit test.
 
@@ -691,7 +691,8 @@ If not specified, this value is false by default.
 </plugins>
 ----
 
-== To Specify the Runtime Product
+[[specify-runtime-product]]
+== Specifying the Runtime Product
 
 MUnit allows you to specify the runtime version in which your applications being tested will run.
 
