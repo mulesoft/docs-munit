@@ -24,10 +24,10 @@ With MUnit you can:
 * Generate coverage reports
 // * Debug your tests with Studio
 
-MUnit version 2.2, works with all Mule versions since 4.1.1.
+MUnit version 2.2, works with all Mule versions since 4.1.4.
 
 
 
 == See Also
 
-* xref:message-processors.adoc[About MUnit Event Processors]
+* xref:event-processors.adoc[About MUnit Event Processors]

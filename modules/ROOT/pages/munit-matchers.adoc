@@ -5,12 +5,9 @@ endif::[]
 :version-info: 2.0 and later
 :keywords: munit, testing, unit testing
 
-MUnit matchers are a set of DataWeave functions to define assertion conditions for any value in an expression instead of a specific value.
+MUnit matchers are a set of DataWeave functions to define assertion conditions for any value in an expression.
 
-[NOTE]
---
 When defining matchers, include the prefix `MunitTools::` in the expression, as illustrated in the following examples.
---
 
 Matchers are grouped according to the type of conditions you want to validate.
 
@@ -67,7 +64,7 @@ Example:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::both(MunitTools::notNullValue(),MunitTools::equalTo('example'))]
+#[MunitTools::both(MunitTools::notNullValue(), MunitTools::equalTo('example'))]
 ----
 
 * xref:core-matchers-reference.adoc#either-matcher-matcher[either(Matcher,Matcher)] checks that at least one of the matchers is successful.
@@ -76,7 +73,7 @@ Example:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::either(MunitTools::nullValue(),MunitTools::equalTo(0))]
+#[MunitTools::either(MunitTools::nullValue(), MunitTools::equalTo(0))]
 ----
 
 * xref:core-matchers-reference.adoc#not-matcher[not(Matcher)] checks if the provided matcher is not successful.
@@ -117,7 +114,7 @@ String Matchers perform assertions on String expressions:
 String Matchers:
 
 * xref:string-matchers-reference.adoc#containsstring-string[containsString(String)] checks that the expression contains the specified String.
-++
++
 Example:
 +
 [source,DataWeave,options="nowrap"]
@@ -167,7 +164,7 @@ Example:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::equalToIgnoringCase('Example')]
+#[MunitTools::equalToIgnoringCase('example')]
 ----
 
 * xref:string-matchers-reference.adoc#equaltoignoringwhitespace-string[equalToIgnoringWhiteSpace(String)] checks that the expression is equal to the string disregarding leading and trailing white spaces, and compressing all inner white spaces to a single space.
@@ -195,12 +192,9 @@ Comparable matchers compare the expression against a specified value:
 * Is the expression's value bigger or smaller than a specified value?
 * Is the expression's value closer to a specific number?
 
-[Note]
---
-Some comparable matchers take a `Comparable` type.
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other.
-Allowed primitives are `String`, `Number`, `Boolean`, `DateTime`, `LocalDateTime`, `LocalTime`, `Time`, and `TimeZone`.
---
+
+Some comparable matchers take a `Comparable` type. `Comparable` is a DataWeave type that represents all the types that can be compared to each other. Allowed primitives are `String`, `Number`, `Boolean`, `DateTime`, `LocalDateTime`, `LocalTime`, `Time`, and `TimeZone`.
+
 Comparable Matchers:
 
 * xref:comparable-matchers-reference.adoc#greaterthan-comparable[greaterThan(Comparable)] checks that the expression is greater than the specified value.
@@ -288,8 +282,8 @@ Use iterable matchers and maps matchers when your expression is an array or a ma
 
 * Is the map or array in the expression empty?
 * Does the map or array in the expression have a specific key?
-* Is every item in the map or array from the expression greater than or less than a specific number?
-* Does any item in the map or array from the expression start or end with a specified string?
+* Is every item in the array from the expression greater than or less than a specific number?
+* Does any item in the array from the expression start or end with a specified string?
 
 Iterable and Map Matchers:
 
@@ -332,7 +326,7 @@ Examples:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::hasSize(MunitTools::startsWith('a'))]
+#[MunitTools::hasSize(MunitTools::greaterThan(5))]
 ----
 
 * xref:iterable-map-matchers-reference.adoc#isempty[isEmpty()] checks that the expression is an empty collection.
@@ -377,4 +371,4 @@ Examples:
 * xref:core-matchers-reference.adoc[Core Matchers Reference]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:assertion-event-processor.adoc[Assert That Event Processor]

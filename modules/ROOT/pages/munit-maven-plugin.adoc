@@ -193,7 +193,7 @@ To inherit the MUnit plugin in your child POM files, you need to reference it in
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.runtime>4.1.1</app.runtime>
+        <app.runtime>4.1.4</app.runtime>
         <munit.version>2.2.0</munit.version>
     </properties>
 
@@ -711,7 +711,7 @@ MUnit allows you to specify the runtime version in which your applications being
 </plugins>
 ----
 
-== To Specify The Runtime
+== To Specify The Runtime Product
 
 MUnit allows you to specify the type of runtime in which your applications being tested will run. +
 The two possible values are MULE for community edition, and MULE_EE for Enterprise Edition.
