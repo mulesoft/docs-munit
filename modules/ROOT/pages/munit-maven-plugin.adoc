@@ -691,7 +691,8 @@ If not specified, this value is false by default.
 </plugins>
 ----
 
-== To Specify the Runtime Version
+[[specify-runtime-product]]
+== Specifying the Runtime Product
 
 MUnit allows you to specify the runtime version in which your applications being tested will run.
 
