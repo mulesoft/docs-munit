@@ -87,7 +87,7 @@ expression="#[payload]"
 is="#[MunitTools::not(MunitTools::equalTo(0))]"/>
 ----
 
-== anyOf(Array<Matchers>)
+== anyOf(Array<Matcher>)
 
 Checks if any of the matchers are successful.
 
@@ -99,7 +99,7 @@ expression="#[payload]"
 is="#[MunitTools::anyOf([MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString()])]"/>
 ----
 
-== allOf(Array<Matchers>)
+== allOf(Array<Matcher>)
 
 Checks if all of the matchers are successful.
 

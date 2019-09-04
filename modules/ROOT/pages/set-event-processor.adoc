@@ -1,0 +1,85 @@
+= Set Event Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:version-info: 2.0 and newer
+:keywords: munit, testing, unit testing
+
+The Set Event Processor allows you to define a Mule Event. +
+This processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.
+
+The example below shows how to define a simple payload of a Mule Message:
+
+[source,xml,linenums]
+----
+<munit:set-event cloneOriginalEvent="false">
+  <munit:payload value="#['payload_value']" mediaType="text/plain" encoding="UTF-8"/>
+</munit:set-event>
+----
+
+The set-event has the `cloneOriginalEvent` property. If set to true, it clones the event that enters the processor
+and overrides its values with the ones defined. +
+By default, the value of this property is false.
+
+The payload element in the Set Event processor has the following attributes:
+
+[%header%autowidth.spread]
+|===
+|Attribute Name |Description
+
+|`value`
+|Defines the value of the payload's message.
+
+|`encoding`
+|Defines the encoding of the message. This attribute is optional.
+
+|`mediaType`
+|Defines the mime type of the message. This attribute is optional.
+
+|===
+
+You can also use the Set Event processor to define message attributes and event variables:
+
+[source,xml,linenums]
+----
+<munit:set-event>
+    <munit:payload value="#['payload_value']" mediaType="text/plain" encoding="UTF-8"/>
+
+    <munit:attributes value="#[{ method: 'GET'}]" />
+
+    <munit:variables>
+      <munit:variable key="variableName" value="#['aVariableValue']" />
+    </munit:variables>
+</munit:set-event>
+----
+
+Variables have the following set of parameters:
+
+[%header%autowidth.spread]
+.Variable's Parameters
+|===
+|Parameter Name |Description
+
+|`key`
+|The key of the variable being set.
+
+|`value`
+|The content of the variable.
+
+|`encoding`
+|Defines the encoding of the variable. This parameter is optional.
+
+|`mediaType`
+|Defines the media type of the variable. This parameter is optional.
+
+|===
+
+You can define as many variables as you need for your test.
+
+== See Also
+
+* xref:assertion-event-processor.adoc[About Assert That Event Processor]
+* xref:fail-event-processor.adoc[About Fail Event Processor]
+* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:verify-event-processor.adoc[About Verify Event Processor]

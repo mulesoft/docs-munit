@@ -244,6 +244,6 @@ The test may look something like this:
 
 == See Also
 
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
+* xref:verify-event-processor.adoc[About Verify Event Processor]

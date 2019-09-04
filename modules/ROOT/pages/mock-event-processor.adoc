@@ -5,7 +5,7 @@ endif::[]
 :version-info: 2.0 and later
 :keywords: munit, testing, unit testing
 
-The Mock When processor allows you to mock an Event Processor when it matches the defined name and attributes.
+The Mock When processor allows you to mock an event processor when it matches the defined name and attributes.
 
 For example, you can use the Mock Event processor to mock a POST request with a mocked payload:
 
@@ -23,7 +23,7 @@ For example, you can use the Mock Event processor to mock a POST request with a 
 
 You can set the `processor` attribute to define the processor to mock and the `with-attribute` element to define the attribute's name and value. In the example above you are defining a POST method.
 
-You can also take advantage of DataWeave functions and mappings to set the `value` attribute in the `then-return` element. For example, create a `mockPost.dwl` under `src\test\resources\sample_data` file as shown below:
+You can also use DataWeave functions and mappings to set the `value` attribute in the `then-return` element. For example, create a `mockPost.dwl` under `src/test/resources/sample_data` file:
 
 [source]
 ----
@@ -35,7 +35,7 @@ output application/json
 }
 ----
 
-This Dataweave file creates the payload that you want to send in the POST request and then use the `readUrl` DataWeave function to read the mapping file:
+This Dataweave file creates the payload to send in a POST request. You can then use the `readUrl` DataWeave function to read the mapping file:
 
 [source,xml,linenums]
 ----
@@ -68,7 +68,7 @@ By configuring the mock-when processor like the example below:
 </munit-tools:mock-when>
 ----
 
-This mock-when processor mocks a call to the OrderTshirt operation in the WSDL definition.
+This mock-when processor mocks a call to the `OrderTshirt` operation in the WSDL definition.
 
 
 You can also mock specific variables:
@@ -81,7 +81,7 @@ You can also mock specific variables:
 	</munit-tools:with-attributes>
 	<munit-tools:then-return>
 	  <munit-tools:variables>
-	  	<munit-tools:variable key="#['aVariable']" value="#[aValue]"/>
+	  	<munit-tools:variable key="aVariable" value="#['aValue']"/>
 	  </munit-tools:variables>
 	</munit-tools:then-return>
 </munit-tools:mock-when>
@@ -89,7 +89,8 @@ You can also mock specific variables:
 
 == Mocking Errors
 
-The Mock When processor also allows you to mock errors in your operations. For example, assume you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails. A sample application with this scenario would look like this:
+The Mock When processor also allows you to mock errors in your operations. For example, assume you have an HTTP requester
+in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails. A sample application with this scenario would look like this:
 
 [source,xml,linenums]
 ----
@@ -136,7 +137,7 @@ You can assert that every time the HTTP request fails, your application returns 
   </munit:execution>
 
   <munit:validation>
-    <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalToIgnoringCase('Connection  Error')]"/> // <4>
+    <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalToIgnoringCase('connection error')]"/> // <4>
   </munit:validation>
 
 </munit:test>
@@ -167,8 +168,8 @@ The Mock When processor also allows you to mock errors specifying the cause (exc
 
 == See Also
 
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:assertion-event-processor.adoc[About Assert That Event Processor]
 * xref:fail-event-processor.adoc[About Fail Event Processor]
 * xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:set-event-processor.adoc[About Set Event Processor]
+* xref:verify-event-processor.adoc[About Verify Event Processor]
