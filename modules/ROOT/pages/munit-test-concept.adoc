@@ -162,8 +162,8 @@ If none of your flows are using an FTP connector, then the error type is not def
 +
 ErrorTypes that belong to the Mule Runtime do not need to be typified. For example, `MULE:RETRY_EXHAUSTED` can be defined as `RETRY_EXHAUSTED`.
 
-* The attribute expectException expects a literal exception class name (canonical form). +
- When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
+* The attribute `expectException` expects a literal exception class name. +
+You must provide the canonical class name of the exception that you expect. MUnit then validates that the underlying cause for the exception thrown is of the exact same type of the class name you are expecting.
 +
 [source,xml,linenums]
 ----
