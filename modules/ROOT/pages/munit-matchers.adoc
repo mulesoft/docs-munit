@@ -182,7 +182,7 @@ Example:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::stringContainsInOrder('an', 'example')]
+is="#[MunitTools::stringContainsInOrder(['an', 'example'])]"/>
 ----
 
 == Match Comparable Expressions
