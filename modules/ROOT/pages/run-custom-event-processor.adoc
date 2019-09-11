@@ -1,4 +1,4 @@
-= About Run Custom Event Processor
+= Run Custom Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,6 +6,8 @@ endif::[]
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 
 The Run Custom event processor allows you to assert the Mule event content against a custom assertion.
+
+Although it's not necessary to add any extra dependencies to your `pom.xml` file, you must your custom assertion class to the `mule-artifact.json` file as an exported resource.
 
 For example, you can define the following assertion in Java:
 
@@ -35,6 +37,23 @@ And then use the Run Custom Event Processor to run it:
 ----
 <1> The assertion field needs to have the canonical class name of your custom assertion and the class needs to be exported.
 
+To export it when packaging your application, add the `CustomAssertion` to your `mule-artifact.json`
+
+[source,json,linenums]
+----
+{
+    "name": "mule-application",
+    "minMuleVersion": "4.2.0",
+    "classLoaderModelLoaderDescriptor": {
+        "id": "mule",
+        "attributes": {
+            "exportedResources": [
+                "resources/CustomAssertion.java"
+            ]
+        }
+    }
+}
+----
 
 == See Also
 
