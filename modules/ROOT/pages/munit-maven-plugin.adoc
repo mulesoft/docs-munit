@@ -100,11 +100,11 @@ MUnit has Surefire support built in. The reports output to `target/surefire-repo
 
 === Handling Parent POM Files
 
-You can declare the MUnit plugin in a parent `pom.xml` file and every child project under this file can choose to reference this definition.
+You can declare the MUnit plugin in a parent `pom.xml` file and every child project under this file can reference this definition.
 
-To configure the MUnit Maven plugin in a parent-child POM relationship, you must include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file.
+To configure the MUnit Maven plugin in a parent-child POM relationship, include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file.
 
-In the following example, the `pirate-pom` project declares the MUnit Maven plugin in its plugin management section, which defines a global configuration that each child under this parent can choose to reference, override or even ignore.
+In the following example, the `pirate-pom` project declares the MUnit Maven plugin in its plugin management section, which defines a global configuration that each child under this parent can reference, override or even ignore.
 
 [source,xml,linenums]
 ----
@@ -161,7 +161,7 @@ In the following example, the `pirate-pom` project declares the MUnit Maven plug
 
 === Inheriting a Parent's Plugin
 
-To inherit the MUnit plugin in your child `pom.xml` files, you must reference it in the `<plugin>` section of each child POM file individually.
+To inherit the MUnit plugin in your child `pom.xml` files, reference it in the `<plugin>` section of each child POM file individually.
 
 The following sample references `pirate-pom` file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because the MUnit plugin configuration is inherited from the `<pluginManagement>` section in the parent POM file:
 
@@ -205,7 +205,7 @@ The following sample references `pirate-pom` file as its parent and then declare
 
 === Ignoring a Parent's Plugin
 
-Each child project under a parent `pom.xml` file can choose to ignore the plugin referenced in the  parent's plugin management section and not implement the plugin configuration declared there.
+Each child project under a parent `pom.xml` file can ignore the plugin referenced in the  parent's plugin management section and not implement the plugin configuration declared there.
 
 By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriting the plugin declared in *pirate-pom*:
 
@@ -255,7 +255,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
 
 === Overriding a Parent's Plugin
 
-When inheriting the plugin from a parent POM file, you can also choose to override the parent's configuration. Overriding the plugin configuration from your parent POM file suppresses the original configuration requiring you to declare all necessary configurations again.
+When inheriting the plugin from a parent POM file, you can also override the parent's configuration. Overriding the plugin configuration from your parent POM file suppresses the original configuration requiring you to declare all necessary configurations again.
 
 The following example overrides the console coverage report from its parent POM file, replacing it by the HTML report. Because the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) are not being referenced, this child file won't inherit them and the default values will apply:
 
@@ -332,7 +332,7 @@ To make the build fail, add the following lines to the MUnit plugin configuratio
 </coverage>
 ----
 
-After enabling the `<failBuild>`, you must define the coverage level. MUnit Coverage handles three different levels:
+After enabling the `<failBuild>`, define the coverage level. MUnit Coverage handles three different levels:
 
 * Application
 * Resource
@@ -415,7 +415,7 @@ The Ports to be selected by the plugin are taken from the range: `[40000,50000]`
 
 [CAUTION]
 --
-Dynamic Ports feature is only available as part of the MUnit Maven Plugin. You can not expect this feature to work when running tests from inside Anypoint Studio.
+Dynamic Ports feature is only available as part of the MUnit Maven Plugin. This feature does not work when running tests from inside Anypoint Studio.
 --
 
 === Enabling Dynamic Ports
@@ -452,9 +452,9 @@ If you have the `${http.port}` placeholder in your application, the configuratio
 
 === Preparing Your Application
 
-A placeholder must parametrize the part of the application trying to make use of a port. For example, to have your Mule application listening for HTTP traffic you must provide the following configuration:
+A placeholder must parameterize the part of the application trying to make use of a port. For example, to have your Mule application listening for HTTP traffic, provide the following configuration:
 
-.HTTP Simple Application
+.HTTP Application
 [source,xml,linenums]
 ----
 <http:listener-config name="HTTP_Listener_config">
@@ -468,7 +468,7 @@ A placeholder must parametrize the part of the application trying to make use of
 
 The previous application always listens in port `8081`. To make it dynamic, change it to:
 
-.HTTP Simple Application with dynamic port
+.HTTP Application with dynamic port
 [source,xml,linenums]
 ----
 <http:listener-config name="HTTP_Listener_config">
@@ -531,7 +531,7 @@ You can leverage this feature by adding naming conventions to your MUnit Test su
 
 === Running Specific MUnit Tests
 
-In the same way that you instruct MUnit to run one test suite, you can also tell it to run a specific test inside that test suite. You must use the property `munit.test` with the addition of the the special character `#` to append the test name:
+In the same way that you instruct MUnit to run one test suite, you can also configure it to run a specific test inside that test suite. You must use the property `munit.test` with the addition of the the special character `#` to append the test name:
 
 [source,console]
 ----
@@ -566,7 +566,7 @@ You can also configure this from the `pom.xml` configuration:
 
 === Running Tests Using a Specific Tag
 
-You can choose to run only the tests that you grouped under one specific tag:
+You can run only the tests that you grouped under one specific tag:
 
 [source,console]
 ----
@@ -612,7 +612,7 @@ You can also configure this from the `pom.xml` configuration:
       <artifactId>munit-maven-plugin</artifactId>
       <configuration>
       ...
-      <skipMunitTests>True</skipMunitTests>
+      <skipMunitTests>true</skipMunitTests>
       ...
     </configuration>
   </plugin>
@@ -644,10 +644,10 @@ If not specified, this value is `false` by default.
 [[specify-runtime-product]]
 == Specifying The Runtime Product
 
-MUnit allows you to specify the type of runtime in which your applications being tested will run. Accepted values are:
+You can specify the type of runtime in which your applications being tested will run. Accepted values are:
 
 * `MULE` for community edition.
-* `MULE_EE` for Enterprise Edition.
+* `MULE_EE` for enterprise edition.
 
 [source,xml,linenums]
 ----
@@ -685,7 +685,7 @@ MUnit allows you to specify the runtime version in which your applications being
 
 == Specifying The JVM
 
-MUnit allows you to specify the JVM (or the java executable) in which your applications being tested will run. You must populate the `munit.jvm` parameter with the path to the executable:
+You can specify the JVM (or the java executable) in which your applications being tested run. You must populate the `munit.jvm` parameter with the path to the executable:
 
 .Specifying the JVM
 [source,console]
@@ -712,7 +712,7 @@ You can also configure this from the `pom.xml` configuration:
 
 === Additional Argument Lines
 
-You can pass additional argument lines to the JVM. You must specify each argument in a separate `argLine`:
+You can pass additional argument lines to the JVM. Specify each argument in a separate `argLine`:
 
 .Argument lines
 [source,xml,linenums]
@@ -760,7 +760,7 @@ As shown in the previous example, you can use environment variables to replace p
 
 === System Properties Variables
 
-You may need to define specific system variables so that your MUnit test to run successfully:
+You may need to define specific system variables so that your MUnit test runs successfully:
 
 .Setting system property variables
 [source,xml,linenums]
