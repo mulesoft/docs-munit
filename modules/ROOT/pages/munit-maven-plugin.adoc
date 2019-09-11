@@ -6,7 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing
 :page-aliases: munit-maven-support.adoc, to-set-up-munit-maven-plugin.adoc, faq-working-with-parent-pom.adoc, to-inherit-parent-plugin.adoc, to-ignore-parent-plugin.adoc, to-override-parent-plugin.adoc, munit-maven-plugin-configuration.adoc,
 
-MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment. +
+MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment.
 
 == Setting Up MUnit Maven Plugin
 
