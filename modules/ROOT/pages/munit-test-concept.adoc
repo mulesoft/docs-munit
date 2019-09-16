@@ -134,7 +134,7 @@ In that case, you can use the `timeOut` attribute, where you can set the desired
 == About MUnit Test Expected Error and Exception Attributes
 
 Sometimes, the only thing you want to validate is that the flow or sub-flow you are testing fails and throws a specific error, which depends on the business logic being tested. In these cases, MUnit provides a simple way to validate the scenario. +
-You can add the attribute expectedErrorType and expectException, as shown below:
+You can add the attribute expectedErrorType and expectedException, as shown below:
 
 [source,xml,linenums]
 ----
@@ -167,7 +167,7 @@ If none of your flows are using using an FTP connector, then the error type is n
 [TIP]
 ErrorTypes that belong to the Mule Runtime does not need to be typified. For example, MULE:RETRY_EXHAUSTED can be defined as simply RETRY_EXHAUSTED.
 
-* The attribute expectException expects a literal exception class name (canonical form).
+* The attribute expectedException expects a literal exception class name (canonical form).
 :: When you provide a literal value, it should take the form of the canonical class name of the exception that is expected. In these cases, Mule always throws a `MuleMessagingException`. MUnit validates the provided classname if the underlying cause of the `MuleMessagingException` thrown is of the exact same type.
 +
 [source,xml,linenums]
