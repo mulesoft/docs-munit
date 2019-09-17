@@ -18,6 +18,7 @@
   ** xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave Expression From a Test]
   ** xref:poll-flow-cookbook.adoc[Testing a Flow With a Poll]
   ** xref:flow-sources-enable-cookbook.adoc[Enabling flow sources]
+  ** xref:testing-oauth-modules.adoc[Testing OAuth Enabled Connectors]  
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:munit-test-reference.adoc[MUnit Test Parameters]
