@@ -18,4 +18,5 @@ This section links to examples that demonstrate common MUnit usages.
 | xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave ... From a Test] |
 | xref:poll-flow-cookbook.adoc[Testing a Flow With a Poll] |
 | xref:flow-sources-enable-cookbook.adoc[Enabling flow sources] |
+| xref:testing-oauth-modules.adoc[Testing OAuth Enabled Connectors] |
 |===
