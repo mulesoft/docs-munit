@@ -56,6 +56,11 @@ If the http-transportFlow is not listed as an enabled flow source, your MUnit te
 NOTE: Since MUnit 2.2, flow sources are *started at the beginning of the test*, and *stopped at the end of the test*. This means
 that during the before-suite/before-test flow sources will be stopped, and also during the after-test/after-suite.
 
+NOTE: The enable-flow-sources replaces the possibility to start all flows in Mule 3 (MUnit 1.x)
+via  ```<munit:config ...  mock-connectors="false" mock-inbounds="false" ... />```
+
+
+
 == To Enable Flow Sources from Studio
 
 You can also define flow sources using the Mule Properties view of your MUnit Test in Anypoint studio:
