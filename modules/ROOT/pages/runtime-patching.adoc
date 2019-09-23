@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Patching in MUnit is different than how the Mule runtime engine is patched. MUnit runs using an embedded Mule runtime engine container, which downloads all required dependencies to start a Mule runtime enginge based on a given version. To use a patched Mule runtime engine version, for example `4.1.2-hf2`, you must point MUnit to run specifically against it. You can do this from either Maven or Studio.
+Patching in MUnit is different than how the Mule runtime engine is patched. MUnit runs using an embedded Mule runtime engine container, which downloads all required dependencies to start a Mule runtime engine based on a given version. To use a patched Mule runtime engine version, for example `4.1.2-hf2`, you must point MUnit to run specifically against it. You can do this from either Maven or Studio.
 
 == Patching MUnit Using Maven
 
