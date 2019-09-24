@@ -8,6 +8,9 @@ We’ve introduced several changes to the MUnit 2.X syntax. Please find below a 
 
 == MUnit config
 
+[NOTE]
+For version 2.1 or higher, please refer directly to xref:enable-flow-sources-concept.adoc[Enable Flow Sources].
+
 * We removed the attributes mock-connectors and mock-inbounds. They have been replaced with disableFlowSources. +
 * We’ve added the exclude-flow-sources
 
