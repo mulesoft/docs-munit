@@ -15,9 +15,10 @@
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking Message before and inside a foreach]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
   ** xref:environment-config-cookbook.adoc[Testing environment configurations]
-  ** xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave Expression From a Test]
+  ** xref:utility-classes-dw-cookbook.adoc[Using Utility Classes With a DataWeave Expression From a Test]
   ** xref:poll-flow-cookbook.adoc[Testing a Flow With a Poll]
   ** xref:flow-sources-enable-cookbook.adoc[Enabling flow sources]
+  ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:munit-test-reference.adoc[MUnit Test Parameters]
@@ -54,9 +55,8 @@
 ** xref:munit-scaffold-test-task.adoc[Scaffolding an MUnit Test]
 ** xref:munit-showing-results.adoc[Showing Results]
 ** xref:munit-run-configurations.adoc[Run Configurations]
-** xref:runtime-patching.adoc[Runtime Patching]
 
-* xref:munit-domain-support.adoc[MUnit Support for Domain Based Applications]
+* xref:munit-domain-support.adoc[MUnit Support for Domain-Based Applications]
 
 * xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
 
