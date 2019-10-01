@@ -1,0 +1,41 @@
+= MUnit Supported Types of Tests
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The following are definitions and concepts that MuleSoft recommends to take into account while designing and organizing test cases for your Mule applications. Understanding these definitions and concepts will help you build more robust MUnit test by covering multiple edge cases, automate your tests through your CI/CD pipeline, and maximize the quality coverage for your Mule application.
+
+As a general good practice, MuleSoft recommends to follow a naming convention for file names and tests so that you can quickly realize what was being tested when a test fails.
+
+When testing a Mule application MUnit allows you to cover three different types of tests:
+
+* Unit tests.
+* Integration tests.
+* Functional test.
+
+== Unit Testing
+
+Unit testing consists in testing individual units or components of a program. A unit is the smallest testable part of any software. For a Mule application these units are flows and when doing unit testing for flows, you must isolate them from the rest of the Mule application or external services by mocking these calls to any resource outside the flow you are testing.
+
+Creating these tests helps you validate the behavior of key processors and the behavior of a flow as a whole.
+
+== Integration testing
+
+When running integration testing you must validate how the units interact with each other or with external systems to expose faults in the interactions. Samples of Integration testing in a Mule application are:
+
+* Testing how a service responds (Web Services, Salesforce, ServiceNow, Amazon, etc).
+* Testing a database driver.
+* Validating a database response data structure.
+* Testing in-between flows interactions.
+
+Creating and executing these type of tests requires live versions of the services that your test cases will target.
+
+MuleSoft recommends to run the test cases using environment properties and version of the services dedicated to this end.
+
+== Functional testing
+
+Functional testing is a wider concept as it means testing the functional requirements of your Mule Application. The goal is to think in your Mule application use case and design test cases that target that functionality.
+
+For example, when testing a Mule application that is meant to keep a two-way synchronization between two systems, you can design a test case that creates an entry in each system and verifies the replication in the opposite. If you are testing a batch processing application, you can run a test with a representative set of information and validate the results of the batch. Or if you are testing a service orchestration, you can generate an input and test the result in the other end after the event went through different services.
+
+MuleSoft recommends to run the test cases using environment properties and version of the services dedicated to this end.

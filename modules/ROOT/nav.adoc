@@ -1,5 +1,6 @@
 .xref:index.adoc[MUnit]
 * xref:index.adoc[Overview]
+ ** xref:supported-types-of-tests.adoc[MUnit Supported Types of Tests]
 
 * xref:configuring-munit.adoc[Configuring MUnit]
 
