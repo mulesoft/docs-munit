@@ -31,4 +31,4 @@ Additionally you can set min and max values from where to get the port:
 == See Also
 
 * xref:dynamic-directories.adoc[Dynamic Directories]
-* xref:storage-processors.adoc[Storage Processors]
+* xref:storage-event-processors.adoc[Storage Event Processors]
