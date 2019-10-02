@@ -10,6 +10,3 @@ To automatically generate an MUnit test suite from an API definition, you need t
 
 APIkit automatically scaffolds an MUnit test suite based on the endpoints described on your API definition.
 
-== See Also
-
-* xref:munit-suite.adoc[Test Suite]
