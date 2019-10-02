@@ -25,5 +25,4 @@ And then use it to create files/folders inside it:
 
 == See Also
 
-* xref:dynamic-ports.adoc[About Dynamic Ports]
-* xref:storage-processors.adoc[About Storage Processors]
+* xref:dynamic-ports.adoc[Dynamic Ports]

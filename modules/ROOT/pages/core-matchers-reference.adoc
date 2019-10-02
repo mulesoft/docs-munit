@@ -95,7 +95,7 @@ expression="#[payload]"
 is="#[MunitTools::not(MunitTools::equalTo(0))]"/>
 ----
 
-== anyOf(Array<Matchers>)
+== anyOf(Array<Matcher>)
 
 Checks if any of the matchers are successful.
 
@@ -107,7 +107,7 @@ expression="#[payload]"
 is="#[MunitTools::anyOf([MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString()])]"/>
 ----
 
-== allOf(Array<Matchers>)
+== allOf(Array<Matcher>)
 
 Checks if all of the matchers are successful.
 
@@ -121,7 +121,7 @@ is="#[MunitTools::allOf([MunitTools::notNullValue(),MunitTools::withMediaType('t
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:munit-matchers.adoc[MUnit Matchers]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

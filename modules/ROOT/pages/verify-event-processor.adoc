@@ -1,0 +1,53 @@
+= Verify Event Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:version-info: 2.0 and newer
+:keywords: munit, testing, unit testing
+
+The Verify Event processor allows you to verify if a processor was called.
+
+For example, you can validate if a specific processor has been called with a particular set of attributes a specific number of times.
+
+When defining a verification, you are telling MUnit to fail a test if the verification is not successful.
+
+You can define verifications over any processor, even if you haven't created a mock for it.
+
+[source,xml,linenums]
+----
+<munit-tools:verify-call processor="http:request" atLeast="1">
+   <munit-tools:with-attributes>
+       <munit-tools:with-attribute attributeName="method" whereValue="#['GET']" />
+   </munit-tools:with-attributes>
+</munit-tools:verify-call>
+----
+
+[%header%autowidth.spread]
+|===
+|Attribute Name |Description
+
+|`eventProcessor`
+|Describes which event processor you want to mock. The description takes the form `{name-space}:{event-processor-name}`. It supports regular expressions.
+
+|`times`
+|*(Default = 1.)* Defines the verification as successful if the event processor was called _N_ and only _N_ number of times.
+
+|`atLeast`
+|Defines the verification as successful if the event processor was called a minimum of _N_ number of times.
+
+|`atMost`
+|Defines the verification as successful if the event processor was called maximum of _N_ number of times.
+
+|===
+
+The attributes `times`, `atLeast`, `atMost`, are mutually exclusive.
+
+The `eventProcessor` attribute accepts regular expressions. For example, you can create the same verification as `.*:request` to verify for an event processor named request, disregarding which namespace the event processor belongs to. The regular expression language is the same as Java.
+
+== See Also
+
+* xref:assertion-event-processor.adoc[Assert That Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]
+* xref:run-custom-event-processor.adoc[Run Custom Event Processor]
+* xref:set-event-processor.adoc[Set Event Processor]
+* xref:mock-event-processor.adoc[Mock When Event Processor]
