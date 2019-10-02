@@ -181,4 +181,4 @@ To ignore flows and files:
 
 == See Also
 
-* xref:munit-coverage-report.adoc[About Coverage Report]
+* xref:munit-coverage-report.adoc[Coverage Report]

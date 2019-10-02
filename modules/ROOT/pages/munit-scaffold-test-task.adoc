@@ -1,15 +1,15 @@
-= To Generate an MUnit Test Suite from RAML
+= Scaffold an MUnit Test From an API Definition
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-To automatically generate an MUnit test suite from a RAML definition, you need to have a project generated using Apikit.
+To automatically generate an MUnit test suite from an API definition, you need to have a project generated using APIkit:
 
 . Find your APIKit Router in your project and right click on it.
-. Select Create Test Suite For Project From RAML.
+. Select *Create Test Suite For Project From RAML*.
 
-This automatically scaffolds an MUnit test suite based on the endpoints described on your API definition.
+APIkit automatically scaffolds an MUnit test suite based on the endpoints described on your API definition.
 
 == See Also
 
-* xref:munit-suite.adoc[About Test Suite]
+* xref:munit-suite.adoc[Test Suite]

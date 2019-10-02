@@ -46,8 +46,8 @@ The `eventProcessor` attribute accepts regular expressions. For example, you can
 
 == See Also
 
-* xref:assertion-event-processor.adoc[About Assert That Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:set-event-processor.adoc[About Set Event Processor]
-* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:assertion-event-processor.adoc[Assert That Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]
+* xref:run-custom-event-processor.adoc[Run Custom Event Processor]
+* xref:set-event-processor.adoc[Set Event Processor]
+* xref:mock-event-processor.adoc[Mock When Event Processor]

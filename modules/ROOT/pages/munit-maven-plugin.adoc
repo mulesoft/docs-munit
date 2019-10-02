@@ -938,10 +938,3 @@ Default value: `${project.build.directory}/munit-reports/output/`
 
 
 |===
-
-
-
-== See Also
-
-* xref:to-set-up-munit-maven-plugin.adoc[To Set Up MUnit Maven Plugin]
-* xref:munit-maven-plugin.adoc[To Operate the MUnit Maven Plugin]

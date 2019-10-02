@@ -57,9 +57,9 @@ To export it when packaging your application, add the `CustomAssertion` to your 
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
-* xref:assertion-event-processor.adoc[About Assert That Event Processor]
-* xref:set-event-processor.adoc[About Set Event Processor]
-* xref:mock-event-processor.adoc[About Mock When Event Processor]
-* xref:verify-event-processor.adoc[About Verify Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
+* xref:munit-matchers.adoc[MUnit Matchers]
+* xref:assertion-event-processor.adoc[Assert That Event Processor]
+* xref:set-event-processor.adoc[Set Event Processor]
+* xref:mock-event-processor.adoc[Mock When Event Processor]
+* xref:verify-event-processor.adoc[Verify Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]

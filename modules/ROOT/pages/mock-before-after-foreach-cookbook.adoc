@@ -1,4 +1,4 @@
-= Mocking Message before and inside a foreach
+= Mocking a Message Before and Inside a Foreach Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -45,7 +45,7 @@ Inside the flow that is called by then-call you can use a Choice processor to ev
 </flow>
 ----
 
-= Mock a Mule Message
+== Mocking a Mule Message
 
 To mock processors like file:list or ftp:list it needs to return as payload a Mule Message collections. MunitTools provides a function to these payloads:
 
@@ -58,7 +58,7 @@ fun createMessage(payload: Any, mimeType: String|Null , attributes: Any, attribu
 
 [source,xml]
 ----
-<flow doc:name="Flow" >		
+<flow doc:name="Flow" >
 	<file:list doc:name="List" config-ref="File_Config" directoryPath="/tmp/"/>
 </flow>
 
@@ -74,4 +74,4 @@ fun createMessage(payload: Any, mimeType: String|Null , attributes: Any, attribu
 
 == See Also
 
-* xref:mock-event-processor.adoc[About Mock When Event Processor]
+* xref:mock-event-processor.adoc[Mock When Event Processor]

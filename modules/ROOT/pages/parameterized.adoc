@@ -78,7 +78,7 @@ For example, if you have a test that sets a payload for a flow and expects a res
 </mule>
 ----
 
-= Parameterization From File
+== Parameterization From File
 
 To use the same parameterized values on different test suites you must save your parameterizations values in a YAML file in the `/test/resources` directory of your Mule application project:
 

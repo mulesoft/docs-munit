@@ -1,4 +1,4 @@
-= Assert That
+= Assert That Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]

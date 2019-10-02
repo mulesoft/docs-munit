@@ -1,4 +1,4 @@
-= Fail
+= Fail Event Processor
 
 The Fail Event Processor allows you to fail your test on purpose. This is useful to validate that a test should fail
 if that point is reached.

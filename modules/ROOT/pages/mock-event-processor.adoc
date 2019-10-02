@@ -1,4 +1,4 @@
-= About Mock When Event Processor
+= Mock When Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -204,8 +204,8 @@ To dynamically mock a variable, you can use `then-call` as follows:
 
 == See Also
 
-* xref:assertion-event-processor.adoc[About Assert That Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:set-event-processor.adoc[About Set Event Processor]
-* xref:verify-event-processor.adoc[About Verify Event Processor]
+* xref:assertion-event-processor.adoc[Assert That Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]
+* xref:run-custom-event-processor.adoc[Run Custom Event Processor]
+* xref:set-event-processor.adoc[Set Event Processor]
+* xref:verify-event-processor.adoc[Verify Event Processor]

@@ -1,4 +1,4 @@
-= About MUnit Event Processors
+= MUnit Event Processors
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
