@@ -1,4 +1,0 @@
-= Mocking Message before and inside a foreach
-ifndef::env-site,env-github[]
-include::_attributes.adoc[]
-endif::[]

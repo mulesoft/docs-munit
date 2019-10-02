@@ -2,7 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: munit-suite.adoc
+:page-aliases: munit-suite.adoc, munit-test-reference.adoc
 
 == MUnit Test Suite
 
@@ -85,11 +85,39 @@ Assertions and Verifications should go here.
 .A Studio representation of the MUnit Test
 image::munit-test-concept-9c736.png[munit-test]
 
-=== MUnit Test Description Attribute
+=== MUnit Test Reference
+
+[cols="30,70"]
+|===
+|Name |Description
+
+|`name`
+| Defines the name of the test. The name must be unique inside the test suite. +
+This attribute is mandatory.
+
+|`description`
+| Describes the scenario being tested. +
+This attribute is mandatory.
+
+|`ignore`
+|Defines if the test should be ignored. If not present, the test is not ignored.
+
+|`tags`
+|Comma separated list of tags to assign to the test.
+
+|`expectedErrorType`
+|Defines the error Type that should be received after the execution of this test.
+
+|`expectException`
+|Defines the exception that should be received after the execution of this test.
+
+|===
+
+==== MUnit Test Description Attribute
 
 In MUnit, you must write a description for your test. Ideally, you should write a useful, representative description of the scenario you are testing. This description displays in the test console before running the test, and also in the reports. The more representative the description, the easier to read and troubleshoot any failures.
 
-=== Ignoring a Test
+==== Ignoring a Test
 
 There may be scenarios where you need to shut down a test. Whether this be because the test is failing or because it has inconvenient side effects. MUnit allows you to ignore a specific test so that you don't have to manually comment out the code.
 
@@ -109,7 +137,7 @@ In Anypoint Studio, you can check the *Ignore Test* option.
 
 image::munit-test-concept-de4c9.png[ignore-test]
 
-=== Test Tag Attribute
+==== Test Tag Attribute
 
 MUnit allows you to tag your tests, so you can choose to run tests under a specific tag. For example:
 
@@ -127,7 +155,7 @@ MUnit allows you to tag your tests, so you can choose to run tests under a speci
 .In Anypoint Studio, you can define tags in the proper field.
 image::munit-test-concept-c2d9f.png[test-tags]
 
-=== MUnit Test Expected Error and Exception Attributes
+==== MUnit Test Expected Error and Exception Attributes
 
 Assume that you want to validate that the flow or sub-flow you are testing fails and throws a specific error. MUnit allows you to add the attributes `expectedErrorType` and `expectException` as follows:
 
@@ -175,6 +203,7 @@ You must provide the canonical class name of the exception that you expect. MUni
 ----
 +
 If you define that your test expects an exception and none is thrown, the test fails immediately.
+
 
 == Before and After Scopes
 

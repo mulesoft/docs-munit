@@ -1,31 +1,18 @@
 .xref:index.adoc[MUnit]
 * xref:index.adoc[Overview]
 
-* xref:configuring-munit.adoc[Configuring MUnit]
-
-* xref:build-munit-tutorial.adoc[Building your First MUnit test]
- ** xref:build-munit-tutorial-studio.adoc[Using Studio]
- ** xref:build-munit-tutorial-maven.adoc[Using Maven]
-
 * xref:munit-cookbook.adoc[MUnit Examples]
-  ** xref:coverage-config-cookbook.adoc[Configuring Coverage Limits]
-  ** xref:db-utils-cookbook.adoc[Using DB Utils]
-  ** xref:ftp-utils-cookbook.adoc[Using FTP Utils]
-  ** xref:mock-file-cookbook.adoc[Mocking from File ]
-  ** xref:mock-before-after-foreach-cookbook.adoc[Mocking Message before and inside a foreach]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
-  ** xref:environment-config-cookbook.adoc[Testing environment configurations]
   ** xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave Expression From a Test]
-  ** xref:poll-flow-cookbook.adoc[Testing a Flow With a Poll]
-  ** xref:flow-sources-enable-cookbook.adoc[Enabling flow sources]
+  ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
- ** xref:munit-test-reference.adoc[MUnit Test Parameters]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
  ** xref:before-after-scopes-reference.adoc[Before/After scopes]
+ ** xref:munit-showing-results.adoc[Reading MUnit Results]
 
 * xref:event-processors.adoc[MUnit Processors]
- ** xref:assertion-event-processor.adoc[Assert]
+ ** xref:assertion-event-processor.adoc[Assert That]
   *** xref:munit-matchers.adoc[Matchers]
    **** xref:core-matchers-reference.adoc[Core Matchers]
    **** xref:string-matchers-reference.adoc[String Matchers]
@@ -37,23 +24,14 @@
  ** xref:mock-event-processor.adoc[Mock When]
  ** xref:verify-event-processor.adoc[Verify]
  ** xref:spy-event-processor.adoc[Spy Event]
- ** xref:munit-utils.adoc[Utils]
-  *** xref:db-util.adoc[Database]
-  *** xref:ftp-util.adoc[FTP]
 
 * xref:munit-in-studio.adoc[MUnit in Studio]
-** xref:munit-update-site.adoc[Update Site]
 ** xref:munit-scaffold-test-task.adoc[Scaffolding an MUnit Test]
-** xref:munit-showing-results.adoc[Showing Results]
-** xref:munit-run-configurations.adoc[Run Configurations]
-** xref:runtime-patching.adoc[Runtime Patching]
 
 * xref:munit-domain-support.adoc[MUnit Support for Domain Based Applications]
 
 * xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
 
 * xref:munit-coverage-report.adoc[Coverage]
- ** xref:coverage-maven-concept.adoc[Maven Configuration for Coverage]
-
-* xref:munit-best-practices.adoc[Best Practices]
-* xref:munit-troubleshooting.adoc[Troubleshooting]
+ ** xref:coverage-maven-concept.adoc[Using Coverage in Maven]
+ ** xref:coverage-studio-concept.adoc[Using Coverage in Studio]

@@ -1,8 +1,8 @@
-= About MUnit Coverage Reports
+= Coverage
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: faq-how-munit-coverage.adoc, coverage-studio-concept.adoc, to-disable-coverage-studio.adoc
+:page-aliases: faq-how-munit-coverage.adoc, to-disable-coverage-studio.adoc
 
 The MUnit Coverage feature provides a measurement of how much of a Mule application has been executed by a set of MUnit tests by counting the amount of event processors executed. This allows you to obtain a quality standard for your application, and provides metrics for:
 
@@ -93,50 +93,3 @@ Use the code callouts below to understand each field in the report:
 <14> Amount of event processors in that flow.
 <15> Amount of event processors covered in that flow.
 <16> XML line numbers containing event processors in that file, and whether they were covered or not.
-
-== Enabling Coverage Reports in Anypoint Studio
-
-The Coverage button in the image bellow allows you to see which flows, and which percentage of event processors in those
-flows were covered by the test:
-
-image::using-munit-coverage-in-anypoint-studio.png[]
-
-The Overall Coverage value represents the percentage of the Mule application event processors that have been executed by the MUnit test.
-
-You can click the Generate Report button to get the report detailing the flows and event processors contained by the Mule configuration files that were included in the MUnit test.
-
-image::munit-coverage-report-in-anypoint-studio.png[]
-
-[%header,cols="20a,80a"]
-|===
-| Column      | Description
-| Resource    | The name of the Mule Configuration file.
-| Containers | Number of Flows inside the Mule configuration file.
-| Weight      | This field represents how much of your application is contained inside a configuration file. +
-                It is calculated as a percentage of the overall number of event processors in the documentation and the
-                amount of event processors contained in the Mule configuration file.
-| Coverage    | This field represents the percentage of the event processors inside the Mule Configuration file that
-                were executed in the MUnit test.
-|===
-
-Additionally you can click in each Resource, to get a more specific and granular report of the Event Processors executed in that resource:
-
-image::munit-granular-coverage-report-in-anypoint-studio.png[]
-
-[%header,cols="20a,80a"]
-|===
-| Column              | Description
-| Name                | The name of the container.
-| Type                | The type of the container.
-| Covered Processors | The processors inside the container that were executed during the MUnit test.
-| Processors         | The total amount of processors inside the container.
-| Coverage            | This field represents the percentage of the event processors inside the container that were executed in the MUnit test.
-|===
-
-== Disabling Coverage Reports
-
-If you choose so, you can disable the coverage calculation from your project's run configuration.
-
-Right click in your Package Explorer, and choose *Run As* and *Run Configurations...*, select your MUnit run configuration file to access your suite's configuration, and deselect the "Run coverage" option under your coverage settings.
-
-image::disable-munit-coverage-in-anypoint-studio.png[]

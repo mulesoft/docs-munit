@@ -160,7 +160,7 @@ is="#[MunitTools::equalTo([3, 2, 1])]"/>
 == See Also
 
 * xref:4.1@mule-runtime::dataweave-types.adoc#dw_type_comparable[DataWeave Comparable Type]
-* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:munit-matchers.adoc[MUnit Matchers]
 * xref:core-matchers-reference.adoc[Core Matchers Reference]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

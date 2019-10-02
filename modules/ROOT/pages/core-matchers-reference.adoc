@@ -113,7 +113,7 @@ is="#[MunitTools::allOf([MunitTools::notNullValue(),MunitTools::withMediaType('t
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:munit-matchers.adoc[MUnit Matchers]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

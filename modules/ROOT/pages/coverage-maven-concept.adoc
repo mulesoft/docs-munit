@@ -1,4 +1,4 @@
-= Maven Configuration for Coverage
+= Using Coverage in Maven
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]

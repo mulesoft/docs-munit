@@ -1,4 +1,4 @@
-= About the Spy Event Processor
+= Spy Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -79,4 +79,4 @@ Overall, you should use the Spy processor to verify or assert.
 
 == See Also
 
-** xref:event-processors.adoc[About MUnit Event Processors]
+** xref:event-processors.adoc[MUnit Event Processors]

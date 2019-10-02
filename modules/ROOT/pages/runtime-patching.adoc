@@ -1,14 +1,13 @@
-= Runtime Patching
+= Patching the Embedded Mule Runtime Engine Version
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Patching in MUnit is different than how the mule runtime is patched. +
-MUnit runs using the embedded container, which downloads all required dependencies to start a container based on a given version. To use a patched version, for example `4.1.2-hf2`, you need to specifically point MUnit to run against it. You can do this from both Maven and Studio.
+Patching in MUnit is different from patching in Mule runtime engine . MUnit runs using an embedded Mule container, which downloads all required dependencies to start Mule based on a given version. To use a patched Mule version (for example, `4.1.2-hf2`), you must point MUnit to run specifically against it. You can do this from either Maven or Anypoint Studio.
 
-== Patching MUnit from Maven
+== Patching MUnit Using Maven
 
-By default, MUnit runs with the runtime corresponding to the _minMuleVersion_ of the `mule-artifact.json` file. You can override this version by using the _runtimeVersion_ attribute of the munit-maven-plugin configuration:
+By default, MUnit runs against the Mule version corresponding to the `minMuleVersion` defined in the `mule-artifact.json` file. You can override this version by using the `runtimeVersion` attribute of the `munit-maven-plugin` artifact configuration:
 
 [source,xml,linenums]
 ----
@@ -30,22 +29,22 @@ By default, MUnit runs with the runtime corresponding to the _minMuleVersion_ of
     </configuration>
 </plugin>
 ----
-<1> Remember that this version is an example. You need to declare the correct version provided by the team.
+<1> Be sure to replace the placeholder version in this example with your version, as provided by MuleSoft.
 
-== Patching MUnit from Studio
+== Patching MUnit Using Studio
 
-By default, MUnit runs in studio with the version of the project’s server. You can override this version, by specifying the patched runtime version in the MUnit run configuration:
+By default, MUnit runs in Anypoint Studio with the Mule runtime engine version of the project’s server. You can override this version by specifying the patched Mule version in the MUnit run configuration menu:
 
-. In the top menu bar, go to *Run* and *Run Configurations…*.
-. Under MUnit, select your MUnit test file.
-. Type the MUnit patched version you want to use in the *Mule Runtime Version* field, under *Advanced Settings*.
+. In the top menu bar, select *Run* and *Run Configurations…*.
+. Under *MUnit*, select your MUnit test file.
+. In the *Mule Runtime Version* field under *Advanced Settings* type the Mule patched version you want to use.
 +
 image::runtime-patching-7d385.png[]
-+
- If you already set the runtimeVersion attribute in the pom as shown in the “From Maven” section, you can click the *Load configuration from pom file* option to automatically load this version into the *Mule Runtime Version* field.
+
+
+If you already set the `runtimeVersion` attribute in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
 
 
 == See Also
 
-* xref:munit-maven-support.adoc[About MUnit Maven Plugin]
-* xref:to-set-up-munit-maven-plugin.adoc[To Set Up MUnit Maven Plugin (Maven)]
+* xref:munit-maven-support.adoc[MUnit Maven Plugin]

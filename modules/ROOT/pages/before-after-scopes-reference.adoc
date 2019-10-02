@@ -4,7 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :page-aliases: before-after-scopes-concept.adoc
 
-== About Before Suite Scope
+== Before Suite Scope
 
 The MUnit Before Suite contains code that is meant to be executed before the whole suite.
 The Before Suite has one execution rule: Run before all the tests, just once.
@@ -31,7 +31,7 @@ Note that the `before-suite` is located outside the MUnit test. One instance in 
 When you place a before-suite in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
 
-== About After Suite Scope
+== After Suite Scope
 
 The MUnit After Suite is a scope. It can contain code that is meant to be executed after the whole suite. The After suite has one execution rule: Run after all the tests, just once.
 
@@ -60,7 +60,7 @@ Note that the after-suite is located outside the MUnit test. One instance in whi
 
 When you place an after-suite in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
-== About Before Test Scope
+== Before Test Scope
 
 The MUnit Before Test Scope contains code that is meant to be executed before each test. Each Before Test scope follows the same execution rule: Run before each test.
 
@@ -85,7 +85,7 @@ Note that the `before.test` is located outside the MUnit test. One instance in w
 
 When you place an before-test in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
-== About After Test Scope
+== After Test Scope
 
 The MUnit After Test Scope contains code that is meant to be executed after each test. Each After Test scope follows the same execution rule: Run after each test.
 
