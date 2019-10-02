@@ -43,8 +43,3 @@ image::runtime-patching-7d385.png[]
 
 
 If you already set the `runtimeVersion` attribute in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
-
-
-== See Also
-
-* xref:munit-maven-support.adoc[MUnit Maven Plugin]
