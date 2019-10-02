@@ -5,7 +5,7 @@ endif::[]
 
 When developing test cases, you might want to use Java classes located in `src/test/java`. You can use Java classes through Java Module or through DataWeave.
 
-For the following example, assume that your class is located in `src/test/java/com/example/MyUtilClass.java`:
+For example, assume that you want to use in an MUnit test a `MyUtilClass.java` class located in `src/test/java/com/example/`:
 
 .MyUtilClass
 [source, java, linenums]
@@ -21,9 +21,8 @@ public class Helper {
 }
 ----
 
-[CAUTION]
-====
-The package of the class needs to be exported in the `mule-artifact.json` file:
+When using custom classes, the package of the class must be exported in the `mule-artifact.json` file:
+
 [source, json]
 ----
 {
@@ -38,10 +37,8 @@ The package of the class needs to be exported in the `mule-artifact.json` file:
   }
 }
 ----
-====
 
-
-== Using DataWeave
+== Invoking your Java Class Using DataWeave
 
 To invoke static methods using DataWeave you must add the `java!` prefix to the package name of the class:
 
@@ -58,7 +55,7 @@ To invoke static methods using DataWeave you must add the `java!` prefix to the 
 </munit:test>
 ----
 
-== Using Java Module
+== Invoking your Java Class Using Java Module
 
 . Ensure that the Java module is in your project:
 +
@@ -74,7 +71,7 @@ To invoke static methods using DataWeave you must add the `java!` prefix to the 
 </dependency>
 ----
 . Use any of the Java Module's operations. +
-In this case, invoke a static method of a class:
+For this example, invoke a static method of a class:
 +
 .Using a class with the Java Module
 [source, xml, linenums]
