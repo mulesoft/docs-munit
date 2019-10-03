@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and later
 :keywords: munit, testing, unit testing
+:page-aliases: mock-message-processor.adoc
 
 The Mock When processor allows you to mock an event processor when it matches the defined name and attributes.
 
