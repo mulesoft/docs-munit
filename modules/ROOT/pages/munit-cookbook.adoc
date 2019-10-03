@@ -8,6 +8,6 @@ This section links to examples that demonstrate common MUnit usages.
 [%header%autowidth.spread,cols="a,a"]
 |===
 | Example | Description
-| xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors] |
-| xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave Expression From a Test] |
+| xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors] | Learn how to mock expected errors in your code.
+| xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] | Learn how to configure MUnit to run against a patched Mule runtime engine version.
 |===
