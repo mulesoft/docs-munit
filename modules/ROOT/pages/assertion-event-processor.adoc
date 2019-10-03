@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and later
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+:page-aliases: assertion-message-processor.adoc
 
 The Assert That event processor allows you to run assertions to validate the state of a Mule event's content. You can use the Assert That processor to validate the Mule event after the production code runs.
 
