@@ -1,14 +1,15 @@
-= About Queue Event Processors
+= Queue Event Processors
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing, queue
 
-Allows you to manage temporary queues during your test runs.
-All queues will be emptied as soon as the test ends.
+The Queue event processors allow you to manage temporary queues during your test runs.
 
-=== Queue
+All queues are emptied as soon as the test ends.
+
+== Queue
 
 Adds the value to the queue. If not specified, the value is taken from the `payload`.
 
@@ -28,9 +29,9 @@ You can specify the queue's name to which the value should be added. If not spec
 </munit-tools:queue>
 ----
 
-=== Dequeue
-Removes the last element of the queue, if the queue is empty, it waits until an element
-is queued.
+== Dequeue
+
+Removes the last element of the queue, if the queue is empty, it waits until an element is queued.
 
 [source,xml,linenums]
 ----
@@ -44,15 +45,15 @@ You can specify a timeout when waiting for an element to be queued:
 <munit-tools:dequeue timeout="1000" timeoutUnit="SECONDS"/>
 ----
 
-Like the queue operation, you can specify the queue's name from which to dequeue.
-If not specified, the default queue will be used.
+Like the queue operation, you can specify the queue's name from which to dequeue. If not specified, the default queue will be used.
 
 [source,xml,linenums]
 ----
 <munit-tools:dequeue queueName="CUSTOM_QUEUE_1"/>
 ----
 
-=== Queue Size
+== Queue Size
+
 Function that obtains the queue size.
 
 [source,xml,linenums]

@@ -1,0 +1,167 @@
+= FTP Utils
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:page-aliases: munit-ftp-server.adoc
+
+== Overview
+
+One of the main problems of testing production code are external system connections. To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You could also have a dedicated external FTP server for testing, but your Maven project would not be portable -- a third party would need to install the testing FTP server to compile your project.
+
+To make it easier for you to test FTP connections, MUnit allows you to implement an FTP server in your local environment.
+
+== Example
+
+. Assume that you want to test the following Mule application:
++
+[source,xml,linenums]
+----
+<sftp:config name="SFTP_Config">
+    <sftp:connection host="${ftp.host}" port="${ftp.port}" username="${ftp.user}" password="${ftp.password}"/>
+</sftp:config>
+
+<configuration-properties file="ftp.properties" />
+
+<flow name="listFlow" doc:id="37fddc97-1f0a-4d31-9d24-ec7eb741501f" >
+    <sftp:list config-ref="SFTP_Config" directoryPath="."/>
+    <foreach>
+        <logger level="INFO" message="#[attributes.fileName]"/>
+    </foreach>
+</flow>
+----
+. The `ftp.properties` in `src/main/resources` has the following content:
++
+----
+ftp.host=localhost
+ftp.port=22
+ftp.user=max
+ftp.password=munittest
+----
++
+The username field cannot be empty. If you do not have a username/password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to true.
+
+== Installing MUnit FTP Server Module
+
+. From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
+. In the search bar look for *MUnit Utils FTP Server*, and add the module to your project.
+
+A few considerations after adding the module to your project:
+
+* The MUnit FTP server artifact in your `pom` file must have the `test` scope:
++
+[source,xml,linenums]
+----
+<!-- Ftp Server Dependency -->
+<dependency>
+    <groupId>com.mulesoft.munit.utils</groupId>
+    <artifactId>munit-ftpserver-module</artifactId>
+    <version>2.0.1</version>
+    <classifier>mule-plugin</classifier>
+    <scope>test</scope>
+</dependency>
+----
+
+
+=== Defining the FTP Server
+
+Define the FTP server using the *MUnit FTP Server Config* from the *Global Elements* in your canvas.
+
+The FTP Server can take the following parameters:
+
+[%header%autowidth.spread]
+|===
+|Attribute Name |Description
+|`name` |Defines the configuration name of this FTP server. The value must be unique.
+|`port` |Defines the port on which the FTP server should listen.
+|`anonymous` | (Boolean.) Sets anonymous access to the FTP Server. If Anonymous is set to true, by setting the username to "anonymous" you don't need to set a password to access the FTP server. Default value is true.
+|`secure` |(Boolean.) Defines the FTP protocol. When the secure parameter is set to true, the server behaves as a SFTP server and connections are allowed only through authentication. If it is set to false, the server behaves as a FTP server and allows either authenticated or anonymous connections. Default value is false.
+|`homeDir` |Defines the user home directory. The default value is the filesystem root. +
+It is possible to define the FTP user home directory using the "~" character to represent the home directory on the file system.
+|===
+
+. In your Studio canvas, go to *Global Elements* tab, and select your *MUnit FTP Server Config* element.
+. Click *Edit* and complete the fields:
++
+[%header%autowidth.spread,cols="a,a"]
+|===
+| _Name_ | `MUnit_FTP_Server_Config`
+| _port_. | `${ftp.port}`
+| _Username_. | `${ftp.user}`
+| _Password_. | `${ftp.password}`
+| _secure_. | `true`
+| _homeDir_. | `${app.home}`
+|===
++
+[source,xml,linenums]
+----
+<ftpserver:config name="MUnit_FTP_Server_Config">
+    <ftpserver:connection port="${ftp.port}" username="${ftp.user}" password="${ftp.password}" secure="true" homeDir="${app.home}"/>
+</ftpserver:config>
+----
+
+=== Running the Test
+
+After configuring the FTP server you can run the test:
+
+[source,xml,linenums]
+----
+<munit:test name="listFlowTest" description="Test listFlow" >
+    <munit:execution>
+        <flow-ref name="listFlow"/>
+    </munit:execution>
+    <munit:validation>
+        <munit-tools:assert-that expression="#[sizeOf(payload)]" is="#[MunitTools::greaterThan(0)]"/>
+    </munit:validation>
+</munit:test>
+----
+
+This FTP accepts any user, so there is no need to set up a user database or list.
+
+== MUnit FTP server Processors
+
+=== Validating file existence
+
+The `contains-files` processor attempts to validate the existence of a file in the FTP server. If the file is not present, the processor fails causing the test to fail.
+
+[source,xml,linenums]
+----
+<ftpserver:contains-files config-ref="MUnit_FTP_Server_Config" path="/" file="example.txt"/>
+----
+
+[%header%autowidth.spread]
+|===
+|Attribute Name |Description
+
+|`config-ref`
+|Defines the FTP server configuration.
+
+|`path`
+|Defines in which folder to search based on the user home directory defined previously.
+
+|`file`
+|Defines the name of the file to look for.
+
+|===
+
+=== Removing a file
+
+The `remove` processor provides another operation that may be of use. This operation instructs the FTP server to remove a file from storage.
+
+[source,xml,linenums]
+----
+<ftpserver:remove config-ref="MUnit_FTP_Server_Config" path="example.txt"/>
+----
+
+[%header%autowidth.spread]
+|===
+|Attribute Name |Description
+
+|`config-ref`
+|Defines the FTP server configuration.
+
+|`path`
+|The full path of the file to remove.
+
+|===
+
+TIP: This feature is of use when we are creating the same file name several times. For example, we can make use of it in an `after-test` to ensure that no name collisions cause the test to fail.

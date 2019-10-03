@@ -1,13 +1,15 @@
-= About Run Custom Event Processor
+= Run Custom Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and later
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 
-The Run Custom Event Processor allows you to assert the Mule Event content against a custom assertion.
+The Run Custom event processor allows you to assert the Mule event content against a custom assertion.
 
-For example, you can define the following assertion in JAVA:
+Although it's not necessary to add any extra dependencies to your `pom.xml` file, you must your custom assertion class to the `mule-artifact.json` file as an exported resource.
+
+For example, you can define the following assertion in Java:
 
 [source,java,linenums]
 ----
@@ -33,21 +35,31 @@ And then use the Run Custom Event Processor to run it:
   assertion="com.example.CustomAssertion" // <1>
   expression="#[payload]"/>
 ----
-<1> The assertion field needs to have the canonical class name of your custom assertion.
+<1> The assertion field needs to have the canonical class name of your custom assertion and the class needs to be exported.
 
-// _TODO:Comment out and check with the team
-// [CAUTION]
-// --
-// Implement your custom assertions with care. Modifying the message payload or variables could affect subsequent assertions in your test. Normal MUnit assertions guarantee that this does not happens unless specified
-// --
+To export it when packaging your application, add the `CustomAssertion` to your `mule-artifact.json`
 
-
+[source,json,linenums]
+----
+{
+    "name": "mule-application",
+    "minMuleVersion": "4.2.0",
+    "classLoaderModelLoaderDescriptor": {
+        "id": "mule",
+        "attributes": {
+            "exportedResources": [
+                "resources/CustomAssertion.java"
+            ]
+        }
+    }
+}
+----
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
-* xref:set-event-processor.adoc[About Set Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
+* xref:munit-matchers.adoc[MUnit Matchers]
+* xref:assertion-event-processor.adoc[Assert That Event Processor]
+* xref:set-event-processor.adoc[Set Event Processor]
+* xref:mock-event-processor.adoc[Mock When Event Processor]
+* xref:verify-event-processor.adoc[Verify Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]

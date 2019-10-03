@@ -1,7 +1,10 @@
-= dw::test::Asserts
+= DataWeave Assertions Library
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-aliases: weave-assertions.adoc
+
+== dw::test::Asserts
 
 This module contains the set of core Matchers to use in your tests
 

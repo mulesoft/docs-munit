@@ -1,0 +1,30 @@
+= Assert Equals
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+:page-aliases: assert-equals-processor.adoc
+
+The Assert Equals processor allows you to run assertions in order to validate the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs.
+
+For example, to assert that a payload is equal to a certain value, you can configure the Assert-Equals processor the following way:
+
+[source,xml,linenums]
+----
+<munit-tools:assert-equals
+  actual="#[payload]"
+  expected="#[2]"
+  message="The payload should be 2"/>
+----
+
+If the `expected` attribute is a String, you can specify the literal value without requiring an expression.
+
+[source,xml,linenums]
+----
+<munit-tools:assert-equals
+  actual="#[payload]"
+  expected="Example"
+  message="The payload should be 'Example'"/>
+----
+
+
+If this assertion fails, the processor throws a `java.lang.AssertionError`.

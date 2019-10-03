@@ -1,0 +1,89 @@
+= Using Utility Classes From a Test
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+When developing test cases, you might want to use custom Java classes located in `src/test/java`. You can use Java classes through DataWeave or through Java Module.
+
+When using custom classes, the package of the class must be exported in the `mule-artifact.json` file:
+
+[source, json]
+----
+{
+  "minMuleVersion": "4.x.x",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [
+        "com.example.test"
+      ]
+    }
+  }
+}
+----
+
+For example, assume that you want to use in an MUnit test a `MyUtilClass.java` class located in `src/test/java/com/example/`:
+
+.MyUtilClass
+[source, java, linenums]
+----
+package com.example.test;
+
+public class Helper {
+
+  public static long getCurrentMillis() {
+    return System.currentTimeMillis();
+  }
+
+}
+----
+
+== Invoking Your Java Class Using DataWeave
+
+To invoke static methods using DataWeave you must add the `java!` prefix to the package name of the class:
+
+.Using a class in DataWeave
+[source, xml, linenums]
+----
+<munit:test name="usingJavaInDW">
+    <munit:behavior>
+        <set-variable variableName="number" value="#[java!com::example::test::Helper::currentMillis()]" />
+    </munit:behavior>
+    <munit:execution>
+        <flow-ref name="myFlow"/>
+    </munit:execution>
+</munit:test>
+----
+
+== Invoking Your Java Class Using Java Module
+
+To invoke a custom Java class using Java Module:
+
+. Ensure that Java Module is in your project:
++
+.Java Module dependency
+[source, xml, linenums]
+----
+<dependency>
+    <groupId>org.mule.module</groupId>
+    <artifactId>mule-java-module</artifactId>
+    <version>${javaModule.version}</version>
+    <classifier>mule-plugin</classifier>
+    <scope>test</scope>
+</dependency>
+----
+. Use any of the Java Module's operations. +
+For this example, invoke a static method of a class:
++
+.Using a class with the Java Module
+[source, xml, linenums]
+----
+<munit:test name="usingJavaInDW">
+    <munit:behavior>
+        <set-variable variableName="number" value="#[java!com::example::test::Helper::currentMillis()]" />
+    </munit:behavior>
+    <munit:execution>
+        <flow-ref name="myFlow"/>
+    </munit:execution>
+</munit:test>
+----

@@ -52,7 +52,7 @@ Checks that the size of the expression matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasSize(5)]"/>
+is="#[MunitTools::hasSize(MUnitTools::greaterThan(2))]"/>
 ----
 
 .Example
@@ -60,9 +60,8 @@ is="#[MunitTools::hasSize(5)]"/>
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasSize(MUnitTools::greaterThan(2))]"/>
+is="#[MunitTools::hasSize(5)]"/>
 ----
-
 
 == isEmpty()
 
@@ -85,7 +84,7 @@ Checks that the expression has a key that matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasKey('myKey')]"/>
+is="#[MunitTools::hasKey(MunitTools::startsWith('a'))]"/>
 ----
 
 .Example
@@ -93,7 +92,7 @@ is="#[MunitTools::hasKey('myKey')]"/>
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasKey(MunitTools::startsWith('a'))]"/>
+is="#[MunitTools::hasKey('mykey')]"/>
 ----
 
 == hasValue(Object)
@@ -105,7 +104,7 @@ Checks that the expression has a value that matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasValue('myValue')]"/>
+is="#[MunitTools::hasValue('myvalue')]"/>
 ----
 
 .Example
@@ -118,7 +117,7 @@ is="#[MunitTools::hasValue(MunitTools::startsWith('a'))]"/>
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:munit-matchers.adoc[MUnit Matchers]
 * xref:core-matchers-reference.adoc[Core Matchers Reference]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]

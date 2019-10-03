@@ -1,12 +1,12 @@
-= About Storage Event Processors
+= Storage Event Processors
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:version-info: 2.0 and newer
-:keywords: munit, testing, unit testing, storage
+:page-aliases: storage-processors.adoc
 
-The Storage Processors allows you to manage temporary storage during  your tests.
-All storage is *cleared as soon as the test ends*.
+The Storage processors allows you to manage temporary storage during  your tests.
+
+All storage is cleared as soon as the test ends.
 
 == Store operation
 

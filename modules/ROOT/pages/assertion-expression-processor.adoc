@@ -1,12 +1,10 @@
-= About Assert Expression Event Processor
+= Assert Expression
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:version-info: 2.0 and later
-:keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+:page-aliases: assert-expression-processor.adoc
 
-The Assert Expression Event Processor allows you evaluate a DW expression that asserts the state of a Mule Event's content. +
-This Event Processor can be used to validate the Mule Event after the production code runs, using the xref:weave-assertions.adoc[DW Assertions Library]
+The Assert Expression processor allows you evaluate a Dataweave expression that asserts the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs, using the xref:dataweave-assertions-library.adoc[DataWeave Assertions Library].
 
 For example, to assert that a payload is equal to a certain value, you can configure the Assert-Expression processor using the equalTo() matcher.
 
@@ -19,7 +17,7 @@ For example, to assert that a payload is equal to a certain value, you can confi
 </munit-tools:assert>
 ----
 
-== Perform complex assertions
+== Perform Complex Assertions
 
 The DW assertions library allows you to assert the state of the Mule Event's content in a deeper way.
 
@@ -34,6 +32,7 @@ The DW assertions library allows you to assert the state of the Mule Event's con
 
 
 == Create your own Matcher
+
 To create your own matcher, you can add DW files to your `src/test/resources` folder. For example, a file called
 `MyMatcher.dwl` with the following content:
 
@@ -65,10 +64,7 @@ And then use it in your Assert-Expression processor:
 
 If this assertion fails, the processor throws a `java.lang.AssertionError`.
 
-WARNING: Matchers from the `dw::test::Asserts` library are not compatible with the `MunitTools` matchers.
-This means, you *can't* use `dw::test::Asserts` with the Assert-That processor, and you *can't* use `MunitTools` matchers with the Assert-Expression processor.
-
-== See Also
-
-* xref:assert-equals-processor.adoc[About Assert Equals Event Processor]
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+[WARNING]
+--
+Matchers from the `dw::test::Asserts` library are not compatible with the `MunitTools` matchers. You can't use `dw::test::Asserts` with the Assert-That processor, and you can't use `MunitTools` matchers with the Assert-Expression processor.
+--

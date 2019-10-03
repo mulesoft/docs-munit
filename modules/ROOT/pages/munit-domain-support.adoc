@@ -1,4 +1,4 @@
-= About MUnit Support for Domain Based Applications
+= MUnit Support for Domain-Based Applications
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -55,4 +55,4 @@ Remember to keep consistency with `<version>` artifact in your repository and in
 
 == See Also
 
-* xref:7.1@studio::domain-support-concept.adoc[About Domain Support (Anypoint Studio)]
+* xref:7.1@studio::domain-support-concept.adoc[Domain Support (Anypoint Studio)]

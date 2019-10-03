@@ -1,0 +1,15 @@
+= MUnit Cookbook
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+This section links to examples that demonstrate common MUnit usages.
+
+[%header%autowidth.spread,cols="a,a"]
+|===
+| Example | Description
+| xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor] | Learn how to mock a processor that can return different payloads.
+| xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors] | Learn how to mock expected errors in your code.
+| xref:utility-classes-cookbook.adoc[Using Utility Classes From a Test] | Learn how to use custom Java classes in you MUnit tests.
+| xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] | Learn how to configure MUnit to run against a patched Mule runtime engine version.
+|===
