@@ -82,8 +82,5 @@ If you define two properties in the same scope with the _same_ key, be aware tha
 
 == See Also
 
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]
+* xref:run-custom-event-processor.adoc[Run Custom Event Processor]
