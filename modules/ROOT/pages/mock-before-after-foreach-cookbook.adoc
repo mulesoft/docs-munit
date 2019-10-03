@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Suppose you have a processor inside a foreach scope and you want to provide different values on each interation.
+Suppose you have a processor inside a `foreach` scope and you want to provide different values on each iteration:
 
 [source,xml]
 ----
@@ -14,7 +14,7 @@ Suppose you have a processor inside a foreach scope and you want to provide diff
 </flow>
 ----
 
-You can use a munit-tools:mock-when to mock the processor and use the then-call to call a new flow that set payloads depending on the foreach status.
+Use an `munit-tools:mock-when` processor to mock the processor in your flow and use the `then-call` operation to call a new flow that set payloads depending on the `foreach` status:
 
 [source,xml]
 ----
@@ -26,7 +26,7 @@ You can use a munit-tools:mock-when to mock the processor and use the then-call 
 </munit-tools:mock-when>
 ----
 
-Inside the flow that is called by then-call you can use a Choice processor to evaluate some value and set a mocked payload. In this case the foreach counter is evaluated to decide what payload setup.
+Inside the flow that is called by the `then-call` you can use a `Choice` processor to evaluate a value and set a mocked payload. In this case, the `foreach` counter is evaluated to decide which payload to set:
 
 [source,xml]
 ----
@@ -47,7 +47,7 @@ Inside the flow that is called by then-call you can use a Choice processor to ev
 
 == Mocking a Mule Message
 
-To mock processors like file:list or ftp:list it needs to return as payload a Mule Message collections. MunitTools provides a function to these payloads:
+To mock processors like `file:list` or `ftp:list`, you must return a Mule message collection as payload. `MunitTools` provides a function to mock these payloads:
 
 [source]
 ----
