@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.2 and later
 :keywords: munit, testing, unit testing
+:page-aliases: munit-parameterized-suite.adoc
 
 A parameterized test suite runs the same tests but with different inputs.
 

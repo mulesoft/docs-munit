@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-aliases: assert-expression-processor.adoc
 
 The Assert Expression processor allows you evaluate a Dataweave expression that asserts the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs, using the xref:dataweave-assertions-library.adoc[DataWeave Assertions Library].
 
