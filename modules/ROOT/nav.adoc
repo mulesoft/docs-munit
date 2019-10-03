@@ -3,7 +3,6 @@
 
 * xref:munit-cookbook.adoc[MUnit Examples]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
-  ** xref:utility-classes-dw-cookbook.adoc[Using Utility Classes with a DataWeave Expression From a Test]
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
