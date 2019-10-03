@@ -12,7 +12,7 @@ Checks that the expression contains the specified String.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="`#[MunitTools::containsString('example')]`"/>
+is="#[MunitTools::containsString('example')]"/>
 ----
 
 
@@ -73,7 +73,7 @@ Checks that the expression is equal to the specified String, ignoring case.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::equalToIgnoringCase('Example')]"/>
+is="#[MunitTools::equalToIgnoringCase('example')]"/>
 ----
 
 == equalToIgnoringWhiteSpace(String)
@@ -102,7 +102,7 @@ is="#[MunitTools::stringContainsInOrder(['an', 'example'])]"/>
 
 == See Also
 
-* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:munit-matchers.adoc[MUnit Matchers]
 * xref:core-matchers-reference.adoc[Core Matchers Reference]
 * xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]

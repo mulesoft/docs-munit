@@ -7,9 +7,11 @@ endif::[]
 :port: 1234
 :payload: 'Hello World!'
 
-Because MUnit does not load any of your flow endpoints by default, you must use the *Enable Flow Sources* element within *MUnit Test* to configure which endpoints the MUnit runtime should load and execute for your tests.
+The Enable Flow Sources element within the MUnit test tells MUnit which flow sources to load and execute for the test.
 
-For example, assume that your application has a flow with an HTTP listener that returns a specific payload:
+By default, MUnit does not start any of the event sources (flow sources such as triggers, and listeners). You must configure which flow sources must start for your tests.
+
+Assume that your application has a flow with an HTTP listener that returns a specific payload:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -23,7 +25,7 @@ For example, assume that your application has a flow with an HTTP listener that 
 </flow>
 ----
 
-For MUnit to reach the endpoint, you must enable the `{flow_name}` in your `enable-flow-source` property:
+For MUnit to be able to invoke that listener you must enable the `http-transportFlow` in your `enable-flow-source` property within your MUnit test:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -33,7 +35,7 @@ For MUnit to reach the endpoint, you must enable the `{flow_name}` in your `enab
 
 <munit:test name="http-example-test">
     <munit:enable-flow-sources>
-        <munit:enable-flow-source value="{flow_name}"/> <!--1-->
+        <munit:enable-flow-source value="{flow_name}"/>
     </munit:enable-flow-sources>
 
     <munit:execution>
@@ -46,19 +48,17 @@ For MUnit to reach the endpoint, you must enable the `{flow_name}` in your `enab
     </munit:validation>
 </munit:test>
 ----
-<1> If the `{flow_name}` value is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the
-HTTP listener configuration.
 
-== Enabling Flow Sources from Studio
+If the `{flow_name}` value is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the HTTP listener configuration.
 
-You can also define flow sources using the *Mule Properties* view of your MUnit test in Anypoint Studio:
+MUnit starts flow sources at the beginning of the test, and stops them at the end of the test. Flow sources are not executed during the before-suite/before-test, nor during the after-test/after-suite. +
+See xref:before-after-scopes-reference.adoc[Before/After scopes] for more information.
+
+== Enabling Flow Sources from Anypoint Studio
+
+You can define flow sources using the *Mule Properties* view of your MUnit test in Studio:
 
 image::enable-flow-sources-concept.png[]
 
 . Click *Add*.
 . Select the name of the flow you want to enable from the *Name of the flow* drop-down menu.
-
-
-== See Also
-
-* xref:munit-test-concept.adoc[About MUnit Test]

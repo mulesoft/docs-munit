@@ -1,4 +1,4 @@
-= About MUnit
+= Overview
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,23 +7,20 @@ endif::[]
 
 MUnit is a Mule application testing framework that allows you to easily build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
 
+MUnit version 2.1, works with all Mule versions since 4.0
+
 With MUnit you can:
 
 * Create your test by writing Mule code
 * Mock processors
 * Spy any processor
 * Verify processor calls
-// COMBAK: This will be enable for RC
-// * Create not only unit tests but also integration tests in a local environment -- MUnit allows you to start a local FTP/SFTP or DB server
 * Enable or ignore particular tests
 * Tag tests
-// COMBAK: This will be available for RC
 * Check visual coverage in Studio
 * Generate coverage reports
-// * Debug your tests with Studio
 
-
-MUnit version 2.1, works with all Mule versions since 4.0
+MUnit is fully integrated with Anypoint Studio, allowing you to create, design and run MUnit tests just like you would Mule applications.
 
 MUnit is divided in two main sub modules:
 
@@ -57,10 +54,6 @@ Each module has its own dependency:
 </dependency>
 ----
 
-
-MUnit is fully integrated with Anypoint Studio, allowing you to create, design and run MUnit tests just like you would Mule applications.
-
-
 == See Also
 
-* xref:message-processors.adoc[About MUnit Event Processors]
+* xref:event-processors.adoc[MUnit Event Processors]

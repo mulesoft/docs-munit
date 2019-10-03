@@ -1,11 +1,7 @@
-= About Fail Event Processor
-ifndef::env-site,env-github[]
-include::_attributes.adoc[]
-endif::[]
-:version-info: 2.0 and later
-:keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+= Fail Event Processor
 
-The Fail Event Processor allows you to fail your test on purpose. This is useful to validate that a specific event should not happen.
+The Fail Event Processor allows you to fail your test on purpose. This is useful to validate that a test should fail
+if that point is reached.
 
 [source,xml,linenums]
 ----
@@ -14,11 +10,4 @@ The Fail Event Processor allows you to fail your test on purpose. This is useful
 ----
 
 The message field is optional and defines the error message to print when the assertion fails.
-
-== See Also
-
-* xref:munit-matchers.adoc[About MUnit Matchers]
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
-* xref:set-message-processor.adoc[About Set Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+The processor throws a `java.lang.AssertionError`.

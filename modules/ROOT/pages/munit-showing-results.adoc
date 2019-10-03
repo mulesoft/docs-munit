@@ -1,8 +1,10 @@
-= FAQ: How To Read MUnit Test Results
+= Reading MUnit Results
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-aliases: faq-how-to-read-munit-test-results.adoc
 
+//.faq-how-to-read-munit-test-res
 This section briefly explains how to read the MUnit console logs.
 
 .Successful Build
@@ -120,6 +122,3 @@ java.util.concurrent.ExecutionException: org.mule.runtime.api.component.executio
 ----
 
 == See Also
-
-* xref:to-set-up-munit-maven-plugin.adoc[To Set Up MUnit Maven Plugin from Maven]
-* xref:munit-maven-plugin.adoc[To Operate the MUnit Maven Plugin]
