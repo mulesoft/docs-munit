@@ -96,4 +96,5 @@ Use the code callouts below to understand each field in the report:
 
 == See Also
 
-* xref:coverage-maven-concept.adoc[ Coverage in Maven]
+
+* xref:coverage-maven-concept.adoc[Coverage in Maven]

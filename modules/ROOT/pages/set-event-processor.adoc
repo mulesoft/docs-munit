@@ -6,7 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing
 
 The Set Event Processor allows you to define a Mule Event. +
-This processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.
+This message processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.
 
 The example below shows how to define a simple payload of a Mule Message:
 
@@ -17,8 +17,7 @@ The example below shows how to define a simple payload of a Mule Message:
 </munit:set-event>
 ----
 
-The set-event has the `cloneOriginalEvent` property. If set to true, it clones the event that enters the processor
-and overrides its values with the ones defined. +
+The set-event has the cloneOriginalEvent property. If set to true, it clones the event produced by your code. +
 By default, the value of this property is false.
 
 The payload element in the Set Event processor has the following attributes:
@@ -42,44 +41,49 @@ You can also use the Set Event processor to define message attributes and event 
 
 [source,xml,linenums]
 ----
-<munit:set-event>
-    <munit:payload value="#['payload_value']" mediaType="text/plain" encoding="UTF-8"/>
+<munit:set-event cloneOriginalEvent="false">
+  <munit:payload value="#['Example Body']" mediaType="text/plain" encoding="UTF-8"/>
 
-    <munit:attributes value="#[{ method: 'GET'}]" />
+  <munit:attributes value="#[{ method : 'GET', queryParams : { page : '1'}}]" />
 
-    <munit:variables>
-      <munit:variable key="variableName" value="#['aVariableValue']" />
-    </munit:variables>
+  <munit:variables>
+    <munit:variable key="variable_key" value="#['example']" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:variables>
 </munit:set-event>
 ----
 
-Variables have the following set of parameters:
+All the properties have the same set of attributes:
 
 [%header%autowidth.spread]
-.Variable's Parameters
+.Property Message Processor's Attributes
 |===
-|Parameter Name |Description
+|Attribute Name |Description
 
 |`key`
-|The key of the variable being set.
+|The key of the property being set.
 
 |`value`
-|The content of the variable.
+|The content of the property.
 
 |`encoding`
-|Defines the encoding of the variable. This parameter is optional.
+|Defines the encoding of the message. This attribute is optional.
 
 |`mediaType`
-|Defines the media type of the variable. This parameter is optional.
+|Defines the mime type of the message. This attribute is optional.
 
 |===
 
-You can define as many variables as you need for your test.
+You can define as many properties per each scope as you need for your test.
+
+[WARNING]
+--
+If you define two properties in the same scope with the _same_ key, be aware that one would end up overwriting the other.
+--
 
 == See Also
 
-* xref:assertion-event-processor.adoc[Assert That Event Processor]
-* xref:fail-event-processor.adoc[Fail Event Processor]
-* xref:run-custom-event-processor.adoc[Run Custom Event Processor]
-* xref:mock-event-processor.adoc[Mock When Event Processor]
-* xref:verify-event-processor.adoc[Verify Event Processor]
+* xref:assertion-message-processor.adoc[About Assert That Event Processor]
+* xref:fail-event-processor.adoc[About Fail Event Processor]
+* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
+* xref:mock-message-processor.adoc[About Mock When Event Processor]
+* xref:verify-message-processor.adoc[About Verify Event Processor]
