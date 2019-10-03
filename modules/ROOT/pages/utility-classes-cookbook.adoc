@@ -3,9 +3,26 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-When developing test cases, you might want to use Java classes located in `src/test/java`. You can use Java classes through Java Module or through DataWeave.
+When developing test cases, you might want to use custom Java classes located in `src/test/java`. You can use Java classes through DataWeave or through Java Module.
 
-For the following example, assume that your class is located in `src/test/java/com/example/MyUtilClass.java`:
+When using custom classes, the package of the class must be exported in the `mule-artifact.json` file:
+
+[source, json]
+----
+{
+  "minMuleVersion": "4.x.x",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [
+        "com.example.test"
+      ]
+    }
+  }
+}
+----
+
+For example, assume that you want to use in an MUnit test a `MyUtilClass.java` class located in `src/test/java/com/example/`:
 
 .MyUtilClass
 [source, java, linenums]
@@ -21,31 +38,11 @@ public class Helper {
 }
 ----
 
-[CAUTION]
-====
-The package of the class needs to be exported in the `mule-artifact.json` file:
-[source, json]
-----
-{
-  "minMuleVersion": "4.x.x",
-  "classLoaderModelLoaderDescriptor": {
-    "id": "mule",
-    "attributes": {
-      "exportedPackages": [
-        "com.example.test"
-      ]
-    }
-  }
-}
-----
-====
-
-
-== Using DataWeave
+== Invoking Your Java Class Using DataWeave
 
 To invoke static methods using DataWeave you must add the `java!` prefix to the package name of the class:
 
-.Using a Class in DataWeave
+.Using a class in DataWeave
 [source, xml, linenums]
 ----
 <munit:test name="usingJavaInDW">
@@ -58,9 +55,11 @@ To invoke static methods using DataWeave you must add the `java!` prefix to the 
 </munit:test>
 ----
 
-== Using Java Module
+== Invoking Your Java Class Using Java Module
 
-. Ensure that the Java module is in your project:
+To invoke a custom Java class using Java Module:
+
+. Ensure that Java Module is in your project:
 +
 .Java Module dependency
 [source, xml, linenums]
@@ -74,7 +73,7 @@ To invoke static methods using DataWeave you must add the `java!` prefix to the 
 </dependency>
 ----
 . Use any of the Java Module's operations. +
-In this case, invoke a static method of a class:
+For this example, invoke a static method of a class:
 +
 .Using a class with the Java Module
 [source, xml, linenums]
