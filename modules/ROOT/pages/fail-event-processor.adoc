@@ -1,6 +1,7 @@
-= Fail
+= Fail Event Processor
 
-The Fail processor allows you to fail your test on purpose. This is useful to validate that a specific event should not happen.
+The Fail Event Processor allows you to fail your test on purpose. This is useful to validate that a test should fail
+if that point is reached.
 
 [source,xml,linenums]
 ----
@@ -9,5 +10,4 @@ The Fail processor allows you to fail your test on purpose. This is useful to va
 ----
 
 The message field is optional and defines the error message to print when the assertion fails.
-
-== See Also
+The processor throws a `java.lang.AssertionError`.

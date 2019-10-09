@@ -1,16 +1,18 @@
-= About Coverage in Maven
+= Maven Configuration for Coverage
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Since MUnit 2.x, the coverage report goal is properly integrated with the maven reporting section.
+Since MUnit 2.x, the coverage report goal is integrated with the maven reporting section. Coverage Reports are generated during Maven's `site` lifecycle, during the `coverage-report` goal.
 
+.MUnit Coverage - Sample Maven configuration
 [source,xml,linenums]
 ----
 <plugin>
     <groupId>com.mulesoft.munit.tools</groupId>
     <artifactId>munit-maven-plugin</artifactId>
-    <version>${project.version}</version>
+    <version>${munit.version}</version>
+
     <executions>
         <execution>
             <id>test</id>
@@ -21,13 +23,16 @@ Since MUnit 2.x, the coverage report goal is properly integrated with the maven 
             </goals>
         </execution>
     </executions>
+
     <configuration>
         <coverage>
             <runCoverage>true</runCoverage>
             <failBuild>false</failBuild>
-            <requiredApplicationCoverage>0</requiredApplicationCoverage>
-            <requiredResourceCoverage>0</requiredResourceCoverage>
-            <requiredFlowCoverage>0</requiredFlowCoverage>
+
+            <requiredApplicationCoverage>75</requiredApplicationCoverage>
+            <requiredResourceCoverage>50</requiredResourceCoverage>
+            <requiredFlowCoverage>50</requiredFlowCoverage>
+
             <formats>
                 <format>console</format>
                 <format>html</format>
@@ -37,153 +42,143 @@ Since MUnit 2.x, the coverage report goal is properly integrated with the maven 
 </plugin>
 ----
 
-Coverage Reports are generated during Maven's site lifecycle. +
-Since MUnit 2.x, coverage report generation is run separately during the "coverage-report" goal.
+== Coverage Report Types
 
-When enabling MUnit Coverage, you only see a summary report in the console. +
-By default no other action is taken so it's merely informative.
+When enabling MUnit Coverage, you see a summary report in the console. By default, no other action is taken:
 
-This is how a summary report looks like:
-
-[source,console,linenums]
+[source,console]
 ----
-[INFO] ===============================================================================
-[INFO] 				MUnit Coverage Report
-[INFO] ===============================================================================
-[NOTE]
-[INFO] -------------------------------------------------------------------------------
-[INFO] Resource File: mule-app.xml - Flows: 1 - Weight: 100.00 -  Coverage: 100.00%
-[INFO] -------------------------------------------------------------------------------
-[INFO]   * Flow: muleFlow - Covered (MP): 2 - Total (MP): 2 - Coverage: 100.00%
-[NOTE]
-[INFO] ===============================================================================
-[INFO] 					Summary
-[INFO] ===============================================================================
-[INFO]   * CMPs: 2
-[INFO]   * MPs: 2
-[INFO]   * Flows: 1
-[INFO]   * Resources: 1
-[INFO] ===============================================================================
-[INFO] 				** Application Coverage: 100.00% **
-[INFO] ===============================================================================
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 27.462 s
-[INFO] Finished at: yyyy-mm-ddThh:mm:ss
-[INFO] Final Memory: 20M/379M
-[INFO] ------------------------------------------------------------------------
+===============================================================================
+MUnit Coverage Summary
+===============================================================================
+ * Resources: 2 - Flows: 3 - Processors: 4
+ * Application Coverage: 75.00%
+====================================================================================
 ----
 
-But a console report is not your only option.
 MUnit Coverage offers three types of reports:
 
-* Console
-* HTML
-* JSON
-
-The *Console* report is printed in the console. It works with the summary report and
-shows details of each resource, flow, sub-flow, and batch, and its coverage level.
-
-The *HTML* report shows the same information, which you can view in any web browser.
-To access the *HTML* report, browse your application folder structure:
-
-* `${application.path}/target/site/munit/coverage/`
-
-Locate the file *summary.html*, which is the starting point of the report and lets you navigate through all the data.
-
-The *JSON* report shows the same information as the _HTML_ report, in a JSON format. +
-To access the JSON report file, browse your application folder structure:
-
-----
-${application.path}/target/site/munit/coverage/munit-coverage.json
-----
+* The *Console* report is printed to the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
+* The *HTML* report shows the same information but formatted to fit any web browser. +
+To access the report, browse your application folder structure to the `${application.path}/target/site/munit/coverage/` path and locate the file `summary.html` at the starting point of the report and to navigate through all the data.
+* The *JSON* report shows the same information as the HTML report, in a JSON format. +
+To access the JSON report locate the `${application.path}/target/site/munit/coverage/munit-coverage.json`  fileinside your application folder structure.
 
 To enable the report generation, add the following configuration:
 
 .MUnit Coverage - Report Configuration
-[source,console,linenums]
+[source,xml,linenums]
 ----
 <coverage>
-  <runCoverage>true</runCoverage>
+    <runCoverage>true</runCoverage>
 
-  <formats>
-    <format>console</format>  //<1>
-    <format>html</format>     //<2>
-    <format>json</format>     //<3>
-  </formats>
+    <formats>
+        <format>console</format> <1>
+        <format>html</format>    <2>
+        <format>json</format>    <3>
+    </formats>
 </coverage>
 ----
 <1> Console report
 <2> HTML report
 <3> JSON report
 
-TIP: You can have none, one, or all the report types added to your configuration.
+You can choose to have either none, one, or all the report types added to your configuration.
 
-To configure, for example, the JSON report generation, you need to add the following configuration in your `pom.xml` file:
+To configure, for example, the JSON report generation, you must to add the following configuration to your `pom.xml` file:
 
 [source,xml,linenums]
 ----
 <coverage>
-<runCoverage>true</runCoverage>
-  <formats>
-    <format>json</format>
-  </formats>
+    <runCoverage>true</runCoverage>
+
+    <formats>
+        <format>json</format>
+    </formats>
 </coverage>
 ----
+
+== Configuring Coverage Requirements
 
 One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
 
 MUnit Coverage handles three different levels:
 
-* Application
-* Resource
-* Flow
+* *Application*: The overall coverage of all your application.
+* *Resource*: The coverage level of each individual Mule configuration file.
+* *Flow*: The coverage of event processors in each flow.
 
-Here is how to define the required coverage level:
+To define the required coverage levels:
 
 .MUnit Coverage - Require Coverage
 [source,xml,linenums]
 ----
 <coverage>
-  <runCoverage>true</runCoverage>
-  <failBuild>true</failBuild>
+    <runCoverage>true</runCoverage>
+    <failBuild>true</failBuild>
 
-  <requiredApplicationCoverage>20</requiredApplicationCoverage>
-  <requiredResourceCoverage>10</requiredResourceCoverage>
-  <requiredFlowCoverage>5</requiredFlowCoverage>
+    <requiredApplicationCoverage>75</requiredApplicationCoverage> //<1>
+    <requiredResourceCoverage>50</requiredResourceCoverage>
+    <requiredFlowCoverage>50</requiredFlowCoverage>
 </coverage>
 ----
 
-TIP: Each value represents a percentage.
+<1> Each value represents a percentage. +
+If a percentage is not defined, it defaults to *-1*, which indicates that no requirements are defined for said level so the build will not fail due to low coverage.
 
-If you define coverage levels, but set the property `failBuild` to *false*, and if the levels are not reached, a warning shows up in the MUnit Coverage summary.
+If you define coverage levels but set the property `failBuild` to *false*, and then the levels are not reached, a warning shows up in the MUnit coverage summary:
 
-Something like this:
-
-[source,console,linenums]
+[source,console]
 ----
-[INFO] ===============================================================================
-[INFO] MUnit Coverage Summary
-[INFO] ===============================================================================
-[INFO]  * Resources: 1 - Flows: 1 - Processors: 2
-[INFO]  * Application Coverage: 00.00%
-[NOTE]
-[WARNING] ----------------------------- WARNING --------------------------------------
-[WARNING]  * Application coverage is below defined limit. Required: 50.0% - Current: 00.00% //<1>
-[INFO] ====================================================================================
-----
-<1> Warning detailing which coverage level wasn't met
+===============================================================================
+MUnit Coverage Summary
+===============================================================================
+ * Resources: 2 - Flows: 3 - Processors: 4
+ * Application Coverage: 75.00%
 
-TIP: If no level is defined, -1 is assumed, which indicates that the build won't fail due to low coverage.
+----------------------------- WARNING --------------------------------------
+ * Flow: file2.xml -> file2Flow1 coverage is below defined limit. Required: 50.0% - Current: 00.00% <1>
+====================================================================================
+----
+<1> Warning detailing which coverage level was not met, and where it happened.
+
+== Ignoring a flow or a file
 
 Another feature is the ability to ignore either a flow or a file. This way, the ignored resource:
 
-* Doesn't count as coverage data.
-* Doesn't affect the overall number of message processors.
-* Doesn't cause a build to fail if the flow is not tested or if the flow doesn't reach coverage metrics.
+* Does not count as coverage data.
+* Does not affect the overall number of message processors.
+* Does not cause a build to fail if the flow is not tested or if the flow does not reach coverage metrics.
+
+To ignore flows and files:
+
+.MUnit Coverage - Ignore both flows and files
+[source,xml,linenums]
+----
+<coverage>
+    <runCoverage>true</runCoverage>
+    <failBuild>true</failBuild>
+
+    <requiredApplicationCoverage>100</requiredApplicationCoverage>
+    <requiredResourceCoverage>100</requiredResourceCoverage>
+    <requiredFlowCoverage>100</requiredFlowCoverage>
+
+    <ignoreFlows>
+        <ignoreFlow>flow-1</ignoreFlow>
+        <ignoreFlow>flow-2</ignoreFlow>
+        ...
+        <ignoreFlow>flow-n</ignoreFlow>
+    </ignoreFlows>
+
+    <ignoreFiles>
+        <ignoreFile>mule-config-1.xml</ignoreFile>
+        <ignoreFile>mule-config-2.xml</ignoreFile>
+        ...
+        <ignoreFile>mule-config-n.xml</ignoreFile>
+    </ignoreFiles>
+</coverage>
+----
 
 == See Also
 
-* xref:munit-coverage-report.adoc[About Coverage Report]
-* xref:coverage-studio-concept.adoc[About Coverage Report in Anypoint Studio]
+* xref:munit-coverage-report.adoc[Coverage Report]

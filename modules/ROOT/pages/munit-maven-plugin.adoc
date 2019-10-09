@@ -4,20 +4,15 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
-:page-aliases: munit-maven-support.adoc, to-set-up-munit-maven-plugin.adoc, faq-working-with-parent-pom.adoc, to-inherit-parent-plugin.adoc, to-ignore-parent-plugin.adoc, to-override-parent-plugin.adoc, munit-maven-plugin-configuration.adoc, 
+:page-aliases: munit-maven-support.adoc, to-set-up-munit-maven-plugin.adoc, faq-working-with-parent-pom.adoc, to-inherit-parent-plugin.adoc, to-ignore-parent-plugin.adoc, to-override-parent-plugin.adoc, munit-maven-plugin-configuration.adoc,to-configure-munit-maven-plugin-maven.adoc
 
-MUnit is a composition of several modules, all of which are necessary to run your MUnit test.
+MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment.
 
-MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment. +
-The MUnit Maven Plugin allows you to run MUnit tests from Maven.
+== Setting Up MUnit Maven Plugin
 
-== To Set Up MUnit Maven Plugin (Maven)
+This documentation assumes you have the `<munit.version>` property in your pom.xml.
 
-For MUnit to run properly with Maven, you need to add a few sections to your pom.xml file.
-
-This documentation assumes you have the <munit.version> property in your pom.xml.
-
-* Enable the MUnit Maven plugin, by adding the following section to your pom.xml.
+* Enable the MUnit Maven plugin in your `pom.xml` file:
 +
 .MUnit Maven Plugin
 [source,xml,linenums]
@@ -45,7 +40,7 @@ This documentation assumes you have the <munit.version> property in your pom.xml
   </plugins>
 </build>
 ----
-* Add MUnit dependencies to your pom.xml.
+* Add MUnit dependencies to your `pom.xml` file:
 +
 .Dependencies
 [source,xml,linenums]
@@ -69,8 +64,7 @@ This documentation assumes you have the <munit.version> property in your pom.xml
   ...
 </dependencies>
 ----
-
-* Finally, you need to setup the repositories where Maven will download the MUnit dependencies and Plugin.
+* Configure the repositories for the MUnit dependencies and plugin:
 +
 .Repositories
 [source,xml,linenums]
@@ -102,14 +96,15 @@ This documentation assumes you have the <munit.version> property in your pom.xml
 ----
 
 
-MUnit has Surefire support built in. No additional configuration is needed. +
-The reports can be found under target/surefire-reports.
+MUnit has Surefire support built in. The reports output to `target/surefire-reports`.
 
-== How To Handle Parent POM Files
+=== Handling Parent POM Files
 
-You can declare the MUnit plugin in a parent POM file and every child project under this file can choose to reference this definition.
+You can declare the MUnit plugin in a parent `pom.xml` file and every child project under this file can reference this definition.
 
-In order to make a proper use of the MUnit plugin in a parent-child POM relationship, you need to include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file:
+To configure the MUnit Maven plugin in a parent-child POM relationship, include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file.
+
+In the following example, the `pirate-pom` project declares the MUnit Maven plugin in its plugin management section, which defines a global configuration that each child under this parent can reference, override or even ignore.
 
 [source,xml,linenums]
 ----
@@ -164,11 +159,11 @@ In order to make a proper use of the MUnit plugin in a parent-child POM relation
 </project>
 ----
 
-This pirate-pom project declares the MUnit Maven plugin in its plugin management section, which defines a global configuration that each child under this parent can choose to reference, override or even ignore.
+=== Inheriting a Parent's Plugin
 
-== To Inherit Parent's Plugin
+To inherit the MUnit plugin in your child `pom.xml` files, reference it in the `<plugin>` section of each child POM file individually.
 
-To inherit the MUnit plugin in your child POM files, you need to reference it in a _<plugin>_ section of each child _POM_ file individually:
+The following sample references `pirate-pom` file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because the MUnit plugin configuration is inherited from the `<pluginManagement>` section in the parent POM file:
 
 .POM child file sample
 [source,xml,linenums]
@@ -193,7 +188,7 @@ To inherit the MUnit plugin in your child POM files, you need to reference it in
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.runtime>4.1.1</app.runtime>
+        <app.runtime>4.1.4</app.runtime>
         <munit.version>2.2.0</munit.version>
     </properties>
 
@@ -208,13 +203,9 @@ To inherit the MUnit plugin in your child POM files, you need to reference it in
     </project>
 ----
 
-This quick sample references _pirate-pom_ file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because MUnit plugin configuration is being inherited from the `<pluginManagement>` section in the parent.
+=== Ignoring a Parent's Plugin
 
-
-//_THIS
-== To Ignore a Parent's Plugin
-
-Each child project under a parent `pom` file can choose to ignore the plugin referenced in the  parent's plugin management section and not implement the plugin declared there.
+Each child project under a parent `pom.xml` file can ignore the plugin referenced in the  parent's plugin management section and not implement the plugin configuration declared there.
 
 By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriting the plugin declared in *pirate-pom*:
 
@@ -262,11 +253,11 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
     </project>
 ----
 
-//_to-verride-parent-plugin.adoc
+=== Overriding a Parent's Plugin
 
-== To Override a Parent's Plugin
+When inheriting the plugin from a parent POM file, you can also override the parent's configuration. Overriding the plugin configuration from your parent POM file suppresses the original configuration requiring you to declare all necessary configurations again.
 
-When inheriting the plugin from a parent POM file, you can also choose to override the parent's configuration, but keep in mind that overriding completely suppresses the original configuration, requiring you to declare all necessary configurations again:
+The following example overrides the console coverage report from its parent POM file, replacing it by the HTML report. Because the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) are not being referenced, this child file won't inherit them and the default values will apply:
 
 .Coverage configuration in parent POM file
 [source,xml,linenums]
@@ -302,41 +293,11 @@ When inheriting the plugin from a parent POM file, you can also choose to overri
 </plugin>
 ----
 
-In this example, this child project is overriding the console coverage report, replacing it only by the HTML one, but since the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) are not being referenced, this child file won't inherit them and the default values will apply.
+== Setting Up Coverage
 
-//to-configure-munit-mavne-plugin
-== To Configure MUnit Maven Plugin From the POM File
-ifndef::env-site,env-github[]
-include::_attributes.adoc[]
-endif::[]
+=== Enabling Coverage Reports
 
-== Additional argument lines
-
-Since the tests are being run in a new JVM, additional argument lines can be specified
-to the JVM. Each argument should be specified in separate `argLine`.
-
-.Argument lines
-[source,xml,linenums]
-----
-<plugins>
-  <plugin>
-    <groupId>com.mulesoft.munit.tools</groupId>
-    <artifactId>munit-maven-plugin</artifactId>
-    <configuration>
-      ...
-      <argLines>
-          <argLine>-XX:MaxPermSize=512m</argLine>
-          <argLine>-Xmx1024m</argLine>
-      </argLines>
-      ...
-    </configuration>
-  </plugin>
-</plugins>
-----
-
-== To Enable Coverage
-
-To enable MUnit Coverage, add the following configuration to the MUnit Plugin:
+To enable MUnit Coverage, add the following configuration to the MUnit plugin configuration:
 
 .MUnit Coverage - Minimal Configuration
 [source,xml,linenums]
@@ -348,40 +309,36 @@ To enable MUnit Coverage, add the following configuration to the MUnit Plugin:
     <configuration>
       ...
       <coverage>
-        <runCoverage>true</runCoverage>   //<1>
+        <runCoverage>true</runCoverage>
       </coverage>
       ...
     </configuration>
   </plugin>
 </plugins>
 ----
-<1> This enables the coverage feature
 
-== To Set a Minimum Coverage Level
+=== Seting up a Minimum Coverage Level
 
-One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
+The MUnit Coverage report can fail the build if a certain coverage level is not reached.
 
-To make the build fail, add the following lines to the configuration:
+To make the build fail, add the following lines to the MUnit plugin configuration:
 
 .MUnit Coverage - Fail Build
 [source,xml,linenums]
 ----
 <coverage>
   <runCoverage>true</runCoverage>
-  <failBuild>true</failBuild>       //<1>
+  <failBuild>true</failBuild>
 </coverage>
 ----
-<1> Enable *Fail Build Feature*
 
-The next step is to define the coverage levels.
-
-MUnit Coverage handles three different levels:
+After enabling the `<failBuild>`, define the coverage level. MUnit Coverage handles three different levels:
 
 * Application
 * Resource
 * Flow
 
-Here is how to define the required coverage level:
+The following example shows how to define the required coverage level:
 
 .MUnit Coverage - Require Coverage
 [source,xml,linenums]
@@ -396,11 +353,9 @@ Here is how to define the required coverage level:
 </coverage>
 ----
 
-TIP: Each value represents a percentage.
+Each value represents a percentage.
 
-If you define coverage levels but set the property `failBuild` to *false*, if the levels are not reached, a warning shows up in the MUnit Coverage summary.
-
-Something like this:
+If you define coverage levels but set the property `<failBuild>` to *false*, a warning shows up in the MUnit Coverage summary if the levels are not reached:
 
 [source,console,linenums]
 ----
@@ -412,51 +367,55 @@ INFO] [CoverageManager] Printing Coverage Report...
 [INFO]  * Application Coverage: 71.43%
 [INFO]
 [WARNING] ----------------------------- WARNING --------------------------------------
-[WARNING]  * Application coverage is below defined limit. Required: 100.0% - Current: 71.43%  //<1>
+[WARNING]  * Application coverage is below defined limit. Required: 100.0% - Current: 71.43%
 ----
-<1> Warning detailing which coverage level wasn't met
 
-TIP: If no level is defined, -1 is assumed, which indicates that the build won't fail due to lack of coverage.
+If you don't define a coverage level, MUnit Coverage assumes a `-1` value, which indicates that the build won't fail due to lack of coverage.
 
-== To Ignore Flows for Coverage Report
+=== Ignoring Flows for Coverage Report
 
 .MUnit Coverage - Ignoring Flows
 [source,xml,linenums]
 ----
 <coverage>
   <ignoreFlows>
-	  <ignoreFlow>the-name-of-your-flow</ignoreFlow>       //<1>
+	  <ignoreFlow>the-name-of-your-flow</ignoreFlow>
   </ignoreFlows>
 </coverage>
 ----
-<1> The name of the flow you want to ignore.
 
-This is a list, so you can ignore as many flows as you need.
+`<ignoreFlows>` is a list, so you can ignore as many flows as you need:
+
+[source,xml,linenums]
+----
+<coverage>
+  <ignoreFlows>
+      <ignoreFlow>the-name-of-your-flow</ignoreFlow>
+      <ignoreFlow>the-name-of-another-flow</ignoreFlow>
+  </ignoreFlows>
+</coverage>
+----
 
 == Dynamic Ports
 
-[IMPORTANT]
-MUnit 2.2 and later introduce the `dynamic-port` global element, that allows you to define dynamic ports at the MUnit suite level. +
-Using this element instead of the plugin configuration described below allows you to set the dynamic port both from Maven and Studio. +
+MUnit 2.2 and later introduce the `dynamic-port` global element, that allows you to define dynamic ports at the MUnit suite level. Using this element instead of the plugin configuration described as follows allows you to set the dynamic port both from Maven and Studio. +
 See xref:dynamic-ports.adoc[Dynamic Ports] to learn how to configure this element.
-
 
 When testing a Mule application in a continuous integration (CI) environment, you might encounter the following scenario:
 
-`Your application tries to open a specific port. The port is already in use. The application fails with a port binding exception.`
+----
+Your application tries to open a specific port. The port is already in use. The application fails with a port binding exception.
+----
 
-The easy solution to this problem is to have your application use a free port.
-The MUnit Maven Plugin comes with a built-in feature to do just that.
+The MUnit Maven Plugin comes with a built-in feature to make your application use a free port.
 
-`MUnit Dynamic Ports` instructs the MUnit Maven Plugin to look for unbound ports and reserve them before running the tests over the Mule application. Each port selected is placed in a system property under the name indicated in the configuration.
-The application can acquire the port number through the use of placeholders afterward.
+MUnit Dynamic Ports instructs the MUnit Maven Plugin to look for unbound ports and reserve them before running the tests over the Mule application. Each port selected is placed in a system property under the name indicated in the configuration. The application can acquire the port number through the use of placeholders afterward.
 
-TIP: The Ports to be selected by the plugin are taken from the following range: `[40000,50000)`
+The Ports to be selected by the plugin are taken from the range: `[40000,50000]`
 
 [CAUTION]
 --
-Dynamic Ports feature is only available as part of the MUnit Maven Plugin. +
-You can not expect this feature to work when running tests from inside Anypoint Studio.
+Dynamic Ports feature is only available as part of the MUnit Maven Plugin. This feature does not work when running tests from inside Anypoint Studio.
 --
 
 === Enabling Dynamic Ports
@@ -491,12 +450,11 @@ If you have the `${http.port}` placeholder in your application, the configuratio
 </dynamicPorts>
 ----
 
-==== Preparing Your Application
+=== Preparing Your Application
 
-A placeholder must parametrize the part of the application trying to make use of a port. +
-For instance, you may want to have your Mule application listening for HTTP traffic. To do that you should provide the following configuration:
+A placeholder must parameterize the part of the application trying to make use of a port. For example, to have your Mule application listening for HTTP traffic, provide the following configuration:
 
-.HTTP Simple Application
+.HTTP Application
 [source,xml,linenums]
 ----
 <http:listener-config name="HTTP_Listener_config">
@@ -508,9 +466,9 @@ For instance, you may want to have your Mule application listening for HTTP traf
 </flow>
 ----
 
-Now this application always listens in port `8081`. To make it dynamic, change it to:
+The previous application always listens in port `8081`. To make it dynamic, change it to:
 
-.HTTP Simple Application with dynamic port
+.HTTP Application with dynamic port
 [source,xml,linenums]
 ----
 <http:listener-config name="HTTP_Listener_config">
@@ -525,14 +483,12 @@ Now this application always listens in port `8081`. To make it dynamic, change i
 
 With the application coded in this way and the configuration of Dynamic Ports in place, your application starts each run listening on a different port.
 
-== Enable surefire reports
+== Enabling Surefire Reports
 
-MUnit has built-in support for Surefire. No additional configuration is needed for this but it can be disabled if not needed.
+MUnit has built-in support for Surefire. No additional configuration is needed, but you can disable it if you don't need it:
 
-
-//_TODO: Where? Properties? pluginConfig?
 .Disabling surefire reports
-[source,xml,linenums]
+[source]
 ----
 <enableSurefireReports>false</enableSurefireReports>
 ----
@@ -541,31 +497,31 @@ The reports can be found under `${project.build.directory}/surefire-reports`.
 
 By default, it is set to `true`.
 
+== Running Tests Using the Plugin
 
-//_TODO:munit-maven-support.adoc
-== To Run MUnit Tests for a Mule Application (MUnit Maven Plugin)
+=== Running MUnit Tests for a Mule Application
 
 .Running MUnit tests in a Single Resource Mule project.
-[source,console]
+[source]
 ----
 mvn clean test
 ----
 
-== To Run a Specific MUnit Test Suite (MUnit Maven Plugin)
+=== Running a Specific MUnit Test Suite
 
-You can instruct MUnit Maven Plugin to run only tests that belong to a specific test suite.
+By using the property `munit.test`, you can instruct the MUnit Maven plugin to run only tests that belong to a specific test suite:
 
-To do this, we use the property `munit.test`.
-
-[source,console]
+[source,maven,linenums]
 ----
 mvn clean test -Dmunit.test=<regex-test-suite>
 ----
 
-The property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation. +
-This path is relative to src/test/munit.
+This path is relative to `src/test/munit`.
 
-The following is a valid example:
+The property `munit.test` accepts regular expressions. The expression is applied to the name of the MUnit Test Suite file. The regular expression language is the Java implementation. +
+
+For example:
+
 [source,console]
 ----
 mvn clean test -Dmunit.test=.*my-test.*
@@ -573,49 +529,25 @@ mvn clean test -Dmunit.test=.*my-test.*
 
 You can leverage this feature by adding naming conventions to your MUnit Test suites.
 
-== To Run Specific MUnit Tests (MUnit Maven Plugin)
+=== Running Specific MUnit Tests
 
-In the same way that you instruct MUnit to run one test suite, you can also tell it to run a specific test inside that test suite. To do so, we again make use of the property `munit.test`, with one addition:
+In the same way that you instruct MUnit to run one test suite, you can also configure it to run a specific test inside that test suite. You must use the property `munit.test` with the addition of the the special character `#` to append the test name:
 
 [source,console]
 ----
 mvn clean test -Dmunit.test=<regex-test-suite>#<regex-test-name>
 ----
 
-The addition is the special character `#`. To the right of it, you should type the test name. It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test.
+It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test. For example:
 
-The following is a valid example:
 [source,console]
 ----
 mvn clean test -Dmunit.test=.*my-test.*#.*test-scenario-1.*
 ----
 
-[TIP]
---
-The tests inside the MUnit Test Suite that don't match the regular expression is flagged as *ignored*.
---
+The tests inside the MUnit Test Suite that don't match the regular expression are flagged as *ignored*.
 
-== To Run Tests Using a Specific Tag (MUnit Maven Plugin)
-
-You can choose to run only the tests that you grouped under one specific tag.
-
-[source,console]
-----
-mvn clean test -Dmunit.tags=<munit-tag>
-----
-
-== To Skip All Tests (MUnit Maven Plugin)
-
-When building your application, you may want to prevent a test from running. MUnit leverages the same mechanism as Maven, so if you wish to skip tests, you can make use of the parameter `skipTests`.
-
-.Skipping Tests example
-[source,console]
-----
-mvn clean package -DskipTests
-----
-
-
-== To Run Specific Tests
+You can also configure this from the `pom.xml` configuration:
 
 [source,xml,linenums]
 ----
@@ -632,7 +564,16 @@ mvn clean package -DskipTests
 </plugins>
 ----
 
-== To Run Tests With Specific Tags
+=== Running Tests Using a Specific Tag
+
+You can run only the tests that you grouped under one specific tag:
+
+[source,console]
+----
+mvn clean test -Dmunit.tags=<munit-tag>
+----
+
+You can also configure this from the `pom.xml` configuration:
 
 [source,xml,linenums]
 ----
@@ -651,7 +592,17 @@ mvn clean package -DskipTests
 
 You can specify more than one tag by separating them using a comma.
 
-== To Skip MUnit Tests
+=== Skipping All Tests
+
+MUnit leverages the same mechanism as Maven. To skip tests, you must use the `skipTests` parameter:
+
+.Skipping Tests example
+[source,console]
+----
+mvn clean package -DskipTests
+----
+
+You can also configure this from the `pom.xml` configuration:
 
 [source,xml,linenums]
 ----
@@ -661,20 +612,16 @@ You can specify more than one tag by separating them using a comma.
       <artifactId>munit-maven-plugin</artifactId>
       <configuration>
       ...
-      <skipMunitTests>True</skipMunitTests>
+      <skipMunitTests>true</skipMunitTests>
       ...
     </configuration>
   </plugin>
 </plugins>
 ----
 
+=== Skipping Tests After One Suite Fails
 
-// CONFIGURATION
-
-== To Skip Tests After One Suite Fails
-
-MUnit allows you to skip the rest of the tests if one test suite fails. +
-If not specified, this value is false by default.
+MUnit allows you to skip the rest of the tests if one test suite fails:
 
 [source,xml,linenums]
 ----
@@ -691,29 +638,16 @@ If not specified, this value is false by default.
 </plugins>
 ----
 
-== To Specify the Runtime Product
+If not specified, this value is `false` by default.
 
-MUnit allows you to specify the runtime version in which your applications being tested will run.
 
-[source,xml,linenums]
-----
-<plugins>
-  <plugin>
-    <groupId>com.mulesoft.munit.tools</groupId>
-    <artifactId>munit-maven-plugin</artifactId>
-    <configuration>
-      ...
-      <runtimeVersion>1.2.3</runtimeVersion>
-      ...
-    </configuration>
-  </plugin>
-</plugins>
-----
+[[specify-runtime-product]]
+== Specifying The Runtime Product
 
-== To Specify The Runtime
+You can specify the type of runtime in which your applications being tested will run. Accepted values are:
 
-MUnit allows you to specify the type of runtime in which your applications being tested will run. +
-The two possible values are MULE for community edition, and MULE_EE for Enterprise Edition.
+* `MULE` for community edition.
+* `MULE_EE` for enterprise edition.
 
 [source,xml,linenums]
 ----
@@ -730,10 +664,36 @@ The two possible values are MULE for community edition, and MULE_EE for Enterpri
 </plugins>
 ----
 
-== To Specify The JVM
+=== Specifying the Runtime Product Version
 
-MUnit allows you to specify the jvm (or the java executable) in which your applications being tested will run.
-The property should be populated with the path to the executable.
+MUnit allows you to specify the runtime version in which your applications being tested will run.
+
+[source,xml,linenums]
+----
+<plugins>
+  <plugin>
+    <groupId>com.mulesoft.munit.tools</groupId>
+    <artifactId>munit-maven-plugin</artifactId>
+    <configuration>
+      ...
+      <runtimeVersion>4.2.2</runtimeVersion>
+      ...
+    </configuration>
+  </plugin>
+</plugins>
+----
+
+== Specifying The JVM
+
+You can specify the JVM (or the java executable) in which your applications being tested run. You must populate the `munit.jvm` parameter with the path to the executable:
+
+.Specifying the JVM
+[source,console]
+----
+mvn clean package -Dmunit.jvm=/path/to/jdk/bin/java
+----
+
+You can also configure this from the `pom.xml` configuration:
 
 [source,xml,linenums]
 ----
@@ -750,12 +710,32 @@ The property should be populated with the path to the executable.
 </plugins>
 ----
 
-From the command line, the property is `-Dmunit.jvm`
+=== Additional Argument Lines
 
-== Environment Variables
+You can pass additional argument lines to the JVM. Specify each argument in a separate `argLine`:
 
-To set additional environment variables during the test run, you can specify
-them with the respective key and value.
+.Argument lines
+[source,xml,linenums]
+----
+<plugins>
+  <plugin>
+    <groupId>com.mulesoft.munit.tools</groupId>
+    <artifactId>munit-maven-plugin</artifactId>
+    <configuration>
+      ...
+      <argLines>
+          <argLine>-XX:MaxPermSize=512m</argLine>
+          <argLine>-Xmx1024m</argLine>
+      </argLines>
+      ...
+    </configuration>
+  </plugin>
+</plugins>
+----
+
+=== Environment Variables
+
+To set additional environment variables during the test run, you can specify them with the respective key and value:
 
 .Additional Environment Variables
 [source,xml,linenums]
@@ -776,43 +756,11 @@ them with the respective key and value.
 </plugins>
 ----
 
-Environment variables can be used to replace placeholders such as `${MY_ENV}`
-(using the example above).
+As shown in the previous example, you can use environment variables to replace placeholders such as `${MY_ENV}`.
 
-== Redirect Test Output to File
+=== System Properties Variables
 
-When running several tests, the build output can get very complex to read. You may want
-to redirect the output of each Test suite to a file. This way what remains in the build
-output will be the test results and to check the standard output of each test suite you can find it
-in its respective file.
-
-These files will be located in the `testOutputDirectory` folder following this naming convention:
-`munit.${suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the
-MUnit test folder.
-
-The test run output that doesn't belong to a particular suite won't be printed to keep the build output clean, but it can be enabled by running maven in _debug_ mode.
-
-.Redirect test output to file
-[source,xml,linenums]
-----
-<plugins>
-  <plugin>
-    <groupId>com.mulesoft.munit.tools</groupId>
-    <artifactId>munit-maven-plugin</artifactId>
-    <configuration>
-      ...
-      <redirectTestOutputToFile>true</redirectTestOutputToFile>
-      ...
-    </configuration>
-  </plugin>
-</plugins>
-----
-
-By default, it is set to `false`
-
-== System Properties Variables
-
-You may wish to define specific system variables needed for your MUnit test to run successfully. The example below shows how you can send them.
+You may need to define specific system variables so that your MUnit test runs successfully:
 
 .Setting system property variables
 [source,xml,linenums]
@@ -832,22 +780,46 @@ You may wish to define specific system variables needed for your MUnit test to r
 </plugins>
 ----
 
-[TIP]
-====
 Depending on the execution context, the system properties values may vary. When referencing these properties, it is a good practice to override their value to enforce test reproducibility.
 
-You can do so using the ­`-D` argument when running MUnit with Maven. +
-Variables passed with the `-D` argument take full priority over any other property.
+You can do so using the ­`-D` argument when running MUnit with Maven.  Variables passed with the `-D` argument take full priority over any other property. For example:
 
-For example:
+[source]
+----
+-Dmy.property.key=my.property.another.value
+----
 
-`-Dmy.property.key=my.property.another.value`
-====
+== Redirecting Test Output to File
 
-== Test Output Directory
+When running several tests, the build output can get very complex to read. MUnit allows you to redirect the output of each test suite to a file. This way, only the test results will remain in the build output and to you can check the respective file to check the standard output of each test suite.
 
-You may want to choose the location where the test output files will be created.
-The path specified can be absolute or written as a maven placeholder.
+These files are located in the `testOutputDirectory` folder following the naming convention: `munit.${suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the MUnit test folder.
+
+The test's output that doesn't belong to a particular suite won't be printed to keep the build output clean, but it can be enabled by running maven in debug mode.
+
+To redirect the output of each test suite to a file:
+
+.Redirect test output to file
+[source,xml,linenums]
+----
+<plugins>
+  <plugin>
+    <groupId>com.mulesoft.munit.tools</groupId>
+    <artifactId>munit-maven-plugin</artifactId>
+    <configuration>
+      ...
+      <redirectTestOutputToFile>true</redirectTestOutputToFile>
+      ...
+    </configuration>
+  </plugin>
+</plugins>
+----
+
+By default, it is set to `false`
+
+=== Test Output Directory
+
+You may want to choose the location where the test output files will be created. The path specified can be absolute or written as a Maven placeholder:
 
 .Test output directory with absolute path
 [source,xml,linenums]
@@ -871,9 +843,8 @@ The path specified can be absolute or written as a maven placeholder.
 <testOutputDirectory>${project.build.directory}/my/output/folder</testOutputDirectory>
 ----
 
-By default, the files will be created in `${project.build.directory}/munit-reports/output/`.
+By default, the files are created in `${project.build.directory}/munit-reports/output/`.
 
-//.munit-maven-plugin-configuration.adoc
 
 == MUnit Maven Plugin Configuration Reference
 
@@ -882,132 +853,88 @@ The MUnit Maven Plugin offers a set of optional parameters that can be configure
 //_NOTE: This params are taken from MUnitMojo.java in munit-runtime code.
 
 .Maven Plugin Parameters
-[%header,cols="3,^2,4"]
+[%header,cols="3a,^2a,4a"]
 |===
 |Name    |Type | Description
 
-|argLines
+|`argLines`
 |List
 |Additional JVM argument lines to set on the test run.
 
-| coverage
+| `coverage`
 | Configuration
 | Coverage configuration to be set on the test run.
 
-|dynamicPorts
+|`dynamicPorts`
 |List
 |Dynamic ports to be set on the test run.
 
-|enableSurefireReports
+|`enableSurefireReports`
 |boolean
 |Set value to `true` to generate MUnit test results in the surefire format. +
-*Default value: `true`*
+Default value: `true`
 
-| munitTest
+| `munitTest`
 | String
 | Name of the MUnit tests to run.
 
-| munitTags
+| `munitTags`
 | String
 | Name of the MUnit tags. Only tests tagged with these names will run.
 
-| skipMunitTests
+| `skipMunitTests`
 | boolean
 | Set to `true` when you want to skip all MUnit tests. +
-*Default value: `false`*
+Default value: `false`
 
-| skipAfterFailure
+| `skipAfterFailure`
 | boolean
 | Skip all tests if one fails. +
-*Default value: `false`*
+Default value: `false`
 
-| munitTestsDirectory
+| `munitTestsDirectory`
 | File
 | Directory where the MUnit tests reside. +
-*Default value: `${project.build.directory}/test-mule/munit`*
+Default value: `${project.build.directory}/test-mule/munit`
 
 
-| runtimeVersion
+| `runtimeVersion`
 | String
 | Version of the Mule runtime in case
 By default it runes with the mule-version defined in the pom.xml file of the mule-artifact.json.
 
 | runtimeProduct
 | String
-| Type of runtime. Expected values are MULE for community edition, and MULE_EE for enterprise edition. +
-By default, this value is taken from the requiredProduct parameter in the mule-artifact.json file.
+| Type of runtime. Expected values are:
 
-| jvm
+* `MULE` for community edition
+* `MULE_EE` for enterprise edition.
+
+By default, this value is taken from the `requiredProduct` parameter in the `mule-artifact.json` file.
+
+| `jvm`
 | String
-| Option to specify the jvm (or path to the java executable) to use.
+| Option to specify the JVM (or path to the java executable) to use.
 
 By default, the JVM will the same VM as the one used to run Maven.
 
-|environmentVariables
+|`environmentVariables`
 |Map
 |Additional environment variables to be set on the test run.
 
-|redirectTestOutputToFile
+|`redirectTestOutputToFile`
 |boolean
 |Set value to `true` to redirect the MUnit tests standard output to a file. +
-*Default value: `false`*
+Default value: `false`
 
-|systemPropertyVariables
+|`systemPropertyVariables`
 |Map
 |System properties to be set on the test run.
 
-|testOutputDirectory
+|`testOutputDirectory`
 |File
 |Directory where the test outputs will be written to. +
-*Default value: `${project.build.directory}/munit-reports/output/`*
-
-// THESE PARAMS ARE IN THE CODE, BUT NOT EXPOSED TO THE USER.
-// | surefireReportsFolder
-// | File
-// | Directory where the reports in the surefire format will be written to. +
-// *Default value: `${project.build.directory}/surefire-reports/`*
-
-// | pluginVersion
-// | String
-// | Version of the MUnit Maven Plugin.
-
-// | coverageReportDataFile
-// | File
-// | Directory where the coverage report data lives. +
-// *Default value: `${project.build.directory}/munit-reports/coverage-report.data`*
-
-// | coverageConfigDataFile
-// | File
-// | Directory where the coverage report configuration file lives. +
-// *Default value: ${project.build.directory}/munit-reports/coverage-config.data"*
-
-// |muleWorkingDirectory
-// |File
-// |Directory to be used as Mule working directory. +
-// *Default value: `${project.build.directory}/.mule`*
-
-// | session
-// | MavenSession
-// |
-
-// |classpathDependencyExcludes
-// |List
-// |Dependencies to be excluded from the classpath. Must follow the format `groupId:artifactId`.
-
-// | project
-// | MavenProject
-// | *Required*
-
-// |classpathElements
-// |List
-// |Additional entries to be appended to the classpath.
+Default value: `${project.build.directory}/munit-reports/output/`
 
 
 |===
-
-
-
-== See Also
-
-* xref:to-set-up-munit-maven-plugin.adoc[To Set Up MUnit Maven Plugin]
-* xref:munit-maven-plugin.adoc[To Operate the MUnit Maven Plugin]

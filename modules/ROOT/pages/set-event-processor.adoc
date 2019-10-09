@@ -42,13 +42,13 @@ You can also use the Set Event processor to define message attributes and event 
 [source,xml,linenums]
 ----
 <munit:set-event cloneOriginalEvent="false">
-  <munit:payload value="#['payload_value']" mediaType="text/plain" encoding="UTF-8"/>
+  <munit:payload value="#['Example Body']" mediaType="text/plain" encoding="UTF-8"/>
 
-  <munit:attributes value="attribute_value" />
+  <munit:attributes value="#[{ method : 'GET', queryParams : { page : '1'}}]" />
 
-	<munit:variables>
-	  <munit:variable key="variable_key" value="variable_value" mediaType="text/plain" encoding="UTF-8"/>
-	</munit:variables>
+  <munit:variables>
+    <munit:variable key="variable_key" value="#['example']" mediaType="text/plain" encoding="UTF-8"/>
+  </munit:variables>
 </munit:set-event>
 ----
 
@@ -82,8 +82,5 @@ If you define two properties in the same scope with the _same_ key, be aware tha
 
 == See Also
 
-* xref:assertion-message-processor.adoc[About Assert That Event Processor]
-* xref:fail-event-processor.adoc[About Fail Event Processor]
-* xref:run-custom-event-processor.adoc[About Run Custom Event Processor]
-* xref:mock-message-processor.adoc[About Mock When Event Processor]
-* xref:verify-message-processor.adoc[About Verify Event Processor]
+* xref:fail-event-processor.adoc[Fail Event Processor]
+* xref:run-custom-event-processor.adoc[Run Custom Event Processor]
