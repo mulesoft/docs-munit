@@ -21,7 +21,7 @@ Creating these tests helps you validate the behavior of key processors and the b
 
 == Integration testing
 
-When running integration testing you must validate how the units interact with each other or with external systems to expose faults in the interactions. Samples of Integration testing in a Mule application are:
+When running integration tests you must validate how the units interact with each other or with external systems to expose faults in the interactions. Samples of integration testing in a Mule application are:
 
 * Testing how a service responds (Web Services, Salesforce, ServiceNow, Amazon, etc).
 * Testing a database driver.
