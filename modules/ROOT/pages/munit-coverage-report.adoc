@@ -1,167 +1,95 @@
-= About MUnit Coverage Reports
+= Coverage
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: faq-how-munit-coverage.adoc, coverage-studio-concept.adoc, to-disable-coverage-studio.adoc
+:page-aliases: faq-how-munit-coverage.adoc, to-disable-coverage-studio.adoc
 
-The MUnit Coverage feature provides a metric on how much of a Mule application has been executed by a set of MUnit tests. +
-This lets you obtain a quality metric for your application.
-
-MUnit Coverage is based on the amount of event processors executed. +
-MUnit Coverage provides metrics for:
+The MUnit Coverage feature provides a measurement of how much of a Mule application has been executed by a set of MUnit tests by counting the amount of event processors executed. This allows you to obtain a quality standard for your application, and provides metrics for:
 
 * Application overall coverage: An average of the items below.
-* Resource coverage: Refers to each Mule configuration file under src/main/mule. Each of is considered a resource by MUnit Coverage.
+* Resource coverage: Refers to each Mule configuration file under src/main/mule.
 * Flow coverage: Refers to any of the following components: Flows, Sub-flows, and Batch jobs.
 
-[NOTE]
-Coverage report runs only for EE edition runtimes. If your application has a `requiredProduct` of a Mule CE runtime you will see the following message: *Coverage is a EE only feature and you've selected to run over CE*. To run against an EE runtime see xref:to-configure-munit-maven-plugin-maven.adoc#to-specify-the-runtime-product[To Configure MUnit Maven Plugin From the POM File]
+Coverage report runs only for EE edition runtimes. If your application has a `requiredProduct` of a Mule CE runtime you will see the following message: *Coverage is a EE only feature and you've selected to run over CE*. To run against an EE runtime see xref:munit-maven-plugin.adoc#specify-runtime-product[Specifying the Runtime Product].
 
 The following is a coverage report sample in JSON format. +
 Use the code callouts below to understand each field in the report:
 
+.MUnit Coverage - sample JSON report
 [source,json,linenums]
 ----
 {
- "coverage" : 75.0, //<1>
- "requiredApplicationCoverage" : 40.0, //<2>
- "requiredResourceCoverage" : 30.0,
- "requiredFlowCoverage" : 25.0,
- "flowCount" : 3, //<3>
- "processorCount" : 4, //<4>
- "coveredProcessorCount": 4 //<5>
- "files" : [ {
-   "name": "sample.xml",
-   "flowCount" : 1, //<6>
-   "coverage" : 100.0, //<7>
-   "processorCount" : 2, //<8>
-   "weight" : 100.0, //<9>
-   "flows" : [ {
-     "name" : "file1Flow1" //<10>
-     "type" : "FLOW", //<11>
-     "coverage" : 100.0, //<12>
-     "processorCount" : 2, //<13>
-     "coveredProcessorCount" : 2
-
-   } ],
-   "name" : "file1.xml" //<14>
- }, {
-   "coverage" : 50.0,
-   "flowCount" : 2,
-   "messageProcessorCount" : 2,
-   "flows" : [ {
-     "coverage" : 0.0,
-     "messageProcessorCount" : 1,
-     "name" : "file2Flow1"
-   }, {
-     "coverage" : 100.0,
-     "messageProcessorCount" : 1,
-     "name" : "file2Flow2"
-   } ],
-   "name" : "file2.xml"
- } ]
+  "coverage": 75.0, <1>
+  "requiredApplicationCoverage": 40.0, <2>
+  "requiredResourceCoverage": 30.0,    <2>
+  "requiredFlowCoverage": 25.0,        <2>
+  "flowCount": 3,             <3>
+  "processorCount": 4,        <4>
+  "coveredProcessorCount": 3, <5>
+  "files": [ {
+    "name": "file1.xml", <6>
+    "flowCount": 1,      <7>
+    "coverage": 100.0,   <8>
+    "processorCount": 2, <9>
+    "weight": 50.0,     <10>
+    "flows": [ {
+      "name": "file1Flow1", <11>
+      "type": "FLOW",       <12>
+      "coverage": 100.0,    <13>
+      "messageProcessorCount": 2, <14>
+      "coveredProcessorCount": 2, <15>
+      "lines": [ { <16>
+        "lineNumber": 11,
+        "covered": true
+      }, {
+        "lineNumber": 12,
+        "covered": true
+      } ]
+    } ]
+  }, {
+    "name": "file2.xml",
+    "flowCount": 2,
+    "coverage": 50.0,
+    "processorCount": 2,
+    "weight": 50.0,
+    "flows": [ {
+      "name": "file2Flow2",
+      "type": "SCOPE",
+      "coverage": 100.0,
+      "messageProcessorCount": 1,
+      "coveredProcessorCount": 1,
+      "lines": [ {
+        "lineNumber": 10,
+        "covered": true
+      } ]
+    }, {
+      "name": "file2Flow1",
+      "type": "SCOPE",
+      "coverage": 0.0,
+      "messageProcessorCount": 1,
+      "coveredProcessorCount": 0,
+      "lines": [  {
+        "lineNumber": 7,
+        "covered": false
+      } ]
+    } ]
+  } ]
 }
 ----
-<1> Coverage percentage of the whole application.
-<2> Required coverages for application, resources and flow, if the user did not configure any value it defaults to -1.
-<3> Amount of flows in the application.
-<4> Amount of event processors in the application.
-<5> Amount of covered event processors.
-<6> Amount of flows in that file.
-<7> Coverage percentage of that file.
-<8> Amount of event processors in that file.
-<9> Contribution of that file to the coverage percentage of the whole application.
-<10> Name of the flow.
-<11> Type of the top level element. +
-Other type of top level element in coverage is error-handler.
-<12> Coverage percentage of that flow.
-<13> Amount of event processors in that flow.
-<14> Name of that file.
-
-//.faq-how-munit-coverge.adoc
-== FAQ: How Does MUnit Calculate Coverage
-
-The MUnit Coverage Module unit of measure is the Event processor. +
-MUnit calculates coverage by counting all the event processors that have been executed as result of the MUnit test being run and comparing that number with the amount of event processors that compose the whole application. +
-Although the reports arrange the resulting information by flow and configuration file, the calculations are run against the number of event processors.
-
-As a general rule each XML node inside a top-level XML node is an event processor. That is each node inside a flow, sub-flow, catch, batch. +
-Top-level elements are not event processors.
-
-Given the nature of XML structure this definition might lead to confusion, mostly when it comes to container elements (XML containing child elements). +
-In order to avoid such confusion here is a list of the most common event processors that are containers in Mule and how they are accounted by the MUnit Coverage:
-
-
-//_TODO: Commenting Out. check with the team
-* *Container Elements Considered event processors*
-// ** Enricher
-// ** Processor chain
-** Choice Router
-** Until Successful
-** First Successful
-** Scatter Gather
-** For Each
-// ** Round Robin
-// ** Splitter
-* *Container Elements Not Considered event processors*
-** Batch Step
-// ** Catch
-// ** Catch ref
-** Error Handlers
-
-//_TODO: Check with QA If these Known Issues are still valid
-// == Known Issues
-//
-// So far we have found only a couple of scenarios where coverage may not be reported properly. +
-// Unfortunately those cases cannot be fixed from MUnit. Issues were created in the proper products in order to address them.
-//
-// In order to make them easy to ID we list the scenarios where coverage might be reported incorrectly:
-//
-// * First Successful component (with no processor chain in all its paths)
-// * Sub-flow containing scatter gather
-
-//.coverage-studio-concept.adoc
-
-== About Coverage Report (Studio)
-
-The Coverage button in the image above allows you to see which flows, and which percentage of event processors in those flows were covered by the test:
-
-image::using-munit-in-anypoint-studio-b3762.png[]
-
-The Overall Coverage value represents the percentage of the Mule application event processors that have been executed by the MUnit test.
-
-You can click the Generate Report button to get the report detailing the flows and event processors contained by the Mule configuration files that were included in the MUnit test.
-
-image::using-munit-in-anypoint-studio-acd3b.png[]
-
-[%header,cols="20a,80a"]
-|===
-|Column |Description
-|Resource   | The name of the Mule Configuration file.
-|Flows | Number of Flows inside the Mule configuration field.
-|Weight | This field represents how much of your application is contained inside a configuration file. +
-It is calculated as a percentage of the overall number of event processors in the documentation and the amount of event processors contained in the Mule configuration file.
-|Coverage | This field represents the percentage of the event processors inside the Mule Configuration file that are being executed in the MUnit test.
-|===
-
-Additionally you can click in each Resource, to get a more specific and granular report of the Event Processors executed in that resource:
-
-image::using-munit-in-anypoint-studio-1e4ee.png[]
-
-//.to-disable-coverage-studio.adoc
-
-== To Disable Coverage Reports (Studio)
-
-If you choose so, you can disable the coverage calculation from your project's run configuration.
-
-* Right click in your Package Explorer, and choose *Run As* and *Run Configurations...*, Select your munit run configuration file to access your suite's configuration, and deselect the "Run coverage" option under your Coverage Settings.
-
-image::using-munit-in-anypoint-studio-2cd78.png[]
-
-
-
-
-== See Also
-
-* xref:faq-how-munit-coverage.adoc[FAQ: How Does MUnit Calculate Coverage]
-* xref:coverage-studio-concept.adoc[About Coverage Report in Anypoint Studio]
+<1>  Coverage percentage of the whole application.
+<2>  Required coverages for application, resources, and flows. If not configured, they default to -1.
+<3>  Amount of flows in the application.
+<4>  Amount of event processors in the application.
+<5>  Amount of covered event processors.
+<6>  Name of that file.
+<7>  Amount of flows in that file.
+<8>  Coverage percentage of that file.
+<9>  Amount of event processors in that file.
+<10> Contribution of that file to the coverage percentage of the whole application.
+<11> Name of the flow.
+<12> Type of the top level element. +
+     Other type of top level element in coverage is error-handler.
+<13> Coverage percentage of that flow.
+<14> Amount of event processors in that flow.
+<15> Amount of event processors covered in that flow.
+<16> XML line numbers containing event processors in that file, and whether they were covered or not.

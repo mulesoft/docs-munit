@@ -3,11 +3,11 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-== greaterThan(Comparable)
-
 [NOTE]
 `Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
 Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone  that you can pass any primitive value such as an integer or a date.
+
+== greaterThan(Comparable)
 
 Checks that the expression is greater than the specified value.
 
@@ -30,10 +30,6 @@ is="#[MunitTools::greaterThan(20)]"/>
 
 == greaterThanOrEqualTo(Comparable)
 
-[NOTE]
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
-Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
-
 Checks that the expression is greater than or equal to the specified value.
 
 .Example
@@ -54,10 +50,6 @@ is="#[MunitTools::greaterThanOrEqualTo(|2017-08-09|)]"/>
 
 == lessThan(Comparable)
 
-[NOTE]
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
-Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
-
 .Example
 [source,xml,linenums]
 ----
@@ -75,10 +67,6 @@ is="#[MunitTools::lessThan(|2017-08-09|)]"/>
 ----
 
 == lessThanOrEqualTo(Comparable)
-
-[NOTE]
-`Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
-Allowed primitives are String, Number, Boolean, DateTime, LocalDateTime, LocalTime, Time, and TimeZone
 
 Checks that the expression is less than or equal to the specified value.
 
@@ -172,7 +160,7 @@ is="#[MunitTools::equalTo([3, 2, 1])]"/>
 == See Also
 
 * xref:4.1@mule-runtime::dataweave-types.adoc#dw_type_comparable[DataWeave Comparable Type]
-* xref:munit-matchers.adoc[About MUnit Matchers]
+* xref:munit-matchers.adoc[MUnit Matchers]
 * xref:core-matchers-reference.adoc[Core Matchers Reference]
 * xref:string-matchers-reference.adoc[String Matchers Reference]
 * xref:iterable-map-matchers-reference.adoc[Iterable and Map Matchers Reference]
