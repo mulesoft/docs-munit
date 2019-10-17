@@ -9,7 +9,7 @@ In Mule 3, you used to use a `getResourceAsString()` function to incorporate ext
 
 == Mocking Files Using DataWeave Scripts
 
-You can use a DataWeave script that returns the data that you want to mock, save the file under a folder in `src\test\resources` and then use a DataWeave function to read this file.
+You can use a DataWeave script that returns the data that you want to mock, save the file under a folder in `src/test/resources` and then use a DataWeave function to read this file.
 
 For example, define a `mockPost.dwl` file in the `src/test/resources/sample_data` folder with the following content:
 
@@ -38,7 +38,7 @@ The `classpath-based` URL uses the `classpath:` protocol prefix to find the file
 
 You can create a DataWeave module to centralize all your mocks in a single file by declaring them in DataWeave variables.
 
-For example, to create a custom DataWeave module, create a `TestData.dwl` file under `src\test\resources` and add a couple of variables with references to different mocks either from files or inline:
+For example, to create a custom DataWeave module, create a `TestData.dwl` file under `src/test/resources` and add a couple of variables with references to different mocks either from files or inline:
 
 [source]
 ----
