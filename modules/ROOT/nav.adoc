@@ -11,7 +11,7 @@
   ** xref:coverage-config-cookbook.adoc[Configuring Coverage Limits]
   ** xref:db-utils-cookbook.adoc[Using DB Utils]
   ** xref:ftp-utils-cookbook.adoc[Using FTP Utils]
-  ** xref:mock-file-cookbook.adoc[Mocking from File ]
+  ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking Message before and inside a foreach]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
   ** xref:environment-config-cookbook.adoc[Testing environment configurations]
