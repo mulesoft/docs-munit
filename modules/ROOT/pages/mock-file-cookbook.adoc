@@ -7,9 +7,9 @@ As your tests suites start to get bigger and more complex, it’s a good practic
 
 Mule 3 uses a `getResourceAsString()` function to incorporate external or mocked resources into your tests. In Mule 4, you can leverage DataWeave to mock your test code, either by creating DataWeave scripts or by using variables in a DataWeave module.
 
-== Mocking Files Using DataWeave Scripts
+== Mocking Files Using DataWeave File
 
-You can use a DataWeave script that returns the data that you want to mock, save the file under a folder in `src/test/resources` and then use a DataWeave function to read this file.
+You can write a DataWeave file that returns the data that you want to mock, save the file under a folder in `src/test/resources` and then use a DataWeave function from your test to read this file.
 
 For example, imagine that you have defined a `mockPost.dwl` file in the `src/test/resources/sample_data` folder with the following content:
 
@@ -52,7 +52,7 @@ var jsonFromFile = read(getResourceAsString('sample_data/mydata.json'), 'applica
 var jsonObject = { paymentID: "1B56925769601335TLQMIWVY" }
 ----
 
-You can then access any of the defined variables in the DataWeave module by importing the variables from your custom module:
+You can then access any of the defined variables in the DataWeave module by importing the variables from your module:
 
 [source,xml,linenums]
 ----
@@ -62,8 +62,6 @@ You can then access any of the defined variables in the DataWeave module by impo
 				</munit-tools:variables>
 </munit-tools:then-return>
 ----
-
-Using this approach with a proper file naming convention and folder structure should help you have cleaner code and organized mocks for your MUnit test suites as well as provide you an easy way to reuse code.
 
 == See Also
 
