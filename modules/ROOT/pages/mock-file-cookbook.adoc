@@ -3,15 +3,15 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-When the tests suites start to grow in size and complexity, it’s a good practice to externalize some parts of the code to test resources so that you can keep the code clean and organized as well as reuse the files that you need to mock for your tests without the need to have duplicated code.
+As your tests suites start to get bigger and more complex, it’s a good practice to externalize some parts of the test code, not only so that you can keep the code clean and organized but also so that you can reuse the files that you need to mock for your tests.
 
-In Mule 3, you used to use a `getResourceAsString()` function to incorporate external or mocked resources to your tests. In Mule 4, you can leverage DataWeave to mock your code for your tests.
+Mule 3 uses a `getResourceAsString()` function to incorporate external or mocked resources into your tests. In Mule 4, you can leverage DataWeave to mock your test code, either by creating DataWeave scripts or by using variables in a DataWeave module.
 
 == Mocking Files Using DataWeave Scripts
 
 You can use a DataWeave script that returns the data that you want to mock, save the file under a folder in `src/test/resources` and then use a DataWeave function to read this file.
 
-For example, define a `mockPost.dwl` file in the `src/test/resources/sample_data` folder with the following content:
+For example, imagine that you have defined a `mockPost.dwl` file in the `src/test/resources/sample_data` folder with the following content:
 
 [source]
 ----
@@ -23,7 +23,9 @@ output application/json
 }
 ----
 
-This DataWeave file is a sample that creates a mock payload that you want to return in an `http:request`. When configuring the `then-return` section in the `mock-when`, use the `readUrl` function to read the mapping file:
+This DataWeave file (`mockPost.dwl`) is a sample that creates a mock payload that you want to return in an `http:request` request. 
+
+When configuring the `then-return` section in the `mock-when`, use the `readUrl` function to read the mapping file:
 
 [source,xml,linenums]
 ----
@@ -32,13 +34,13 @@ This DataWeave file is a sample that creates a mock payload that you want to ret
 </munit-tools:then-return>
 ----
 
-The `classpath-based` URL uses the `classpath:` protocol prefix to find the file we defined under `src/test/resources`.
+The `classpath-based` URL uses the `classpath:` protocol prefix to find the file defined in `src/test/resources`.
 
 == Mocking Files Using Variables in a DataWeave Module
 
-You can create a DataWeave module to centralize all your mocks in a single file by declaring them in DataWeave variables.
+You can create a DataWeave module to centralize all your mocked data in a single file by declaring it using DataWeave variables.
 
-For example, to create a custom DataWeave module, create a `TestData.dwl` file under `src/test/resources` and add a couple of variables with references to different mocks either from files or inline:
+For example, imagine that you create a custom DataWeave module by creating a `TestData.dwl` file in `src/test/resources`, and you add a couple of variables with references to different mocked data, either from files or inline:
 
 [source]
 ----
