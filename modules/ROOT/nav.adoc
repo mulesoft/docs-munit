@@ -4,10 +4,11 @@
 * xref:munit-cookbook.adoc[MUnit Examples]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
+  ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
- ** xref:before-after-scopes-reference.adoc[Before/After scopes]
+ ** xref:before-after-scopes-reference.adoc[Before and After scopes]
  ** xref:munit-showing-results.adoc[Reading MUnit Results]
 
 * xref:event-processors.adoc[MUnit Processors]
@@ -27,7 +28,7 @@
 * xref:munit-in-studio.adoc[MUnit in Studio]
 ** xref:munit-scaffold-test-task.adoc[Scaffolding an MUnit Test]
 
-* xref:munit-domain-support.adoc[MUnit Support for Domain Based Applications]
+* xref:munit-domain-support.adoc[MUnit Support for Domain-Based Applications]
 
 * xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
 
