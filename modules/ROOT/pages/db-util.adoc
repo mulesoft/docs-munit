@@ -6,9 +6,9 @@ endif::[]
 
 == Overview
 
-One of the main problems of testing production code are external system connections. To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You could also have a dedicated external database server for testing, but your Maven project would not be portable -- a third party would need to install the testing database server to compile your project.
+To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You could also have a dedicated external database server for testing, but your Maven project would not be portable -- a third party would need to install the testing database server to compile your project.
 
-To make it easier for you to test datbase connections, MUnit allows you to implement a database server in your local environment.
+To make it easier for you to test database connections, MUnit allows you to implement a database server in your local environment.
 
 == Example
 

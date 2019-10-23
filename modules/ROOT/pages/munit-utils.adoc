@@ -2,3 +2,18 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+
+One of the main problems of testing production code are external system connections.
+
+MUnit provides a set of utilities for you to write your tests in a portable way and mock external system connections from your tests.
+
+[%header%autowidth.spread,cols="a,a"]
+|===
+| Utility | Description
+| xref:db-util.adoc[Database] | Implement a DB server in your local environment to test connections.
+| xref:ftp-util.adoc[FTP] | Implement an FTP server in your local environment to test connections.
+| xref:queue-processors.adoc[Queue Event Processors] | Manage temporary queues during your test runs.
+|===
+
+
+
