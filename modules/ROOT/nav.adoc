@@ -5,6 +5,7 @@
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
+  ** xref:test-ssl-enabled-sources-cookbook.adoc[Testing SSL-Enabled Applications]  
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
