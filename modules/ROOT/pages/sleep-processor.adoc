@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-The Sleep processor allows you to wait for the current thread for a specified time. This processor is normally used to simulate a delay in the processing of the flow:
+The Sleep processor allows you to pause your test for a specific time. You can use this processor to simulate a delay in the processing of the flow:
 
 [source,xml,linenums]
 ----

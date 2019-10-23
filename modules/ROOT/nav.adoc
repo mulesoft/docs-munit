@@ -42,6 +42,7 @@
  ** xref:verify-message-processor.adoc[Verify]
  ** xref:spy-processor-concept.adoc[Spy Event]
  ** xref:storage-event-processors.adoc[Storage Event Processors]
+ ** xref:sleep-processor.adoc[Sleep Processor]
  ** xref:dynamic-ports.adoc[Dynamic Ports]
  ** xref:dynamic-directories.adoc[Dynamic Directories]
  ** xref:munit-utils.adoc[Utils]
