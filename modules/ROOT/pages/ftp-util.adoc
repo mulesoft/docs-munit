@@ -6,7 +6,7 @@ endif::[]
 
 == Overview
 
-One of the main problems of testing production code are external system connections. To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You could also have a dedicated external FTP server for testing, but your Maven project would not be portable -- a third party would need to install the testing FTP server to compile your project.
+To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You could also have a dedicated external FTP server for testing, but your Maven project would not be portable -- a third party would need to install the testing FTP server to compile your project.
 
 To make it easier for you to test FTP connections, MUnit allows you to implement an FTP server in your local environment.
 
