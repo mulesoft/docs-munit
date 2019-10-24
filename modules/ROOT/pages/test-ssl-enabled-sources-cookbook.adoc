@@ -31,14 +31,50 @@ Note that:
 <1> This application defines a TLS context.
 <2> The HTTP Lister is validating all requests using the TLS context previously defined.
 
-Depending on the purpose of your test, you can either:
+The most forward way to write your test, is to invoke the flow being tested using a `flow-ref` component.
 
-* Write a test that reaches your application using an HTTP request.
-* Invoke the flow of your application using a `flow-ref` component.
+See the following section for more information.
 
-== Writing Your Test Using an HTTP Requester
+== Testing Using a Flow-Ref Component
 
-To test the Mule application in the previous example section, your MUnit test must send an HTTP request to your application using the same TLS context that the HTTP lister expects. In this case, the Execution scope in your MUnit test must looks as follows:
+To validate the behavior of your flow, your MUnit test must invoke the flow you want to test using a `flow:ref` component. In this case, the Execution scope in your MUnit test must looks as follows:
+
+[source,xml,linenums]
+----
+(...)
+
+<munit:test name="example-using-tls-context" description="Test">
+  (...)
+  <munit:execution >
+    <flow-ref doc:name="Flow Reference" name="tlsExampleFlow"/>
+  </munit:execution>
+(...)
+----
+
+A full test to, for example, assert the payload of the application would look as follows:
+
+[source,xml,linenums]
+----
+	<munit:config name="tls-example-test-suite.xml" />
+
+  <munit:test name="example-using-flow-ref">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" name="tlsExampleFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" expression="#[payload.name]" is='#[MunitTools::equalTo("John Doe")]'/>
+		</munit:validation>
+	</munit:test>
+
+----
+
+Depending on the circumstance of your test, the Execution scope in your MUnit test might use an HTTP requester to reach the Mule application being tested. For example, if you scaffolded your test using APIkit, your test will use HTTP requesters to reach the application endpoints. You might also need to validate specific behaviors that happen when directly triggering the HTTP listener of your application.
+
+See the following section for more information.
+
+== Testing Using an HTTP Requester
+
+To test the Mule application in the previous example section using an HTTP requester, your MUnit test must send an HTTP request to your application using the same TLS context that the HTTP lister expects. In this case, the Execution scope in your MUnit test must look as follows:
 
 [source,xml,linenums]
 ----
@@ -92,45 +128,10 @@ A full test to, for example, assert the payload of the application would look as
 </munit:test>
 ----
 
-==== Running Your Test From Maven
+=== Running Your Test From Maven
 
-If you are running your tests in a CI/CD environment and you don't want to set the `insecure` property in your test's `tls:trust-store` component, you must pass the `-Dcom.ning.http.client.AsyncHttpClientConfig.acceptAnyCertificate` option when running your test:
+If you are running your tests in a CI/CD environment and you can't configure a TLS context for your tests, you must pass the `-Dcom.ning.http.client.AsyncHttpClientConfig.acceptAnyCertificate` option when running your test:
 
 ----
 mvn clean test -Dcom.ning.http.client.AsyncHttpClientConfig.acceptAnyCertificate
-----
-
-== Writing Your Test Using a Flow-Ref Component
-
-To test the Mule application in the previous example section, your MUnit test must invoke the flow you want to test using a `flow:ref` component. In this case, the Execution scope in your MUnit test must looks as follows:
-
-[source,xml,linenums]
-----
-(...)
-
-<munit:test name="example-using-tls-context" description="Test">
-  (...)
-  <munit:execution >
-    <flow-ref doc:name="Flow Reference" name="tlsExampleFlow"/>
-  </munit:execution>
-(...)
-----
-
-Note that you don't need to specify a TLS context element.
-
-A full test to, for example, assert the payload of the application would look as follows:
-
-[source,xml,linenums]
-----
-	<munit:config name="tls-example-test-suite.xml" />
-
-  <munit:test name="example-using-flow-ref">
-		<munit:execution >
-			<flow-ref doc:name="Flow Reference" name="tlsExampleFlow"/>
-		</munit:execution>
-		<munit:validation >
-			<munit-tools:assert-that doc:name="Assert that" expression="#[payload.name]" is='#[MunitTools::equalTo("John Doe")]'/>
-		</munit:validation>
-	</munit:test>
-
 ----
