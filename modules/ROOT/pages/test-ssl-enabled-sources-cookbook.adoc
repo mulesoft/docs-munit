@@ -31,10 +31,14 @@ Note that:
 <1> This application defines a TLS context.
 <2> The HTTP Lister is validating all requests using the TLS context previously defined.
 
-The most forward way to write your test, is to invoke the flow being tested using a `flow-ref` component.
+Depending on how you created your test, there are two ways of testing the previous example:
 
-See the following section for more information.
+* If you are writing your test, invoke the flow being tested using a `flow-ref` component. +
+See the <<flow-ref-test,Testing Using a Flow-Ref Component>> section for more information.
+* If you scaffolded your test using APIkit, your test uses HTTP requesters to reach the application endpoints. +
+See the <<request-test, Testing Using an HTTP Requester>> section for more information.
 
+[[flow-ref-test]]
 == Testing Using a Flow-Ref Component
 
 To validate the behavior of your flow, your MUnit test must invoke the flow you want to test using a `flow:ref` component. In this case, the Execution scope in your MUnit test must looks as follows:
@@ -68,13 +72,11 @@ A full test to, for example, assert the payload of the application would look as
 
 ----
 
-Depending on the circumstance of your test, the Execution scope in your MUnit test might use an HTTP requester to reach the Mule application being tested. For example, if you scaffolded your test using APIkit, your test will use HTTP requesters to reach the application endpoints. You might also need to validate specific behaviors that happen when directly triggering the HTTP listener of your application.
 
-See the following section for more information.
-
+[[request-test]]
 == Testing Using an HTTP Requester
 
-To test the Mule application in the previous example section using an HTTP requester, your MUnit test must send an HTTP request to your application using the same TLS context that the HTTP lister expects. In this case, the Execution scope in your MUnit test must look as follows:
+To test the Mule application in the previous example section using an HTTP requester, your MUnit test must send an HTTP request to your application using the same TLS context that the HTTP listener expects. In this case, the Execution scope in your MUnit test must look as follows:
 
 [source,xml,linenums]
 ----
