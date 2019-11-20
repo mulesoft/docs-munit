@@ -3,10 +3,16 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-To automatically generate an MUnit test suite from an API definition, you need to have a project generated using APIkit:
+You can use APIKit to automatically generate an empty structure for an MUnit test suite based on your API specification.
 
-. Find your APIKit Router in your project and right click on it.
+This process does not generate a functional implementation of a test. It is meant to make it easier for you to start writing an MUnit test.
+
+Your Mule project must be generated using APIKit.
+
+. Find the APIKit Router in your project and right click on it.
 . Select *Create Test Suite For Project From RAML*.
 
-APIkit automatically scaffolds an MUnit test suite based on the endpoints described on your API definition.
+APIkit automatically scaffolds an empty MUnit test suite based on the endpoints described on your API definition.
+
+
 
