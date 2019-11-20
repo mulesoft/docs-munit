@@ -39,7 +39,7 @@
   *** xref:queue-processors.adoc[Queue Event Processors]
 
 * xref:munit-in-studio.adoc[MUnit in Studio]
-** xref:munit-scaffold-test-task.adoc[Scaffolding an MUnit Test]
+** xref:munit-scaffold-test-task.adoc[Scaffold a Template for an Munit Test from an API Definition]
 
 * xref:munit-domain-support.adoc[MUnit Support for Domain-Based Applications]
 
