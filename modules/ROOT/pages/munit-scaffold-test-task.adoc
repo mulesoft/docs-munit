@@ -5,7 +5,7 @@ endif::[]
 
 You can use APIKit to automatically generate an empty structure for an MUnit test suite based on your API specification.
 
-This process does not generate a functional implementation of a test. It is meant to make it easier for you to start writing an MUnit test.
+Using APIKit does not generate a test, but it helps you to start writing one.
 
 Your Mule project must be generated using APIKit.
 
