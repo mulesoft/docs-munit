@@ -1,0 +1,114 @@
+= Test Domain-Based Applications
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+MUnit 2.2 allows you to write MUnit test suites for your Mule applications that share their resources with a Mule domain without the need for any extra configurations.
+
+== Base Mule Application
+
+Consider a Mule domain called `domain-config` that defines a global configuration for the HTTP listeners of all the Mule applications under it:
+
+.Mule domain
+[source,XML,linenums]
+----
+<domain:mule-domain ...>
+
+<http:listener-config name="HTTP_Listener_config" basePath="/" >
+  <http:listener-connection host="0.0.0.0" port="8081" />
+</http:listener-config>
+
+
+</domain:mule-domain>
+----
+
+.Mule domain pom.xml file
+[source,XML,linenums]
+----
+<groupId>com.mycompany</groupId>
+<artifactId>domain-config</artifactId>
+<version>1.0.0-SNAPSHOT</version>
+<packaging>mule-domain</packaging>
+<name>domain-config</name>
+
+----
+
+And a basic Mule application that returns the path being pinged:
+
+[source,XML,linenums]
+----
+<mule ...>
+
+  <flow name="application-aFlow">
+        <http:listener  config-ref="HTTP_Listener_config" path="/api"/>
+        <set-payload value='#["You reached " ++ message.attributes.listenerPath]'/>
+  </flow>
+
+</mule>
+----
+
+Note that this application does not define an `http:listener-config` global element, because it inherits it from its Mule domain. The application declares the domain dependency in its `pom.xml` file:
+
+[source,XML,linenums]
+----
+<dependencies>
+...
+  <dependency>
+    <groupId>com.mycompany</groupId>
+    <artifactId>domain-config</artifactId>
+    <version>1.0.0</version>
+    <classifier>mule-domain</classifier>
+    <scope>provided</scope>
+  </dependency>
+...
+</dependencies>
+----
+
+== Write The MUnit Test
+
+Because the Mule domain is a dependency of the Mule application, MUnit can start up the Mule domain to pick up the necessary global elements configuration for the application that it's testing.
+
+Assume an MUnit test to validate that the path being pinged is indeed the expected `/api` path:
+
+[source,XML,linenums]
+----
+
+<mule ...>
+
+  <munit:config name="application-a-test-suite.xml" />
+
+  <http:request-config name="HTTP_Request_configuration" basePath="/api">
+    <http:request-connection host="0.0.0.0" port="8081" />
+  </http:request-config>
+
+  <munit:test name="application-a-test-suite-application-aFlowTest" description="Test to validate the path being called">
+
+  <munit:enable-flow-sources >
+    <munit:enable-flow-source value="application-aFlow" />
+  </munit:enable-flow-sources>
+
+  <munit:execution>
+    <http:request config-ref="HTTP_Request_configuration" method="GET"/> //<1>
+    <ee:transform>
+      <ee:message>
+        <ee:set-payload> //<2>
+          <![CDATA[%dw 2.0
+          output text/plain
+          ---
+          payload
+          ]]>
+        </ee:set-payload>
+      </ee:message>
+    </ee:transform>
+  </munit:execution>
+
+  <munit:validation>
+    <munit-tools:assert-equals actual="#[payload]" expected='#["You reached /api"]'/> //<3>
+  </munit:validation>
+
+</munit:test>
+----
+
+. Inside the `execution` scope, an HTTP requester sends a `GET` request to your application's endpoint.
+. To be able to compare the response against the expected text you must convert the response to plain text.
+. Inside the `validation` scope, the `assert-equals` processor asserts that the actual payload (now converted to plain text) is the same as the text you expect.
