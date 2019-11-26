@@ -89,26 +89,18 @@ Assume an MUnit test to validate that the path being pinged is indeed the expect
 
   <munit:execution>
     <http:request config-ref="HTTP_Request_configuration" method="GET"/> //<1>
-    <ee:transform>
-      <ee:message>
-        <ee:set-payload> //<2>
-          <![CDATA[%dw 2.0
-          output text/plain
-          ---
-          payload
-          ]]>
-        </ee:set-payload>
-      </ee:message>
-    </ee:transform>
   </munit:execution>
 
   <munit:validation>
-    <munit-tools:assert-equals actual="#[payload]" expected='#["You reached /api"]'/> //<3>
+    <munit-tools:assert-equals //<2>
+        actual="#[output text/plain --- payload]" //<3>
+        expected='#["You reached /api"]'/>
   </munit:validation>
 
 </munit:test>
 ----
 
 . Inside the `execution` scope, an HTTP requester sends a `GET` request to your application's endpoint.
-. To be able to compare the response against the expected text you must convert the response to plain text.
-. Inside the `validation` scope, the `assert-equals` processor asserts that the actual payload (now converted to plain text) is the same as the text you expect.
+. Inside the `validation` scope, set up an `assert-equals` processor to assert the response from the `execution` scope against your expected response.
+. To be able to compare the response against the expected text you must convert the payload to plain text.
+
