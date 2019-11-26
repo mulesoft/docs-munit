@@ -9,12 +9,23 @@ MUnit 2.x allows you to write MUnit test suites for your Mule applications that 
 
 Consider a Mule domain called `domain-config` that defines a global configuration for the HTTP listeners of all the Mule applications under it:
 
+[.ex]
+=====
+[discrete.view]
+===== Studio Visual Editor
+
+image::domain-munit-example.png[]
+
+
+[discrete.view]
+===== XML Editor
+
 .Mule domain
 [source,XML,linenums]
 ----
 <domain:mule-domain ...>
 
-<http:listener-config name="HTTP_Listener_config" basePath="/" >
+<http:listener-config name="HTTP_Listener_config_domain" basePath="/" >
   <http:listener-connection host="0.0.0.0" port="8081" />
 </http:listener-config>
 
@@ -30,24 +41,38 @@ Consider a Mule domain called `domain-config` that defines a global configuratio
 <version>1.0.0-SNAPSHOT</version>
 <packaging>mule-domain</packaging>
 <name>domain-config</name>
-
 ----
+=====
 
 And a basic Mule application that returns the path being pinged:
+
+[.ex]
+=====
+[discrete.view]
+===== Studio Visual Editor
+
+image::mule-app-domain-listener.png[]
+
+Note that this application does not define a HTTP Listener global configuration because it inherits it from its Mule domain (`HTTP_Listener_config_domain`).
+
+image::mule-app-domain-set-payload.png[]
+
+[discrete.view]
+===== XML Editor
 
 [source,XML,linenums]
 ----
 <mule ...>
 
   <flow name="application-aFlow">
-        <http:listener  config-ref="HTTP_Listener_config" path="/api"/>
+        <http:listener  config-ref="HTTP_Listener_config_domain" path="/api"/>
         <set-payload value='#["You reached " ++ message.attributes.listenerPath]'/>
   </flow>
 
 </mule>
 ----
 
-Note that this application does not define an `http:listener-config` global element, because it inherits it from its Mule domain. The application declares the domain dependency in its `pom.xml` file:
+Note that this application does not define an `http:listener-config` global element because it inherits it from its Mule domain (`HTTP_Listener_config_domain`). The application declares the domain dependency in its `pom.xml` file:
 
 [source,XML,linenums]
 ----
@@ -64,11 +89,30 @@ Note that this application does not define an `http:listener-config` global elem
 </dependencies>
 ----
 
+=====
+
 == Write The MUnit Test
 
 Because the Mule domain is a dependency of the Mule application, MUnit can start up the Mule domain to pick up the necessary global elements configuration for the application that it's testing.
 
 Assume an MUnit test to validate that the path being pinged is indeed the expected `/api` path:
+
+
+
+[.ex]
+=====
+[discrete.view]
+===== Studio Visual Editor
+
+image::munit-domain-sample.png[]
+
+. Inside the `execution` scope, an HTTP requester sends a `GET` request to your application's endpoint.
+. Inside the `validation` scope, set up an Assert Equals` processor to assert the response from the `execution` scope against your expected response.
+. To be able to compare the response against the expected text you must convert the payload to plain text.
+
+
+[discrete.view]
+===== XML Editor
 
 [source,XML,linenums]
 ----
@@ -103,4 +147,8 @@ Assume an MUnit test to validate that the path being pinged is indeed the expect
 . Inside the `execution` scope, an HTTP requester sends a `GET` request to your application's endpoint.
 . Inside the `validation` scope, set up an `assert-equals` processor to assert the response from the `execution` scope against your expected response.
 . To be able to compare the response against the expected text you must convert the payload to plain text.
+
+=====
+
+
 
