@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-MUnit 2.2 allows you to write MUnit test suites for your Mule applications that share their resources with a Mule domain without the need for any extra configurations.
+MUnit 2.x allows you to write MUnit test suites for your Mule applications that share their resources with a Mule domain without the need for any extra configurations.
 
 == Base Mule Application
 
