@@ -91,7 +91,7 @@ Note that this application does not define an `http:listener-config` global elem
 
 =====
 
-== Write The MUnit Test
+== Writing an MUnit Test of the Example Domain-Based Application
 
 Because the Mule domain is a dependency of the Mule application, MUnit can start up the Mule domain to pick up the necessary global elements configuration for the application that it's testing.
 
