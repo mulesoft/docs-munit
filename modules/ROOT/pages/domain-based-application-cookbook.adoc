@@ -93,7 +93,7 @@ Note that this application does not define an `http:listener-config` global elem
 
 == Writing an MUnit Test of the Example Domain-Based Application
 
-Because the Mule domain is a dependency of the Mule application, MUnit can start up the Mule domain to pick up the necessary global elements configuration for the application that it's testing.
+Because the Mule domain is a dependency of the Mule application, MUnit can start the Mule domain to retrieve the necessary global elements configuration for the application that it's testing.
 
 Assume an MUnit test to validate that the path being pinged is indeed the expected `/api` path:
 
