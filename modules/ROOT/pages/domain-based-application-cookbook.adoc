@@ -44,7 +44,7 @@ image::domain-munit-example.png[]
 ----
 =====
 
-And a basic Mule application that returns the path being pinged:
+Consider also a basic Mule application that returns the path being pinged:
 
 [.ex]
 =====
