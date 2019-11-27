@@ -108,7 +108,7 @@ image::munit-domain-sample.png[]
 
 . Inside the `execution` scope, an HTTP requester sends a `GET` request to your application's endpoint.
 . Inside the `validation` scope, set up an Assert Equals` processor to assert the response from the `execution` scope against your expected response.
-. To be able to compare the response against the expected text you must convert the payload to plain text.
+. To compare the response against the expected text, you must convert the payload to plain text.
 
 
 [discrete.view]
