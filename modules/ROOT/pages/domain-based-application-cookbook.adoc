@@ -5,7 +5,7 @@ endif::[]
 
 MUnit 2.x enables you to write MUnit test suites for your Mule applications that share their resources with a Mule domain, without you performing any additional configuration. To understand how this works, it is helpful to consider a specific scenario populated with actual values, and then use those values in steps that illustrate how to write such a test.
 
-== Base Mule Application
+== Example Domain-Based Mule Application to Be Tested
 
 Consider a Mule domain called `domain-config` that defines a global configuration for the HTTP listeners of all the Mule applications within it:
 
@@ -149,4 +149,3 @@ image::munit-domain-sample.png[]
 . To be able to compare the response against the expected text you must convert the payload to plain text.
 
 =====
-
