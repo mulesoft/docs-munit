@@ -7,7 +7,7 @@ MUnit 2.x enables you to write MUnit test suites for your Mule applications that
 
 == Base Mule Application
 
-Consider a Mule domain called `domain-config` that defines a global configuration for the HTTP listeners of all the Mule applications under it:
+Consider a Mule domain called `domain-config` that defines a global configuration for the HTTP listeners of all the Mule applications within it:
 
 [.ex]
 =====
@@ -149,5 +149,4 @@ image::munit-domain-sample.png[]
 . To be able to compare the response against the expected text you must convert the payload to plain text.
 
 =====
-
 
