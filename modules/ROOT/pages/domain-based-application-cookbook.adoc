@@ -53,7 +53,7 @@ Consider also a basic Mule application that returns the path being pinged:
 
 image::mule-app-domain-listener.png[]
 
-Note that this application does not define a HTTP Listener global configuration because it inherits it from its Mule domain (`HTTP_Listener_config_domain`).
+Note that this application does not define a HTTP listener global configuration because it inherits it from its Mule domain (`HTTP_Listener_config_domain`).
 
 image::mule-app-domain-set-payload.png[]
 
