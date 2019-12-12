@@ -37,7 +37,7 @@ And then use the Run Custom Event Processor to run it:
 ----
 <1> The assertion field needs to have the canonical class name of your custom assertion and the class needs to be exported.
 
-To export it when packaging your application, add the `CustomAssertion` to your `mule-artifact.json`
+To export it when packaging your application, add the `CustomAssertion` to your `mule-artifact.json`.
 
 [source,json,linenums]
 ----
@@ -53,6 +53,17 @@ To export it when packaging your application, add the `CustomAssertion` to your 
         }
     }
 }
+----
+
+Finally, you must add a dependency on the `com.mulesoft.munit.munit-assert` package to the POM file that provides the `MunitAssertion` class.
+
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>com.mulesoft.munit</groupId>
+    <artifactId>munit-assert</artifactId>
+    <version>2.1.4</version>
+</dependency>
 ----
 
 == See Also
