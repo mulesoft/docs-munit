@@ -13,6 +13,11 @@ For example, you can define the following assertion in Java:
 
 [source,java,linenums]
 ----
+package org.mule.custom;
+
+import org.mule.munit.assertion.api.MunitAssertion;
+import org.mule.munit.assertion.api.TypedValue;
+
 public class CustomAssertion implements MunitAssertion {
 
     @Override
@@ -27,17 +32,19 @@ public class CustomAssertion implements MunitAssertion {
 <1> Implement the only method in the interface `public void execute(TypedValue expression, Object params) throws AssertionError`
 <2> Run your custom logic, which in this case validates that the message's payload is `Hello World`.
 
+The `CustomAssertion` class must located in the scr/test/java directory.
+
 And then use the Run Custom Event Processor to run it:
 
 [source,xml,linenums]
 ----
 <munit-tools:run-custom
-  assertion="com.example.CustomAssertion" // <1>
+  assertion="org.mule.custom.CustomAssertion" // <1>
   expression="#[payload]"/>
 ----
 <1> The assertion field needs to have the canonical class name of your custom assertion and the class needs to be exported.
 
-To export it when packaging your application, add the `CustomAssertion` to your `mule-artifact.json`
+To export it when packaging your application, add the `org.mule.custom` package to your `mule-artifact.json`
 
 [source,json,linenums]
 ----
@@ -47,13 +54,15 @@ To export it when packaging your application, add the `CustomAssertion` to your 
     "classLoaderModelLoaderDescriptor": {
         "id": "mule",
         "attributes": {
-            "exportedResources": [
-                "resources/CustomAssertion.java"
+            "exportedPackages": [
+                "org.mule.custom" 
             ]
         }
     }
 }
 ----
+
+Note: only the package name need be configured in the `exportedPackages` collection.
 
 == See Also
 
