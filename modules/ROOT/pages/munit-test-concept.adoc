@@ -163,13 +163,13 @@ image::munit-test-concept-de4c9.png[ignore-test]
 
 You can also use expressions to ignore a test based on your current mule version or on your current operative system:
 
-.Ignoring a Test based on The Mule Runtime Engine Version
+.Ignoring a Test Based on Operating System
 [source,xml]
 ----
 <munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
 ----
 
-.Ignoring a Test Based on the Operating System
+.Ignoring a Test Based on Mule Runtime Engine Version
 [source,xml]
 ----
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
