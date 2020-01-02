@@ -295,6 +295,7 @@ The following example overrides the console coverage report from its parent POM 
 
 == Setting Up Coverage
 
+include::page$coverage-maven-concept.adoc[tags=coverage-report;!report-types,leveloffset=+1]
 
 == Dynamic Ports
 
