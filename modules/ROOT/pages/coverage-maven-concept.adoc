@@ -98,7 +98,7 @@ To configure, for example, the JSON report generation, you must to add the follo
 </coverage>
 ----
 
-== Configuring Coverage Requirements
+== Setting up a Minimum Coverage Level
 
 One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
 
