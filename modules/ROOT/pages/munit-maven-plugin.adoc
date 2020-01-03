@@ -900,8 +900,9 @@ Default value: `${project.build.directory}/test-mule/munit`
 
 | `runtimeVersion`
 | String
-| Version of the Mule runtime in case
-By default it runes with the mule-version defined in the pom.xml file of the mule-artifact.json.
+| Version of the Mule runtime 
+By default, this value is taken from the `minMuleVersion` parameter in the `mule-artifact.json` file.
+
 
 | runtimeProduct
 | String
