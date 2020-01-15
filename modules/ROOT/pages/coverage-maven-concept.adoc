@@ -2,6 +2,9 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-partial:
+
+// tag::coverage-report[]
 
 Since MUnit 2.x, the coverage report goal is integrated with the maven reporting section. Coverage Reports are generated during Maven's `site` lifecycle, during the `coverage-report` goal.
 
@@ -41,6 +44,8 @@ Since MUnit 2.x, the coverage report goal is integrated with the maven reporting
     </configuration>
 </plugin>
 ----
+
+// tag::report-types[]
 
 == Coverage Report Types
 
@@ -98,7 +103,9 @@ To configure, for example, the JSON report generation, you must to add the follo
 </coverage>
 ----
 
-== Configuring Coverage Requirements
+// end::report-types[]
+
+== Setting up a Minimum Coverage Level
 
 One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
 
@@ -178,6 +185,8 @@ To ignore flows and files:
     </ignoreFiles>
 </coverage>
 ----
+
+// end::coverage-report[]
 
 == See Also
 
