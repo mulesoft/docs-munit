@@ -45,4 +45,4 @@ NOTE: If you don't create a `log4j2-test.xml` file, Mule looks for a file called
 
 == See Also
 
-* https://support.mulesoft.com[Contact MuleSoft]
+* https://help.mulesoft.com[Contact MuleSoft]
