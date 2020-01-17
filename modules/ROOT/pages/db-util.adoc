@@ -71,7 +71,7 @@ A few considerations after adding the module to your project:
 <dependency>
     <groupId>com.mulesoft.munit.utils</groupId>
     <artifactId>munit-dbserver-module</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <classifier>mule-plugin</classifier>
     <scope>test</scope>
 </dependency>
@@ -176,7 +176,7 @@ Developer,10,DEV
 [source,xml,linenums]
 ----
 <db:config name="Test_Database_Config">
-    <db:generic-connection url="jdbc:h2:mem:DATABASE_NAME" driverClassName="org.h2.Driver" />
+    <db:generic-connection url="jdbc:h2:tcp://localhost/mem:DATABASE_NAME" driverClassName="org.h2.Driver" />
 </db:config>
 ----
 . Define the `db.properties` file in your `src/test/resources` folder that will pick up your test database configuration:
