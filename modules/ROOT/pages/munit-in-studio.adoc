@@ -1,4 +1,15 @@
 = MUnit in Studio
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
+endif::[]
+
+MUnit is fully integrated with Anypoint Studio. You can use Studio’s graphical interface to:
+
+* Create and design MUnit tests.
+* Run your tests.
+* View test results and coverage.
+* Debug your tests.
+
+== See Also
+
 * xref:munit-scaffold-test-task.adoc[Scaffold a Template for an MUnit Test from an API Specification]
