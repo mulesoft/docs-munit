@@ -1,4 +1,4 @@
 = MUnit in Studio
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
-endif::[]
+* xref:munit-scaffold-test-task.adoc[Scaffold a Template for an MUnit Test from an API Specification]
