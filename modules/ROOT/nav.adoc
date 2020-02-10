@@ -42,6 +42,8 @@
 
 * xref:munit-in-studio.adoc[MUnit in Studio]
 ** xref:munit-scaffold-test-task.adoc[Scaffold a Template for an Munit Test from an API Specification]
+** xref:test-recorder.adoc[Test Recorder in Studio]
+
 
 * xref:munit-domain-support.adoc[MUnit Support for Domain-Based Applications]
 

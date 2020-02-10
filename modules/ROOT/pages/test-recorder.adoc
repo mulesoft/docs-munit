@@ -1,0 +1,15 @@
+= Test Recorder in Studio (Beta)
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The test recorder enables you to record a processing flow and then configure a unit test based on the captured event.
+
+The test recorder is an open beta feature and is compatible with Anypoint Studio 7.x.x and later, and MUnit 2.2.1 and later.
+
+== Limitations
+
+== See Also
+
+
+
