@@ -126,7 +126,7 @@ This attribute is mandatory.
 |`expectedErrorType`
 |Defines the error Type that should be received after the execution of this test.
 
-|`expectException`
+|`expectedException`
 |Defines the exception that should be received after the execution of this test.
 
 |`expectedErrorDescription`
