@@ -7,6 +7,7 @@
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
   ** xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications]
+  ** xref:test-recorder-examples.adoc[Recording a Test From an Exchange Example]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
