@@ -169,7 +169,7 @@ Developer,10,DEV
 |===
 | _Name_ | `Test_Database_Config`
 | _Connection_ | `Generic connection`
-| _URL_ | `jdbc:h2:mem:DATABASE_NAME`
+| _URL_ | `jdbc:h2:tcp://localhost/mem:DATABASE_NAME`
 | _Driver class name_ | `org.h2.Driver`
 |===
 +
