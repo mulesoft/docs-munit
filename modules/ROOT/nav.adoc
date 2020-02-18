@@ -2,6 +2,7 @@
 * xref:index.adoc[Overview]
 
 * xref:munit-cookbook.adoc[MUnit Examples]
+  ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]  
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
