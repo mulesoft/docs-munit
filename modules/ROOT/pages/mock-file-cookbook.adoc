@@ -40,7 +40,7 @@ The `classpath-based` URL uses the `classpath:` protocol prefix to find the file
 
 You can create a DataWeave module to centralize all your mocked data in a single file by declaring it using DataWeave variables.
 
-For example, imagine that you create a custom DataWeave module by creating a `TestData.dwl` file in `src/test/resources`, and you add a couple of variables with references to different mocked data, either from files or inline:
+For example, imagine that you create a custom DataWeave module by creating a `TestData.dwl` file in `src/test/resources`, and you add variables with references to different mocked data, either from files or inline:
 
 [source]
 ----
