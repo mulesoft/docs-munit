@@ -13,18 +13,18 @@ See xref:studio::set-credentials-in-studio-to.adoc[Configuring Anypoint Platform
 
 == Testing the Login Form Using the HTTP Connector Example
 
-. Click the *Open Exchange* icon image:exchange-icon.png[3%,3%].
+. Click the Open Exchange icon image:exchange-icon.png[3%,3%].
 . Select *Provided by MuleSoft* in the pop-up Exchange window, filter per *Examples*, and look for the *Login Form Using the HTTP Connector*.
 . Click *Open*. +
 Studio imports the example as a new working project.
 . If prompted, select *Perform Update* in *Update your Workspace*.
-. Select the *Manage Mule Projects APIs* icon image:manage-project-api-icon.png[2%,2%].
+. Select the Manage Mule Projects APIs icon image:manage-project-api-icon.png[2%,2%].
 . Select *Modules* and update both *MUnit* and *Munit Tools*:
 +
 image::update-munit.png[]
 . Select *Apply and Close*.
 
-=== Testing a Successful Login
+=== Testing the Process for a Successful Login Attempt
 
 //tag::this-test[]
 . In your project, right-click `DoLoginFlow` and select *Munit* > *Record new test for this flow (BETA)*:
@@ -40,7 +40,7 @@ The test recorder captures this event and stops the recording.
 . Return to Studio and click *Configure Test*:
 +
 image::stops-recording.png[]
-. Select the file name for the MUnit test suite in which you want to record your test.
+. Select the file name for the MUnit test suite in which you want to record your test:
 //end::also-this[]
 . Under *Test name*, type `_DoLoginFlow-successfull_`.
 . Set the test recorder to set the recorded input of the flow, and assert that the recorded output is the expected output by the test.
@@ -49,7 +49,7 @@ image::stops-recording.png[]
 +
 A fully functional MUnit test is generated to assert that the process in your application works as expected when the login is successful.
 
-=== Testing an Unsuccessful Login
+=== Testing the Process for an Unsuccessful Login Attempt
 
 include::page$test-recorder-examples.adoc[tag=this-test]
 . Type `admin` in both *Username* and *Password*, and click *Submit*:+
