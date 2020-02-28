@@ -23,9 +23,11 @@ The following table describes the required product versions to use the test reco
 | MUnit
 | 2.2.4
 
+| MUnit Anypoint Studio Plugin
+| 2.4.2
+
 | Mule runtime engine
-| Patched version of 4.2.2. +
-See xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] to learn how to apply this patched version to your project.
+| 4.2.2
 
 |===
 
