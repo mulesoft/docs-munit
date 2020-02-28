@@ -35,11 +35,12 @@ The test recorder has the following limitations for creating MUnit tests:
 
 * You cannot create tests for flows that have mule errors either raised inside the flow or already inside the incoming event. Not even if they are handled by an *on error continue* error handler.
 * When the recorded flow execution ends, the application is killed. This causes the result of the execution to never reach its destination. For example, an HTTP listener will not respond to the incoming request. This does not mean that the recording failed.
-* The test recorded does not support creating tests for anything that uses parallelism, random data, or time-dependent information (for example, timestamps).
+* You should not try to assert random data, time-dependent information (such as timestamps), or any value resulting from parallel processes. Because those values might change in every execution, those assertions will fail every time your test runs.
 * Although the recorder supports data iteration in the flow, such as recursivity or loops, it does not support cases where the structure of the data being tested changes inside said iteration.
-* The recorder does not support mocking a message before or inside a Foreach processor. +
+* The recorder does not support mocking a message before or inside a Foreach processor.
 
 
 == See Also
 
 * xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example]
+* xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
