@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-As your tests suites start to get bigger and more complex, it’s a good practice to externalize some parts of the test code, not only so that you can keep the code clean and organized but also so that you can reuse the files that you need to mock for your tests.
+As your tests suites start to get bigger and more complex, it’s a good practice to externalize some parts of the test code, not only so that you can keep the code clean and organized but also to reuse the files that you need to mock for your tests.
 
 Mule 3 uses a `getResourceAsString()` function to incorporate external or mocked resources into your tests. In Mule 4, you can leverage DataWeave to mock your test code, either by creating DataWeave scripts or by using variables in a DataWeave module.
 
