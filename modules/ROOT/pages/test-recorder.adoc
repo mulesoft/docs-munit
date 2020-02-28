@@ -5,10 +5,41 @@ endif::[]
 
 The test recorder enables you to record a processing flow and then configure a unit test based on the captured event.
 
-The test recorder is an open beta feature that is compatible with Anypoint Studio 7.x.x and later and MUnit 2.2.1 and later.
+The test recorder captures real data as it goes through your application in Studio. By capturing the flow execution, MUnit can automatically generate an MUnit test so that you can configure the necessary mocks and assertions for your test. See xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example] for a full working example.
+
+[NOTE]
+The test recorder is an open beta feature.
+
+== Compatibility
+
+The following table describes the required product versions to use the test recorder. These versions are for the beta feature and are likely to change for the GA (general availability) release.
+
+[%header%autowidth.spread,cols="a,a"]
+|===
+| Product | Version
+| Anypoint Studio
+| 7.4.0 and later.
+
+| MUnit
+| 2.2.4
+
+| Mule runtime engine
+| Patched version of 4.2.2. +
+See xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] to learn how to apply this patched version to your project.
+
+|===
 
 == Limitations
 
+The test recorder has the following limitations for creating MUnit tests:
+
+* You cannot create tests for flows that have mule errors either raised inside the flow or already inside the incoming event. Not even if they are handled by an *on error continue* error handler.
+* When the recorded flow execution ends, the application is killed. This causes the result of the execution to never reach its destination. For example, an HTTP listener will not respond to the incoming request. This does not mean that the recording failed.
+* The test recorded does not support creating tests for anything that uses parallelism, random data, or time dependent information (for example, timestamps).
+* Although the recorder supports data iteration in the flow, such as recursivity or loops, it does not support cases where the structure of the data being tested changes inside said iteration.
+* The recorder does not support mocking a message before or inside a Foreach processor. +
+
+
 == See Also
 
-
+* xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example]
