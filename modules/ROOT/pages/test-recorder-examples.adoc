@@ -32,15 +32,15 @@ image::update-munit.png[]
 image::login-flow-test-recorder-example.png[]
 +
 The test recorder starts your project and starts recording the event going through that flow.
-. Open a browser and navigate to `+http://0.0.0.0:8081/login+`:
+. Open a browser and navigate to `+http://0.0.0.0:8081/login+`.
 //end::this-test[]
-. Type `mule` for both *Username* and *Password*, and click *Submit*: +
+. Type `mule` for both *Username* and *Password*, and click *Submit*. +
 //tag::also-this[]
 The test recorder captures this event and stops the recording.
 . Return to Studio and click *Configure Test*:
 +
 image::stops-recording.png[]
-. Select the file name for the MUnit test suite in which you want to record your test:
+. Select the file name for the MUnit test suite in which you want to record your test.
 //end::also-this[]
 . Under *Test name*, type `_DoLoginFlow-successfull_`.
 . Set the test recorder to set the recorded input of the flow, and assert that the recorded output is the expected output by the test.
