@@ -4,7 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :page-partial:
 
-The following example shows you how to import to Studio an existing project from Exchange, and then record the flow processing to create a unit test for the flows.
+The following example shows you how to import to Anypoint Studio an existing project from Anypoint Exchange and then record the flow processing to create a unit test for the flows.
 
 == Prerequesite
 
