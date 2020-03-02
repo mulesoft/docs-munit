@@ -8,6 +8,7 @@
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
   ** xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications]
+  ** xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example]
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
@@ -42,6 +43,8 @@
 
 * xref:munit-in-studio.adoc[MUnit in Studio]
 ** xref:munit-scaffold-test-task.adoc[Scaffold a Template for an Munit Test from an API Specification]
+** xref:test-recorder.adoc[Test Recorder in Studio]
+
 
 * xref:munit-domain-support.adoc[MUnit Support for Domain-Based Applications]
 
@@ -50,4 +53,3 @@
 * xref:munit-coverage-report.adoc[Coverage]
  ** xref:coverage-maven-concept.adoc[Using Coverage in Maven]
  ** xref:coverage-studio-concept.adoc[Using Coverage in Studio]
-
