@@ -18,7 +18,7 @@ The following table describes the product versions required to use the test reco
 |===
 | Product | Version
 | Anypoint Studio
-| 7.4.0 and later
+| 7.4.2 and later
 
 | MUnit
 | 2.2.4
