@@ -1,0 +1,139 @@
+= Testing SSL-Enabled Applications
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+To test an application that has an HTTP Listener with SSL configured, you must configure an SSL truststore in your test to send authenticated requests to your code using a TLS certificate.
+
+== Example
+
+Assume that you want to test the following Mule application:
+
+[source,xml,linenums]
+----
+<tls:context name="TLS_Context">  //<1>
+  <tls:trust-store path="client_truststore.ts" password="123456" insecure="false" />
+  <tls:key-store type="jks" path="server.jks" alias="serverkey" keyPassword="123456" password="123456"/>
+</tls:context>
+
+<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" basePath="/">
+  <http:listener-connection host="0.0.0.0" port="8083" protocol="HTTPS" tlsContext="TLS_Context" /> //<2>
+</http:listener-config>
+
+<flow name="tlsExampleFlow">
+  <http:listener doc:name="Listener" config-ref="HTTP_Listener_config" path="/"/>
+  <set-payload value='#[output application/json --- {"name": "John Doe"}]' doc:name="Set Payload"/>
+</flow>
+----
+
+Note that:
+
+<1> This application defines a TLS context.
+<2> The HTTP Lister is validating all requests using the TLS context previously defined.
+
+Depending on how you created your test, there are two ways of testing the previous example:
+
+* If you are writing your test, invoke the flow being tested using a `flow-ref` component. +
+See the <<flow-ref-test,Testing Using a Flow-Ref Component>> section for more information.
+* If you scaffolded your test using APIkit, your test uses HTTP requesters to reach the application endpoints. +
+See the <<request-test, Testing Using an HTTP Requester>> section for more information.
+
+[[flow-ref-test]]
+== Testing Using a Flow-Ref Component
+
+To validate the behavior of your flow, your MUnit test must invoke the flow you want to test using a `flow:ref` component. In this case, the Execution scope in your MUnit test must looks as follows:
+
+[source,xml,linenums]
+----
+(...)
+
+<munit:test name="example-using-tls-context" description="Test">
+  (...)
+  <munit:execution >
+    <flow-ref doc:name="Flow Reference" name="tlsExampleFlow"/>
+  </munit:execution>
+(...)
+----
+
+A full test to, for example, assert the payload of the application would look as follows:
+
+[source,xml,linenums]
+----
+	<munit:config name="tls-example-test-suite.xml" />
+
+  <munit:test name="example-using-flow-ref">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" name="tlsExampleFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" expression="#[payload.name]" is='#[MunitTools::equalTo("John Doe")]'/>
+		</munit:validation>
+	</munit:test>
+
+----
+
+
+[[request-test]]
+== Testing Using an HTTP Requester
+
+To test the Mule application in the previous example section using an HTTP requester, your MUnit test must send an HTTP request to your application using the same TLS context that the HTTP listener expects. In this case, the Execution scope in your MUnit test must look as follows:
+
+[source,xml,linenums]
+----
+<munit:config name="tls-example-test-suite.xml" />
+<http:request-config name="HTTP_Request_configuration_Test"> //<1>
+  <http:request-connection protocol="HTTPS" host="localhost" port="8083">
+    <tls:context> //<2>
+      <tls:trust-store path="client_truststore.ts" password="123456" insecure="true"/>
+      <tls:key-store type="jks" path="server.jks" alias="serverkey" keyPassword="123456" password="123456"/>
+    </tls:context>
+  </http:request-connection>
+</http:request-config>
+
+<munit:test name="example-using-tls-context" description="Test">
+  (...)
+  <munit:execution >
+    <http:request method="GET" config-ref="HTTP_Request_configuration_Test" path="/"/> //<3>
+  </munit:execution>
+  (...)
+----
+
+Note that:
+
+<1> You are configuring an HTTP requester to use in your Execution scope.
+<2> Inside your HTTP request, you are configuring the same TLS context used in your Mule application code, and setting the `insecure` property of your truststore to `true`.
+<3> Inside your Execution scope, you send a request to your Mule application using the TLS context previously configured.
+
+A full test to, for example, assert the payload of the application would look as follows:
+
+[source,xml,linenums]
+----
+<munit:config name="tls-example-test-suite.xml" />
+<http:request-config name="HTTP_Request_configuration_Test">
+  <http:request-connection protocol="HTTPS" host="localhost" port="8083">
+      <tls:context>
+        <tls:trust-store path="client_truststore.ts" password="123456" insecure="true"/>
+        <tls:key-store type="jks" path="server.jks" alias="serverkey" keyPassword="123456" password="123456"/>
+      </tls:context>
+  </http:request-connection>
+</http:request-config>
+<munit:test name="example-using-tls-context" description="Test">
+  <munit:enable-flow-sources >
+    <munit:enable-flow-source value="tlsExampleFlow" />
+  </munit:enable-flow-sources>
+  <munit:execution >
+    <http:request method="GET" config-ref="HTTP_Request_configuration_Test" path="/"/>
+  </munit:execution>
+  <munit:validation >
+    <munit-tools:assert-that expression="#[payload.name]" is='#[MunitTools::equalTo("John Doe")]'/>
+  </munit:validation>
+</munit:test>
+----
+
+=== Running Your Test From Maven
+
+If you are running your tests in a CI/CD environment and you can't configure a TLS context for your tests, you must pass the `-Dcom.ning.http.client.AsyncHttpClientConfig.acceptAnyCertificate` option when running your test:
+
+----
+mvn clean test -Dcom.ning.http.client.AsyncHttpClientConfig.acceptAnyCertificate
+----
