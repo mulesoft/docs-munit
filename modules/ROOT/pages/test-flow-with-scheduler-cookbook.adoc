@@ -1,0 +1,61 @@
+= Testing a Flow with Scheduler
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Suppose you want to test your flow that is triggered by an Scheduler and want to validate that is being triggered correctly.
+
+[source,xml]
+----
+<flow name="schedulerFlow">
+    <scheduler>
+        <scheduling-strategy >
+            <fixed-frequency frequency="10" timeUnit="SECONDS"/>
+        </scheduling-strategy>
+    </scheduler>
+    <set-payload value="#['test poll']"/>
+</flow>
+----
+
+== Enable Flow Sources
+
+By default, MUnit does not start any of the event sources (flow sources such as triggers, and listeners). You must configure which flow sources must start for your tests.
+
+For this case, you need to enable the flow that contains the Scheduler.
+
+[source,xml]
+----
+<munit:test name="test-schedulerFlowTest">
+    <munit:enable-flow-sources>
+        <munit:enable-flow-source value="schedulerFlow"/>
+    </munit:enable-flow-sources>
+</munit:test>
+----
+
+== Verify Flow Execution is Triggered by the Scheduler
+
+If you want to check that the processors inside your flow are being triggered, you can use the `munit-tools:verify-call` to assert that any of the processors was called.
+
+You need to wrap the `munit-tools:verify-call` inside an `until-successful` router, since the scheduler may not be executed at that particular and you need to stay checking for short time.
+
+[source,xml]
+----
+<munit:execution>
+    <until-successful maxRetries="3" millisBetweenRetries="100">
+        <munit-tools:verify-call processor="set-payload" atLeast="1">
+            <munit-tools:with-attributes >
+                <munit-tools:with-attribute whereValue="#['test poll']" attributeName="value" />
+            </munit-tools:with-attributes>
+        </munit-tools:verify-call>
+    </until-successful>
+</munit:execution>
+----
+
+In this example we are checking that the payload was executed at least one time. We validate this condition 3 times since we need to ensure that the flow was executed at the time the test run.
+
+
+== See Also
+
+* xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
+* xref:verify-event-processor.adoc[Verify Event Processor]
+
