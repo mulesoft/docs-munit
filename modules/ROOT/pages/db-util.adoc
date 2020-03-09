@@ -4,66 +4,14 @@ include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-database-server.adoc
 
-== Overview
-
 To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You could also have a dedicated external database server for testing, but your Maven project would not be portable -- a third party would need to install the testing database server to compile your project.
 
 To make it easier for you to test database connections, MUnit allows you to implement a database server in your local environment.
 
-== Example
-
-. Assume that you want to test the following Mule application:
-+
-[source,xml,linenums]
-----
-<!-- Local Database Configuration -->
-<db:config name="Database_Config">
-    <db:my-sql-connection host="localhost" port="1234" />
-</db:config>
-<!-- Properties according to the environment -->
-<configuration-properties file="db.properties" />
-
-<flow name="selectFlow" >
-    <!-- Perform a query based on a value passed by a variable -->
-    <db:select config-ref="${db.config}">
-        <db:sql >SELECT * FROM jobtitlelookup WHERE jobtitleid = :id</db:sql>
-        <db:input-parameters ><![CDATA[#[id : vars.jobid]]]></db:input-parameters>
-    </db:select>
-    <!-- Set two conditions depending on the query result -->
-    <choice>
-        <!-- If there is one or more values resulting from the query set those values as the payload -->
-        <when expression="#[sizeOf(payload) > 0]">
-            <set-payload value="#[payload[0].jobtitle]"/>
-        </when>
-        <!-- If the query throws no results, inform it in the payload  -->
-        <otherwise>
-            <set-payload value="#['No job title for $(vars.jobid) was found']" />
-        </otherwise>
-    </choice>
-
-    <!-- Finally, pass the payload content as a Flow variable  -->
-    <set-variable value="#[payload]" variableName="job" />
-</flow>
-----
-. The file `db.properties` in `src/main/resources` has the following content:
-+
-[source]
-----
-db.config=Database_Config
-----
-. You need to create a test that:
-.. Contains a Database Server with a `jobtitlelookup` table.
-.. Provides a valid Database Structure for the Database connector to perform its' query.
-.. Passes a value for the `jobid` variable that the Database connector uses.
-
-=== Installing MUnit DB Server Module
+== Installing the MUnit DB Server Module
 
 . From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
 . In the search bar look for *MUnit Utils Database Server*, and add the module to your project.
-
-A few considerations after adding the module to your project:
-
-* The MUnit DB server artifact in your `pom` file must have the `test` scope:
 +
 [source,xml,linenums]
 ----
@@ -76,7 +24,9 @@ A few considerations after adding the module to your project:
     <scope>test</scope>
 </dependency>
 ----
-* The `h2` dependency used for the database is a shared library. +
++
+The MUnit DB server artifact in your `pom` file must have the `test` scope.
+. The `h2` dependency used for the database is a shared library. +
 You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in the `mule-maven-plugin`.
 +
 [source,xml,linenums]
@@ -91,7 +41,6 @@ You must add the dependency to your `pom.xml` file and list it as a `sharedLibra
 +
 [source,xml,linenums]
 ----
-
 <plugin>
     <groupId>org.mule.tools.maven</groupId>
     <artifactId>mule-maven-plugin</artifactId>
@@ -109,106 +58,28 @@ You must add the dependency to your `pom.xml` file and list it as a `sharedLibra
 </plugin>
 ----
 
-== Defining The MUnit DB Server
-
-Define the Database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
-
-The DB Server takes the following parameters:
+== Reference
 
 [%header%autowidth.spread]
 |===
 |Attribute Name |Description
 
-|`name`
-|Defines the configuration name of this DB server. Must be unique.
+| name
+|Defines the configuration name of this DB server. This value must be unique.
 
-|`database`
+| database
 |Defines the name of the in-memory DB.
 
-|`sqlFile`
+| sqlFile
 |Specifies the path of the SQL file that defines the DB structure/contents. This parameter is used to create the DB at startup. See the <<db-structure-sql,Defining the DB Structure from an SQL File>> section for more information.
 
-|`csv`
+| csv
 |Specifies the path of the-comma separated file used to define the DB structure/contents. This parameter is used to create the DB at startup. See <<db-structure-csv,Defining the DB Structure from a CSV File>> section for more information.
 
-|`connectionStringParameters`
+| connectionStringParameters
 | Defines the connection string for your database. You can concatenate the parameters with a semicolon.
 
 |===
-
-For this example, define the DB structure and content using a CSV file.
-
-. Go to the `src/test/resources` directory in your project.
-. Create a file named `jobtitlelookup.csv` containing the following values:
-+
-[source,text,linenums]
-----
-JOBTITLE,EECSALARYORHOURLY,JOBTITLEID
-Developer,10,DEV
-----
-. Navigate to your *Global Elements* tab, and select your *MUnit DB Server Config* element.
-. Click *Edit* and complete the fields:
-+
-[%header%autowidth.spread,cols="a,a"]
-|===
-| _Name_ | `MUnit_DB_Server_Config`
-| _Csv_ | `jobtitlelookup.csv`
-| _Database_ | `DATABASE_NAME`
-| _Connection string parameters_ | `MODE=MySQL`
-|===
-+
-[source,xml,linenums]
-----
-<dbserver:config name="MUnit_DB_Server_Config" >
-    <dbserver:connection csv="jobtitlelookup.csv" database="DATABASE_NAME" connectionStringParameters="MODE=MySQL" />
-</dbserver:config>
-----
-. Define the DB configuration to connect to your DB Server:
-+
-[%header%autowidth.spread,cols="a,a"]
-|===
-| _Name_ | `Test_Database_Config`
-| _Connection_ | `Generic connection`
-| _URL_ | `jdbc:h2:tcp://localhost/mem:DATABASE_NAME`
-| _Driver class name_ | `org.h2.Driver`
-|===
-+
-[source,xml,linenums]
-----
-<db:config name="Test_Database_Config">
-    <db:generic-connection url="jdbc:h2:tcp://localhost/mem:DATABASE_NAME" driverClassName="org.h2.Driver" />
-</db:config>
-----
-. Define the `db.properties` file in your `src/test/resources` folder that will pick up your test database configuration:
-+
-[source]
-----
-db.config=Test_Database_Config
-----
-
-== Running The Test
-
-After configuring the DB server you can run the test:
-
-[source,xml,linenums]
-----
-<munit:test name="selectFlowTest" description="Test selectFlow"  >
-    <munit:behavior>
-        <!-- Passes a variable to value to run in the main flow. -->
-        <set-variable variableName="jobid" value="DEV" />
-    </munit:behavior>
-    <munit:execution>
-        <!-- Run the production code. -->
-        <flow-ref name="db-server-docsFlow"/>
-    </munit:execution>
-    <munit:validation>
-        <munit-tools:assert-equals actual="#[vars.job]" expected="Developer" />
-    </munit:validation>
-</munit:test>
-
-----
-
-This test validates that the query ran in your production code is correct, and that the payload returned by the DB server is the expected one.
 
 == Defining the DB Structure
 
@@ -222,7 +93,7 @@ The MUnit DB server is based on H2. Complex structures, index and join commands 
 [[db-structure-sql]]
 === Defining the DB Structure from an SQL File
 
-To define you DB structure and content from an SQL file, you must provide a valid set of ANSI SQL DDL (Data Definition Language) instructions.
+To define the DB structure and content from an SQL file, you must provide a valid set of ANSI SQL DDL (Data Definition Language) instructions.
 
 [source,xml,linenums]
 ----
@@ -246,7 +117,7 @@ To define your DB structure based on a CSV file:
 </dbserver:config>
 ----
 
-You can also split your DB structure among several CSV files. In this case, include the file names as a list separated by a semicolon, as shown below.
+You can also split your DB structure among several CSV files. To do this, include the file names as a list separated by a semicolon:
 
 [source,xml,linenums]
 ----
@@ -255,13 +126,13 @@ You can also split your DB structure among several CSV files. In this case, incl
 </dbserver:config>
 ----
 
-This creates two tables `FILE_NAME` and `FILE_NAME_1`
+This creates two tables `FILE_NAME` and `FILE_NAME_1`.
 
-== MUnit DB server Processors
+== MUnit DB Server Processors
 
-The MUnit DB server also offers a few other features, outlined in this section.
+The DB util has two processors to interact with your DB server:
 
-=== Validating SQL Query Results
+=== Validate-That
 
 The MUnit DB Server allows you to validate that the results of a query are as expected.
 
@@ -273,13 +144,11 @@ To do this, you use the `validate-that` operation. Set the `results` property to
 query="SELECT * FROM jobtitlelookup WHERE JOBTITLE='Developer';" returns="&quot;JOBTITLE&quot;,&quot;EECSALARYORHOURLY&quot;,&quot;JOBTITLEID&quot;\n&quot;Developer&quot;,&quot;10&quot;,&quot;DEV&quot;" />
 ----
 
-=== Executing SQL instructions and SQL queries
+=== Execute
 
-The MUnit DB Server allows you to execute instructions on the in-memory databases, so
-you can add or remove registries before a test, and also check if your data was
-stored correctly.
+The MUnit DB Server allows you to execute instructions on the in-memory databases, so you can add or remove registries before a test, and also check if your data was stored correctly.
 
-Use a DB Server connector with the `execute` operation to insert the values new values to the table (`Culinary Team Member,10,HIR`), then use another DB Server connector with an `execute query` operation to retrieve all values from the table (including the newly added ones) and check the payload using a logger component to store the payload.
+Use a DB Server connector with the `execute` operation to insert the values new values to the table (`Culinary Team Member,10,HIR`), then use another DB Server connector with an `execute query` operation to retrieve all values from the table (including the newly added ones) and check the payload using a logger component to store the payload:
 
 [source,xml,linenums]
 ----
@@ -293,8 +162,13 @@ Use a DB Server connector with the `execute` operation to insert the values new 
 <logger level="INFO" message="#[payload]"/>
 ----
 
-The logger in your console should read:
+The logger in your console reads:
+
 [source,text,linenums]
 ----
 org.mule.runtime.core.internal.processor.LoggerMessageProcessor: [{JOBTITLEID=DEV, EECSALARYORHOURLY=10, JOBTITLE=Developer}, {JOBTITLEID=HIR, EECSALARYORHOURLY=10, JOBTITLE=Culinary Team Member}]
 ----
+
+== See Also
+
+* xref:db-server-cookbook.adoc[Configuring DB Server Util in an MUnit Test]

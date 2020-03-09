@@ -7,6 +7,7 @@
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
   ** xref:ftp-server-cookbook.adoc[Configuring FTP Server Util in an MUnit Test]
+  ** xref:db-server-cookbook.adoc[Configuring DB Server Util in an MUnit Test]  
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
   ** xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications]
   ** xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example]
