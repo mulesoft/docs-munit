@@ -1,0 +1,100 @@
+= Configuring FTP Server Util in an MUnit Test
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Assume that you want to test the following Mule application:
+
+[source,xml,linenums]
+----
+<sftp:config name="SFTP_Config">
+    <sftp:connection host="${ftp.host}" port="${ftp.port}" username="${ftp.user}" password="${ftp.password}"/>
+</sftp:config>
+
+<configuration-properties file="ftp.properties" />
+
+<flow name="listFlow">
+    <sftp:list config-ref="SFTP_Config" directoryPath="."/>
+    <foreach>
+        <logger level="INFO" message="#[attributes.fileName]"/>
+    </foreach>
+</flow>
+----
+
+The `ftp.properties` in `src/main/resources` has the following content:
+
+[source]
+----
+ftp.host=localhost
+ftp.port=22
+ftp.user=max
+ftp.password=munittest
+----
+
+The username field cannot be empty. If you do not have a username/password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to true.
+
+== Install the FTP Server
+
+. From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
+. In the search bar look for *MUnit Utils FTP Server*, and add the module to your project:
++
+[source,xml,linenums]
+----
+<!-- Ftp Server Dependency -->
+<dependency>
+    <groupId>com.mulesoft.munit.utils</groupId>
+    <artifactId>munit-ftpserver-module</artifactId>
+    <version>2.0.1</version>
+    <classifier>mule-plugin</classifier>
+    <scope>test</scope>
+</dependency>
+----
++
+The MUnit FTP server artifact in your `pom` file must have the `test` scope.
+
+
+== Define the FTP Server
+
+. In your Studio canvas, go to *Global Elements* tab, and select your *MUnit FTP Server Config* element.
+. Click *Edit* and complete the fields:
++
+[%header%autowidth.spread,cols="a,a"]
+|===
+| Attribute | Value
+| Name | `MUnit_FTP_Server_Config`
+| Port | `${ftp.port}`
+| Username | `${ftp.user}`
+| Password | `${ftp.password}`
+| Secure | `true`
+| homeDir | `${app.home}`
+|===
++
+[source,xml,linenums]
+----
+<ftpserver:config name="MUnit_FTP_Server_Config">
+    <ftpserver:connection port="${ftp.port}" username="${ftp.user}" password="${ftp.password}" secure="true" homeDir="${app.home}"/>
+</ftpserver:config>
+----
+
+== Run the Test
+
+After configuring the FTP server you can run the test:
+
+[source,xml,linenums]
+----
+<munit:test name="listFlowTest" description="Test listFlow" >
+    <munit:execution>
+        <flow-ref name="listFlow"/>
+    </munit:execution>
+    <munit:validation>
+        <munit-tools:assert-that expression="#[sizeOf(payload)]" is="#[MunitTools::greaterThan(0)]"/>
+    </munit:validation>
+</munit:test>
+----
+
+This FTP accepts any user, so there is no need to set up a user database or list.
+
+== See Also
+
+* xref:ftp-util.adoc[FTP Util]
+
