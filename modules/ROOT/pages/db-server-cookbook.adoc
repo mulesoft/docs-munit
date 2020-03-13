@@ -50,8 +50,8 @@ You need to create a test that:
 
 == Install the MUnit DB Server Module
 
-. From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
-. In the search bar look for *MUnit Utils Database Server*, and add the module to your project.
+. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
+. In the search bar look for *MUnit Utils Database Server*, and add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -65,9 +65,8 @@ You need to create a test that:
 </dependency>
 ----
 +
-The MUnit DB server artifact in your `pom` file must have the `test` scope.
-. The `h2` dependency used for the database is a shared library. +
-You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in the `mule-maven-plugin`.
+The MUnit DB server artifact in your POM file must have the `test` scope.
+. Add the `h2` dependency to your POM file and list it as a `sharedLibrary` in the `mule-maven-plugin`:
 +
 [source,xml,linenums]
 ----
@@ -98,11 +97,11 @@ You must add the dependency to your `pom.xml` file and list it as a `sharedLibra
 </plugin>
 ----
 
-== Defining The MUnit DB Server
+== Defining the MUnit DB Server
 
 Define the Database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
 
-For this example, define the DB structure and content using a CSV file.
+For this example, define the DB structure and content using a CSV file:
 
 . Go to the `src/test/resources` directory in your project.
 . Create a file named `jobtitlelookup.csv` containing the following values:
