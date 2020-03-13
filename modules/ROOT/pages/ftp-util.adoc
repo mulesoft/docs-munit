@@ -27,7 +27,7 @@ To make it easier for you to test FTP connections, MUnit allows you to implement
 +
 The MUnit FTP server artifact in your POM file must have the `test` scope.
 
-== Reference
+== Attributes Reference
 
 The FTP Server takes the following parameters:
 
