@@ -31,12 +31,12 @@ ftp.user=max
 ftp.password=munittest
 ----
 
-The username field cannot be empty. If you do not have a username/password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to true.
+The username field cannot be empty. If you do not have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to `true`.
 
 == Install the FTP Server
 
-. From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
-. In the search bar look for *MUnit Utils FTP Server*, and add the module to your project:
+. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
+. In the search bar look for *MUnit Utils FTP Server* and add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -50,12 +50,12 @@ The username field cannot be empty. If you do not have a username/password pair,
 </dependency>
 ----
 +
-The MUnit FTP server artifact in your `pom` file must have the `test` scope.
+The MUnit FTP server artifact in your POM file must have the `test` scope.
 
 
 == Define the FTP Server
 
-. In your Studio canvas, go to *Global Elements* tab, and select your *MUnit FTP Server Config* element.
+. In your Studio canvas, go to the *Global Elements* tab and select your *MUnit FTP Server Config* element.
 . Click *Edit* and complete the fields:
 +
 [%header%autowidth.spread,cols="a,a"]
@@ -97,4 +97,3 @@ This FTP accepts any user, so there is no need to set up a user database or list
 == See Also
 
 * xref:ftp-util.adoc[FTP Util]
-

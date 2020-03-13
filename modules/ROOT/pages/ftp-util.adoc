@@ -8,10 +8,10 @@ To test a piece of code that connects with an FTP server, you must install an FT
 
 To make it easier for you to test FTP connections, MUnit allows you to implement an FTP server in your local environment.
 
-== Install MUnit FTP Server Module
+== Install the MUnit FTP Server Module
 
 . From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
-. In the search bar look for *MUnit Utils FTP Server*, and add the module to your project:
+. In the search bar, look for *MUnit Utils FTP Server* and add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -25,7 +25,7 @@ To make it easier for you to test FTP connections, MUnit allows you to implement
 </dependency>
 ----
 +
-The MUnit FTP server artifact in your `pom` file must have the `test` scope.
+The MUnit FTP server artifact in your POM file must have the `test` scope.
 
 == Reference
 
@@ -38,10 +38,10 @@ The FTP Server takes the following parameters:
 
 This value must be unique.
 |`port` |Defines the port on which the FTP server listens.
-|`anonymous` | (Boolean) Sets anonymous access to the FTP Server. If `anonymous` is set to true, you don't need to set a password to access the FTP server when using the "anonymous" username.
+|`anonymous` | (Boolean) Sets anonymous access to the FTP server. If `anonymous` is set to `true`, you don't need to set a password to access the FTP server when using the `anonymous` username.
 
-The default value is true.
-|`secure` |(Boolean) Defines the FTP protocol. When the secure parameter is set to true, the server behaves as an SFTP server and connections are allowed only through authentication. If it is set to false, the server behaves as an FTP server and allows either authenticated or anonymous connections.
+The default value is `true`.
+|`secure` |(Boolean) Defines the FTP protocol. When the secure parameter is set to true, the server behaves as an SFTP server and connections are allowed only through authentication. If this parameter is set to false, the server behaves as an FTP server and allows either authenticated or anonymous connections.
 
 The default value is false.
 |`homeDir` |Defines the user home directory. The default value is the filesystem root. +
@@ -97,7 +97,7 @@ The `remove` processor provides another operation that may be of use. This opera
 
 |===
 
-This feature is useful when creating the same file name several times. You can configure it in an `after-test` to ensure that no name collisions cause the test to fail.
+This feature is useful when creating the same file name several times. You can configure it in `after-test` to ensure that no name collisions cause the test to fail.
 
 == See Also
 
