@@ -52,15 +52,15 @@ It is possible to define the FTP user home directory using the `~` character to 
 
 The FTP util has two processors to interact with your FTP server:
 
-=== Contains Files
-
+contains-files::
++
 The `contains-files` processor attempts to validate the existence of a file in the FTP server. If the file is not present, the processor fails causing the test to fail.
-
++
 [source,xml,linenums]
 ----
 <ftpserver:contains-files config-ref="MUnit_FTP_Server_Config" path="/" file="example.txt"/>
 ----
-
++
 [%header%autowidth.spread]
 |===
 |Attribute Name |Description
@@ -76,15 +76,15 @@ The `contains-files` processor attempts to validate the existence of a file in t
 
 |===
 
-=== Remove
-
+remove::
++
 The `remove` processor provides another operation that may be of use. This operation instructs the FTP server to remove a file from storage.
-
++
 [source,xml,linenums]
 ----
 <ftpserver:remove config-ref="MUnit_FTP_Server_Config" path="example.txt"/>
 ----
-
++
 [%header%autowidth.spread]
 |===
 |Attribute Name |Description
@@ -96,7 +96,7 @@ The `remove` processor provides another operation that may be of use. This opera
 |The full path of the file to remove.
 
 |===
-
++
 This feature is useful when creating the same file name several times. You can configure it in `after-test` to ensure that no name collisions cause the test to fail.
 
 == See Also
