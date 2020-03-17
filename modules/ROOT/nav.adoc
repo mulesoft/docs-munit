@@ -2,9 +2,10 @@
 * xref:index.adoc[Overview]
 
 * xref:munit-cookbook.adoc[MUnit Examples]
-  ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]  
+  ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
+  ** xref:use-environment-properties-on-tests-cookbook.adoc[Testing with Environment Properties]
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
   ** xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications]

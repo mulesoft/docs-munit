@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Suppose you have the following flow that obtain data from an external API and you need to consume it from a test environment when executing your MUnit tests.
+Assume that you have the following flow that obtains data from an external API and you need to consume it from a test environment when executing your MUnit tests:
 
 [source,xml]
 ----
@@ -15,35 +15,33 @@ Suppose you have the following flow that obtain data from an external API and yo
 </flow>
 ----
 
-But you want to consume data from a QA API endpoint when running your MUnit tests.
+To consume data from a QA API endpoint when running your MUnit tests.
 
-First you need to extract the HTTP Configuration values into a properties file for each environment where you will execute the validations. Those properties files need to be places under `src/main/resources`.
-
-prod.properties
+. Extract the HTTP Configuration values into a properties file for each environment where you will execute the validations. Those properties files must go under `src/main/resources`:
++
+.prod.properties
 [source,xml,linenums]
 ----
 http.host=dummy.restapiexample.com/api/v1/
 http.port=80
 ----
-
-qa.properties
++
+.qa.properties
 [source,xml,linenums]
 ----
 http.host=dummy.qax.restapiexample.com/api/v1/
 http.port=8081
 ----
-
-You can set a properties file for each environment you have.
-
-Use a `configuration-properties` global configuration on your configuration file to load environment properties from the previously created file.
-
++
+You can set a properties file for each one of your environments.
+. Use a `configuration-properties` global configuration on your configuration file to load environment properties from the previously created file:
++
 [source,xml]
 ----
  <configuration-properties file="${mule-env}.properties"/>
 ----
-
-Replace HTTP configuration with placeholders matching the variables defined on the properties file.
-
+. Replace HTTP configuration with placeholders matching the variables defined on the properties file:
++
 [source,xml]
 ----
 <http:request-config name="HTTP_Request_configuration">
@@ -53,9 +51,8 @@ Replace HTTP configuration with placeholders matching the variables defined on t
 	<http:request method="GET" config-ref="HTTP_Request_configuration" path="/employee"/>
 </flow>
 ----
-
-To load the QA properties during the MUnit tests execution, you need to define an environment variable ont the MUnit maven plugin.
-
+. To load the QA properties during the MUnit tests execution, you need to define an environment variable on the MUnit maven plugin:
++
 [source,xml,linenums]
 ----
  <configuration>
@@ -66,8 +63,8 @@ To load the QA properties during the MUnit tests execution, you need to define a
      ...
  </configuration>
 ----
-
-This way, on the MUnit tests execution, it will load the properties from the qa properties file and will connect to your test environment.
++
+During the MUnit tests execution, MUnit loads the properties from the `qa` properties file and connects to your test environment.
 
 
 
