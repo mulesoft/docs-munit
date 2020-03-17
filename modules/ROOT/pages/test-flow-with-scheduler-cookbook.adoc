@@ -1,9 +1,10 @@
-= Testing a Flow with Scheduler
+= Testing a Flow with a Scheduler Source
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Suppose you want to test your flow that is triggered by an Scheduler and want to validate that is being triggered correctly.
+Assume that you want to test the following flow triggered by an Scheduler component, and that you want to validate that your flow is being triggered correctly:
+
 
 [source,xml]
 ----
@@ -17,12 +18,11 @@ Suppose you want to test your flow that is triggered by an Scheduler and want to
 </flow>
 ----
 
-== Enable Flow Sources
-
-By default, MUnit does not start any of the event sources (flow sources such as triggers, and listeners). You must configure which flow sources must start for your tests.
-
-For this case, you need to enable the flow that contains the Scheduler.
-
+. Enable Flow Sources. +
+By default, MUnit does not start any of the event sources (flow sources such as triggers or listeners). You must configure which flow sources must start for your tests.
++
+In this case, you must enable the flow that contains the Scheduler:
++
 [source,xml]
 ----
 <munit:test name="test-schedulerFlowTest">
@@ -31,13 +31,13 @@ For this case, you need to enable the flow that contains the Scheduler.
     </munit:enable-flow-sources>
 </munit:test>
 ----
-
-== Verify Flow Execution is Triggered by the Scheduler
-
-If you want to check that the processors inside your flow are being triggered, you can use the `munit-tools:verify-call` to assert that any of the processors was called.
-
-You need to wrap the `munit-tools:verify-call` inside an `until-successful` router, since the scheduler may not be executed at that particular and you need to stay checking for short time.
-
+. Verify Flow Execution is Triggered by the Scheduler. +
+To check that the processors inside your flow are being triggered, use the `munit-tools:verify-call` processor to assert that any of the processors was called.
++
+Wrap the `munit-tools:verify-call` inside an `until-successful` router because the Scheduler may not be executed at that particular time and you need to stay checking for a shorter time.
++
+The following example checks that the payload was executed at least one time. It validates this condition three times to ensure that the flow was executed at the time the test runs.
++
 [source,xml]
 ----
 <munit:execution>
@@ -51,7 +51,6 @@ You need to wrap the `munit-tools:verify-call` inside an `until-successful` rout
 </munit:execution>
 ----
 
-In this example we are checking that the payload was executed at least one time. We validate this condition 3 times since we need to ensure that the flow was executed at the time the test run.
 
 
 == See Also
