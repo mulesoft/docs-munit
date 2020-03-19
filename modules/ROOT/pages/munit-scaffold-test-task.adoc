@@ -10,7 +10,7 @@ Because your Mule project is generated using APIKit, you can use APIKit to autom
 To create this empty test suite:
 
 . Locate and right-click the APIKit router in your project.
-. Select Create Test Suite For Project From RAML.
+. Select *Create Test Suite for Project From API Specification*.
 
 
 
