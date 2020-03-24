@@ -5,6 +5,7 @@
   ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
+  ** xref:use-environment-properties-on-tests-cookbook.adoc[Testing with Environment Properties]
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
   ** xref:ftp-server-cookbook.adoc[Configuring FTP Server Utility in an MUnit Test]
   ** xref:db-server-cookbook.adoc[Configuring DB Server Utility in an MUnit Test]

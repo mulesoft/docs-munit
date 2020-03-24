@@ -1,0 +1,69 @@
+= Testing with Environment Properties
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Assume that you have the following flow that obtains data from an external API and you need to consume it from a test environment when executing your MUnit tests:
+
+[source,xml]
+----
+<http:request-config name="HTTP_Request_configuration">
+	<http:request-connection host="sampleapi.com/api/v1/" port="80"/>
+</http:request-config>
+<flow name="requestApiFlow">
+	<http:request method="GET" config-ref="HTTP_Request_configuration" path="/employee"/>
+</flow>
+----
+
+To consume data from a QA API endpoint when running your MUnit tests:
+
+. Extract the HTTP Configuration values into a properties file for each environment where you will execute the validations. Those properties files must go under `src/main/resources`:
++
+.prod.properties
+[source,xml,linenums]
+----
+http.host=dummy.restapiexample.com/api/v1/
+http.port=80
+----
++
+.qa.properties
+[source,xml,linenums]
+----
+http.host=dummy.qax.restapiexample.com/api/v1/
+http.port=8081
+----
++
+You can set a properties file for each one of your environments.
+. Use a `configuration-properties` global configuration in your configuration file to load environment properties from the previously created file:
++
+[source,xml]
+----
+ <configuration-properties file="${mule-env}.properties"/>
+----
+. Replace the HTTP configuration with placeholders matching the variables defined in the properties file:
++
+[source,xml]
+----
+<http:request-config name="HTTP_Request_configuration">
+	<http:request-connection host="${http.host}" port="${http.port}"/>
+</http:request-config>
+<flow name="requestApiFlow">
+	<http:request method="GET" config-ref="HTTP_Request_configuration" path="/employee"/>
+</flow>
+----
+. Define an environment variable in the MUnit Maven plugin:
++
+[source,xml,linenums]
+----
+ <configuration>
+     ...
+     <environmentVariables>
+         <mule-env>qa</mule-env>
+     </environmentVariables>
+     ...
+ </configuration>
+----
++
+During the execution of the MUnit tests, MUnit loads the properties from the `qa` properties file and connects to your test environment.
+
+
