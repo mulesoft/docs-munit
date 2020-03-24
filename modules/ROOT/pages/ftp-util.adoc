@@ -50,7 +50,7 @@ It is possible to define the FTP user home directory using the `~` character to 
 
 == MUnit FTP server Processors
 
-The FTP util has two processors to interact with your FTP server:
+The FTP Utility has two processors to interact with your FTP server:
 
 contains-files::
 +
@@ -101,4 +101,4 @@ This feature is useful when creating the same file name several times. You can c
 
 == See Also
 
-* xref:ftp-server-cookbook.adoc[Configuring FTP Server Util in an MUnit Test]
+* xref:ftp-server-cookbook.adoc[Configuring FTP Server Utility in an MUnit Test]
