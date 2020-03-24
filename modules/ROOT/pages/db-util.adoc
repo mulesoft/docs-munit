@@ -130,7 +130,7 @@ This creates two tables: `FILE_NAME` and `FILE_NAME_1`.
 
 == MUnit DB Server Processors
 
-The DB util has two processors to interact with your DB server:
+The DB server utility has two processors to interact with your DB server:
 
 === Validate-That
 
@@ -171,4 +171,4 @@ org.mule.runtime.core.internal.processor.LoggerMessageProcessor: [{JOBTITLEID=DE
 
 == See Also
 
-* xref:db-server-cookbook.adoc[Configuring DB Server Util in an MUnit Test]
+* xref:db-server-cookbook.adoc[Configuring DB Server Utility in an MUnit Test]
