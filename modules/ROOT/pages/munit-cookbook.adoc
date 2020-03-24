@@ -13,4 +13,6 @@ This section links to examples that demonstrate common MUnit usages.
 | xref:utility-classes-cookbook.adoc[Using Utility Classes From a Test] | Learn how to use custom Java classes in you MUnit tests.
 | xref:use-environment-properties-on-tests-cookbook.adoc[Testing with Environment Properties] | Learn how to load different environment values to your MUnit tests.
 | xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] | Learn how to configure MUnit to run against a patched Mule runtime engine version.
+| xref:test-flow-with-scheduler-cookbook.adoc[Testing a Flow with Scheduler] | Learn how to test a flow that is triggered by an scheduler.
+| xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] | Learn how to configure MUnit to run against a patched Mule runtime engine version.
 |===

@@ -1,0 +1,179 @@
+= Configuring Database Server Utility in an MUnit Test
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Assume that you want to test the following Mule application:
+
+[source,xml,linenums]
+----
+<!-- Local Database Configuration -->
+<db:config name="Database_Config">
+    <db:my-sql-connection host="localhost" port="1234" />
+</db:config>
+<!-- Properties according to the environment -->
+<configuration-properties file="db.properties" />
+
+<flow name="selectFlow" >
+    <!-- Perform a query based on a value passed by a variable -->
+    <db:select config-ref="${db.config}">
+        <db:sql >SELECT * FROM jobtitlelookup WHERE jobtitleid = :id</db:sql>
+        <db:input-parameters ><![CDATA[#[id : vars.jobid]]]></db:input-parameters>
+    </db:select>
+    <!-- Set two conditions depending on the query result -->
+    <choice>
+        <!-- If there is one or more values resulting from the query set those values as the payload -->
+        <when expression="#[sizeOf(payload) > 0]">
+            <set-payload value="#[payload[0].jobtitle]"/>
+        </when>
+        <!-- If the query throws no results, inform it in the payload  -->
+        <otherwise>
+            <set-payload value="#['No job title for $(vars.jobid) was found']" />
+        </otherwise>
+    </choice>
+
+    <!-- Finally, pass the payload content as a Flow variable  -->
+    <set-variable value="#[payload]" variableName="job" />
+</flow>
+----
+The file `db.properties` in `src/main/resources` has the following content:
+
+[source]
+----
+db.config=Database_Config
+----
+
+You need to create a test that:
+* Contains a database server with a `jobtitlelookup` table.
+* Provides a valid database structure for the database connector to perform its query.
+* Passes a value for the `jobid` variable that Database Connector uses.
+
+== Install the MUnit DB Server Module
+
+. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
+. In the search bar, look for *MUnit Utils Database Server* and add the module to your project:
++
+[source,xml,linenums]
+----
+<!-- dbserver Dependency -->
+<dependency>
+    <groupId>com.mulesoft.munit.utils</groupId>
+    <artifactId>munit-dbserver-module</artifactId>
+    <version>2.0.2</version>
+    <classifier>mule-plugin</classifier>
+    <scope>test</scope>
+</dependency>
+----
++
+The MUnit DB server artifact in your POM file must have the `test` scope.
+. Add the `h2` dependency to your POM file and list it as `sharedLibrary` in `mule-maven-plugin`:
++
+[source,xml,linenums]
+----
+<!--Third party libs-->
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>1.3.166</version>
+</dependency>
+----
++
+[source,xml,linenums]
+----
+<plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>${mule.maven.plugin.version}</version>
+    <extensions>true</extensions>
+    <configuration>
+    <sharedLibraries>
+            ...
+            <sharedLibrary>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+            </sharedLibrary>
+        </sharedLibraries>
+    </configuration>
+</plugin>
+----
+
+== Define the MUnit DB Server
+
+Define the database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
+
+For this example, define the DB structure and content using a CSV file:
+
+. Go to the `src/test/resources` directory in your project.
+. Create a file named `jobtitlelookup.csv` containing the following values:
++
+[source,text,linenums]
+----
+JOBTITLE,EECSALARYORHOURLY,JOBTITLEID
+Developer,10,DEV
+----
+. Navigate to the *Global Elements* tab and select the *MUnit DB Server Config* element.
+. Click *Edit* and complete the fields:
++
+[%header%autowidth.spread,cols="a,a"]
+|===
+| Name | `MUnit_DB_Server_Config`
+| CSV | `jobtitlelookup.csv`
+| Database | `DATABASE_NAME`
+| Connection string parameters | `MODE=MySQL`
+|===
++
+[source,xml,linenums]
+----
+<dbserver:config name="MUnit_DB_Server_Config" >
+    <dbserver:connection csv="jobtitlelookup.csv" database="DATABASE_NAME" connectionStringParameters="MODE=MySQL" />
+</dbserver:config>
+----
+. Define the DB configuration to connect to your DB server:
++
+[%header%autowidth.spread,cols="a,a"]
+|===
+| Name | `Test_Database_Config`
+| Connection | `Generic connection`
+| URL | `jdbc:h2:tcp://localhost/mem:DATABASE_NAME`
+| Driver class name | `org.h2.Driver`
+|===
++
+[source,xml,linenums]
+----
+<db:config name="Test_Database_Config">
+    <db:generic-connection url="jdbc:h2:tcp://localhost/mem:DATABASE_NAME" driverClassName="org.h2.Driver" />
+</db:config>
+----
+. Define the `db.properties` file in your `src/test/resources` folder that will pick up your test database configuration:
++
+[source]
+----
+db.config=Test_Database_Config
+----
+
+== Run the Test
+
+After installing and configuring the DB server you can run the test:
+
+[source,xml,linenums]
+----
+<munit:test name="selectFlowTest" description="Test selectFlow"  >
+    <munit:behavior>
+        <!-- Passes a variable to value to run in the main flow. -->
+        <set-variable variableName="jobid" value="DEV" />
+    </munit:behavior>
+    <munit:execution>
+        <!-- Run the production code. -->
+        <flow-ref name="db-server-docsFlow"/>
+    </munit:execution>
+    <munit:validation>
+        <munit-tools:assert-equals actual="#[vars.job]" expected="Developer" />
+    </munit:validation>
+</munit:test>
+----
+
+This test validates that the query run in your production code is correct and that the payload returned by the DB server is as expected.
+
+== See Also
+
+* xref:db-util.adoc[Database Util]
