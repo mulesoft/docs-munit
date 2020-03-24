@@ -44,14 +44,14 @@ db.config=Database_Config
 ----
 
 You need to create a test that:
-* Contains a Database Server with a `jobtitlelookup` table.
-* Provides a valid Database Structure for the Database connector to perform its' query.
-* Passes a value for the `jobid` variable that the Database connector uses.
+* Contains a database server with a `jobtitlelookup` table.
+* Provides a valid database structure for the database connector to perform its query.
+* Passes a value for the `jobid` variable that Database Connector uses.
 
 == Install the MUnit DB Server Module
 
 . From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
-. In the search bar look for *MUnit Utils Database Server*, and add the module to your project:
+. In the search bar, look for *MUnit Utils Database Server* and add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -66,7 +66,7 @@ You need to create a test that:
 ----
 +
 The MUnit DB server artifact in your POM file must have the `test` scope.
-. Add the `h2` dependency to your POM file and list it as a `sharedLibrary` in the `mule-maven-plugin`:
+. Add the `h2` dependency to your POM file and list it as `sharedLibrary` in `mule-maven-plugin`:
 +
 [source,xml,linenums]
 ----
@@ -97,9 +97,9 @@ The MUnit DB server artifact in your POM file must have the `test` scope.
 </plugin>
 ----
 
-== Defining the MUnit DB Server
+== Define the MUnit DB Server
 
-Define the Database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
+Define the database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
 
 For this example, define the DB structure and content using a CSV file:
 
@@ -111,7 +111,7 @@ For this example, define the DB structure and content using a CSV file:
 JOBTITLE,EECSALARYORHOURLY,JOBTITLEID
 Developer,10,DEV
 ----
-. Navigate to your *Global Elements* tab, and select your *MUnit DB Server Config* element.
+. Navigate to the *Global Elements* tab and select the *MUnit DB Server Config* element.
 . Click *Edit* and complete the fields:
 +
 [%header%autowidth.spread,cols="a,a"]
@@ -128,7 +128,7 @@ Developer,10,DEV
     <dbserver:connection csv="jobtitlelookup.csv" database="DATABASE_NAME" connectionStringParameters="MODE=MySQL" />
 </dbserver:config>
 ----
-. Define the DB configuration to connect to your DB Server:
+. Define the DB configuration to connect to your DB server:
 +
 [%header%autowidth.spread,cols="a,a"]
 |===
@@ -151,7 +151,7 @@ Developer,10,DEV
 db.config=Test_Database_Config
 ----
 
-== Running The Test
+== Run the Test
 
 After configuring the DB server you can run the test:
 
@@ -172,7 +172,7 @@ After configuring the DB server you can run the test:
 </munit:test>
 ----
 
-This test validates that the query ran in your production code is correct, and that the payload returned by the DB server is the expected one.
+This test validates that the query run in your production code is correct and that the payload returned by the DB server is as expected.
 
 == See Also
 
