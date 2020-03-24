@@ -153,7 +153,7 @@ db.config=Test_Database_Config
 
 == Run the Test
 
-After configuring the DB server you can run the test:
+After installing and configuring the DB server you can run the test:
 
 [source,xml,linenums]
 ----
