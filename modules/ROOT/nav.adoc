@@ -38,7 +38,7 @@
  ** xref:sleep-processor.adoc[Sleep Processor]
  ** xref:dynamic-ports.adoc[Dynamic Ports]
  ** xref:dynamic-directories.adoc[Dynamic Directories]
- ** xref:munit-utils.adoc[Utils]
+ ** xref:munit-utils.adoc[Utilities]
   *** xref:db-util.adoc[Database]
   *** xref:ftp-util.adoc[FTP]
   *** xref:queue-processors.adoc[Queue Event Processors]
