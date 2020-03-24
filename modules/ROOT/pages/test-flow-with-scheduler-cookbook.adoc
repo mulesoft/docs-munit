@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Assume that you want to test the following flow triggered by an Scheduler component, and that you want to validate that your flow is being triggered correctly:
+Assume that you want to both test the following flow triggered by a Scheduler component and validate that your flow is being triggered correctly:
 
 
 [source,xml]
@@ -18,10 +18,10 @@ Assume that you want to test the following flow triggered by an Scheduler compon
 </flow>
 ----
 
-. Enable Flow Sources. +
-By default, MUnit does not start any of the event sources (flow sources such as triggers or listeners). You must configure which flow sources must start for your tests.
+. Enable flow sources. +
+Because MUnit does not start any of the flow sources (such as triggers or listeners), you must configure which flow sources start for your tests.
 +
-In this case, you must enable the flow that contains the Scheduler:
+In this example, you enable the flow that contains the Scheduler:
 +
 [source,xml]
 ----
@@ -31,12 +31,12 @@ In this case, you must enable the flow that contains the Scheduler:
     </munit:enable-flow-sources>
 </munit:test>
 ----
-. Verify Flow Execution is Triggered by the Scheduler. +
-To check that the processors inside your flow are being triggered, use the `munit-tools:verify-call` processor to assert that any of the processors was called.
+. Verify that flow execution is triggered by the Scheduler. +
+To verify that the processors inside your flow are being triggered, use the `munit-tools:verify-call` processor.
 +
-Wrap the `munit-tools:verify-call` inside an `until-successful` router because the Scheduler may not be executed at that particular time and you need to stay checking for a shorter time.
+Wrap `munit-tools:verify-call` inside an `until-successful` to shorten processing time when the Scheduler is not operating when you want to test.
 +
-The following example checks that the payload was executed at least one time. It validates this condition three times to ensure that the flow was executed at the time the test runs.
+The following example validates three times that the payload was executed at least once during the test. 
 +
 [source,xml]
 ----
@@ -57,4 +57,3 @@ The following example checks that the payload was executed at least one time. It
 
 * xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
 * xref:verify-event-processor.adoc[Verify Event Processor]
-
