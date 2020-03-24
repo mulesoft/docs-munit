@@ -91,7 +91,7 @@ There are two different ways to define the structure and content of your databas
 The MUnit DB server is based on H2. Complex structures, index and join commands may not work properly.
 
 [[db-structure-sql]]
-=== Defining the DB Structure From an SQL File
+=== Defining the DB Structure from an SQL File
 
 To define the DB structure and content from an SQL file, you must provide a valid set of ANSI SQL DDL (Data Definition Language) instructions.
 
@@ -103,7 +103,7 @@ To define the DB structure and content from an SQL file, you must provide a vali
 ----
 
 [[db-structure-csv]]
-=== Defining the Db Structure From a CSV File
+=== Defining the DB Structure From a CSV File
 
 To define your DB structure based on a CSV file:
 
