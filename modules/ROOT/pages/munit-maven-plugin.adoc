@@ -287,6 +287,8 @@ The following example overrides the console coverage report from its parent POM 
 
 == Setting Up Coverage
 
+The following configurations only apply when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. See xref:coverage-maven-concept.adoc[Using Coverage in Maven] for more information. 
+
 include::page$coverage-maven-concept.adoc[tags=coverage-report;!report-types,leveloffset=+1]
 
 == Dynamic Ports
