@@ -1,4 +1,4 @@
-= Test Recorder in Studio (Beta)
+= Test Recorder in Studio
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,27 +7,24 @@ The test recorder enables you to record a processing flow and then configure a u
 
 The test recorder captures real data as it goes through your application in Anypoint Studio. By capturing the flow execution, MUnit can automatically generate an MUnit test so that you can configure the necessary mocks and assertions for your test. See xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example] for a fully working example.
 
-[NOTE]
-The test recorder is an open beta feature.
-
 == Compatibility
 
-The following table describes the product versions required to use the test recorder. These versions are for the beta feature and are likely to change for the GA (general availability) release.
+The following table describes the product versions required to use the test recorder.
 
 [%header%autowidth.spread,cols="a,a"]
 |===
 | Product | Version
 | Anypoint Studio
-| 7.4.2 and later
+| 7.5.0 and later
 
 | MUnit
-| 2.2.4
+| 2.2.5
 
 | MUnit Anypoint Studio Plugin
-| 2.4.2
+| 2.5.0
 
 | Mule runtime engine
-| 4.2.2
+| 4.3.0
 
 |===
 
@@ -36,7 +33,7 @@ The following table describes the product versions required to use the test reco
 The test recorder is limited in the following ways when you create MUnit tests:
 
 * You cannot create tests for flows with Mule errors raised inside the flow or already existing in the incoming event, not even if they are handled by an *on error continue* error handler.
-* A recorded flow execution ends successfully, but the result does not reach its destination because the application is killed. 
+* A recorded flow execution ends successfully, but the result does not reach its destination because the application is killed.
 * Your validations fail every time your test runs if you configure Spy or Assert processors to assert values for random data, time-dependent information (such as timestamps), or values resulting from parallel processes, because those values change in every execution.
 * Mocking values resulting from parallel processes causes a mixture of real and mocked data that compromises the execution of the processors that follow in your test.
 * Although the recorder supports data iteration in the flow, such as recursivity or loops, it does not support cases in which the structure of the data being tested changes inside the iteration.

@@ -27,7 +27,7 @@ image::update-munit.png[]
 === Testing the Process for a Successful Login Attempt
 
 //tag::this-test[]
-. In your project, right-click `DoLoginFlow` and select *Munit* > *Record new test for this flow (BETA)*:
+. In your project, right-click `DoLoginFlow` and select *Munit* > *Record new test for this flow*:
 +
 image::login-flow-test-recorder-example.png[]
 +
