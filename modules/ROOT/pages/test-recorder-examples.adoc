@@ -27,15 +27,16 @@ image::update-munit.png[]
 === Testing the Process for a Successful Login Attempt
 
 //tag::this-test[]
-. In your project, right-click `DoLoginFlow` and select *Munit* > *Record new test for this flow (BETA)*:
+. In your project, right-click `DoLoginFlow` and select *Munit* > *Record new test for this flow*:
 +
 image::login-flow-test-recorder-example.png[]
 +
 The test recorder starts your project and starts recording the event going through that flow.
 . Open a browser and navigate to `+http://0.0.0.0:8081/login+`.
 //end::this-test[]
-. Type `mule` for both *Username* and *Password*, and click *Submit*. +
+. Type `mule` for both *Username* and *Password*, and click *Submit*.
 //tag::also-this[]
++
 The test recorder captures this event and stops the recording.
 . Return to Studio and click *Configure Test*:
 +
@@ -52,7 +53,7 @@ A fully functional MUnit test is generated to assert that the process in your ap
 === Testing the Process for an Unsuccessful Login Attempt
 
 include::page$test-recorder-examples.adoc[tag=this-test]
-. Type `admin` in both *Username* and *Password*, and click *Submit*:+
+. Type `admin` in both *Username* and *Password*, and click *Submit*: +
 include::page$test-recorder-examples.adoc[tag=also-this]
 . Under *Test name*, type `_DoLoginFlow-unsuccessfull_`.
 . Set the test recorder to set the recorded input of the flow, and assert that the recorded output is the expected output by the test.
