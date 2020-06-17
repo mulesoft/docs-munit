@@ -8,6 +8,7 @@ The Storage processors allows you to manage temporary storage during  your tests
 
 All storage is cleared as soon as the test ends.
 
+[[store-operation]]
 == Store operation
 
 Stores the given data associated with the given key. If `value` not set, it defaults to the `payload`.
@@ -19,6 +20,7 @@ Stores the given data associated with the given key. If `value` not set, it defa
 </munit-tools:store>
 ----
 
+[[retrieve-operation]]
 == Retrieve operation
 
 Retrieves the data associated with the given key
@@ -28,6 +30,7 @@ Retrieves the data associated with the given key
 <munit-tools:retrieve key="myKey"/>
 ----
 
+[[remove-operation]]
 == Remove operation
 
 Removes and returns the data associated with the given key
@@ -37,6 +40,7 @@ Removes and returns the data associated with the given key
 <munit-tools:remove key="myKey"/>
 ----
 
+[[clear-stored-data-operation]]
 == Clear stored data operation
 
 Clears all stored data

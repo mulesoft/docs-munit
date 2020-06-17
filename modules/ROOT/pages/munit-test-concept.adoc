@@ -59,6 +59,7 @@ To specify that a suite should run if the Mule version that is equal or newer th
 <munit:config name="A MUnit Suite" minMuleVersion="4.1.4"/>
 ----
 
+[[munit-test]]
 == MUnit Test
 
 An MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
