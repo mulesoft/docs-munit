@@ -392,6 +392,20 @@ The reports can be found under `${project.build.directory}/surefire-reports`.
 
 By default, it is set to `true`.
 
+== Enabling Sonar Reports
+
+MUnit has built-in support for SonarQube. No additional configuration is needed, but you can disable it if you don't need it:
+
+.Disabling sonar reports
+[source]
+----
+<enableSonarReports>false</enableSonarReports>
+----
+
+The reports can be found under `${project.build.directory}/sonar-reports`.
+
+By default, it is set to `true`.
+
 == Running Tests Using the Plugin
 
 === Running MUnit Tests for a Mule Application
