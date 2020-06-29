@@ -2,7 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:version-info: 2.2 and later
+:version-info: 2.3 and later
 :keywords: munit, testing, unit testing
 :page-aliases: munit-parameterized-suite.adoc
 
