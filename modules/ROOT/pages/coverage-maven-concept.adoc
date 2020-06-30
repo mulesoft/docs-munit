@@ -63,12 +63,13 @@ MUnit Coverage Summary
 
 MUnit Coverage offers four types of reports:
 
-* The *Console* report is printed to the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
-* The *HTML* report shows the same information but formatted to fit any web browser. +
-To access the report, browse your application folder structure to the `${application.path}/target/site/munit/coverage/` path and locate the file `summary.html` at the starting point of the report and to navigate through all the data.
-* The *JSON* report shows the same information as the HTML report, in a JSON format. +
-To access the JSON report locate the `${application.path}/target/site/munit/coverage/munit-coverage.json`  fileinside your application folder structure.
-* The *SONAR* report shows the same information in a format that SonarQube can use to inform coverage. To access the Sonar report locate the `${application.path}/target/site/munit/coverage/sonar.xml`
+* The console report is printed to the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
+* The HTML report shows the same information but formatted to fit any web browser. +
+The HTML report is available in the `${application.path}/target/site/munit/coverage/` path.
+* The JSON report shows the same information as the HTML report, in a JSON format. +
+The JSON report is availabie in `${application.path}/target/site/munit/coverage/munit-coverage.json` path.
+* The SONAR report shows the same information as the HTML report, in a SonarQube format. +
+The Sonar report is available in `${application.path}/target/site/munit/coverage/sonar.xml`.
 
 To enable the report generation, add the following configuration:
 
