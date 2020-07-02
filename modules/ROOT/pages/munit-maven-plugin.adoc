@@ -394,7 +394,11 @@ By default, it is set to `true`.
 
 == Enabling Sonar Reports
 
-MUnit has built-in support for SonarQube. No additional configuration is needed, but you can disable it if you don't need it:
+MUnit has built-in support for SonarQube, with a default setting of `true` for `enableSonarReports`. No additional configuration is needed.
+
+You can find the reports under `${project.build.directory}/sonar-reports`.
+
+You can disable SONAR reports if you don't need them:
 
 .Disabling sonar reports
 [source]
