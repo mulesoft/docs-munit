@@ -48,7 +48,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
 
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 == See Also
