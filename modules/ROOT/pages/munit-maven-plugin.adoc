@@ -195,7 +195,7 @@ If you choose to inherit the MUnit plugin in your child POM files, you need to r
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 This quick sample references _pirate-pom_ file as its parent and then declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because MUnit plugin configuration is being inherited from the `<pluginManagement>` section in the parent.
@@ -282,7 +282,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 == Reading MUnit Test Results
