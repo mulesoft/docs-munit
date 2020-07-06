@@ -200,7 +200,7 @@ The following sample references `pirate-pom` file as its parent and then declare
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 === Ignoring a Parent's Plugin
@@ -242,7 +242,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 === Overriding a Parent's Plugin
@@ -287,7 +287,7 @@ The following example overrides the console coverage report from its parent POM 
 
 == Setting Up Coverage
 
-The following configurations only apply when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. See xref:coverage-maven-concept.adoc[Using Coverage in Maven] for more information. 
+The following configurations only apply when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. See xref:coverage-maven-concept.adoc[Using Coverage in Maven] for more information.
 
 include::page$coverage-maven-concept.adoc[tags=coverage-report;!report-types,leveloffset=+1]
 
@@ -795,7 +795,7 @@ Default value: `${project.build.directory}/test-mule/munit`
 
 | `runtimeVersion`
 | String
-| Version of the Mule runtime 
+| Version of the Mule runtime
 By default, this value is taken from the `minMuleVersion` parameter in the `mule-artifact.json` file.
 
 
