@@ -200,7 +200,7 @@ The following sample references `pirate-pom` file as its parent and then declare
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 === Ignoring a Parent's Plugin
@@ -242,7 +242,7 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 === Overriding a Parent's Plugin
