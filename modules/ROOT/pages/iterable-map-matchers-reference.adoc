@@ -52,7 +52,7 @@ Checks that the size of the expression matches the specified matcher.
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasSize(MUnitTools::greaterThan(2))]"/>
+is="#[MunitTools::hasSize(MunitTools::greaterThan(2))]"/>
 ----
 
 .Example
