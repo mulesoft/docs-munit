@@ -60,7 +60,7 @@ is="#[MunitTools::hasSize(MunitTools::equalTo(5))]"/>
 ----
 <munit-tools:assert-that
 expression="#[payload]"
-is="#[MunitTools::hasSize(MUnitTools::greaterThan(2))]"/>
+is="#[MunitTools::hasSize(MunitTools::greaterThan(2))]"/>
 ----
 
 
