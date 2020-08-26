@@ -39,7 +39,7 @@ By default, MUnit runs in Anypoint Studio with the Mule runtime engine version o
 . Under *MUnit*, select your MUnit test file.
 . In the *Mule Runtime Version* field under *Advanced Settings* type the Mule patched version you want to use.
 +
-image::runtime-patching-7d385.png[]
+image::runtime-patching-studio.png[]
 
 
 If you already set the `runtimeVersion` attribute in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
