@@ -43,3 +43,7 @@ image::runtime-patching-studio.png[]
 
 
 If you already set the `runtimeVersion` attribute in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
+
+== See Also
+
+* xref:release-notes::mule-runtime/mule-esb[Mule Runtime Release Notes]
