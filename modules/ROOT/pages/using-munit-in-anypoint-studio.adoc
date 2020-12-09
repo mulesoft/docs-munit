@@ -269,7 +269,7 @@ image::debug3.png[]
 MUnit comes bundled with Studio 5.4.0 and later. If you are running an older Studio version, you first need to install MUnit.
 
 Go to `Help` / `Install New Software...` and click the `Add...` button. +
-Set the *Name:* field as `MUnit Update Site` and the *Location:* field as `http://studio.mulesoft.org/beta/r5/munit`
+Set the *Name:* field as `MUnit Update Site` and the *Location:* field as `+http://studio.mulesoft.org/beta/r5/munit+`
 
 Check *Munit* and *Munit Tools for Mule*, and click *Next* to complete the installation.
 
