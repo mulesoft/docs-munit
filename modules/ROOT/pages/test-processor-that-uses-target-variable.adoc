@@ -1,0 +1,65 @@
+= Testing a Processor that Uses a Target Variable
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+You can test a processor that stores a result in a target variable by mocking the content of the variable.
+
+== Test an HTTP Request with a Target Variable
+
+Consider a Mule application with the following XML configuration:
+
+[source, xml, linenums]
+----
+<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" >
+  <http:listener-connection host="0.0.0.0" port="8081" />
+</http:listener-config>
+<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" />
+
+<flow name="targetVariableTestFlow" >
+  <http:listener doc:name="Listener" config-ref="HTTP_Listener_config" path="/test"/>
+  <http:request
+    method="GET"
+    doc:name="Request"
+    config-ref="HTTP_Request_configuration"
+    target="httpResponse"
+    targetValue="#[message]"
+    url="http://www.mulesoft.com"/>
+  <logger level="INFO" doc:name="Logger" message="#[vars.httpResponse]"/>
+</flow>
+----
+
+When the HTTP Listener receives a request, the app makes and HTTP Request and the processor stores the received HTTP response in a target variable called `httpResponse`. You can then create a test to mock the stored target variable.
+
+=== Mock a Target Variable
+
+The following test mocks the target variable from the previos Mule app example and asserts that the stored HTTP status code is `200`:
+
+[source, xml, linenums]
+----
+<munit:test name="test-target-variable-targetVariableTestFlowTest" description="Test">
+  <munit:behavior >
+    <munit-tools:mock-when doc:name="Mock when HTTP response" processor="http:request">
+      <munit-tools:with-attributes >
+        <munit-tools:with-attribute attributeName='#["doc:name"]' whereValue='#["Request"]' />
+      </munit-tools:with-attributes>
+      <munit-tools:then-return >
+        <munit-tools:variables >
+          <munit-tools:variable key="#['httpResponse']" value='#[{"attributes":{"statusCode":200}}]' />
+        </munit-tools:variables>
+      </munit-tools:then-return>
+    </munit-tools:mock-when>
+  </munit:behavior>
+  <munit:execution >
+    <flow-ref doc:name="Flow-ref to targetVariableTestFlow" name="targetVariableTestFlow"/>
+  </munit:execution>
+  <munit:validation >
+    <munit-tools:assert-that doc:name="Assert that" expression="#[vars.httpResponse.attributes.statusCode]" is="#[MunitTools::equalTo(200)]"/>
+  </munit:validation>
+</munit:test>
+----
+
+== See Also
+
+* xref:mock-event-processor.adoc[Mock When Event Processor]
+* xref:munit-matchers.adoc[MUnit Matchers]
