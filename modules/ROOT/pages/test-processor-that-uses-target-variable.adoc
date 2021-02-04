@@ -49,7 +49,7 @@ If you want to test the behavior of this app without making the HTTP request, yo
 
 === Mock a Processor that Stores Data in a Target Variable
 
-The following test mocks the HTTP Request and the resulting target variable from the previos Mule app example, and then asserts that the stored HTTP status code is `200`:
+The following test mocks the HTTP Request and the resulting target variable from the previous Mule app example, and then asserts that the stored HTTP status code is `200`:
 
 [source, xml, linenums]
 ----
