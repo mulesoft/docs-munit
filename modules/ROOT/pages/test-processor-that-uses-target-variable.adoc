@@ -1,9 +1,9 @@
-= Testing a Processor that Stores Data in a Target Variable
+= Testing a Processor That Stores Data in a Target Variable
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-You can test a processor that stores its result in a target variable by asserting the content of the stored variable.
+When you test a processor that stores its result in a target variable, ensure that the assertions check the content of the stored variable. If you mock the processor, you also need to mock the target variable.
 
 == Example Test of a Target Variable from an HTTP Request Operation
 
@@ -29,7 +29,7 @@ Consider a Mule application with the following XML configuration:
 </flow>
 ----
 
-When the HTTP Listener receives a request, the app makes an HTTP Request and the processor stores the received HTTP response in a target variable called `httpResponse`.
+When the HTTP listener receives a request, the app makes an HTTP request and the processor stores the received HTTP response in a target variable called `httpResponse`.
 
 You can create an MUnit test to assert that the stored variable contains, for example, a `200` HTTP status code:
 
@@ -49,7 +49,7 @@ If you want to test the behavior of this app without making the HTTP request, yo
 
 === Mock a Processor that Stores Data in a Target Variable
 
-The following test mocks the HTTP Request and the resulting target variable from the previous Mule app example, and then asserts that the stored HTTP status code is `200`:
+The following test mocks the HTTP request and the resulting target variable from the previous Mule app example, and then asserts that the stored HTTP status code is `200`:
 
 [source, xml, linenums]
 ----

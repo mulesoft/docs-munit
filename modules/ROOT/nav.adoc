@@ -13,7 +13,7 @@
   ** xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications]
   ** xref:test-flow-with-scheduler-cookbook.adoc[Testing a Flow with a Scheduler Source]
   ** xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example]
-  ** xref:test-processor-that-uses-target-variable.adoc[Testing a Processor that Uses a Target Variable]  
+  ** xref:test-processor-that-uses-target-variable.adoc[Testing a Processor That Uses a Target Variable]  
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
