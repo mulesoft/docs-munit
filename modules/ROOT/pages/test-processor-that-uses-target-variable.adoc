@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-When you test a processor that stores its result in a target variable, ensure that the assertions check the content of the stored variable. If you mock the processor, you also need to mock the target variable.
+When you test a processor that stores its result in a target variable, ensure that the assertions check the content of the stored variable. If you mock the processor, define a value for the target variable.
 
 == Example Test of a Target Variable from an HTTP Request Operation
 
