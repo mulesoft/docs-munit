@@ -7,7 +7,7 @@ endif::[]
 
 The Run Custom event processor allows you to assert the Mule event content against a custom assertion.
 
-You have to add the next dependency to your `pom.xml` file:
+To add the Run Custom processor to your project, add the following dependency to your `pom.xml` file:
 
 [source,xml,linenums]
 ----
