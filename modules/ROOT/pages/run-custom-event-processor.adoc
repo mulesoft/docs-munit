@@ -19,7 +19,7 @@ To add the Run Custom processor to your project, add the following dependency to
 </dependency>
 ----
 
-You must add your custom assertion class to the `mule-artifact.json` file as an exported resource.
+You must also add your custom assertion class to the `mule-artifact.json` file as an exported resource.
 
 For example, you can define the following assertion in Java:
 
