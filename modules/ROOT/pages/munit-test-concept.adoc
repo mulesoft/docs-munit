@@ -242,7 +242,7 @@ This attribute allows you to validate that a defined error type in your applicat
 ----
 +
 This Error Type test expects that an FTP operation will throw an `FTP:ILLEGAL_PATH` error. +
-If none of your flows are using using an FTP connector, then the error type is not defined within your application and the test will not run.
+If none of your flows are using an FTP connector, then the error type is not defined within your application and the test will not run.
 +
 ErrorTypes that belong to the Mule Runtime do not need to be typified. For example, `MULE:RETRY_EXHAUSTED` can be defined as simply `RETRY_EXHAUSTED`.
 
