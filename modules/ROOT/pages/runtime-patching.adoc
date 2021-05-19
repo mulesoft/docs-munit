@@ -3,8 +3,9 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Patching in MUnit is different from patching in Mule runtime engine . MUnit runs using an embedded Mule container, which downloads all required dependencies to start Mule based on a given version. To use a patched Mule version (for example, `4.3.0-20200727`), you must point MUnit to run specifically against it. You can do this from either Maven or Anypoint Studio.
+Patching in MUnit is different from patching in Mule runtime engine. MUnit runs using an embedded Mule container, which downloads all required dependencies to start Mule based on a given version. To use a patched Mule version (for example, `4.3.0-20200727`), you must point MUnit to run specifically against it. You can do this from either Maven or Anypoint Studio.
 
+[[maven]]
 == Patching MUnit Using Maven
 
 By default, MUnit runs against the Mule version corresponding to the `minMuleVersion` defined in the `mule-artifact.json` file. You can override this version by using the `runtimeVersion` attribute of the `munit-maven-plugin` artifact configuration:
@@ -31,6 +32,7 @@ By default, MUnit runs against the Mule version corresponding to the `minMuleVer
 ----
 <1> Be sure to replace the placeholder version in this example with your version, as provided by MuleSoft.
 
+[[studio]]
 == Patching MUnit Using Studio
 
 By default, MUnit runs in Anypoint Studio with the Mule runtime engine version of the project’s server. You can override this version by specifying the patched Mule version in the MUnit run configuration menu:
@@ -42,7 +44,6 @@ By default, MUnit runs in Anypoint Studio with the Mule runtime engine version o
 image::runtime-patching-studio.png[]
 
 If you already set the `runtimeVersion` attribute in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
-
 
 
 == See Also
