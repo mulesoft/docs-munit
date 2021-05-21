@@ -6,7 +6,9 @@ endif::[]
 :keywords: munit, testing, unit testing
 :page-aliases: munit-maven-support.adoc, to-set-up-munit-maven-plugin.adoc, faq-working-with-parent-pom.adoc, to-inherit-parent-plugin.adoc, to-ignore-parent-plugin.adoc, to-override-parent-plugin.adoc, munit-maven-plugin-configuration.adoc,to-configure-munit-maven-plugin-maven.adoc
 
-MUnit provides a Maven plugin that allows you to run your MUnit tests as part of your continuous integration environment.
+MUnit provides a Maven plugin that enables you to run your MUnit tests as part of your continuous integration environment.
+
+The following configurations to the `pom.xml` or `settings.xml` files of your Maven installation apply only when running Munit through Maven.
 
 == Setting Up MUnit Maven Plugin
 
@@ -813,8 +815,9 @@ Default value: `${project.build.directory}/test-mule/munit`
 
 | `runtimeVersion`
 | String
-| Version of the Mule runtime
-By default, this value is taken from the `minMuleVersion` parameter in the `mule-artifact.json` file.
+| Version of the Mule runtime +
+When you run your tests from Maven, this value is taken from the `minMuleVersion` parameter in the `mule-artifact.json` file. +
+To modify the Mule runtime version used to run your MUnit tests in Studio, see xref:runtime-patching.adoc#studio[Runtime Patching in Studio].
 
 
 | runtimeProduct
