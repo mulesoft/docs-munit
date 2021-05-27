@@ -20,7 +20,7 @@ Defining a mock entails several tasks, listed in the sections below.
 Using the parameters entailed in the above tasks, you can tell MUnit how to replace the normal behavior of the message processor with the one you define.
 
 NOTE: You cannot mock flow control message processors, such as Filter or Choice. +
-You cannot mock the Validation module either. 
+Additionally, you cannot mock the Validation module.
 
 For the purpose of this documentation, we assume we are testing the following Mule code:
 
