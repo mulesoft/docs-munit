@@ -8,7 +8,7 @@ endif::[]
 
 Since MUnit 2.x, the coverage report goal is integrated with the maven reporting section. Coverage Reports are generated during Maven's `site` lifecycle, during the `coverage-report` goal.
 
-The following configurations only apply when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. +
+The following configurations apply only when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. +
 To run coverage reports in Studio see xref:coverage-studio-concept.adoc[Using Coverage in Studio].
 
 .MUnit Coverage - Sample Maven configuration
