@@ -131,7 +131,7 @@ MUnit artifacts are deployed in the Mule Maven repositories, which you've probab
   <repository>
     <id>mulesoft-releases</id>
       <name>MuleSoft Releases Repository</name>
-      <url>http://repository.mulesoft.org/releases/</url>
+      <url>https://repository.mulesoft.org/releases/</url>
       <layout>default</layout>
     </repository>
 </repositories>
@@ -147,7 +147,7 @@ You also need to add the Plugin repository.
     <id>mulesoft-release</id>
     <name>mulesoft release repository</name>
     <layout>default</layout>
-    <url>http://repository.mulesoft.org/releases/</url>
+    <url>https://repository.mulesoft.org/releases/</url>
     <snapshots>
       <enabled>false</enabled>
     </snapshots>
