@@ -408,7 +408,7 @@ By using the property `munit.test`, you can instruct the MUnit Maven plugin to r
 
 [source,maven,linenums]
 ----
-mvn clean test -Dmunit.test=<regex-test-suite>
+mvn clean test -D munit.test=<regex-test-suite>
 ----
 
 This path is relative to `src/test/munit`.
@@ -419,7 +419,7 @@ For example:
 
 [source,console]
 ----
-mvn clean test -Dmunit.test=.*my-test.*
+mvn clean test -D munit.test=.*my-test.*
 ----
 
 You can leverage this feature by adding naming conventions to your MUnit Test suites.
@@ -430,14 +430,14 @@ In the same way that you instruct MUnit to run one test suite, you can also conf
 
 [source,console]
 ----
-mvn clean test -Dmunit.test=<regex-test-suite>#<regex-test-name>
+mvn clean test -D munit.test=<regex-test-suite>#<regex-test-name>
 ----
 
 It also accepts regular expressions. The expression is applied to the attribute `name` of the MUnit Test. For example:
 
 [source,console]
 ----
-mvn clean test -Dmunit.test=.*my-test.*#.*test-scenario-1.*
+mvn clean test -D munit.test=.*my-test.*#.*test-scenario-1.*
 ----
 
 The tests inside the MUnit Test Suite that don't match the regular expression are flagged as *ignored*.
@@ -465,7 +465,7 @@ You can run only the tests that you grouped under one specific tag:
 
 [source,console]
 ----
-mvn clean test -Dmunit.tags=<munit-tag>
+mvn clean test -D munit.tags=<munit-tag>
 ----
 
 You can also configure this from the `pom.xml` configuration:
@@ -585,7 +585,7 @@ You can specify the JVM (or the java executable) in which your applications bein
 .Specifying the JVM
 [source,console]
 ----
-mvn clean package -Dmunit.jvm=/path/to/jdk/bin/java
+mvn clean package -D munit.jvm=/path/to/jdk/bin/java
 ----
 
 You can also configure this from the `pom.xml` configuration:
