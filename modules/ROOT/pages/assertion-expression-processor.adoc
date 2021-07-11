@@ -66,5 +66,5 @@ If this assertion fails, the processor throws a `java.lang.AssertionError`.
 
 [WARNING]
 --
-Matchers from the `dw::test::Asserts` library are not compatible with the `MunitTools` matchers. You can't use `dw::test::Asserts` with the Assert-That processor, and you can't use `MunitTools` matchers with the Assert-Expression processor.
+Matchers from the `dw::test::Asserts` library are not compatible with the `MunitTools` matchers. You can't use `dw::test::Asserts` with the Assert-That processor, and you can't use `MunitTools` matchers with the Assert-Expression processor. You can't use `dw::test::Asserts` with a regular Transform processor.
 --
