@@ -65,4 +65,4 @@ You can then access any of the defined variables in the DataWeave module by impo
 
 == See Also
 
-* xref:mule-runtime::dataweave-create-module.adoc[Create Custom Modules and Mappings]
+* xref:dataweave::dataweave-create-module.adoc[Create Custom Modules and Mappings]
