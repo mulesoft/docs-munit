@@ -1,0 +1,93 @@
+= Resource Matchers
+
+== getResourceAsStream(String)
+
+Returns the resource from the path String as a stream.
+
+.Example
+[source,xml,linenums]
+----
+<set-payload
+  value="#[MunitTools::getResourceAsStream('util/files/example.txt')]"/>
+----
+
+== getResourceAsReusableStream(String)
+
+Returns the resource from the path String as a reusable stream.
+
+.Example
+[source,xml,linenums]
+----
+ <set-payload
+   value="#[MunitTools::getResourceAsReusableStream('util/files/example.txt')]"/>
+----
+
+== getResourceAsString(String)
+
+Returns the resource from the path String as a String.
+
+.Example
+[source,xml,linenums]
+----
+<set-payload
+  value="#[MunitTools::getResourceAsString('util/files/example.txt')]"/>
+----
+
+You can also specify the encoding:
+
+.Example
+[source,xml,linenums]
+----
+<set-payload
+  value="#[MunitTools::getResourceAsString('util/files/exampleISO.txt', 'ISO-8859-1')]"/>
+----
+
+== getResourceAsByteArray(String)
+
+Returns the resource from the path String as a byte array.
+
+.Example
+[source,xml,linenums]
+----
+ <set-payload
+   value="#[MunitTools::getResourceAsByteArray('util/files/example.txt')]"/>
+----
+
+== queueSize(String)
+
+Returns the size of the queue specified inside `#[MunitTools::queueSize()]`.
+
+For example, to assert the size of a queue named `QUEUE_SIZE`:
+.Example
+[source,xml,linenums]
+----
+
+<munit:execution>
+  <munit-tools:queue queueName="QUEUE_SIZE">
+    <munit-tools:value>#['EXAMPLE']</munit-tools:value>
+  </munit-tools:queue>
+</munit:execution>
+
+<munit:validation>
+  <munit-tools:assert-that expression="#[MunitTools::queueSize('QUEUE_SIZE')]" is="#[MunitTools::equalTo(1)]"/>
+</munit:validation>
+----
+
+== createMessage(payload: Any, mimeType: String|Null , attributes: Any, attributeMimeType: String|Null)
+
+Creates a Mule message with the attributes specified.
+
+.Example
+[source,xml,linenums]
+----
+<munit:execution>
+     <set-payload value="#[MunitTools::createMessage( 'ITEM-1',  'text/plain', { property : 'ATTRIBUTE-1'}, null )]"/>
+ </munit:execution>
+----
+
+== See Also
+
+* xref:munit-matchers.adoc[MUnit Matchers]
+* xref:core-matchers-reference.adoc[Core Matchers Reference]
+* xref:string-matchers-reference.adoc[String Matchers Reference]
+* xref:comparable-matchers-reference.adoc[Comparable Matchers Reference]
