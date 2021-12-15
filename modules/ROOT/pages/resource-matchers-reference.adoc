@@ -58,6 +58,7 @@ Returns the resource from the path String as a byte array.
 Returns the size of the queue specified inside `#[MunitTools::queueSize()]`.
 
 For example, to assert the size of a queue named `QUEUE_SIZE`:
+
 .Example
 [source,xml,linenums]
 ----
@@ -75,7 +76,7 @@ For example, to assert the size of a queue named `QUEUE_SIZE`:
 
 == createMessage(payload: Any, mimeType: String|Null , attributes: Any, attributeMimeType: String|Null)
 
-Creates a Mule message with the attributes specified.
+Creates a Mule message with the specified attributes.
 
 .Example
 [source,xml,linenums]
