@@ -72,7 +72,8 @@ The console report is printed to the console. It works with the summary report a
 The HTML report shows the same information as the console report, but formatted to fit any web browser. It is available in the `${application.path}/target/site/munit/coverage/` path.+
 * JSON report
 The JSON report shows the same information as the HTML report, but in a JSON format. It is availabie in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.+
-* The SONAR report shows the same information as the HTML report, in a SonarQube format. +
+* The SONAR report shows the same information as the XML report, in a SonarQube format. It is available in `${application.path}/target/site/munit/coverage/sonar.xml`.
+To pass it to your sonar server you need to add property `<sonar.coverageReportPaths>target/site/munit/coverage/sonar.xml</sonar.coverageReportPaths>` to your pom.xml.
 
 To enable the report generation, add the following configuration:
 
