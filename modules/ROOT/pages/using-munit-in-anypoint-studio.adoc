@@ -213,7 +213,7 @@ image::coverage.png[]
 
 If you run more than one test, the MUnit tab displays a history of run tests. For failed tests, the *Errors* button displays the stack trace, which you can copy to your clipboard. To copy the stack trace, right-click the name of the failed test, then select *Copy Stack Trace*.
 
-image::copy-stac.png[]
+image::copy-stack.png[]
 
 As you can see in the image above, you can also use the MUnit tab to <<Running Your Test>> or debug your test, by selecting the appropriate menu option.
 
