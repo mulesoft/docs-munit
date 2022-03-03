@@ -671,7 +671,7 @@ To set additional environment variables during the test run, you can specify the
 </plugins>
 ----
 
-As shown in the previous example, you can use environment variables to replace placeholders such as `${MY_ENV}`.
+As shown in the previous example, you can use environment variables to replace placeholders such as `$\{MY_ENV}`.
 
 === System Properties Variables
 
@@ -708,7 +708,7 @@ You can do so using the ­`-D` argument when running MUnit with Maven.  Variable
 
 When running several tests, the build output can get very complex to read. MUnit allows you to redirect the output of each test suite to a file. This way, only the test results will remain in the build output and to you can check the respective file to check the standard output of each test suite.
 
-These files are located in the `testOutputDirectory` folder following the naming convention: `munit.${suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the MUnit test folder.
+These files are located in the `testOutputDirectory` folder following the naming convention: `munit.$\{suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the MUnit test folder.
 
 The test's output that doesn't belong to a particular suite won't be printed to keep the build output clean, but it can be enabled by running maven in debug mode.
 
