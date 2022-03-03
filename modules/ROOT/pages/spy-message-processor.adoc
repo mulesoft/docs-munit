@@ -61,7 +61,7 @@ image::spy-message-processor.png[]
 |Attribute Name |Description
 
 |`messageProcessor`
-|This attribute is used to describe which message processor we want to mock. It takes the form `{name-space}:{message-processor-name}`. It supports regular expressions.
+|This attribute is used to describe which message processor we want to mock. It takes the form `\{name-space}:\{message-processor-name}`. It supports regular expressions.
 
 |===
 
@@ -157,10 +157,10 @@ image::spy-before-and-after.png[]
                 <mock:with-attribute name="doc:name" whereValue="#['Real Set Payload']"/>
             </mock:with-attributes>
             <mock:assertions-before-call>   // <1>
-                <munit:assert-null message="Ooops! Payload Is not Null" doc:name="Assert Null Payload"/>
+                <munit:assert-null message="Oops! Payload Is not Null" doc:name="Assert Null Payload"/>
             </mock:assertions-before-call>
             <mock:assertions-after-call>   // <2>
-                <munit:assert-not-null message="Ooops! Payload is Null" doc:name="Assert Not Null Payload"/>
+                <munit:assert-not-null message="Oops! Payload is Null" doc:name="Assert Not Null Payload"/>
             </mock:assertions-after-call>
 </mock:spy>
 
