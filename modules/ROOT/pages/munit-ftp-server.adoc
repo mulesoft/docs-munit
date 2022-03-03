@@ -76,7 +76,7 @@ image::ftp-code-to-test.png[]
 
 [NOTE]
 --
-For this example, we are using properties `${host}` and `${ftp.port}`. +
+For this example, we are using properties `$\{host}` and `${ftp.port}`. +
 Remember to add these properties in your `mule-app.properties` file:
 
 ftp.port=22 +
