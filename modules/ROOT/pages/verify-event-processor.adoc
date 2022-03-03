@@ -28,7 +28,7 @@ You can define verifications over any message processor, even if you haven't cre
 |Attribute Name |Description
 
 |`eventProcessor`
-|Describes which event processor you want to mock. The description takes the form `{name-space}:{event-processor-name}`. It supports regular expressions.
+|Describes which event processor you want to mock. The description takes the form `\{name-space}:\{event-processor-name}`. It supports regular expressions.
 
 |`times`
 |*(Default = 1.)* Defines the verification as successful if the event processor was called _N_ and only _N_ number of times.
