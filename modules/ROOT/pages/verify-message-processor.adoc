@@ -41,7 +41,7 @@ When defining a verify, we make use of the `verify-call` message processor.
 |Attribute Name |Description
 
 |`messageProcessor`
-|Describes which message processor we want to mock. The description takes the form `{name-space}:{message-processor-name}`. It supports regular expressions.
+|Describes which message processor we want to mock. The description takes the form `\{name-space}:\{message-processor-name}`. It supports regular expressions.
 
 |`times`
 |*(Default = 1.)* Defines the verification as successful if the message processor was called _N_ and only _N_ number of times.
