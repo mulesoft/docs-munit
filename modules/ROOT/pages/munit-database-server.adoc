@@ -443,7 +443,7 @@ image::after-suite-stop-dbserver.png[]
 [source,xml,linenums]
 ----
 <!-- Stop the server -->
-<munit:after-suite name="munit3Flow-test-suiteAfter_Suite" description="Ater suite actions">
+<munit:after-suite name="munit3Flow-test-suiteAfter_Suite" description="After suite actions">
    <dbserver:stop-db-server config-ref="DB_Server" doc:name="stopServer"/>
 </munit:after-suite>
 ----
