@@ -48,7 +48,7 @@ When defining a mock, we make use of the `when` message processor, as shown belo
 |Attribute Name |Description
 
 |`messageProcessor`
-|Specifies which message processor to mock. The definition takes the form `{name-space}:{message-processor-name}`. Regular expressions are allowed.
+|Specifies which message processor to mock. The definition takes the form `\{name-space}:\{message-processor-name}`. Regular expressions are allowed.
 
 |===
 
@@ -346,7 +346,7 @@ Message Processor Attributes
 |Name |Description
 
 |`whenCalling`
-|Describes which message processor we want to mock, in the form {name-space}:{message-processor-name}. Supports regular expressions.
+|Describes which message processor we want to mock, in the form \{name-space}:\{message-processor-name}. Supports regular expressions.
 
 |`exception-ref`
 |Defines the exception the mocked payload should throw.
