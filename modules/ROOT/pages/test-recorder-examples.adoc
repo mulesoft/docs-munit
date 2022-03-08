@@ -6,7 +6,7 @@ endif::[]
 
 The following example shows you how to import to Anypoint Studio an existing project from Anypoint Exchange and then record the flow processing to create a unit test for the flows.
 
-== Prerequesite
+== Prerequisite
 
 * Your Anypoint Platform credentials are configured in Studio. +
 See xref:studio::set-credentials-in-studio-to.adoc[Configuring Anypoint Platform Credentials] for more information.
