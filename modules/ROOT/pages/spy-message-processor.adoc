@@ -37,7 +37,7 @@ For the purposes of this document, we assume we are testing the following Mule c
 |Attribute Name |Description
 
 |`messageProcessor`
-|This attribute is used to describe which message processor we want to mock. It takes the form `{name-space}:{message-processor-name}`. It supports regular expressions.
+|This attribute is used to describe which message processor we want to mock. It takes the form `\{name-space}:\{message-processor-name}`. It supports regular expressions.
 
 |===
 
