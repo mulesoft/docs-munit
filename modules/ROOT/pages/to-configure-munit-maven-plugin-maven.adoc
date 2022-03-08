@@ -324,7 +324,7 @@ them with the respective key and value.
 </plugins>
 ----
 
-Environment variables can be used to replace placeholders such as `${MY_ENV}`
+Environment variables can be used to replace placeholders such as `$\{MY_ENV}`
 (using the example above).
 
 == Redirect Test Output to File
@@ -335,7 +335,7 @@ output will be the test results and to check the standard output of each test su
 in its respective file.
 
 These files will be located in the `testOutputDirectory` folder following this naming convention:
-`munit.${suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the
+`munit.$\{suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the
 MUnit test folder.
 
 The test run output that doesn't belong to a particular suite won't be printed to keep the build output clean, but it can be enabled by running maven in _debug_ mode.
