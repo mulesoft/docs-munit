@@ -71,7 +71,7 @@ image::mock-set-payload.png[]
 [%autowidth.spread]
 |===
 |Attribute Name |Description
-|`messageProcessor` |Specifies which message processor to mock. The definition takes the form `{name-space}:{message-processor-name}`. Regular expressions are allowed.
+|`messageProcessor` |Specifies which message processor to mock. The definition takes the form `\{name-space}:\{message-processor-name}`. Regular expressions are allowed.
 |===
 
 The `messageProcessor` attribute accepts regular expressions. For example, you can create a mock as follows:
@@ -529,7 +529,7 @@ This feature is offered through a different message processor: `mock:throw-an`.
 [discrete.view]
 === Studio Visual Editor
 
-image::mock-trhow-an.png[]
+image::mock-throw-an.png[]
 
 [discrete.view]
 === XML or Standalone Editor
@@ -551,7 +551,7 @@ Message Processor Attributes
 |Name |Description
 
 |`whenCalling`
-|Describes which message processor we want to mock, in the form {name-space}:{message-processor-name}. Supports regular expressions.
+|Describes which message processor we want to mock, in the form \{name-space}:\{message-processor-name}. Supports regular expressions.
 
 |`exception-ref`
 |Defines the exception the mocked payload should throw.

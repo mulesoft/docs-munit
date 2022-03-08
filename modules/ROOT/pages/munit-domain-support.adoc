@@ -59,7 +59,7 @@ When working with mavenized applications, there are a couple of considerations y
 ==== Your Domain Needs to be Mavenized
 
 The domain is a mavenizable artifact and you can https://docs.mulesoft.com/mule-user-guide/v/3.8/enabling-maven-support-for-a-studio-project#mavenizing-an-existing-mule-project[mavenize it directly from Studio]. +
-If you are working on an application and choose to mavenize it, Mule checks if its associated domain is also mavanized. If not, it will prompt you to mavenize it as well.
+If you are working on an application and choose to mavenize it, Mule checks if its associated domain is also mavenized. If not, it will prompt you to mavenize it as well.
 
 image::munit-domain-support-6f395.png[]
 

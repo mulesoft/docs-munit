@@ -96,7 +96,7 @@ image::run-and-wait-flow-ref.png[]
 | Defines the time (in milliseconds) to wait for all the threads to complete.
 
 |`runAsync`
-| _Boolean_. When runAsync is set to _true_, the synchronize module copies the triggering MuleEvent and sets its `MessageExchangePattern` automatically to ONE_WAY, menaing that your MUnit test handles your Mule application's requests using a ONE_WAY messaging style. +
+| _Boolean_. When runAsync is set to _true_, the synchronize module copies the triggering MuleEvent and sets its `MessageExchangePattern` automatically to ONE_WAY, meaning that your MUnit test handles your Mule application's requests using a ONE_WAY messaging style. +
 This allows your test suite to take the events triggered by the Mule application and put them in a SEDA queue. The callee thread returns and the message is processed by the SEDA thread pool.
 
 |===
