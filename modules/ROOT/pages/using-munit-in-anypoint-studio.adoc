@@ -4,7 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 
-MUnit is fully integrated with Anypoint Studio. You can use Studio's graphical interface to:
+MUnit is fully integrated with Anypoint Studio. You can use Studio graphical interface to:
 
 * <<Creating a New MUnit Test in Studio,Create>> and design MUnit tests
 * <<Running Your Test,Run>> your tests
@@ -242,7 +242,7 @@ image::using-munit-in-anypoint-studio-2cd78.png[]
 
 == Debugging Tests
 
-You can debug MUnit tests just like Studio applications, using Studio's debugging perspective (for details on the debugging UI, see xref:6@studio::studio-visual-debugger.adoc[Studio Visual Debugger]).
+You can debug MUnit tests just like Studio applications, using Studio debugging perspective (for details on the debugging UI, see xref:6@studio::studio-visual-debugger.adoc[Studio Visual Debugger]).
 
 To access the debugging perspective, click *Mule Debug* on the top right of the Studio toolbar. This takes you away from the default Mule Design perspective to the debugging perspective, which displays debugging controls.
 

@@ -31,7 +31,7 @@ This process is also described in the xref:3.8@mule-runtime::sap-connector-troub
 +
 . You may also need to make the `java.library.path` point to the folder where the native libraries are located. +
 The MUnit Studio plugin will try to find these native libraries and configure them automatically when you try to run your tests. In case they are not found, you need to add the following _vm argument_ in the run configuration:
-.. In Studio's top navigation bar, click *run*
+.. In Studio top navigation bar, click *run*
 .. Click *Run Configurations...*
 .. Select the *Arguments* tab
 .. In the *VM Arguments* dialog box, type the path to your libraries with the `java.library.path` argument. +

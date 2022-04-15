@@ -301,7 +301,7 @@ This example shows how to trigger hits to the endpoint exposed by APIkit, and wh
 
 Although this example is meant to showcase how to build a test suite from the ground, MUnit allows you to automatically create a test Suite based on your RAML definitions.
 
-Based on link:{attachmentsdir}/t-shirt.raml[complete t-shirt API definition], the MUnit's scaffolder automatically creates the following test Suite:
+Based on link:{attachmentsdir}/t-shirt.raml[complete t-shirt API definition], the MUnit scaffolder automatically creates the following test Suite:
 
 
 [.ex]
@@ -417,7 +417,7 @@ Additionally you can choose to disable the request/response file creation in cas
 
 The scaffolder doesn't make use of some new RAML 1.0 features yet. For example, if you define an element that has a certain type, the scaffolder won't generate a payload with that type's properties (like it does with JSON schema), it will generate an empty payload.
 
-// This scaffolder has limited support for RAML 1.0. A list of unsupported RAML 1.0 features by MUnit's scaffolder is presented below:
+// This scaffolder has limited support for RAML 1.0. A list of unsupported RAML 1.0 features by MUnit scaffolder is presented below:
 //
 //	* Security Schemes
 //	* Data Type operations: joins/unions/intersections
