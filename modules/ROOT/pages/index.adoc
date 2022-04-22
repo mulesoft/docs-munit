@@ -3,7 +3,6 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
-:keywords: munit, testing, unit testing
 :page-aliases: 4.2@mule-runtime::migration-munit-assert-processor-changes.adoc, 4.2@mule-runtime::migration-munit-mock-processor-changes.adoc, 4.2@mule-runtime::migration-munit.adoc, 4.1@mule-runtime::migration-munit-assert-processor-changes.adoc, 4.1@mule-runtime::migration-munit-mock-processor-changes.adoc, 4.1@mule-runtime::migration-munit.adoc
 
 MUnit is a Mule application testing framework that allows you to easily build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
