@@ -151,6 +151,8 @@ This triggers the On-error scope in your application.
 <3> Execute the flow containing the requester.
 <4> Assert that the returned payload is the one you set inside the On-error scope.
 
+DISCLAIMER: Be aware that it is not possible to return all known error types of the mule application but only those types of the modules being used by the current flow. If you try to return an error type which is out of scope of the flow being tested the error MULE:UNKNOWN will be thrown instead of the configured one.
+
 === Mocking Errors with exceptions
 
 The Mock When processor also allows you to mock errors specifying the cause (exception instance). A sample mock instantiating the cause through Dataweave would look like this:
