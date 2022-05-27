@@ -6,7 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing
 :page-aliases: mock-message-processor.adoc
 
-The Mock When processor allows you to mock an event processor when it matches the defined name and attributes.
+The Mock When processor enables you to mock an event processor when it matches the defined name and attributes.
 
 For example, you can use the Mock Event processor to mock a POST request with a mocked payload:
 
@@ -22,7 +22,7 @@ For example, you can use the Mock Event processor to mock a POST request with a 
 </munit-tools:mock-when>
 ----
 
-You can set the `processor` attribute to define the processor to mock and the `with-attribute` element to define the attribute's name and value. In the example above you are defining a POST method.
+You can set the `processor` attribute to define the processor to mock and the `with-attribute` element to define the attribute name and value. In the previous example you are defining a POST method.
 
 You can also use DataWeave functions and mappings to set the `value` attribute in the `then-return` element. For example, create a `mockPost.dwl` under `src/test/resources/sample_data` file:
 
@@ -62,7 +62,7 @@ For example, you can mock a web service consumer such as this one:
 <wsc:consume config-ref="Web_Service_Consumer_Config" operation="OrderTshirt"/>
 ----
 
-By configuring the `mock-when` processor like the example below:
+By configuring the `mock-when` processor like the following example:
 
 [source,xml,linenums]
 ----
@@ -93,7 +93,7 @@ You can also mock specific variables:
 
 === Mocking Errors
 
-The Mock When processor also allows you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails:
+The Mock When processor also enables you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails:
 
 [source,xml,linenums]
 ----
@@ -148,6 +148,8 @@ You can assert that every time the HTTP request fails, your application returns 
     This triggers the On-error scope in your application.
 <3> Execute the flow containing the requester.
 <4> Assert that the returned payload is the one you set inside the On-error scope.
+
+It is not possible to return all known error types of the Mule application. You can only return the type of modules used by the current flow. If you try to return an error type out of the scope of the being-tested flow, you get the `MULE:UNKNOWN` error instead of the configured one.
 
 == Mocking Using Then-Call
 
