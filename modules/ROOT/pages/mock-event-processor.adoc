@@ -49,7 +49,7 @@ Finally, you can configure a `then-return` element to define the type of respons
 
 You can use either a `then-return` to return a static, constant value, or you can use a `then-call` to invoke a flow for cases where you might want the returned value to change over time, or to have different responses according to certain inputs.
 
-== Mocking Using Then-Return
+== Mock Using Then-Return
 
 For example, you can mock a web service consumer such as this one:
 
@@ -91,7 +91,7 @@ You can also mock specific variables:
 </munit-tools:mock-when>
 ----
 
-=== Mocking Errors
+=== Mock Errors
 
 The Mock When processor also enables you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails:
 
@@ -151,7 +151,7 @@ You can assert that every time the HTTP request fails, your application returns 
 
 It is not possible to return all known error types of the Mule application. You can only return the type of modules used by the current flow. If you try to return an error type out of the scope of the being-tested flow, you get the `MULE:UNKNOWN` error instead of the configured one.
 
-== Mocking Using Then-Call
+== Mock Using Then-Call
 
 To dynamically mock a variable, you can use `then-call` as follows:
 

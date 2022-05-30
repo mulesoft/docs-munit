@@ -11,7 +11,7 @@ The following example shows you how to import to Anypoint Studio an existing pro
 * Your Anypoint Platform credentials are configured in Studio. +
 See xref:studio::set-credentials-in-studio-to.adoc[Configuring Anypoint Platform Credentials] for more information.
 
-== Testing the Login Form Using the HTTP Connector Example
+== Test the Login Form Using the HTTP Connector Example
 
 . Click the Open Exchange icon image:exchange-icon.png[3%,3%].
 . Select *Provided by MuleSoft* in the pop-up Exchange window, filter per *Examples*, and look for the *Login Form Using the HTTP Connector*.
@@ -24,7 +24,7 @@ Studio imports the example as a new working project.
 image::update-munit.png[]
 . Select *Apply and Close*.
 
-=== Testing the Process for a Successful Login Attempt
+=== Test the Process for a Successful Login Attempt
 
 //tag::this-test[]
 . In your project, right-click `DoLoginFlow` and select *Munit* > *Record new test for this flow*:
@@ -50,7 +50,7 @@ image::stops-recording.png[]
 +
 A fully functional MUnit test is generated to assert that the process in your application works as expected when the login is successful.
 
-=== Testing the Process for an Unsuccessful Login Attempt
+=== Test the Process for an Unsuccessful Login Attempt
 
 include::page$test-recorder-examples.adoc[tag=this-test]
 . Type `admin` in both *Username* and *Password*, and click *Submit*: +

@@ -65,5 +65,3 @@ You can set a properties file for each one of your environments.
 ----
 +
 During the execution of the MUnit tests, MUnit loads the properties from the `qa` properties file and connects to your test environment.
-
-
