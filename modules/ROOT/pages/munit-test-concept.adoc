@@ -40,7 +40,7 @@ The MUnit configuration element (`munit:config`) identifies a Mule configuration
 
 ----
 
-==== Ignoring a suite
+==== Ignore a Suite
 
 To ignore a whole suite from running, you can use the `ignore` attribute of the configuration:
 
@@ -142,7 +142,7 @@ This attribute is mandatory.
 
 In MUnit, you must write a description for your test. Ideally, you should write a useful, representative description of the scenario you are testing. This description displays in the test console before running the test, and also in the reports. The more representative the description, the easier to read and troubleshoot any failures.
 
-==== Ignoring a Test
+==== Ignore a Test
 
 There may be scenarios where you need to shut down a test. Whether this be because the test is failing or because it has inconvenient side effects. MUnit allows you to ignore a specific test so that you don't have to manually comment out the code.
 
@@ -164,13 +164,13 @@ image::munit-test-concept-de4c9.png[ignore-test]
 
 You can also use expressions to ignore a test based on your current mule version or on your current operative system:
 
-.Ignoring a Test Based on Operating System
+.Ignore a Test Based on Operating System
 [source,xml]
 ----
 <munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
 ----
 
-.Ignoring a Test Based on Mule Runtime Engine Version
+.Ignore a Test Based on Mule Runtime Engine Version
 [source,xml]
 ----
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">

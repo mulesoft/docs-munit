@@ -45,7 +45,7 @@ Inside the flow that is called by the `then-call` you can use a `Choice` process
 </flow>
 ----
 
-== Mocking a Mule Message
+== Mock a Mule Message
 
 To mock processors like `file:list` or `ftp:list`, you must return a Mule message collection as payload. `MunitTools` provides a function to mock these payloads:
 

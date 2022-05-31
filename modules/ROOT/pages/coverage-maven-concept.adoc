@@ -112,7 +112,7 @@ To configure, for example, the JSON report generation, you must to add the follo
 
 // end::report-types[]
 
-== Setting up a Minimum Coverage Level
+== Set up a Minimum Coverage Level
 
 One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
 
@@ -156,7 +156,7 @@ MUnit Coverage Summary
 ----
 <1> Warning detailing which coverage level was not met, and where it happened.
 
-== Ignoring a flow or a file
+== Ignore a flow or a file
 
 Another feature is the ability to ignore either a flow or a file. This way, the ignored resource:
 

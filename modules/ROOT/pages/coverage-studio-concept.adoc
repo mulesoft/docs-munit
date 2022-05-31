@@ -8,7 +8,7 @@ You can run a coverage report from Anypoint Studio.
 The following configurations apply only when you execute your MUnit tests in Studio. They do not apply when running tests from Maven in a CI/CD environment. +
 To run coverage reports from Maven see xref:coverage-maven-concept.adoc[Using Coverage in Maven].
 
-== Enabling Coverage Reports in Anypoint Studio
+== Enable Coverage Reports in Anypoint Studio
 
 The Coverage button in the image bellow allows you to see which flows, and which percentage of event processors in those
 flows were covered by the test:
@@ -47,7 +47,7 @@ image::munit-granular-coverage-report-in-anypoint-studio.png[]
 | *Coverage*            | This field represents the percentage of the event processors inside the container that were executed in the MUnit test.
 |===
 
-== Disabling Coverage Reports
+== Disable Coverage Reports
 
 If you choose so, you can disable the coverage calculation from your project's run configuration.
 
