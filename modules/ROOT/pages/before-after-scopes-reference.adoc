@@ -172,3 +172,5 @@ When you place an after-test in the Anypoint Studio canvas, the scope locates ou
 |Describes the actions performed.
 
 |===
+
+Test PR2 CP
