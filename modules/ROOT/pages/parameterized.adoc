@@ -30,7 +30,7 @@ The test suite parameterization is defined at a configuration level as follows:
 </munit:config>
 ----
 
-The Test Suite will run twice, first with the `firstParameterization` parameters, and then time with the `secondParameterization` parameters.
+The Test Suite will run twice, first with the `firstParameterization` parameters, and then second time with the `secondParameterization` parameters.
 
 For example, if you have a test that sets a payload for a flow and expects a result:
 
