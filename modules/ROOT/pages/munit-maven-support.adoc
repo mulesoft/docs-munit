@@ -15,7 +15,7 @@ MUnit is a composition of several modules, all of which are necessary to run you
 
 For MUnit to run properly with Maven, you need to add a few sections to your `pom.xml` file.
 
-TIP: If you are using Anypoint Studio, Maven integration is already solved for you. See xref:6@studio::using-maven-in-anypoint-studio.adoc[Using Maven in Anypoint Studio] for details.
+TIP: If you are using Anypoint Studio, Maven integration is already solved for you. See xref:6.x@studio::using-maven-in-anypoint-studio.adoc[Using Maven in Anypoint Studio] for details.
 
 [NOTE]
 --
