@@ -149,6 +149,18 @@ This triggers the On-error scope in your application.
 
 It is not possible to return all known error types of the Mule application. You can only return the type of modules used by the current flow. If you try to return an error type out of the scope of the being-tested flow, you get the *MULE:UNKNOWN* error instead of the configured one.
 
+==== Parameters
+
+If you create a mocking error, one of the following two parameters provide the trigger for the error in the *Then-return* tab:
+
+- *TypeId*: It follows a Mule Error type definition. For example, the HTTP:CONNECTIVITY error explained before <2>.
+- *Cause*: It expects the instance of the exception with a message for the error. For example, using Java, write the expression:
+
+[source,java]
+----
+#[java!java::lang::Exception::new("Exception Message")]
+----
+
 === Mocking Errors with Exceptions
 
 The *Mock When* processor also enables you to mock errors specifying the cause (exception instance). A sample mock instantiating the cause through DataWeave would look like this:
@@ -163,18 +175,6 @@ The *Mock When* processor also enables you to mock errors specifying the cause (
     <munit-tools:error cause="#[java!org::mule::runtime::api::connection::ConnectionException::new('MyMessage')]"/>
   </munit-tools:then-return>
 </munit-tools:mock-when>
-----
-
-==== Parameters
-
-If you create a mocking error with exceptions, the following two parameters provide the trigger for the error in the *Then-return* tab:
-
-- *TypeId*: It follows a Mule Error type definition. For example, Namespace: Identifier.
-- *Cause*: It expects the instance of the exception with a message for the error. For example, using Java, write the expression:
-
-[source,java]
-----
-#[java!java::lang::Exception::new("Exception Message")]
 ----
 
 == See Also
