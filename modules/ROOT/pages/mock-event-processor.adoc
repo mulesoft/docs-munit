@@ -93,7 +93,7 @@ You can also mock specific variables:
 
 === Mock Errors
 
-The *Mock When* processor also enables you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails:
+The *Mock When* processor also enables you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity errors and returns a custom payload if the connection fails:
 
 [source,xml,linenums]
 ----
