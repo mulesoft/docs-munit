@@ -62,7 +62,7 @@ For example, you can mock a web service consumer such as this one:
 <wsc:consume config-ref="Web_Service_Consumer_Config" operation="OrderTshirt"/>
 ----
 
-By configuring the *mock-when* processor like the following example:
+By configuring the *mock-when* processor as shown in the following example:
 
 [source,xml,linenums]
 ----
