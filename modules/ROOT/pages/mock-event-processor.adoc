@@ -149,7 +149,7 @@ You can assert that every time the HTTP request fails, your application returns 
 <3> Execute the flow containing the requester.
 <4> Assert that the returned payload is the one you set inside the On-error scope.
 
-It is not possible to return all known error types of the Mule application. You can only return the type of modules used by the current flow. If you try to return an error type out of the scope of the being-tested flow, you get the *MULE:UNKNOWN* error instead of the configured one.
+You cannot return all known error types of a Mule application. You can only return the type of modules used by the current flow. If you try to return an error type that is. out of the scope of the flow you're testing, you get a *MULE:UNKNOWN* error instead of the configured one.
 
 === Parameters
 
