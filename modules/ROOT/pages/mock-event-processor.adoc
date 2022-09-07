@@ -165,7 +165,7 @@ If you create a mock error, choose one of the following parameters to provide th
 
 == Mock Using Then-Call
 
-To dynamically mock a variable, you can use *then-call* as follows:
+To dynamically mock a variable, use *then-call* as follows:
 
 [source,xml,linenums]
 ----
