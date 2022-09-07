@@ -22,7 +22,7 @@ For example, you can use the *Mock Event* processor to mock a POST request with 
 </munit-tools:mock-when>
 ----
 
-You can set the *processor* attribute to define the processor to mock and the *with-attribute* element to define the attribute name and value. In the previous example you are defining a POST method.
+You can set the *processor* attribute to define the processor to mock and set the *with-attribute* element to define the attribute name and value. In the previous example you define a POST method.
 
 You can also use DataWeave functions and mappings to set the `value` attribute in the *then-return* element. For example, create a *mockPost.dwl* under *src/test/resources/sample_data* file:
 
