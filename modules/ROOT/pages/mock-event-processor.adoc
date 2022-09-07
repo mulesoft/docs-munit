@@ -151,7 +151,7 @@ It is not possible to return all known error types of the Mule application. You 
 
 === Parameters
 
-If you create a mocking error, one of the following two parameters provide the trigger for the error in the *Then-return* tab:
+If you create a mocking error, you choose one of the following two parameters to provide the trigger for the error in the *Then-return* tab:
 
 - *TypeId*: It follows a Mule Error type definition. For example, the HTTP:CONNECTIVITY error explained before.
 - *Cause*: It expects the instance of the exception with a message for the error. For example, using Java, write the expression:
