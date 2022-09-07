@@ -149,7 +149,7 @@ This triggers the On-error scope in your application.
 
 It is not possible to return all known error types of the Mule application. You can only return the type of modules used by the current flow. If you try to return an error type out of the scope of the being-tested flow, you get the *MULE:UNKNOWN* error instead of the configured one.
 
-==== Parameters
+=== Parameters
 
 If you create a mocking error, one of the following two parameters provide the trigger for the error in the *Then-return* tab:
 
