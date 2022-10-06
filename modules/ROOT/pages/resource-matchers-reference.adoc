@@ -22,9 +22,9 @@ Returns the resource from the path String as a reusable stream.
    value="#[MunitTools::getResourceAsReusableStream('util/files/example.txt')]"/>
 ----
 
-== getResourceAsString(String)
+== getResourceAsString(path:String,encoding:String)
 
-Returns the resource from the path String as a String.
+Returns the resource from the path String as a String, where the second parameter (encoding) is optional.
 
 .Example
 [source,xml,linenums]
