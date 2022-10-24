@@ -162,7 +162,7 @@ In Anypoint Studio, you can check the *Ignore Test* option.
 
 image::munit-test-concept-de4c9.png[ignore-test]
 
-You can also use expressions to ignore a test based on your current mule version or on your current operative system:
+You can also use expressions to ignore a test based on your current mule version or on your current operating system:
 
 .Ignore a Test Based on Operating System
 [source,xml]
