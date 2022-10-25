@@ -41,7 +41,7 @@ This configuration disables logs like _cxf_ or _apache commons_. It also sets th
 
 TIP: The configuration file must reside in the classpath to work correctly. Preferably, the file should reside in the `src/test/resources` folder, since this a resource you use when running your tests, and the folder belongs to the classpath.
 
-NOTE: If you don't create a `log4j2-test.xml` file, Mule looks for a file called `log4j2.xml`. For additional information about the priority in which the log configuration files are selected, see xref:3.7@mule-runtime::logging-in-mule.adoc[Logging in Mule].
+NOTE: If you don't create a `log4j2-test.xml` file, Mule looks for a file called `log4j2.xml`. For additional information about the priority in which the log configuration files are selected, see xref:mule-runtime::logging-in-mule.adoc[Logging in Mule].
 
 == See Also
 
