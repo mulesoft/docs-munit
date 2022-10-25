@@ -242,7 +242,7 @@ image::using-munit-in-anypoint-studio-2cd78.png[]
 
 == Debugging Tests
 
-You can debug MUnit tests just like Studio applications, using Studio debugging perspective (for details on the debugging UI, see xref:6.x@studio::studio-visual-debugger.adoc[Studio Visual Debugger]).
+You can debug MUnit tests just like Studio applications, using Studio debugging perspective (for details on the debugging UI, see xref:studio::studio-visual-debugger-concept.adoc[Studio Visual Debugger]).
 
 To access the debugging perspective, click *Mule Debug* on the top right of the Studio toolbar. This takes you away from the default Mule Design perspective to the debugging perspective, which displays debugging controls.
 
