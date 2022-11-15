@@ -398,7 +398,7 @@ image::example-testing-apikit-4dee9.png[]
 
 [NOTE]
 --
-The Scaffolder that generates the MUnit test from the RAML definition does not consider if your application uses xref:3.8@mule-runtime::tls-configuration.adoc[TLS configuration]. +
+The Scaffolder that generates the MUnit test from the RAML definition does not consider if your application uses xref:3.9@mule-runtime::tls-configuration.adoc[TLS configuration]. +
 If your application is using a listener configured to use TLS, when running the scaffolder to generate the MUnit suite, you need to manually configure the requester in your test to use TLS as well.
 --
 

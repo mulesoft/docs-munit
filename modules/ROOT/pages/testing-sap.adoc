@@ -8,7 +8,7 @@ endif::[]
 == Overview
 
 This document contains a basic example for testing SAP-based applications. +
-The SAP connector requires a set of specific libraries which are listed in the xref:3.8@mule-runtime::sap-connector.adoc#requirements[SAP Connector requirements] documentation. These libraries need to be added manually in order to test the SAP-based application correctly.
+The SAP connector requires a set of specific libraries which are listed in the xref:3.9@mule-runtime::sap-connector.adoc#requirements[SAP Connector requirements] documentation. These libraries need to be added manually in order to test the SAP-based application correctly.
 
 Find below the configuration needed to test a SAP connector <<From studio,using studio>> or <<From Maven,using Maven>> respectively:
 
@@ -26,7 +26,7 @@ In your Studio environment:
 +
 [TIP]
 --
-This process is also described in the xref:3.8@mule-runtime::sap-connector-troubleshooting.adoc#solution[SAP Connector documentation].
+This process is also described in the xref:3.9@mule-runtime::sap-connector-troubleshooting.adoc#solution[SAP Connector documentation].
 --
 +
 . You may also need to make the `java.library.path` point to the folder where the native libraries are located. +

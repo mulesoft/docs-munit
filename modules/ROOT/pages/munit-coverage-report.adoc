@@ -21,7 +21,7 @@ Coverage report runs only for EE edition runtimes
 
 == Calculating Coverage
 
-The MUnit Coverage Module unit of measure is the xref:3.8@mule-runtime::index.adoc#message-processors[message processor]. +
+The MUnit Coverage Module unit of measure is the xref:3.9@mule-runtime::index.adoc#message-processors[message processor]. +
 MUnit calculates coverage by counting all the message processors that have been executed as result of the MUnit test being run and comparing that number with the amount of message processors that compose the whole application. +
 Although the reports arrange the resulting information by flow and configuration file, the calculations are run against the number of message processors.
 
@@ -110,7 +110,7 @@ user did not configure any value it defaults to -1
 ==== Not Drawable Nodes
 
 If you are using older versions of the Mule Runtime, some older message processors might not have a graphical representation in the studio canvas. +
-For example, using a ´processor-chain´ component (deprecated since Mule 3.2), in a xref:3.8@mule-runtime::routers.adoc#first-successful[first successful] router displays only two from the three message processors that MUnit considers to calculate coverage:
+For example, using a ´processor-chain´ component (deprecated since Mule 3.2), in a xref:3.9@mule-runtime::routers.adoc#first-successful[first successful] router displays only two from the three message processors that MUnit considers to calculate coverage:
 
 [.ex]
 =====
