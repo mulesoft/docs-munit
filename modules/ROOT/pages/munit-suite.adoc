@@ -20,7 +20,7 @@ An MUnit test suite file should contain any combination of the following compone
 * <<MUnit Tests>>
 
 TIP: Each MUnit test suite file is, behind the scenes, no different than a Mule
-application XML file. You can use several of the Mule top level elements such as xref:3.9@mule-runtime::flows-and-subflows.adoc[flow, sub-flow], xref:3.8@mule-management-console::automating-tasks-using-scripts.adoc[scripts], etc.
+application XML file. You can use several of the Mule top level elements such as xref:3.9@mule-runtime::flows-and-subflows.adoc[flow, sub-flow], etc.
 
 == Imports
 === Defining Imports
