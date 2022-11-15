@@ -5,7 +5,7 @@ endif::[]
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 
 Mule allows you to define connectors and libraries in a _Mule Domain_, to which you can deploy different Mule applications. +
-These _domain based applications_ can xref:3.8@mule-runtime::shared-resources.adoc[share the resources configured in the domain] to which they were deployed.
+These _domain based applications_ can xref:3.9@mule-runtime::shared-resources.adoc[share the resources configured in the domain] to which they were deployed.
 
 With *Domain Support*, MUnit allows you to test applications that run referencing a Mule Domain.
 
@@ -16,7 +16,7 @@ MUnit Domain Support in Anypoint Studio is available since Anypoint Studio 6.1 (
 
 == Using MUnit to Test Domain Based Applications
 
-This section assumes that you are testing a Mule application for which you xref:3.8@mule-runtime::shared-resources.adoc#creating-a-new-domain[created a domain project], and xref:3.8@mule-runtime::shared-resources.adoc#associating-applications-with-the-domain[associated said application to that domain].
+This section assumes that you are testing a Mule application for which you xref:3.9@mule-runtime::shared-resources.adoc#creating-a-new-domain[created a domain project], and xref:3.9@mule-runtime::shared-resources.adoc#associating-applications-with-the-domain[associated said application to that domain].
 
 MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However, if your Mule application depends on a Mule Domain, there are a few considerations to take into account based on the characteristics of your application and domain, for example, if such projects are xref:6.x@studio::enabling-maven-support-for-a-studio-project.adoc[Mavenized].
 
