@@ -59,6 +59,7 @@ To specify that a suite should run if the Mule version that is equal or newer th
 <munit:config name="A MUnit Suite" minMuleVersion="4.1.4"/>
 ----
 
+[[munit-test]]
 == MUnit Test
 
 An MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
@@ -126,7 +127,7 @@ This attribute is mandatory.
 |`expectedErrorType`
 |Defines the error Type that should be received after the execution of this test.
 
-|`expectException`
+|`expectedException`
 |Defines the exception that should be received after the execution of this test.
 
 |`expectedErrorDescription`
@@ -163,13 +164,13 @@ image::munit-test-concept-de4c9.png[ignore-test]
 
 You can also use expressions to ignore a test based on your current mule version or on your current operative system:
 
-.Ignoring a Test based on The Mule Runtime Engine Version
+.Ignoring a Test Based on Operating System
 [source,xml]
 ----
 <munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
 ----
 
-.Ignoring a Test Based on the Operating System
+.Ignoring a Test Based on Mule Runtime Engine Version
 [source,xml]
 ----
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">

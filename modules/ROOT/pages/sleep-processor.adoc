@@ -1,0 +1,26 @@
+= Sleep Processor
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+The Sleep processor allows you to pause your test for a specific time. You can use this processor to simulate a delay in the processing of the flow:
+
+[source,xml,linenums]
+----
+<munit-tools:sleep time="100" timeUnit="MILLISECONDS"/>
+----
+
+`time` ::
+ Numerical value for the unit of time that your test waits before going to sleep.
+
+`timeUnit` ::
+The unit in which the `time` value is measured.
++
+Possible values are:
++
+* `MILLISECONDS` (default)
+* `MICROSECONDS`
+* `MINUTES`
+* `NANOSECONDS`
+* `SECONDS`
+* `HOURS`

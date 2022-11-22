@@ -1,0 +1,59 @@
+= Testing a Flow with a Scheduler Source
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+Assume that you want to both test the following flow triggered by a Scheduler component and validate that your flow is being triggered correctly:
+
+
+[source,xml]
+----
+<flow name="schedulerFlow">
+    <scheduler>
+        <scheduling-strategy >
+            <fixed-frequency frequency="10" timeUnit="SECONDS"/>
+        </scheduling-strategy>
+    </scheduler>
+    <set-payload value="#['test poll']"/>
+</flow>
+----
+
+. Enable flow sources. +
+Because MUnit does not start any of the flow sources (such as triggers or listeners), you must configure which flow sources start for your tests.
++
+In this example, you enable the flow that contains the Scheduler:
++
+[source,xml]
+----
+<munit:test name="test-schedulerFlowTest">
+    <munit:enable-flow-sources>
+        <munit:enable-flow-source value="schedulerFlow"/>
+    </munit:enable-flow-sources>
+</munit:test>
+----
+. Verify that flow execution is triggered by the Scheduler. +
+To verify that the processors inside your flow are being triggered, use the `munit-tools:verify-call` processor.
++
+Wrap `munit-tools:verify-call` inside an `until-successful` to shorten processing time when the Scheduler is not operating when you want to test.
++
+The following example validates three times that the payload was executed at least once during the test. 
++
+[source,xml]
+----
+<munit:execution>
+    <until-successful maxRetries="3" millisBetweenRetries="100">
+        <munit-tools:verify-call processor="set-payload" atLeast="1">
+            <munit-tools:with-attributes >
+                <munit-tools:with-attribute whereValue="#['test poll']" attributeName="value" />
+            </munit-tools:with-attributes>
+        </munit-tools:verify-call>
+    </until-successful>
+</munit:execution>
+----
+
+
+
+== See Also
+
+* xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
+* xref:verify-event-processor.adoc[Verify Event Processor]

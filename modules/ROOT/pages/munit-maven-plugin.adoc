@@ -73,7 +73,7 @@ This documentation assumes you have the `<munit.version>` property in your pom.x
   <repository>
     <id>mulesoft-releases</id>
       <name>MuleSoft Releases Repository</name>
-      <url>http://repository.mulesoft.org/releases/</url>
+      <url>https://repository.mulesoft.org/releases/</url>
       <layout>default</layout>
     </repository>
 </repositories>
@@ -87,7 +87,7 @@ This documentation assumes you have the `<munit.version>` property in your pom.x
     <id>mulesoft-release</id>
     <name>mulesoft release repository</name>
     <layout>default</layout>
-    <url>http://repository.mulesoft.org/releases/</url>
+    <url>https://repository.mulesoft.org/releases/</url>
     <snapshots>
       <enabled>false</enabled>
     </snapshots>
@@ -200,7 +200,7 @@ The following sample references `pirate-pom` file as its parent and then declare
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 === Ignoring a Parent's Plugin
@@ -239,18 +239,10 @@ By not declaring the Munit Plugin in your `<plugin>` section, you avoid inheriti
     <build>
         <plugins>
             <plugin>
-                <groupId>org.mule.tools.maven</groupId>
-                <artifactId>mule-app-maven-plugin</artifactId>
-                <version>${mule.tools.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <copyToAppsDirectory>true</copyToAppsDirectory>
-                </configuration>
             </plugin>
-
         </plugins>
     </build>
-    </project>
+</project>
 ----
 
 === Overriding a Parent's Plugin
@@ -295,106 +287,9 @@ The following example overrides the console coverage report from its parent POM 
 
 == Setting Up Coverage
 
-=== Enabling Coverage Reports
+The following configurations only apply when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. See xref:coverage-maven-concept.adoc[Using Coverage in Maven] for more information.
 
-To enable MUnit Coverage, add the following configuration to the MUnit plugin configuration:
-
-.MUnit Coverage - Minimal Configuration
-[source,xml,linenums]
-----
-<plugins>
-  <plugin>
-    <groupId>com.mulesoft.munit.tools</groupId>
-    <artifactId>munit-maven-plugin</artifactId>
-    <configuration>
-      ...
-      <coverage>
-        <runCoverage>true</runCoverage>
-      </coverage>
-      ...
-    </configuration>
-  </plugin>
-</plugins>
-----
-
-=== Seting up a Minimum Coverage Level
-
-The MUnit Coverage report can fail the build if a certain coverage level is not reached.
-
-To make the build fail, add the following lines to the MUnit plugin configuration:
-
-.MUnit Coverage - Fail Build
-[source,xml,linenums]
-----
-<coverage>
-  <runCoverage>true</runCoverage>
-  <failBuild>true</failBuild>
-</coverage>
-----
-
-After enabling the `<failBuild>`, define the coverage level. MUnit Coverage handles three different levels:
-
-* Application
-* Resource
-* Flow
-
-The following example shows how to define the required coverage level:
-
-.MUnit Coverage - Require Coverage
-[source,xml,linenums]
-----
-<coverage>
-  <runCoverage>true</runCoverage>
-  <failBuild>true</failBuild>
-
-  <requiredApplicationCoverage>20</requiredApplicationCoverage>
-  <requiredResourceCoverage>10</requiredResourceCoverage>
-  <requiredFlowCoverage>5</requiredFlowCoverage>
-</coverage>
-----
-
-Each value represents a percentage.
-
-If you define coverage levels but set the property `<failBuild>` to *false*, a warning shows up in the MUnit Coverage summary if the levels are not reached:
-
-[source,console,linenums]
-----
-INFO] [CoverageManager] Printing Coverage Report...
-[INFO] ===============================================================================
-[INFO] MUnit Coverage Summary
-[INFO] ===============================================================================
-[INFO]  * Resources: 3 - Flows: 6 - Message Processors: 7
-[INFO]  * Application Coverage: 71.43%
-[INFO]
-[WARNING] ----------------------------- WARNING --------------------------------------
-[WARNING]  * Application coverage is below defined limit. Required: 100.0% - Current: 71.43%
-----
-
-If you don't define a coverage level, MUnit Coverage assumes a `-1` value, which indicates that the build won't fail due to lack of coverage.
-
-=== Ignoring Flows for Coverage Report
-
-.MUnit Coverage - Ignoring Flows
-[source,xml,linenums]
-----
-<coverage>
-  <ignoreFlows>
-	  <ignoreFlow>the-name-of-your-flow</ignoreFlow>
-  </ignoreFlows>
-</coverage>
-----
-
-`<ignoreFlows>` is a list, so you can ignore as many flows as you need:
-
-[source,xml,linenums]
-----
-<coverage>
-  <ignoreFlows>
-      <ignoreFlow>the-name-of-your-flow</ignoreFlow>
-      <ignoreFlow>the-name-of-another-flow</ignoreFlow>
-  </ignoreFlows>
-</coverage>
-----
+include::page$coverage-maven-concept.adoc[tags=coverage-report;!report-types,leveloffset=+1]
 
 == Dynamic Ports
 
@@ -756,7 +651,7 @@ To set additional environment variables during the test run, you can specify the
 </plugins>
 ----
 
-As shown in the previous example, you can use environment variables to replace placeholders such as `${MY_ENV}`.
+As shown in the previous example, you can use environment variables to replace placeholders such as `$\{MY_ENV}`.
 
 === System Properties Variables
 
@@ -793,7 +688,7 @@ You can do so using the ­`-D` argument when running MUnit with Maven.  Variable
 
 When running several tests, the build output can get very complex to read. MUnit allows you to redirect the output of each test suite to a file. This way, only the test results will remain in the build output and to you can check the respective file to check the standard output of each test suite.
 
-These files are located in the `testOutputDirectory` folder following the naming convention: `munit.${suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the MUnit test folder.
+These files are located in the `testOutputDirectory` folder following the naming convention: `munit.$\{suiteName}-output.txt`, where the `suiteName` represents the name of the XML file relative to the MUnit test folder.
 
 The test's output that doesn't belong to a particular suite won't be printed to keep the build output clean, but it can be enabled by running maven in debug mode.
 
@@ -900,8 +795,9 @@ Default value: `${project.build.directory}/test-mule/munit`
 
 | `runtimeVersion`
 | String
-| Version of the Mule runtime in case
-By default it runes with the mule-version defined in the pom.xml file of the mule-artifact.json.
+| Version of the Mule runtime
+By default, this value is taken from the `minMuleVersion` parameter in the `mule-artifact.json` file.
+
 
 | runtimeProduct
 | String

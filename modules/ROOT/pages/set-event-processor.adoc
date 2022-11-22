@@ -82,5 +82,6 @@ If you define two properties in the same scope with the _same_ key, be aware tha
 
 == See Also
 
+* xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
 * xref:fail-event-processor.adoc[Fail Event Processor]
 * xref:run-custom-event-processor.adoc[Run Custom Event Processor]

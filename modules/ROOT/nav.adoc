@@ -2,10 +2,17 @@
 * xref:index.adoc[Overview]
 
 * xref:munit-cookbook.adoc[MUnit Examples]
+  ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
   ** xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors]
+  ** xref:use-environment-properties-on-tests-cookbook.adoc[Testing with Environment Properties]
   ** xref:utility-classes-cookbook.adoc[Using Utility Classes from a Test]
+  ** xref:ftp-server-cookbook.adoc[Configuring FTP Server Utility in an MUnit Test]
+  ** xref:db-server-cookbook.adoc[Configuring DB Server Utility in an MUnit Test]
   ** xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version]
+  ** xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications]
+  ** xref:test-flow-with-scheduler-cookbook.adoc[Testing a Flow with a Scheduler Source]
+  ** xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example]  
 
 * xref:munit-test-concept.adoc[MUnit Test Structure Fundamentals]
  ** xref:enable-flow-sources-concept.adoc[Enable Flow Sources]
@@ -30,15 +37,18 @@
  ** xref:verify-event-processor.adoc[Verify]
  ** xref:spy-event-processor.adoc[Spy Event]
  ** xref:storage-event-processors.adoc[Storage Event Processors]
+ ** xref:sleep-processor.adoc[Sleep Processor]
  ** xref:dynamic-ports.adoc[Dynamic Ports]
  ** xref:dynamic-directories.adoc[Dynamic Directories]
- ** xref:munit-utils.adoc[Utils]
+ ** xref:munit-utils.adoc[Utilities]
   *** xref:db-util.adoc[Database]
   *** xref:ftp-util.adoc[FTP]
   *** xref:queue-processors.adoc[Queue Event Processors]
 
 * xref:munit-in-studio.adoc[MUnit in Studio]
-** xref:munit-scaffold-test-task.adoc[Scaffolding an MUnit Test]
+** xref:munit-scaffold-test-task.adoc[Scaffold a Template for an Munit Test from an API Specification]
+** xref:test-recorder.adoc[Test Recorder in Studio]
+
 
 * xref:munit-domain-support.adoc[MUnit Support for Domain-Based Applications]
 
@@ -47,4 +57,3 @@
 * xref:munit-coverage-report.adoc[Coverage]
  ** xref:coverage-maven-concept.adoc[Using Coverage in Maven]
  ** xref:coverage-studio-concept.adoc[Using Coverage in Studio]
-
