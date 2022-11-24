@@ -25,7 +25,7 @@ Assume that your application has a flow with an HTTP listener that returns a spe
 </flow>
 ----
 
-For MUnit to be able to invoke that listener you must enable the `http-transportFlow` in your `enable-flow-source` property within your MUnit test:
+For MUnit to be able to invoke that listener you must enable the `http-example-flow` in your `enable-flow-source` property within your MUnit test:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -58,7 +58,7 @@ See xref:before-after-scopes-reference.adoc[Before/After scopes] for more inform
 
 You can define flow sources using the *Mule Properties* view of your MUnit test in Studio:
 
-image::enable-flow-sources-concept.png[]
+image::enable-flow-sources-concept.png["Flow sources defined using the Mule Properties view in Studio."]
 
 . Click *Add*.
 . Select the name of the flow you want to enable from the *Name of the flow* drop-down menu.
