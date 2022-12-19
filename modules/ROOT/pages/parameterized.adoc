@@ -31,6 +31,7 @@ The test suite parameterization is defined at a configuration level as follows:
 ----
 
 The Test Suite runs twice:
+
 * Firstly, with the `firstParameterization` parameters
 * Secondly, with the `secondParameterization` parameters
 
