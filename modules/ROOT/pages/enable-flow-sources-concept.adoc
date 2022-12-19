@@ -58,7 +58,7 @@ See xref:before-after-scopes-reference.adoc[Before/After scopes] for more inform
 
 You can define flow sources using the *Mule Properties* view of your MUnit test in Studio:
 
-image::enable-flow-sources-concept.png[]
+image::enable-flow-sources-concept.png["Flow sources defined using the Mule Properties view in Studio."]
 
 . Click *Add*.
 . Select the name of the flow you want to enable from the *Name of the flow* drop-down menu.
