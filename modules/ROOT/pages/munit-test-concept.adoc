@@ -6,7 +6,7 @@ endif::[]
 
 == MUnit Test Suite
 
-The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application's project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
@@ -74,13 +74,13 @@ The MUnit test is divided in three scopes:
 | The behavior scope sets all the preconditions before executing the test logic.
 
 | Execution
-| The execution scope contains the testing logic which will wait for all processes to finish before executing the next scope.
+| The execution scope contains the testing logic which waits for all processes to finish before executing the next scope.
 
 | Validation
 | The validation scope contains all the validations for the results of the execution scope.
 |===
 
-All these scopes are optional.
+Scopes are optional.
 
 [source,xml,linenums]
 ----
@@ -230,7 +230,7 @@ Assume that you want to validate that the flow or sub-flow you are testing fails
 image::munit-test-concept-e7280.png[]
 
 * The `expectedErrorType` attribute expects an error ID defined inside the application being tested. +
-This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exists in your application, the test does not run.
+This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test does not run.
 +
 [source,xml,linenums]
 ----
