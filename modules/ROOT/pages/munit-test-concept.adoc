@@ -80,7 +80,7 @@ The MUnit test is divided in three scopes:
 | The validation scope contains all the validations for the results of the execution scope.
 |===
 
-Scopes are optional.
+These scopes are optional.
 
 [source,xml,linenums]
 ----
