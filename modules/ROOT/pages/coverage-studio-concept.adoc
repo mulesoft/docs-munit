@@ -54,3 +54,25 @@ If you choose so, you can disable the coverage calculation from your project's r
 Right click in your Package Explorer, and choose *Run As* and *Run Configurations...*, select your MUnit run configuration file to access your suite's configuration, and deselect the "Run coverage" option under your coverage settings.
 
 image::disable-munit-coverage-in-anypoint-studio.png[]
+
+== Exclude XML files from MUnit Coverage Report
+
+You can exclude one or more XML files from an MUnit Coverage report when testing your application to get an overall coverage of 100%. 
+
+. Go to the flow you want to have 100% coverage.
+. Click *Run* > *Run Configuration*.
+. Click the name of your project.
+. In the *Ignored files* section, click *Add*.
++
+image::add-ignored-files.png[]
++
+. Type the name of the XML file you want to exclude from the Coverage report.
+. Click *OK*.
+. Click *Apply*.
+. Click *Run*.
+
+The coverage report notifies of 100%.
+
+== See Also
+
+* xref:coverage-maven-concept.adoc[]
