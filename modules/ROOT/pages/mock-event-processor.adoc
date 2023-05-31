@@ -8,6 +8,8 @@ endif::[]
 
 The *Mock When* processor enables you to mock an event processor when it matches the defined name and attributes.
 
+Logger processor and Transform Message processor (Dataweave) cannot be mocked.
+
 For example, you can use the *Mock Event* processor to mock a POST request with a mocked payload:
 
 [source,xml,linenums]
