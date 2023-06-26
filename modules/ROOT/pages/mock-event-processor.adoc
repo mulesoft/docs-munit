@@ -8,8 +8,6 @@ endif::[]
 
 The *Mock When* processor enables you to mock an event processor when it matches the defined name and attributes.
 
-Logger processor and Transform Message processor (Dataweave) cannot be mocked.
-
 For example, you can use the *Mock Event* processor to mock a POST request with a mocked payload:
 
 [source,xml,linenums]
@@ -24,7 +22,7 @@ For example, you can use the *Mock Event* processor to mock a POST request with 
 </munit-tools:mock-when>
 ----
 
-You can set the *processor* attribute to define the processor to mock and set the *with-attribute* element to define the attribute name and value. In the previous example you define a POST method.
+You can set the *processor* attribute to define the processor to mock and set the *with-attribute* element to define the attribute name and value. In the previous example, you define a POST method.
 
 You can also use DataWeave functions and mappings to set the `value` attribute in the *then-return* element. For example, create a *mockPost.dwl* in the *src/test/resources/sample_data* file:
 
@@ -50,6 +48,8 @@ This DataWeave file creates the payload to send in a POST request. You can then 
 Finally, you can configure a *then-return* element to define the type of response the mocked processor should return. It could be a payload, a variable, a list of attributes, or even an error.
 
 You can use either a *then-return* to return a static, constant value, or you can use a *then-call* to invoke a flow for cases where you might want the returned value to change over time, or to have different responses according to certain inputs.
+
+NOTE: Logger processor and Transform Message processor (Dataweave) cannot be mocked.
 
 == Mock Using Then-Return
 
