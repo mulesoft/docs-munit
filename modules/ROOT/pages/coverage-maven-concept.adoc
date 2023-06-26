@@ -71,7 +71,7 @@ The console report is printed to the console. It works with the summary report a
 * HTML report +
 The HTML report shows the same information as the console report, but formatted to fit any web browser. It is available in the `${application.path}/target/site/munit/coverage/` path.+
 * JSON report
-The JSON report shows the same information as the HTML report, but in a JSON format. It is availabie in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.+
+The JSON report shows the same information as the HTML report, but in a JSON format. It is available in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.+
 * The SONAR report shows the same information as the HTML report, in a SonarQube format. +
 
 To enable the report generation, add the following configuration:
@@ -112,7 +112,7 @@ To configure, for example, the JSON report generation, you must to add the follo
 
 // end::report-types[]
 
-== Setting up a Minimum Coverage Level
+== Set up a Minimum Coverage Level
 
 One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
 
@@ -156,7 +156,7 @@ MUnit Coverage Summary
 ----
 <1> Warning detailing which coverage level was not met, and where it happened.
 
-== Ignoring a flow or a file
+== Ignore a flow or a file
 
 Another feature is the ability to ignore either a flow or a file. This way, the ignored resource:
 

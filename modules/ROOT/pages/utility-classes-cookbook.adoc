@@ -38,11 +38,11 @@ public class Helper {
 }
 ----
 
-== Invoking Your Java Class Using DataWeave
+== Invoke Your Java Class Using DataWeave
 
 To invoke static methods using DataWeave you must add the `java!` prefix to the package name of the class:
 
-.Using a class in DataWeave
+.Use a class in DataWeave
 [source, xml, linenums]
 ----
 <munit:test name="usingJavaInDW">
@@ -55,7 +55,7 @@ To invoke static methods using DataWeave you must add the `java!` prefix to the 
 </munit:test>
 ----
 
-== Invoking Your Java Class Using Java Module
+== Invoke Your Java Class Using Java Module
 
 To invoke a custom Java class using Java Module:
 
@@ -75,7 +75,7 @@ To invoke a custom Java class using Java Module:
 . Use any of the Java Module's operations. +
 For this example, invoke a static method of a class:
 +
-.Using a class with the Java Module
+.Use a class with the Java Module
 [source, xml, linenums]
 ----
 <munit:test name="usingJavaInDW">

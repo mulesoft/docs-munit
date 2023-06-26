@@ -30,7 +30,7 @@ The test suite parameterization is defined at a configuration level as follows:
 </munit:config>
 ----
 
-The Test Suite will run twice, first with the `firstParameterization` parameters, and then time with the `secondParameterization` parameters.
+The Test Suite runs twice: Firstly, with the `firstParameterization` parameters. Secondly, with the `secondParameterization` parameters.
 
 For example, if you have a test that sets a payload for a flow and expects a result:
 
@@ -79,9 +79,9 @@ For example, if you have a test that sets a payload for a flow and expects a res
 </mule>
 ----
 
-== Parameterization From File
+== Parameterization from File
 
-To use the same parameterized values on different test suites you must save your parameterizations values in a YAML file in the `/test/resources` directory of your Mule application project:
+To use the same parameterized values on different test suites, you must save your parameterizations values in a YAML file in the `/test/resources` directory of your Mule application project:
 
 .parameterizations.yaml Example
 [source,yaml]

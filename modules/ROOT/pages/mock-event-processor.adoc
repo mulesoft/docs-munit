@@ -6,9 +6,9 @@ endif::[]
 :keywords: munit, testing, unit testing
 :page-aliases: mock-message-processor.adoc
 
-The Mock When processor allows you to mock an event processor when it matches the defined name and attributes.
+The *Mock When* processor enables you to mock an event processor when it matches the defined name and attributes.
 
-For example, you can use the Mock Event processor to mock a POST request with a mocked payload:
+For example, you can use the *Mock Event* processor to mock a POST request with a mocked payload:
 
 [source,xml,linenums]
 ----
@@ -22,9 +22,9 @@ For example, you can use the Mock Event processor to mock a POST request with a 
 </munit-tools:mock-when>
 ----
 
-You can set the `processor` attribute to define the processor to mock and the `with-attribute` element to define the attribute's name and value. In the example above you are defining a POST method.
+You can set the *processor* attribute to define the processor to mock and set the *with-attribute* element to define the attribute name and value. In the previous example you define a POST method.
 
-You can also use DataWeave functions and mappings to set the `value` attribute in the `then-return` element. For example, create a `mockPost.dwl` under `src/test/resources/sample_data` file:
+You can also use DataWeave functions and mappings to set the `value` attribute in the *then-return* element. For example, create a *mockPost.dwl* in the *src/test/resources/sample_data* file:
 
 [source]
 ----
@@ -36,7 +36,7 @@ output application/json
 }
 ----
 
-This Dataweave file creates the payload to send in a POST request. You can then use the `readUrl` DataWeave function to read the mapping file:
+This DataWeave file creates the payload to send in a POST request. You can then use the *readUrl* DataWeave function to read the mapping file:
 
 [source,xml,linenums]
 ----
@@ -45,11 +45,11 @@ This Dataweave file creates the payload to send in a POST request. You can then 
 </munit-tools:then-return>
 ----
 
-Finally, you can configure a `then-return` element to define the type of response the mocked processor should return. It could be a payload, a variable, attributes, or even an error.
+Finally, you can configure a *then-return* element to define the type of response the mocked processor should return. It could be a payload, a variable, a list of attributes, or even an error.
 
-You can use either a `then-return` to return a static, constant value, or you can use a `then-call` to invoke a flow for cases where you might want the returned value to change over time, or to have different responses according to certain inputs.
+You can use either a *then-return* to return a static, constant value, or you can use a *then-call* to invoke a flow for cases where you might want the returned value to change over time, or to have different responses according to certain inputs.
 
-== Mocking Using Then-Return
+== Mock Using Then-Return
 
 For example, you can mock a web service consumer such as this one:
 
@@ -62,7 +62,7 @@ For example, you can mock a web service consumer such as this one:
 <wsc:consume config-ref="Web_Service_Consumer_Config" operation="OrderTshirt"/>
 ----
 
-By configuring the `mock-when` processor like the example below:
+By configuring the *mock-when* processor as shown in the following example:
 
 [source,xml,linenums]
 ----
@@ -73,7 +73,7 @@ By configuring the `mock-when` processor like the example below:
 </munit-tools:mock-when>
 ----
 
-This `mock-when` processor mocks a call to the `OrderTshirt` operation in the WSDL definition.
+This *mock-when* processor mocks a call to the *OrderTshirt* operation in the WSDL definition.
 
 You can also mock specific variables:
 
@@ -91,9 +91,9 @@ You can also mock specific variables:
 </munit-tools:mock-when>
 ----
 
-=== Mocking Errors
+=== Mock Errors
 
-The Mock When processor also allows you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity error and returns a custom payload if the connection fails:
+The *Mock When* processor also enables you to mock errors in your operations. Assume that you have an HTTP requester in your flow with an On-Error scope that catches any connectivity errors and returns a custom payload if the connection fails:
 
 [source,xml,linenums]
 ----
@@ -144,14 +144,28 @@ You can assert that every time the HTTP request fails, your application returns 
 </munit:test>
 ----
 <1> Mock an HTTP Requester with the configuration of the requester in your flow.
-<2> Configure a then-return element to throw an `HTTP:CONNECTIVITY` error. +
+<2> Configure a then-return element to throw an *HTTP:CONNECTIVITY* error. +
     This triggers the On-error scope in your application.
 <3> Execute the flow containing the requester.
 <4> Assert that the returned payload is the one you set inside the On-error scope.
 
-== Mocking Using Then-Call
+You cannot return all known error types of a Mule application. You can only return the type of errors defined in the modules used by the current flow. If you try to return an error type that is out of the scope of the flow you're testing, you get a *MULE:UNKNOWN* error instead of the configured one.
 
-To dynamically mock a variable, you can use `then-call` as follows:
+=== Parameters
+
+If you create a mock error, choose one of the following parameters to provide the trigger for the error in the *Then-return* tab:
+
+- *TypeId*: Follows a Mule Error type definition. For example, the HTTP:CONNECTIVITY error explained before.
+- *Cause*: Expects the instance of the exception with a message for the error. For example, using Java, write the expression:
+
+[source,java]
+----
+#[java!java::lang::Exception::new("Exception Message")]
+----
+
+== Mock Using Then-Call
+
+To dynamically mock a variable, use *then-call* as follows:
 
 [source,xml,linenums]
 ----

@@ -6,7 +6,7 @@ endif::[]
 
 == MUnit Test Suite
 
-The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application's project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
@@ -40,7 +40,7 @@ The MUnit configuration element (`munit:config`) identifies a Mule configuration
 
 ----
 
-==== Ignoring a suite
+==== Ignore a Suite
 
 To ignore a whole suite from running, you can use the `ignore` attribute of the configuration:
 
@@ -74,13 +74,13 @@ The MUnit test is divided in three scopes:
 | The behavior scope sets all the preconditions before executing the test logic.
 
 | Execution
-| The execution scope contains the testing logic which will wait for all processes to finish before executing the next scope.
+| The execution scope contains the testing logic which waits for all processes to finish before executing the next scope.
 
 | Validation
 | The validation scope contains all the validations for the results of the execution scope.
 |===
 
-All these scopes are optional.
+These scopes are optional.
 
 [source,xml,linenums]
 ----
@@ -142,7 +142,7 @@ This attribute is mandatory.
 
 In MUnit, you must write a description for your test. Ideally, you should write a useful, representative description of the scenario you are testing. This description displays in the test console before running the test, and also in the reports. The more representative the description, the easier to read and troubleshoot any failures.
 
-==== Ignoring a Test
+==== Ignore a Test
 
 There may be scenarios where you need to shut down a test. Whether this be because the test is failing or because it has inconvenient side effects. MUnit allows you to ignore a specific test so that you don't have to manually comment out the code.
 
@@ -162,15 +162,15 @@ In Anypoint Studio, you can check the *Ignore Test* option.
 
 image::munit-test-concept-de4c9.png[ignore-test]
 
-You can also use expressions to ignore a test based on your current mule version or on your current operative system:
+You can also use expressions to ignore a test based on your current mule version or on your current operating system:
 
-.Ignoring a Test Based on Operating System
+.Ignore a Test Based on Operating System
 [source,xml]
 ----
 <munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
 ----
 
-.Ignoring a Test Based on Mule Runtime Engine Version
+.Ignore a Test Based on Mule Runtime Engine Version
 [source,xml]
 ----
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
@@ -230,7 +230,7 @@ Assume that you want to validate that the flow or sub-flow you are testing fails
 image::munit-test-concept-e7280.png[]
 
 * The `expectedErrorType` attribute expects an error ID defined inside the application being tested. +
-This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exists in your application, the test does not run.
+This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test does not run.
 +
 [source,xml,linenums]
 ----

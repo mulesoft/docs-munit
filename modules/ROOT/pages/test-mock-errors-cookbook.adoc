@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-== Expecting an Error in your Test
+== Expect an Error in your Test
 
 During the execution of a flow, components may throw errors which might be expected for the use case
 being tested. In these cases, you want to specify that your test expects a particular error type or exception.
@@ -120,7 +120,7 @@ Since the test will fail with the raised custom error type, the test should expe
 </munit:test>
 ----
 
-== Mocking Errors
+== Mock Errors
 
 When you don't want to trigger manually an error on a component (like the examples above), but you only want to
 make the processor fail with a specific error, you can use the `error` parameter of the mock-when processor.
@@ -193,7 +193,7 @@ In this case the error could be caught with a try scope and then the verificatio
 </munit:test>
 ----
 
-== Setting an Event with an Error
+== Set an Event with an Error
 
 When extracting error handling logic into a separated flow or sub flow, the input event must have an error that can be
 used in the error handling logic.

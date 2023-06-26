@@ -41,7 +41,7 @@ is="#[MunitTools::withMediaType('text/xml')]"/>
 
 == withEncoding(String)
 
-Checks that the expression's encoding is the one specified.
+Checks that the expression encoding is the one specified.
 
 .Example
 [source,xml,linenums]
