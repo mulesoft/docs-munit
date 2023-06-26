@@ -10,7 +10,7 @@ To run coverage reports from Maven see xref:coverage-maven-concept.adoc[Using Co
 
 == Enable Coverage Reports in Anypoint Studio
 
-The Coverage button in the image bellow allows you to see which flows, and which percentage of event processors in those
+The Coverage button in the image below allows you to see which flows, and which percentage of event processors in those
 flows were covered by the test:
 
 image::using-munit-coverage-in-anypoint-studio.png[]
@@ -33,7 +33,7 @@ image::munit-coverage-report-in-anypoint-studio.png[]
                 were executed in the MUnit test.
 |===
 
-Additionally you can click in each Resource, to get a more specific and granular report of the Event Processors executed in that resource:
+Additionally, you can click on each Resource, to get a more specific and granular report of the Event Processors executed in that resource:
 
 image::munit-granular-coverage-report-in-anypoint-studio.png[]
 
@@ -44,22 +44,22 @@ image::munit-granular-coverage-report-in-anypoint-studio.png[]
 | *Type*                | The type of the container.
 | *Covered Processors* | The processors inside the container that were executed during the MUnit test.
 | *Processors*         | The total amount of processors inside the container.
-| *Coverage*            | This field represents the percentage of the event processors inside the container that were executed in the MUnit test.
+| *Coverage*            | This field represents the percentage of the event processors inside the container executed in the MUnit test.
 |===
 
 == Disable Coverage Reports
 
 If you choose so, you can disable the coverage calculation from your project's run configuration.
 
-Right click in your Package Explorer, and choose *Run As* and *Run Configurations...*, select your MUnit run configuration file to access your suite's configuration, and deselect the "Run coverage" option under your coverage settings.
+Right-click in your Package Explorer, and choose *Run As* and *Run Configurations...*, select your MUnit run configuration file to access your suite's configuration, and deselect the "Run coverage" option under your coverage settings.
 
 image::disable-munit-coverage-in-anypoint-studio.png[]
 
 == Exclude XML files from MUnit Coverage Report
 
-You can exclude one or more XML files from an MUnit Coverage report when testing your application to get an overall coverage of 100%. 
+You can exclude one or more XML files from an MUnit Coverage report when testing your application. 
 
-. Go to the flow you want to have 100% coverage.
+. Go to the flow you want to change.
 . Click *Run* > *Run Configuration*.
 . Click the name of your project.
 . In the *Ignored files* section, click *Add*.
@@ -70,8 +70,6 @@ image::add-ignored-files.png[]
 . Click *OK*.
 . Click *Apply*.
 . Click *Run*.
-
-The coverage report notifies of 100%.
 
 == See Also
 
