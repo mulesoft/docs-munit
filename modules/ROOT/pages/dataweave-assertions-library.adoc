@@ -32,7 +32,7 @@ Validates that the value satisfies at least one of the given matchers
 %dw 2.0
 import dw::tests::Asserts
 ---
-"A Text" must anyOf(beObject(), beString())
+"A Text" must anyOf([beObject(), beString()])
 ----
 
 
