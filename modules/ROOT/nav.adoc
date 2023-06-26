@@ -1,6 +1,8 @@
 .xref:index.adoc[MUnit]
 * xref:index.adoc[Overview]
 
+* xref:munit-release-notes.adoc[Release Notes]
+
 * xref:munit-cookbook.adoc[MUnit Examples]
   ** xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests]
   ** xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor]
