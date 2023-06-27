@@ -64,7 +64,7 @@ You can exclude one or more XML files from an MUnit Coverage report when testing
 +
 image::add-ignored-files.png["Add Ignored File window highlighted in the Test tab."]
 +
-. Type the name of the XML file you want to exclude from the Coverage report.
+. Enter the name of the XML file to exclude from the Coverage report.
 . Click *OK*.
 . Click *Apply*.
 . Click *Run*.
