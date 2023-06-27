@@ -49,7 +49,7 @@ image::munit-granular-coverage-report-in-anypoint-studio.png["MUnit Coverage Rep
 
 If you choose so, you can disable the coverage calculation from your project run configuration.
 
-Right-click in your *Package Explorer*, and choose *Run As* and *Run Configurations...*. Select your MUnit run configuration file to access your suite configuration, and deselect the *Run coverage* option in your coverage settings.
+Right-click *Package Explorer* and choose *Run As* > *Run Configurations*. Select your MUnit run configuration file to access your suite configuration, and deselect the *Run coverage* option in your coverage settings.
 
 image::disable-munit-coverage-in-anypoint-studio.png["MUnit run and Run coverage highlighted"]
 
