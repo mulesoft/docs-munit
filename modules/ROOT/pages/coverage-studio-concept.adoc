@@ -40,7 +40,7 @@ image::munit-granular-coverage-report-in-anypoint-studio.png["Granular report is
 | Column              | Description
 | *Name*                | The name of the container
 | *Type*                | The type of the container
-| *Covered Processors* | The processors inside the container that is executed during the MUnit test
+| *Covered Processors* | Processors inside the container that are executed during the MUnit test
 | *Processors*         | The total amount of processors inside the container
 | *Coverage*            | The percentage of the event processors inside the container executed in the MUnit test
 |===
