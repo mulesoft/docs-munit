@@ -16,7 +16,7 @@ image::using-munit-coverage-in-anypoint-studio.png["MUnit Coverage tab highlight
 
 The Overall Coverage value represents the percentage of the Mule application event processors that the MUnit test executes.
 
-You can click on *Generate Report* to get the report that details the flows and event processors in the Mule configuration files that are included in the MUnit test.
+You can click *Generate Report* to get the report that details the flows and event processors in the Mule configuration files that are included in the MUnit test.
 
 image::munit-coverage-report-in-anypoint-studio.png["Files included in the report are highlighted."]
 
