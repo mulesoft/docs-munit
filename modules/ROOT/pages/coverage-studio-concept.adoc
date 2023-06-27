@@ -57,7 +57,7 @@ image::disable-munit-coverage-in-anypoint-studio.png["MUnit run and Run coverage
 
 You can exclude one or more XML files from an MUnit Coverage report when testing your application. 
 
-. Go to the flow you want to change.
+. Go to the flow to change.
 . Click *Run* > *Run Configuration*.
 . Click the name of your project.
 . In the *Ignored files* section, click *Add*.
