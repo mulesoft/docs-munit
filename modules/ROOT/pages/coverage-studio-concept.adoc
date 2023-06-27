@@ -23,7 +23,7 @@ image::munit-coverage-report-in-anypoint-studio.png["Files included in the repor
 [%header,cols="20a,80a"]
 |===
 | Column      | Description
-| *Resource*    | The name of the Mule Configuration file
+| *Resource*    | Name of the Mule configuration file
 | *Containers* | Number of flows inside the Mule configuration file
 | *Weight*      | The percentage of your application in a configuration file. +
                 It is calculated as a percentage of the overall number of event processors in the documentation and the
