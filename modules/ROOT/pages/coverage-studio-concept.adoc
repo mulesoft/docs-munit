@@ -47,7 +47,7 @@ image::munit-granular-coverage-report-in-anypoint-studio.png["MUnit Coverage Rep
 
 == Disable Coverage Reports
 
-If you choose so, you can disable the coverage calculation from your project run configuration.
+If you choose so, you can disable the coverage calculation from your project run configuration so you test your flow without a coverage report.
 
 Right-click *Package Explorer* and choose *Run As* > *Run Configurations*. Select your MUnit run configuration file to access your suite configuration, and deselect the *Run coverage* option in your coverage settings.
 
