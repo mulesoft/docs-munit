@@ -30,15 +30,15 @@ The following table describes the product versions required to use the test reco
 
 == Limitations
 
-The test recorder is limited in the following ways when you create MUnit tests:
+The test recorder has the following limitations when you create MUnit tests:
 
-* You cannot create tests for flows with Mule errors raised inside the flow or already existing in the incoming event, not even if they are handled by an *on error continue* error handler.
+* You cannot create tests for flows with Mule errors raised inside the flow or already existing in the incoming event, even if an *on error continue* error handler controls them.
 * A recorded flow execution ends successfully, but the result does not reach its destination because the application is killed.
-* Your validations fail every time your test runs if you configure Spy or Assert processors to assert values for random data, time-dependent information (such as timestamps), or values resulting from parallel processes, because those values change in every execution.
+* Your validations fail every time your test runs if you configure `spy` or `assert` processors to assert values for random data, time-dependent information (such as timestamps), or values resulting from parallel processes, because those values change in every execution.
 * Mocking values resulting from parallel processes causes a mixture of real and mocked data that compromises the execution of the processors that follow in your test.
 * Although the recorder supports data iteration in the flow, such as recursions or loops, it does not support cases in which the structure of the data being tested changes inside the iteration.
-* The recorder does not support mocking a message before or inside a Foreach processor.
-
+* The recorder does not support mocking a message before or inside a `foreach` processor.
+* If you activate a test over a flow, you can mock parameters of the main flow and flows related to your main flow. MUnit Test Recorder ignores third-party flows and flows that are not related to your main flow.  
 
 == See Also
 
