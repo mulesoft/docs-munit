@@ -55,7 +55,7 @@ image::disable-munit-coverage-in-anypoint-studio.png["MUnit run and Run coverage
 
 == Exclude XML Files from MUnit Coverage Report
 
-You can exclude one or more XML files from an MUnit Coverage report when testing your application. 
+You can exclude one or more XML files from an MUnit Coverage report when testing your application. For example, you can exclude a third-party XML file that does not comply with your quality standards to improve your final report score.
 
 . Go to the flow to change.
 . Click *Run* > *Run Configuration*.
@@ -68,5 +68,5 @@ image::add-ignored-files.png["Add Ignored File window highlighted in the Test ta
 . Click *Apply* and *Run*.
 
 == See Also
-
+* xref:munit-coverage-report.adoc[]
 * xref:coverage-maven-concept.adoc[]
