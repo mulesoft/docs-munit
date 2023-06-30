@@ -3,13 +3,13 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-The test recorder enables you to record a processing flow and then configure a unit test based on the captured event.
+The Test Recorder enables you to record a processing flow and then configure a unit test based on the captured event.
 
 The test recorder captures real data as it goes through your application in Anypoint Studio. By capturing the flow execution, MUnit can automatically generate an MUnit test so that you can configure the necessary mocks and assertions for your test. See xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example] for a fully working example.
 
 == Compatibility
 
-The following table describes the product versions required to use the test recorder.
+The following table describes the product versions required to use the Test Recorder.
 
 [%header%autowidth.spread,cols="a,a"]
 |===
