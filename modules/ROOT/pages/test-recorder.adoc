@@ -38,7 +38,7 @@ The test recorder has the following limitations when you create MUnit tests:
 * Mocking values resulting from parallel processes causes a mixture of real and mocked data that compromises the execution of the processors that follow in your test.
 * Although the recorder supports data iteration in the flow, such as recursions or loops, it does not support cases in which the structure of the data being tested changes inside the iteration.
 * The recorder does not support mocking a message before or inside a `foreach` processor.
-* If you activate a test over a flow, you can mock parameters of the main flow and flows related to your main flow. MUnit Test Recorder ignores third-party flows and flows that are not related to your main flow.  
+* When using the Test Recorder to generate a test over your flow, you can only mock parameters included in your flow. You cannot mock parameters in sub-flows or in referenced flows through the Test Recorder UI. If you need to mock parameters in sub-flows of any other process in the project, you can modify the mocking component after creating the test.
 
 == See Also
 
