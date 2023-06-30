@@ -3,13 +3,13 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-The test recorder enables you to record a processing flow and then configure a unit test based on the captured event.
+The Test Recorder enables you to record a processing flow and then configure a unit test based on the captured event.
 
 The test recorder captures real data as it goes through your application in Anypoint Studio. By capturing the flow execution, MUnit can automatically generate an MUnit test so that you can configure the necessary mocks and assertions for your test. See xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example] for a fully working example.
 
 == Compatibility
 
-The following table describes the product versions required to use the test recorder.
+The following table describes the product versions required to use the Test Recorder.
 
 [%header%autowidth.spread,cols="a,a"]
 |===
@@ -30,15 +30,15 @@ The following table describes the product versions required to use the test reco
 
 == Limitations
 
-The test recorder is limited in the following ways when you create MUnit tests:
+The test recorder has the following limitations when you create MUnit tests:
 
-* You cannot create tests for flows with Mule errors raised inside the flow or already existing in the incoming event, not even if they are handled by an *on error continue* error handler.
+* You cannot create tests for flows with Mule errors raised inside the flow or already existing in the incoming event, even if an *on error continue* error handler controls them.
 * A recorded flow execution ends successfully, but the result does not reach its destination because the application is killed.
-* Your validations fail every time your test runs if you configure Spy or Assert processors to assert values for random data, time-dependent information (such as timestamps), or values resulting from parallel processes, because those values change in every execution.
+* Your validations fail every time your test runs if you configure `spy` or `assert` processors to assert values for random data, time-dependent information (such as timestamps), or values resulting from parallel processes, because those values change in every execution.
 * Mocking values resulting from parallel processes causes a mixture of real and mocked data that compromises the execution of the processors that follow in your test.
 * Although the recorder supports data iteration in the flow, such as recursions or loops, it does not support cases in which the structure of the data being tested changes inside the iteration.
-* The recorder does not support mocking a message before or inside a Foreach processor.
-
+* The recorder does not support mocking a message before or inside a `foreach` processor.
+* When using the Test Recorder to generate a test over your flow, you can only mock parameters included in your flow. You cannot mock parameters in sub-flows or in referenced flows through the Test Recorder UI. If you need to mock parameters in sub-flows of any other process in the project, you can modify the mocking component after creating the test.
 
 == See Also
 
