@@ -99,7 +99,7 @@ Example:
 +
 [source,DataWeave,options="nowrap"]
 ----
-#[MunitTools::allOf(MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString())]
+#[MunitTools::allOf([MunitTools::notNullValue(),MunitTools::withMediaType('text/xml'),MunitTools::isEmptyString()])]
 ----
 
 == Match Strings
