@@ -48,5 +48,5 @@ If you already set the `runtimeVersion` attribute in the POM file of your projec
 
 == See Also
 
-* xref:release-notes::mule-runtime/mule-esb[Mule Runtime Release Notes]
+* xref:release-notes::mule-runtime/mule-esb.adoc[Mule Runtime Release Notes]
 * xref:munit-maven-plugin.adoc[MUnit Maven Plugin]
