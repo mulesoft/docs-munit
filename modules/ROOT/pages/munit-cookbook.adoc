@@ -8,16 +8,16 @@ This section links to examples that demonstrate common MUnit usages.
 [%header%autowidth.spread,cols="a,a"]
 |===
 | Example | Description
-| xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests] | Learn how to mock test code for your MUnit tests.
-| xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor] | Learn how to mock a processor that can return different payloads.
-| xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors] | Learn how to mock expected errors in your code.
-| xref:use-environment-properties-on-tests-cookbook.adoc[Testing with Environment Properties] | Learn how to load different environment values to your MUnit tests.
-| xref:utility-classes-cookbook.adoc[Using Utility Classes From a Test] | Learn how to use custom Java classes in your MUnit tests.
-| xref:ftp-server-cookbook.adoc[Configuring FTP Server Utility in an MUnit Test] | Learn how to configure an FTP utility to test your FTP server connections.
-| xref:db-server-cookbook.adoc[Configuring DB Server Utility in an MUnit Test] | Learn how to configure a database utility to test your database connections.
-| xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] | Learn how to configure MUnit to run against a patched Mule runtime engine version.
-| xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications] | Learn how to test Mule applications that inherit a Mule domain.
-| xref:test-flow-with-scheduler-cookbook.adoc[Testing a Flow with a Scheduler Source] | Learn how to test a flow that is triggered by a scheduler.
-| xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example] | Learn how to use the MUnit test recorder.
-| xref:test-processor-that-uses-target-variable.adoc[Testing a Processor That Stores Data in a Target Variable] | Learn how to ensure that the assertions check the content of the stored variable.
+| xref:mock-file-cookbook.adoc[Mocking Resources for Your Tests] | Mocking test code for your MUnit tests.
+| xref:mock-before-after-foreach-cookbook.adoc[Mocking a Message Before and Inside a Foreach Processor] | Mocking a processor that can return different payloads.
+| xref:test-mock-errors-cookbook.adoc[Testing and Mocking Errors] | Mocking expected errors in your code.
+| xref:use-environment-properties-on-tests-cookbook.adoc[Testing with Environment Properties] | Loading different environment values to your MUnit tests.
+| xref:utility-classes-cookbook.adoc[Using Utility Classes From a Test] | Using custom Java classes in your MUnit tests.
+| xref:ftp-server-cookbook.adoc[Configuring FTP Server Utility in an MUnit Test] | Configuring an FTP utility to test your FTP server connections.
+| xref:db-server-cookbook.adoc[Configuring DB Server Utility in an MUnit Test] | Configuring a database utility to test your database connections.
+| xref:runtime-patching.adoc[Patching the Embedded Mule Runtime Engine Version] | Configuring MUnit to run against a patched Mule runtime engine version.
+| xref:domain-based-application-cookbook.adoc[Test Domain-Based Applications] | Testing Mule applications that inherit a Mule domain.
+| xref:test-flow-with-scheduler-cookbook.adoc[Testing a Flow with a Scheduler Source] | Testing a flow that is triggered by a scheduler.
+| xref:test-recorder-examples.adoc[Recording a Test from an Exchange Example] | Using the MUnit test recorder.
+| xref:test-processor-that-uses-target-variable.adoc[Testing a Processor That Stores Data in a Target Variable] | Ensuring that the assertions check the content of the stored variable.
 |===
