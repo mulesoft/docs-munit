@@ -2,7 +2,6 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: faq-how-munit-coverage.adoc, to-disable-coverage-studio.adoc
 
 The MUnit Coverage feature provides a measurement of how much of a Mule application has been executed by a set of MUnit tests by counting the amount of event processors executed. This allows you to obtain a quality standard for your application, and provides metrics for:
 
