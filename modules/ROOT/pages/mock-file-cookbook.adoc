@@ -57,9 +57,9 @@ You can then access any of the defined variables in the DataWeave module by impo
 [source,xml,linenums]
 ----
 <munit-tools:then-return >
-				<munit-tools:variables>
-        				<munit-tools:variable key="ticket" value="#[import TestData output application/json --- TestData::mockPost]" mediaType="application/json" />
-				</munit-tools:variables>
+    <munit-tools:variables>
+        <munit-tools:variable key="ticket" value="#[import TestData output application/json --- TestData::mockPost]" mediaType="application/json" />
+    </munit-tools:variables>
 </munit-tools:then-return>
 ----
 
