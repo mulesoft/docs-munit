@@ -45,9 +45,11 @@ This DataWeave file creates the payload to send in a POST request. You can then 
 </munit-tools:then-return>
 ----
 
-Finally, you can configure a *then-return* element to define the type of response the mocked processor should return. It could be a payload, a variable, a list of attributes, or even an error.
+Finally, you can configure a *then-return* element to define the type of response the mocked processor returns. It can be a payload, a variable, a list of attributes, or an error.
 
-You can use either a *then-return* to return a static, constant value, or you can use a *then-call* to invoke a flow for cases where you might want the returned value to change over time, or to have different responses according to certain inputs.
+You can use either a *then-return* to return a static, constant value, or you can use a *then-call* to invoke a flow for cases where the returned value can change over time, or to have different responses according to certain inputs.
+
+The mocking of the processors is executed after the initialization of the Mule app, and some connectors can require credentials or configurations to start the app, even when its processors are mocked.
 
 NOTE: Logger processor and Transform Message processor (DataWeave) cannot be mocked.
 
@@ -149,9 +151,9 @@ You can assert that every time the HTTP request fails, your application returns 
 <2> Configure a then-return element to throw an *HTTP:CONNECTIVITY* error. +
     This triggers the On-error scope in your application.
 <3> Execute the flow containing the requester.
-<4> Assert that the returned payload is the one you set inside the On-error scope.
+<4> Assert that the returned payload is the one you set in the On-error scope.
 
-You cannot return all known error types of a Mule application. You can only return the type of errors defined in the modules used by the current flow. If you try to return an error type that is out of the scope of the flow you're testing, you get a *MULE:UNKNOWN* error instead of the configured one.
+You cannot return all known error types of a Mule application. You can return the type of errors defined in the modules the current flow uses. If you try to return an error type that is out of the scope of the flow you're testing, you get a *MULE:UNKNOWN* error instead of the configured one.
 
 === Parameters
 
@@ -215,8 +217,8 @@ To dynamically mock a variable, use *then-call* as follows:
     </munit:validation>
 </munit:test>
 ----
-<1> This is the processor we wish to mock.
-<2> This flow will be called by the mock, which sets a variable that changes depending on the incoming event.
+<1> This is the processor you mock.
+<2> The mock calls this flow. The mock sets a variable that changes depending on the incoming event.
 <3> Configure the mock to call the desired flow.
 
 == See Also
