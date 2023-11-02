@@ -49,7 +49,7 @@ Finally, you can configure a *then-return* element to define the type of respons
 
 You can use either a *then-return* to return a static, constant value, or you can use a *then-call* to invoke a flow for cases where the returned value can change over time, or to have different responses according to certain inputs.
 
-The mocking of the processors is executed after the initialization of the Mule app, and some connectors can require credentials or configurations to start the app, even when its processors are mocked.
+NOTE: The mocking of the processors is executed after the initialization of the Mule app, and some connectors can require credentials or configurations to start the app, even when its processors are mocked.
 
 NOTE: Logger processor and Transform Message processor (DataWeave) cannot be mocked.
 
