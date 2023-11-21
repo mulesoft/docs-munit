@@ -55,4 +55,4 @@ Remember to keep consistency with `<version>` artifact in your repository and in
 
 == See Also
 
-* xref:7.1@studio::domain-support-concept.adoc[Domain Support (Anypoint Studio)]
+* xref:studio::domain-support-concept.adoc[Domain Support (Anypoint Studio)]
