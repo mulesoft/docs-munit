@@ -20,14 +20,14 @@ With MUnit you can:
 * Check visual coverage in Studio
 * Generate coverage reports
 
-MUnit is integrated with Anypoint Studio and Anypoint Code Builder. Y can create, design and run MUnit tests just like you would Mule applications.
+MUnit is integrated with Anypoint Studio and Anypoint Code Builder. You can create, design, and run MUnit tests just like you would Mule applications.
 
-MUnit is divided in two main sub modules:
+MUnit is divided into two main sub modules:
 
 * MUnit
 * MUnit Tools
 
-Each module has its own dependency:
+Each module has its dependency:
 
 .MUnit Dependencies
 [source,xml,linenums]
