@@ -22,7 +22,7 @@ With MUnit you can:
 
 You can create, design, and run MUnit tests with the integration MUnit has in Anypoint Studio and Anypoint Code Builder.
 
-MUnit has into two main sub modules:
+MUnit has two main sub modules:
 
 * MUnit
 * MUnit Tools
