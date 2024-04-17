@@ -41,7 +41,7 @@ Each module has its dependency:
 </dependency>
 ----
 
-== MUnit Tools dependencies
+== MUnit Tools Dependencies
 [source,xml,linenums]
 ----
 <dependency>
