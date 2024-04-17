@@ -5,7 +5,7 @@ endif::[]
 :version-info: 2.0 and newer
 :page-aliases: 4.2@mule-runtime::migration-munit-assert-processor-changes.adoc, 4.2@mule-runtime::migration-munit-mock-processor-changes.adoc, 4.2@mule-runtime::migration-munit.adoc, 4.1@mule-runtime::migration-munit-assert-processor-changes.adoc, 4.1@mule-runtime::migration-munit-mock-processor-changes.adoc, 4.1@mule-runtime::migration-munit.adoc
 
-MUnit is a Mule application testing framework that allows you to easily build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
+MUnit is a Mule application testing framework that allows you to build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
 
 MUnit version 3.0 works with all Mule versions since 4.3.
 
@@ -20,7 +20,7 @@ With MUnit you can:
 * Check visual coverage in Studio
 * Generate coverage reports
 
-MUnit is integrated with Anypoint Studio and Anypoint Code Builder. You can create, design, and run MUnit tests just like you would Mule applications.
+MUnit is integrated with Anypoint Studio and Anypoint Code Builder so you can create, design, and run MUnit tests.
 
 MUnit is divided into two main sub modules:
 
@@ -29,7 +29,7 @@ MUnit is divided into two main sub modules:
 
 Each module has its dependency:
 
-.MUnit Dependencies
+== MUnit Dependencies
 [source,xml,linenums]
 ----
 <dependency>
@@ -41,8 +41,7 @@ Each module has its dependency:
 </dependency>
 ----
 
-
-.MUnit Tools dependencies
+== MUnit Tools dependencies
 [source,xml,linenums]
 ----
 <dependency>
