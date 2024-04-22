@@ -1,0 +1,15 @@
+= MUnit in Anypoint Code Builder
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+
+MUnit is integrated with Anypoint Code Builder and you can:
+
+* Create and design MUnit tests
+* Run your tests
+* View test results
+* Debug your tests
+
+== See Also
+
+* xref:munit-in-studio.adoc[]
