@@ -8,7 +8,7 @@ endif::[]
 
 MUnit is a Mule application testing framework that allows you to build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
 
-MUnit version 3.0 works with all Mule versions since 4.3.
+MUnit version 3.0 and later works with all Mule versions since 4.3.
 
 With MUnit you can:
 
