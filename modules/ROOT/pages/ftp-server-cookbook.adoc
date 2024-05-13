@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Assume that you want to test the following Mule application:
+If you want to test the following Mule application:
 
 [source,xml,linenums]
 ----
@@ -31,12 +31,16 @@ ftp.user=max
 ftp.password=munittest
 ----
 
-The username field cannot be empty. If you do not have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to `true`.
+The username field can't be empty. If you don't have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute sets to `true`.
 
 == Install the FTP Server
 
-. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
-. In the search bar look for *MUnit Utils FTP Server* and add the module to your project:
+Depending on the IDE you use, to install the FTP server you must:
+
+. Look for *MUnit Utils FTP Server* asset.
+.. In Anypoint Code Builder, open the Command Palette, look for *MuleSoft: Search in Exchange*, and type *MUnit Utils FTP Server* asset.
+.. In Anypoint Studio, go to the *Mule Palette*, click *Search in Exchange*, and look for *MUnit Utils FTP Server*.
+. Add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -52,11 +56,11 @@ The username field cannot be empty. If you do not have a username-password pair,
 +
 The MUnit FTP server artifact in your POM file must have the `test` scope.
 
-
 == Define the FTP Server
 
-. In your Studio canvas, go to the *Global Elements* tab and select your *MUnit FTP Server Config* element.
-. Click *Edit* and complete the fields:
+Depending on the IDE you use, to define the FTP server you must:
+
+. Change the FTP server attributes according to the following values:     
 +
 [%header%autowidth.spread,cols="a,a"]
 |===
@@ -75,6 +79,9 @@ The MUnit FTP server artifact in your POM file must have the `test` scope.
     <ftpserver:connection port="${ftp.port}" username="${ftp.user}" password="${ftp.password}" secure="true" homeDir="${app.home}"/>
 </ftpserver:config>
 ----
++
+.. In Anypoint Code Builer, go to *global-configs.xml* file and add the FTP server code. 
+.. In Anypoint Studio canvas, go to the *Global Elements* tab, select your *MUnit FTP Server Config* element, click *Edit*, and complete the fields.
 
 == Run the Test
 
@@ -92,7 +99,7 @@ After configuring the FTP server you can run the test:
 </munit:test>
 ----
 
-This FTP accepts any user, so there is no need to set up a user database or list.
+This FTP accepts any user, so you must not set up a user database or list.
 
 == See Also
 
