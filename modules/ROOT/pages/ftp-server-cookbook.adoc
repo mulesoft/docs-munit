@@ -36,9 +36,9 @@ The username field can't be empty. If you don't have a username-password pair, s
 
 == Install the FTP Server
 
-Depending on the IDE you use, to install the FTP server you must
+Depending on the IDE you use, to install the FTP server you must:
 
-. Look for the *MUnit Utils FTP Server* asset.
+. Look for the *MUnit Utils FTP Server* asset:
 .. In Anypoint Code Builder, open the Command Palette, look for *MuleSoft: Search in Exchange*, and type *MUnit Utils FTP Server* asset.
 .. In Anypoint Studio, go to the *Mule Palette*, click *Search in Exchange*, and look for *MUnit Utils FTP Server*.
 . Add the module to your project:
