@@ -52,7 +52,7 @@ You must create a test that:
 
 == Install the MUnit DB Server Module
 
-Depending on the IDE you use, to install the MUnit Utils Database Server you must:
+Depending on the IDE you use, to install the *MUnit Utils Database Server* you must:
 
 . Look for the *MUnit Utils Database Server* module:
 .. In Anypoint Code Builder, open the Command Palette, look for *MuleSoft: Search in Exchange*, and type *MUnit Utils Database Server*.
