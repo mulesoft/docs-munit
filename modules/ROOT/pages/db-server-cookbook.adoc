@@ -37,6 +37,7 @@ If you want to test the following Mule application:
     <set-variable value="#[payload]" variableName="job" />
 </flow>
 ----
+
 The file `db.properties` in `src/main/resources` has the following content:
 
 [source]
@@ -52,11 +53,7 @@ You must create a test that:
 
 == Install the MUnit DB Server Module
 
-Depending on the IDE you use, to install the *MUnit Utils Database Server* you must:
-
-. Look for the *MUnit Utils Database Server* module:
-.. In Anypoint Code Builder, open the Command Palette, look for *MuleSoft: Search in Exchange*, and type *MUnit Utils Database Server*.
-.. In Anypoint Studio, go to the *Mule Palette* view, click *Search in Exchange*, and look for *MUnit Utils Database Server*. 
+. Look for the *MUnit Utils Database Server* module in Exchange.
 . Add the module to your project:
 +
 [source,xml,linenums]
@@ -117,16 +114,7 @@ For this example, define the DB structure and content using a CSV file:
 JOBTITLE,EECSALARYORHOURLY,JOBTITLEID
 Developer,10,DEV
 ----
-. Navigate to the *Global Elements* tab and select the *MUnit DB Server Config* element.
-. Click *Edit* and complete the fields:
-+
-[%header%autowidth.spread,cols="a,a"]
-|===
-| Name | `MUnit_DB_Server_Config`
-| CSV | `jobtitlelookup.csv`
-| Database | `DATABASE_NAME`
-| Connection string parameters | `MODE=MySQL`
-|===
+. Create the *global-configs.xml* file and define the *MUnit DB Server Config* element as follows:
 +
 [source,xml,linenums]
 ----
@@ -135,14 +123,6 @@ Developer,10,DEV
 </dbserver:config>
 ----
 . Define the DB configuration to connect to your DB server:
-+
-[%header%autowidth.spread,cols="a,a"]
-|===
-| Name | `Test_Database_Config`
-| Connection | `Generic connection`
-| URL | `jdbc:h2:tcp://localhost/mem:DATABASE_NAME`
-| Driver class name | `org.h2.Driver`
-|===
 +
 [source,xml,linenums]
 ----
@@ -183,3 +163,5 @@ This test validates that the query run in your production code is correct and th
 == See Also
 
 * xref:db-util.adoc[Database Util]
+* xref:anypoint-code-builder::acb-commands.adoc[Import a module in Anypoint Code Builder]
+* xref:studio::add-modules-in-studio-to.adoc[Studio]
