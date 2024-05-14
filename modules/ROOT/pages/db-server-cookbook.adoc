@@ -102,7 +102,7 @@ The MUnit DB server artifact in your POM file must have the `test` scope.
 
 == Define the MUnit DB Server
 
-Define the database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
+Define the database server by creating the *global-configs.xml* file.
 
 For this example, define the DB structure and content using a CSV file:
 
@@ -163,5 +163,5 @@ This test validates that the query run in your production code is correct and th
 == See Also
 
 * xref:db-util.adoc[Database Util]
-* xref:anypoint-code-builder::acb-commands.adoc[Import a module in Anypoint Code Builder]
-* xref:studio::add-modules-in-studio-to.adoc[Studio]
+* xref:anypoint-code-builder::acb-commands.adoc[Add Modules to Your Test in Anypoint Code Builder]
+* xref:studio::add-modules-in-studio-to.adoc[Add Modules to Your Test in Anypoint Studio]
