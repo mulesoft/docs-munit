@@ -45,6 +45,7 @@ db.config=Database_Config
 ----
 
 You must create a test that:
+
 * Contains a database server with a `jobtitlelookup` table.
 * Provides a valid database structure for the database connector to perform its query.
 * Passes a value for the `jobid` variable that Database Connector uses.
@@ -54,7 +55,7 @@ You must create a test that:
 Depending on the IDE you use, to install the MUnit Utils Database Server you must:
 
 . Look for the *MUnit Utils Database Server* module:
-.. In Anypoint Code Builder, 
+.. In Anypoint Code Builder, open the Command Palette, look for *MuleSoft: Search in Exchange*, and type *MUnit Utils Database Server*.
 .. In Anypoint Studio, go to the *Mule Palette* view, click *Search in Exchange*, and look for *MUnit Utils Database Server*. 
 . Add the module to your project:
 +
