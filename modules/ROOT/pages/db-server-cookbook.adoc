@@ -2,8 +2,9 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
-Assume that you want to test the following Mule application:
+If you want to test the following Mule application:
 
 [source,xml,linenums]
 ----
@@ -43,15 +44,19 @@ The file `db.properties` in `src/main/resources` has the following content:
 db.config=Database_Config
 ----
 
-You need to create a test that:
+You must create a test that:
 * Contains a database server with a `jobtitlelookup` table.
 * Provides a valid database structure for the database connector to perform its query.
 * Passes a value for the `jobid` variable that Database Connector uses.
 
 == Install the MUnit DB Server Module
 
-. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
-. In the search bar, look for *MUnit Utils Database Server* and add the module to your project:
+Depending on the IDE you use, to install the MUnit Utils Database Server you must:
+
+. Look for the *MUnit Utils Database Server* module:
+.. In Anypoint Code Builder, 
+.. In Anypoint Studio, go to the *Mule Palette* view, click *Search in Exchange*, and look for *MUnit Utils Database Server*. 
+. Add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -144,7 +149,7 @@ Developer,10,DEV
     <db:generic-connection url="jdbc:h2:tcp://localhost/mem:DATABASE_NAME" driverClassName="org.h2.Driver" />
 </db:config>
 ----
-. Define the `db.properties` file in your `src/test/resources` folder that will pick up your test database configuration:
+. Define the `db.properties` file in your `src/test/resources` folder that picks up your test database configuration:
 +
 [source]
 ----
