@@ -32,7 +32,7 @@ ftp.user=max
 ftp.password=munittest
 ----
 
-The username field can't be empty. If you don't have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute sets to `true`.
+The username field can't be empty. If you don't have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to `true`.
 
 == Install the FTP Server
 
@@ -81,7 +81,7 @@ Depending on the IDE you use, to define the FTP server you must:
 </ftpserver:config>
 ----
 +
-.. In Anypoint Code Builer, go to the *global-configs.xml* file and add the FTP server code. 
+.. In Anypoint Code Builer, create the *global-configs.xml* file and add the FTP server code. 
 .. In Anypoint Studio canvas, go to the *Global Elements* tab, select your *MUnit FTP Server Config* element, click *Edit*, and complete the fields.
 
 == Run the Test
