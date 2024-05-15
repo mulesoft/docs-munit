@@ -102,9 +102,9 @@ The MUnit DB server artifact in your POM file must have the `test` scope.
 
 == Define the MUnit DB Server
 
-Define the database server by creating the *global-configs.xml* file.
+Define the database server by creating the *global-configs.xml* file and defining the MUnit DB Server Config element.
 
-For this example, define the DB structure and content using a CSV file:
+Define the MUnit DB Server Config element as follows:
 
 . Go to the `src/test/resources` directory in your project.
 . Create a file named `jobtitlelookup.csv` containing the following values:
