@@ -38,7 +38,7 @@ The username field can't be empty. If you don't have a username-password pair, s
 
 To install the FTP server, you must:
 
-. Look for the *MUnit Utils FTP Server* asset in Exchange.
+. Look for the *MUnit Utils FTP Server* module in Exchange.
 . Add the module to your project:
 +
 [source,xml,linenums]
