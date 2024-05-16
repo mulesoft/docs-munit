@@ -7,7 +7,7 @@ endif::[]
 
 == MUnit Test Suite
 
-The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
@@ -15,7 +15,7 @@ An MUnit test suite can contain any combination of the following components:
 * Before/After Tests
 * MUnit tests
 
-Each MUnit test suite is, behind the scenes, no different from a Mule configuration file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
+Each MUnit test suite is, behind the scenes, no different from a Mule configuration file. You can use several of the Mule top-level elements such as flow, sub-flow, and scripts.
 
 === MUnit Configuration
 
@@ -52,8 +52,7 @@ To ignore a whole suite from running, you can use the `ignore` attribute of the 
 
 ==== Minimum Mule Version
 
-To specify that a suite must run if the Mule version that is equal or newer than a specific version, use the
-`minMuleVersion` attribute of the configuration:
+To specify that a suite must run if the Mule version is equal to or newer than a specific version, use the `minMuleVersion` attribute of the configuration:
 
 [source,xml]
 ----
@@ -122,7 +121,7 @@ This attribute is mandatory.
 |Defines if the test must be ignored. If not present, the test isn't ignored.
 
 |`tags`
-|Comma separated list of tags to assign to the test.
+|Comma-separated list of tags to assign to the test.
 
 |`expectedErrorType`
 |Defines the error Type to receive after executing the test.
@@ -134,7 +133,7 @@ This attribute is mandatory.
 |Defines the error description to receive after executing the test.
 
 |`timeOut`
-|Defines maximum time in milliseconds that the test can run before failing.
+|Defines the maximum time in milliseconds that the test can run before failing.
 
 |===
 
@@ -144,7 +143,7 @@ In MUnit, you must write a description for your test. The description must be us
 
 ==== Ignore a Test
 
-You can find scenarios where you must shut down a test. Whether the test is failing or it has inconvenient side effects, you can ignore a specific test so that you mustn't manually comment out the code.
+You can find scenarios where you must shut down a test. Whether the test is failing or it has inconvenient side effects, you can ignore a specific test so that you don't manually comment out the code.
 
 You can ignore any of your tests by adding the ignore boolean to the test definition:
 
@@ -164,7 +163,7 @@ image::munit-test-concept-de4c9.png["The ignore-test checkbox highlighted in Stu
 
 You can also use expressions to ignore a test based on your current Mule version or on your current operating system:
 
-.Ignore a Test Based on Operating System
+.Ignore a Test Based on the Operating System
 [source,xml]
 ----
 <munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
@@ -176,7 +175,7 @@ You can also use expressions to ignore a test based on your current Mule version
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
 ----
 
-MUnit ignores this test if the Mule version is prior to `4.1.4`. Other possible functions are `muleVersionEqualTo` and `muleVersionNewerThan`.
+MUnit ignores this test if the Mule version is earlier than `4.1.4`. Other possible functions are `muleVersionEqualTo` and `muleVersionNewerThan`.
 
 ==== Test TimeOut Attribute
 
@@ -229,7 +228,7 @@ If you want to validate that the flow or sub-flow you're testing fails and throw
 image::munit-test-concept-e7280.png["Failure Expectation section highlighted in Studio."]
 
 * The `expectedErrorType` attribute expects an error ID defined in the tested application. +
-With this attribute, you can validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test does not run.
+With this attribute, you can validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test doesn't run.
 +
 [source,xml,linenums]
 ----
@@ -260,7 +259,7 @@ You must provide the canonical class name of the exception that you expect. MUni
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 
 * The attribute `expectedErrorDescription` expects an error description. +
-With this attribute you can validate that an error is thrown and the error has a description that is equals to or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
+With this attribute, you can validate that an error is thrown and the error has a description that is equal to or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
 +
 [source,xml,linenums]
 ----
