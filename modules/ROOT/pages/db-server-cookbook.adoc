@@ -2,8 +2,9 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
-Assume that you want to test the following Mule application:
+If you want to test the following Mule application:
 
 [source,xml,linenums]
 ----
@@ -36,6 +37,7 @@ Assume that you want to test the following Mule application:
     <set-variable value="#[payload]" variableName="job" />
 </flow>
 ----
+
 The file `db.properties` in `src/main/resources` has the following content:
 
 [source]
@@ -43,15 +45,16 @@ The file `db.properties` in `src/main/resources` has the following content:
 db.config=Database_Config
 ----
 
-You need to create a test that:
+You must create a test that:
+
 * Contains a database server with a `jobtitlelookup` table.
 * Provides a valid database structure for the database connector to perform its query.
 * Passes a value for the `jobid` variable that Database Connector uses.
 
 == Install the MUnit DB Server Module
 
-. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
-. In the search bar, look for *MUnit Utils Database Server* and add the module to your project:
+. Look for the *MUnit Utils Database Server* module in Exchange.
+. Add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -99,9 +102,9 @@ The MUnit DB server artifact in your POM file must have the `test` scope.
 
 == Define the MUnit DB Server
 
-Define the database server using the *MUnit DB Server Config* from the *Global Elements* in your canvas.
+Define the database server by creating the *global-configs.xml* file and defining the MUnit DB Server Config element.
 
-For this example, define the DB structure and content using a CSV file:
+Define the MUnit DB Server Config element as follows:
 
 . Go to the `src/test/resources` directory in your project.
 . Create a file named `jobtitlelookup.csv` containing the following values:
@@ -111,16 +114,7 @@ For this example, define the DB structure and content using a CSV file:
 JOBTITLE,EECSALARYORHOURLY,JOBTITLEID
 Developer,10,DEV
 ----
-. Navigate to the *Global Elements* tab and select the *MUnit DB Server Config* element.
-. Click *Edit* and complete the fields:
-+
-[%header%autowidth.spread,cols="a,a"]
-|===
-| Name | `MUnit_DB_Server_Config`
-| CSV | `jobtitlelookup.csv`
-| Database | `DATABASE_NAME`
-| Connection string parameters | `MODE=MySQL`
-|===
+. Create the *global-configs.xml* file and define the *MUnit DB Server Config* element as follows:
 +
 [source,xml,linenums]
 ----
@@ -130,21 +124,13 @@ Developer,10,DEV
 ----
 . Define the DB configuration to connect to your DB server:
 +
-[%header%autowidth.spread,cols="a,a"]
-|===
-| Name | `Test_Database_Config`
-| Connection | `Generic connection`
-| URL | `jdbc:h2:tcp://localhost/mem:DATABASE_NAME`
-| Driver class name | `org.h2.Driver`
-|===
-+
 [source,xml,linenums]
 ----
 <db:config name="Test_Database_Config">
     <db:generic-connection url="jdbc:h2:tcp://localhost/mem:DATABASE_NAME" driverClassName="org.h2.Driver" />
 </db:config>
 ----
-. Define the `db.properties` file in your `src/test/resources` folder that will pick up your test database configuration:
+. Define the `db.properties` file in your `src/test/resources` folder that picks up your test database configuration:
 +
 [source]
 ----
@@ -177,3 +163,5 @@ This test validates that the query run in your production code is correct and th
 == See Also
 
 * xref:db-util.adoc[Database Util]
+* xref:anypoint-code-builder::acb-commands.adoc[Add Modules to Your Test in Anypoint Code Builder]
+* xref:studio::add-modules-in-studio-to.adoc[Add Modules to Your Test in Anypoint Studio]
