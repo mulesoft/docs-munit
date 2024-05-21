@@ -7,7 +7,7 @@ endif::[]
 
 // tag::coverage-report[]
 
-Since MUnit 2.x, the coverage report goal is integrated with the Maven reporting section. MUnit generates Coverage Reports during Maven `site` lifecycle, during the `coverage-report` goal.
+Since MUnit 2.x, the coverage report goal is integrated with the Maven reporting section. MUnit generates Coverage Reports during the Maven `site` lifecycle, during the `coverage-report` goal.
 
 The following configurations apply if you execute your MUnit tests using the Maven plugin. They don't apply when running tests from Anypoint Code Builder or Anypoint Studio.
 
@@ -70,10 +70,10 @@ MUnit Coverage offers four types of reports:
 The console report prints in the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
 
 * HTML report +
-The HTML report shows the same information as the console report, but formatted to fit any web browser. It's available in the `${application.path}/target/site/munit/coverage/` path.
+The HTML report shows the same information as the console report but it's formatted to fit any web browser. It's available in the `${application.path}/target/site/munit/coverage/` path.
 
 * JSON report +
-The JSON report shows the same information as the HTML report, but in a JSON format. It's available in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.
+The JSON report shows the same information as the HTML report but in a JSON format. It's available in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.
 
 * SONAR report +
 The SONAR report shows the same information as the HTML report, in a SonarQube format.
@@ -123,7 +123,7 @@ One of the features of MUnit Coverage is to fail the build if a certain coverage
 MUnit Coverage handles three different levels:
 
 * *Application*: The overall coverage of all your application.
-* *Resource*: The coverage level of each individual Mule configuration file.
+* *Resource*: The coverage level of each Mule configuration file.
 * *Flow*: The coverage of event processors in each flow.
 
 To define the required coverage levels:
@@ -158,7 +158,7 @@ MUnit Coverage Summary
  * Flow: file2.xml -> file2Flow1 coverage is below defined limit. Required: 50.0% - Current: 00.00% <1>
 ====================================================================================
 ----
-<1> Warning detailing the which coverage level was not met, and where it happened.
+<1> Warning detailing which coverage level is not met, and where it happens.
 
 == Ignore a Flow or a File
 
