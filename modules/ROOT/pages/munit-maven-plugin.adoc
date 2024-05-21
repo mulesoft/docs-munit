@@ -166,7 +166,7 @@ In the following example, the `pirate-pom` project declares the MUnit Maven plug
 
 To inherit the MUnit plugin in your child `pom.xml` files, reference it in the `<plugin>` section of each child POM file individually.
 
-The following sample references `pirate-pom` file as its parent. It declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because the MUnit plugin configuration is inherited from the `<pluginManagement>` section in the parent POM file:
+The following sample references the `pirate-pom` file as its parent. It declares the MUnit plugin in a `<plugin>` section without specifying its `<version>` because the MUnit plugin configuration is inherited from the `<pluginManagement>` section in the parent POM file:
 
 .POM child file sample
 [source,xml,linenums]
@@ -252,7 +252,7 @@ By not declaring the MUnit Plugin in your `<plugin>` section, you avoid inheriti
 
 When inheriting the plugin from a parent POM file, you can also override the parent configuration. Overriding the plugin configuration from your parent POM file suppresses the original configuration requiring you to declare all necessary configurations again.
 
-The following example overrides the console coverage report from its parent POM file, replacing it by the HTML report. Because the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) aren't being referenced, this child file won't inherit them and the default values are applied:
+The following example overrides the console coverage report from its parent POM file, replacing it with the HTML report. Because the values from the other elements in the parent (`<failBuild>`, `<requiredApplicationCoverage>`, `<requiredResourceCoverage>`, `<requiredFlowCoverage>`) aren't being referenced, this child file won't inherit them and the default values are applied:
 
 .Coverage configuration in parent POM file
 [source,xml,linenums]
@@ -397,7 +397,7 @@ By default, it's set to `true`.
 
 == Enable Sonar Reports
 
-MUnit has built-in support for SonarQube, with a default setting of `true` for `enableSonarReports`. You mustn't do configuration.
+MUnit has built-in support for SonarQube, with a default setting of `true` for `enableSonarReports`. No other configuration is required.
 
 You can find the reports under `${project.build.directory}/sonar-reports`.
 
@@ -559,10 +559,10 @@ If not specified, this value is `false` by default.
 [[specify-runtime-product]]
 == Specify the Runtime Product
 
-You can specify the type of runtime in which the applications you test runs. Accepted values are:
+You can specify the type of runtime in which the applications you test run. Accepted values are:
 
-* `MULE` for community edition.
-* `MULE_EE` for enterprise edition.
+* `MULE` for the community edition.
+* `MULE_EE` for the enterprise edition.
 
 [source,xml,linenums]
 ----
@@ -695,7 +695,7 @@ If you must define specific system variables to run your MUnit test successfully
 </plugins>
 ----
 
-Depending on the execution context, the system properties values can vary. When referencing these properties, you must override their value to enforce test reproducibility.
+Depending on the execution context, the system property values can vary. When referencing these properties, you must override their value to enforce test reproducibility.
 
 You can do so using the ­`-D` argument when running MUnit with Maven. Variables passed with the `-D` argument take full priority over any other property. For example:
 
@@ -714,7 +714,7 @@ The test output that doesn't belong to a particular suite isn't printed to keep 
 
 To redirect the output of each test suite to a file:
 
-.Redirect test output to file
+.Redirect test output to a file
 [source,xml,linenums]
 ----
 <plugins>
@@ -764,7 +764,7 @@ By default, the files are created in `${project.build.directory}/munit-reports/o
 
 The MUnit Maven Plugin offers a set of optional configurable parameters.
 
-//_NOTE: This params are taken from MUnitMojo.java in munit-runtime code.
+//_NOTE: These params are taken from MUnitMojo.java in munit-runtime code.
 
 .Maven Plugin Parameters
 [%header,cols="3a,^2a,4a"]
@@ -821,8 +821,8 @@ To modify the Mule runtime version used to run your MUnit tests, see xref:runtim
 |String
 |Type of runtime. Expected values are:
 
-* `MULE` for community edition
-* `MULE_EE` for enterprise edition.
+* `MULE` for the community edition
+* `MULE_EE` for the enterprise edition.
 
 By default, this value comes from the `requiredProduct` parameter in the `mule-artifact.json` file.
 
@@ -847,7 +847,7 @@ Its default value is `false`.
 
 |`testOutputDirectory`
 |File
-|Directory where the test outputs is written. +
+|Directory where the test outputs are written. +
 Its default value is `${project.build.directory}/munit-reports/output/`.
 
 |===
