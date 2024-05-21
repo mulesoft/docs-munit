@@ -107,7 +107,7 @@ You can declare the MUnit plugin in a parent `pom.xml` file and every child proj
 
 To configure the MUnit Maven plugin in a parent-child POM relationship, include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file.
 
-In the following example, the `pirate-pom` project declares the MUnit Maven plugin in its plugin management section. This section also defines a global configuration that each child under this parent can reference, override or even ignore.
+In the following example, the `pirate-pom` project declares the MUnit Maven plugin in its plugin management section. This section also defines a global configuration that each child under this parent can reference, override, or even ignore.
 
 [source,xml,linenums]
 ----
@@ -270,8 +270,7 @@ The following example overrides the console coverage report from its parent POM 
 </coverage>
 ----
 
-
-.POM child file overriding coverage report's format
+.POM child file overriding coverage report format
 [source,xml,linenums]
 ----
 <plugin>
