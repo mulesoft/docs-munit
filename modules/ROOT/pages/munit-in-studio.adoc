@@ -3,7 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-MUnit is fully integrated with Anypoint Studio. You can use Studio graphical interface to:
+MUnit is fully integrated with Anypoint Studio. You can use the Studio graphical interface to:
 
 * Create and design MUnit tests
 * Run your tests
