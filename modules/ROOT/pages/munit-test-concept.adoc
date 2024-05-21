@@ -272,11 +272,11 @@ With this attribute, you can validate that an error is thrown and the error has 
 
 == Before and After Scopes
 
-As with other testing frameworks, MUnit provides a set of scopes so you can add processing or actions to run before and after the entire MUnit test or MUnit test suite execute:
+As with other testing frameworks, MUnit provides a set of scopes so you can add processing or actions to run before and after the entire MUnit test or MUnit test suite executes:
 
 * Before and After Suite Scopes.
 * Before and After Test Scopes.
 
-The ID field for each component must be unique across all your application. The before and after scopes can't share the same name between them, nor have the same name as any flow in your application.
+The ID field for each component must be unique across all your applications. The before and after scopes can't share the same name, nor have the same name as any flow in your application.
 
 See xref:before-after-scopes-reference.adoc[] reference for more information.
