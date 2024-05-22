@@ -5,13 +5,13 @@ endif::[]
 :page-aliases: munit-ftp-server.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You can also have a dedicated external FTP server for testing, but your Maven project can't be portable. A third party must install the testing the FTP server to compile your project.
+To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You can also have a dedicated external FTP server for testing, but your Maven project can't be portable. A third party must install the testing FTP server to compile your project.
 
 To test the FTP connections, you can implement an FTP server in your local environment with MUnit.
 
 == Install the MUnit FTP Server Module
 
-To install the MUnit FTP Server module, you must:
+To install the MUnit FTP server module, you must:
 
 . Look for the *MUnit Utils FTP Server* module in Exchange.
 . Add the module to your project:
@@ -48,7 +48,7 @@ The default value is `true`.
 The default value is `false`.
 
 |`homeDir` |Defines the user's home directory. The default value is the filesystem root. +
-You can define the FTP user home directory using the `~` character to represent the home directory on the file system.
+You can define the FTP user home directory by using the `~` character to represent the home directory on the file system.
 |===
 
 == MUnit FTP Server Processors
