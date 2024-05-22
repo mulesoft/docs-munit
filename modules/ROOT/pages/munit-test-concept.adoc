@@ -7,7 +7,7 @@ endif::[]
 
 == MUnit Test Suite
 
-The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as needed. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
@@ -15,7 +15,7 @@ An MUnit test suite can contain any combination of the following components:
 * Before/After Tests
 * MUnit tests
 
-Each MUnit test suite is, behind the scenes, no different from a Mule configuration file. You can use several of the Mule top-level elements such as flow, sub-flow, and scripts.
+Each MUnit test suite is similar to a Mule configuration file. You can use several of the Mule top-level elements such as flow, sub-flow, and scripts.
 
 === MUnit Configuration
 
@@ -111,7 +111,7 @@ image::munit-test-concept-9c736.png[munit-test]
 |Name |Description
 
 |`name`
-| Defines the name of the test. The name must be unique inside the test suite. +
+| Defines the name of the test. The name must be unique in the test suite. +
 This attribute is mandatory.
 
 |`description`
@@ -145,7 +145,7 @@ In MUnit, you must write a description for your test. The description must be us
 
 You can find scenarios where you must shut down a test. Whether the test is failing or it has inconvenient side effects, you can ignore a specific test so that you don't manually comment out the code.
 
-You can ignore any of your tests by adding the ignore boolean to the test definition:
+You can ignore any of your tests by adding the `ignore` boolean to the test definition:
 
 [source,xml,linenums]
 ----
@@ -156,10 +156,6 @@ You can ignore any of your tests by adding the ignore boolean to the test defini
 ----
 
 The default value for the ignore attribute is `false`.
-
-In Anypoint Studio, you can check the *Ignore Test* option.
-
-image::munit-test-concept-de4c9.png["The ignore-test checkbox highlighted in Studio."]
 
 You can also use expressions to ignore a test based on your current Mule version or on your current operating system:
 
@@ -279,4 +275,4 @@ As with other testing frameworks, MUnit provides a set of scopes so you can add 
 
 The ID field for each component must be unique across all your applications. The before and after scopes can't share the same name, nor have the same name as any flow in your application.
 
-See xref:before-after-scopes-reference.adoc[] reference for more information.
+See xref:before-after-scopes-reference.adoc[] reference for additional information.
