@@ -1,11 +1,11 @@
-= Database
+= Installing a Database Server
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-database-server.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You can also have a dedicated external database server for testing, but your Maven project would not be portable -- a third party must install the testing database server to compile your project.
+To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You can also have a dedicated external database server for testing, but your Maven project can't be portable. If so, a third party must install the testing database server to compile your project.
 
 To make it easier for you to test database connections, MUnit allows you to implement a database server in your local environment.
 
@@ -30,7 +30,7 @@ To install the MUnit DB Server Module, you must:
 +
 The MUnit DB server artifact in your `pom` file must have the `test` scope.
 . The `h2` dependency used for the database is a shared library. +
-You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in the `mule-maven-plugin`.
+You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in `mule-maven-plugin`.
 +
 [source,xml,linenums]
 ----
@@ -74,10 +74,10 @@ You must add the dependency to your `pom.xml` file and list it as a `sharedLibra
 |Defines the name of the in-memory DB.
 
 | `sqlFile`
-|Specifies the path of the SQL file that defines the DB structure/contents. Use this parameter to create the DB at startup. See the <<db-structure-sql,Defining the DB Structure from an SQL File>> section for more information.
+|Specifies the path of the SQL file that defines the DB structure/contents. Use this parameter to create the DB at startup. See the <<db-structure-sql,Defining the DB Structure from an SQL File>> section for additional information.
 
 | `csv`
-|Specifies the path of the comma-separated file used to define the DB structure/contents. Use this parameter to create the DB at startup. See <<db-structure-csv,Defining the DB Structure from a CSV File>> section for more information.
+|Specifies the path of the comma-separated file used to define the DB structure/contents. Use this parameter to create the DB at startup. See <<db-structure-csv,Defining the DB Structure from a CSV File>> section for additional information.
 
 | `connectionStringParameters`
 | Defines the connection string for your database. You can concatenate the parameters with a semicolon.
