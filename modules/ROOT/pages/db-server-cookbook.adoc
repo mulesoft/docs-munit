@@ -1,4 +1,4 @@
-= Configuring Database Server Utility in an MUnit Test
+= Configuring the Database Server Utility in an MUnit Test
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -158,7 +158,7 @@ After installing and configuring the DB server you can run the test:
 </munit:test>
 ----
 
-This test validates that the query run in your production code is correct and that the payload returned by the DB server is as expected.
+This test validates that the query run in your production code is correct and that the DB server returns the payload as expected.
 
 == See Also
 

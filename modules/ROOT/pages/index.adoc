@@ -1,4 +1,4 @@
-= Overview
+= MUnit Overview
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -18,7 +18,6 @@ With MUnit you can:
 * Verify processor calls
 * Enable or ignore particular tests
 * Tag tests
-* Check visual coverage in Studio
 * Generate coverage reports
 
 You can create, design, and run MUnit tests with the integration MUnit has in Anypoint Studio and Anypoint Code Builder.
