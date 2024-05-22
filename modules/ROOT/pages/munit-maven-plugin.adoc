@@ -15,7 +15,7 @@ The following configurations to the `pom.xml` or `settings.xml` files of your Ma
 
 You must have the `<munit.version>` property in your pom.xml to set up MUnit Maven Plugin.
 
-* Enable the MUnit Maven plugin in your `pom.xml` file:
+* Enable MUnit Maven Plugin in your `pom.xml` file:
 +
 .MUnit Maven Plugin
 [source,xml,linenums]
@@ -105,9 +105,9 @@ MUnit has Surefire support built in. The reports output to `target/surefire-repo
 
 You can declare the MUnit plugin in a parent `pom.xml` file and every child project under this file can reference this definition.
 
-To configure the MUnit Maven plugin in a parent-child POM relationship, include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file.
+To configure MUnit Maven Plugin in a parent-child POM relationship, include the MUnit plugin declaration in the `<pluginManagement>` section of your parent `pom.xml` file.
 
-In the following example, the `pirate-pom` project declares the MUnit Maven plugin in its plugin management section. This section also defines a global configuration that each child under this parent can reference, override, or even ignore.
+In the following example, the `pirate-pom` project declares MUnit Maven Plugin in its plugin management section. This section also defines a global configuration that each child under this parent can reference, override, or even ignore.
 
 [source,xml,linenums]
 ----
@@ -289,7 +289,7 @@ The following example overrides the console coverage report from its parent POM 
 
 == Set Up Coverage
 
-The following configurations only apply when you execute your MUnit tests using the Maven plugin. They don't apply when running tests from Studio. See xref:coverage-maven-concept.adoc[Using Coverage in Maven] for more information.
+The following configurations only apply when you execute your MUnit tests using the Maven plugin. They don't apply when running tests from Studio. See xref:coverage-maven-concept.adoc[Using Coverage in Maven] for additional information.
 
 include::page$coverage-maven-concept.adoc[tags=coverage-report;!report-types,leveloffset=+1]
 
@@ -312,7 +312,7 @@ The plugin selects the ports from the range: `[40000,50000]`
 
 [CAUTION]
 --
-Dynamic Ports feature is only available as part of the MUnit Maven Plugin. This feature does not work when running tests from inside Anypoint Studio.
+Dynamic Ports feature is only available as part of the MUnit Maven Plugin. This feature does not work when running tests in Anypoint Studio.
 --
 
 === Enable Dynamic Ports
@@ -446,7 +446,7 @@ You can leverage this feature by adding naming conventions to your MUnit Test su
 
 === Run Specific MUnit Tests
 
-In the same way that you instruct MUnit to run one test suite, you can also configure it to run a specific test inside that test suite. You must use the property `munit.test` with the addition of the special character `#` to append the test name:
+In the same way that you instruct MUnit to run one test suite, you can also configure it to run a specific test in that test suite. You must use the property `munit.test` with the addition of the special character `#` to append the test name:
 
 [source,console]
 ----
@@ -460,7 +460,7 @@ It also accepts regular expressions. The expression is applied to the attribute 
 mvn clean test -Dmunit.test=.*my-test.*#.*test-scenario-1.*
 ----
 
-MUnit flags the tests inside the MUnit Test Suite that don't match the regular expression as *ignored*.
+MUnit flags the tests in the MUnit Test Suite that don't match the regular expression as *ignored*.
 
 You can also configure this from the `pom.xml` configuration:
 
@@ -505,7 +505,7 @@ You can also configure this from the `pom.xml` configuration:
 </plugins>
 ----
 
-You can specify more than one tag by separating them using a comma.
+You can specify more than one tag by separating them with a comma.
 
 === Skip All Tests
 
@@ -553,7 +553,7 @@ MUnit allows you to skip the rest of the tests if one test suite fails:
 </plugins>
 ----
 
-If not specified, this value is `false` by default.
+If not specified, it's default value is `false`.
 
 [[specify-runtime-product]]
 == Specify the Runtime Product
@@ -696,7 +696,7 @@ If you must define specific system variables to run your MUnit test successfully
 
 Depending on the execution context, the system property values can vary. When referencing these properties, you must override their value to enforce test reproducibility.
 
-You can do so using the ­`-D` argument when running MUnit with Maven. Variables passed with the `-D` argument take full priority over any other property. For example:
+You can do so by using the ­`-D` argument when running MUnit with Maven. Variables passed with the `-D` argument take full priority over any other property. For example:
 
 [source]
 ----
