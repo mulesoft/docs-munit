@@ -158,7 +158,7 @@ MUnit Coverage Summary
  * Flow: file2.xml -> file2Flow1 coverage is below defined limit. Required: 50.0% - Current: 00.00% <1>
 ====================================================================================
 ----
-<1> Warning detailing which coverage level is not met, and where it happens.
+<1> Warning detailing which coverage level isn't met, and where it happens.
 
 == Ignore a Flow or a File
 
