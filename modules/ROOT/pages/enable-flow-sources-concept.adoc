@@ -53,4 +53,4 @@ For MUnit to be able to invoke that listener, you must enable the `http-example-
 If the `{flow_name}` value isn't listed as an enabled flow source, your MUnit test fails because it can't initialize the HTTP listener configuration.
 
 MUnit starts flow sources at the beginning of the test and stops them at the end of the test. Flow sources aren't executed during the before-suite/before-test, nor during the after-test/after-suite. +
-See xref:before-after-scopes-reference.adoc[Before/After scopes] for more information.
+See xref:before-after-scopes-reference.adoc[Before/After scopes] for additional information.
