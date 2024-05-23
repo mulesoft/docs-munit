@@ -70,7 +70,7 @@ MUnit Coverage offers four types of reports:
 The console report prints in the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
 
 * HTML report +
-The HTML report shows the same information as the console report but it's formatted to fit any web browser. It's available in the `${application.path}/target/site/munit/coverage/` path.
+The HTML report shows the same information as the console report but is formatted to fit any web browser. It's available in the `${application.path}/target/site/munit/coverage/` path.
 
 * JSON report +
 The JSON report shows the same information as the HTML report but in a JSON format. It's available in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.
