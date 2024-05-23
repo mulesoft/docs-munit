@@ -424,7 +424,7 @@ mvn clean test
 
 === Run a Specific MUnit Test Suite
 
-By using the property `munit.test`, you can instruct the MUnit Maven plugin to run on certain tests that belong to a specific test suite:
+By using the property `munit.test`, you can instruct the MUnit Maven plugin to run certain tests that belong to a specific test suite:
 
 [source,maven,linenums]
 ----
