@@ -73,7 +73,7 @@ The console report prints in the console. It works with the summary report and s
 The HTML report shows the same information as the console report but is formatted to fit any web browser. It's available in the `${application.path}/target/site/munit/coverage/` path.
 
 * JSON report +
-The JSON report shows the same information as the HTML report but in a JSON format. It's available in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.
+The JSON report provides the same information as the HTML report but in a JSON format. It's available at `${application.path}/target/site/munit/coverage/munit-coverage.json`.
 
 * SONAR report +
 The SONAR report shows the same information as the HTML report, in a SonarQube format.
