@@ -52,7 +52,7 @@ The following configurations apply if you execute your MUnit tests using the Mav
 
 == Coverage Report Types
 
-When enabling MUnit Coverage, you see a summary report in the console:
+When you enable MUnit Coverage, the console displays a summary report.
 
 [source,console]
 ----
