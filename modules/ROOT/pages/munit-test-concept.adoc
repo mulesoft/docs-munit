@@ -102,7 +102,6 @@ Three optional scopes divide MUnit tests:
 
 .A Studio representation of the MUnit Test
 image::munit-test-concept-9c736.png[munit-test]
-// There's no UI to create this representation in Anypoint Code Builder.
 
 === MUnit Test Reference
 
