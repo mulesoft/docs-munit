@@ -560,8 +560,8 @@ If not specified, it's default value is `false`.
 
 You can specify the type of runtime in which the applications you test run. Accepted values are:
 
-* `MULE` for the community edition.
-* `MULE_EE` for the enterprise edition.
+* `MULE` for the Mule Kernel (formerly called Mule Community Edition)
+* `MULE_EE` for the Mule Enterprise Edition
 
 [source,xml,linenums]
 ----
@@ -820,8 +820,8 @@ To modify the Mule runtime version used to run your MUnit tests, see xref:runtim
 |String
 |Type of runtime. Expected values are:
 
-* `MULE` for the community edition
-* `MULE_EE` for the enterprise edition.
+* `MULE` for the Mule Kernel (formerly called Mule Community Edition)
+* `MULE_EE` for the Mule Enterprise Edition
 
 By default, this value comes from the `requiredProduct` parameter in the `mule-artifact.json` file.
 
