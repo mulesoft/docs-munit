@@ -7,7 +7,7 @@ endif::[]
 
 // tag::coverage-report[]
 
-Since MUnit 2.x, the coverage report goal is integrated with the Maven reporting section. MUnit generates Coverage Reports during the Maven `site` lifecycle, during the `coverage-report` goal.
+From MUnit 2.x and later, the coverage report goal is integrated with the Maven reporting section. MUnit generates coverage reports during the Maven `site` lifecycle, during the `coverage-report` goal.
 
 The following configurations apply if you execute your MUnit tests using the Maven plugin. They don't apply when running tests from Anypoint Code Builder or Anypoint Studio.
 
@@ -43,7 +43,7 @@ The following configurations apply if you execute your MUnit tests using the Mav
                 <format>console</format>
                 <format>html</format>
             </formats>
-        </coverage>
+        </>
     </configuration>
 </plugin>
 ----
@@ -144,7 +144,7 @@ To define the required coverage levels:
 <1> Each value represents a percentage. +
 If a percentage isn't defined, it defaults to *-1*, which indicates that no requirements are defined for said level so the build doesn't fail due to low coverage.
 
-If you define coverage levels but set the property `failBuild` to `false`, and then the levels aren't reached, a warning shows up in the MUnit coverage summary:
+If you define coverage levels but set the property `failBuild` to `false`, and then the levels aren't reached, a warning shows up in the MUnit Coverage summary:
 
 [source,console]
 ----
