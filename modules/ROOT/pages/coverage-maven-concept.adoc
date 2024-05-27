@@ -43,7 +43,7 @@ The following configurations apply if you execute your MUnit tests using the Mav
                 <format>console</format>
                 <format>html</format>
             </formats>
-        </>
+        </coverage>
     </configuration>
 </plugin>
 ----
