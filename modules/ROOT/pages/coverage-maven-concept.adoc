@@ -3,13 +3,13 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-partial:
+:page-deployment-options: acb-ide, studio-ide
 
 // tag::coverage-report[]
 
-Since MUnit 2.x, the coverage report goal is integrated with the maven reporting section. Coverage Reports are generated during Maven's `site` lifecycle, during the `coverage-report` goal.
+From MUnit 2.x and later, the coverage report goal is integrated with the Maven reporting section. MUnit generates coverage reports during the Maven `site` lifecycle, during the `coverage-report` goal.
 
-The following configurations apply only when you execute your MUnit tests using the Maven plugin. They do not apply when running tests from Studio. +
-To run coverage reports in Studio see xref:coverage-studio-concept.adoc[Using Coverage in Studio].
+The following configurations apply if you execute your MUnit tests using the Maven plugin. They don't apply when running tests from Anypoint Code Builder or Anypoint Studio.
 
 .MUnit Coverage - Sample Maven configuration
 [source,xml,linenums]
@@ -52,7 +52,7 @@ To run coverage reports in Studio see xref:coverage-studio-concept.adoc[Using Co
 
 == Coverage Report Types
 
-When enabling MUnit Coverage, you see a summary report in the console. By default, no other action is taken:
+When you enable MUnit Coverage, the console displays a summary report.
 
 [source,console]
 ----
@@ -67,12 +67,16 @@ MUnit Coverage Summary
 MUnit Coverage offers four types of reports:
 
 * Console report +
-The console report is printed to the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
+The console report prints in the console. It works with the summary report and shows an overview of the MUnit run, with a count of all resources, flows, and processors, as well as the overall application coverage level, and warnings and errors if any.
+
 * HTML report +
-The HTML report shows the same information as the console report, but formatted to fit any web browser. It is available in the `${application.path}/target/site/munit/coverage/` path.+
-* JSON report
-The JSON report shows the same information as the HTML report, but in a JSON format. It is available in the `${application.path}/target/site/munit/coverage/munit-coverage.json` path.+
-* The SONAR report shows the same information as the HTML report, in a SonarQube format. +
+The HTML report shows the same information as the console report but is formatted to fit any web browser. It's available in the `${application.path}/target/site/munit/coverage/` path.
+
+* JSON report +
+The JSON report provides the same information as the HTML report but in a JSON format. It's available at `${application.path}/target/site/munit/coverage/munit-coverage.json`.
+
+* SONAR report +
+The SONAR report shows the same information as the HTML report, in a SonarQube format.
 
 To enable the report generation, add the following configuration:
 
@@ -97,7 +101,7 @@ To enable the report generation, add the following configuration:
 
 You can choose to have either none, one, or all the report types added to your configuration.
 
-To configure, for example, the JSON report generation, you must to add the following configuration to your `pom.xml` file:
+To configure, for example, the JSON report generation, you must add the following configuration to your `pom.xml` file:
 
 [source,xml,linenums]
 ----
@@ -114,12 +118,12 @@ To configure, for example, the JSON report generation, you must to add the follo
 
 == Set up a Minimum Coverage Level
 
-One of the features of MUnit Coverage is to fail the build if a certain coverage level is not reached.
+One of the features of MUnit Coverage is to fail the build if a certain coverage level isn't reached.
 
 MUnit Coverage handles three different levels:
 
 * *Application*: The overall coverage of all your application.
-* *Resource*: The coverage level of each individual Mule configuration file.
+* *Resource*: The coverage level of each Mule configuration file.
 * *Flow*: The coverage of event processors in each flow.
 
 To define the required coverage levels:
@@ -138,9 +142,9 @@ To define the required coverage levels:
 ----
 
 <1> Each value represents a percentage. +
-If a percentage is not defined, it defaults to *-1*, which indicates that no requirements are defined for said level so the build will not fail due to low coverage.
+If a percentage isn't defined, it defaults to *-1*, which indicates that no requirements are defined for said level so the build doesn't fail due to low coverage.
 
-If you define coverage levels but set the property `failBuild` to *false*, and then the levels are not reached, a warning shows up in the MUnit coverage summary:
+If you define coverage levels but set the property `failBuild` to `false`, and then the levels aren't reached, a warning shows up in the MUnit Coverage summary:
 
 [source,console]
 ----
@@ -154,19 +158,19 @@ MUnit Coverage Summary
  * Flow: file2.xml -> file2Flow1 coverage is below defined limit. Required: 50.0% - Current: 00.00% <1>
 ====================================================================================
 ----
-<1> Warning detailing which coverage level was not met, and where it happened.
+<1> Warning detailing which coverage level isn't met, and where it happens.
 
-== Ignore a flow or a file
+== Ignore a Flow or a File
 
-Another feature is the ability to ignore either a flow or a file. This way, the ignored resource:
+You can also ignore a flow or a file. This way, the ignored resource:
 
 * Does not count as coverage data.
 * Does not affect the overall number of message processors.
-* Does not cause a build to fail if the flow is not tested or if the flow does not reach coverage metrics.
+* Does not cause a build to fail if the flow isn't tested or if the flow doesn't reach coverage metrics.
 
 To ignore flows and files:
 
-.MUnit Coverage - Ignore both flows and files
+.MUnit Coverage - Ignore flows and files
 [source,xml,linenums]
 ----
 <coverage>
@@ -198,3 +202,4 @@ To ignore flows and files:
 == See Also
 
 * xref:munit-coverage-report.adoc[Coverage Report]
+* xref:coverage-studio-concept.adoc[].
