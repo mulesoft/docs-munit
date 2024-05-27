@@ -55,6 +55,7 @@ Each module has its dependency:
 
 == See Also
 
-* xref:event-processors.adoc[MUnit Event Processors]
-* xref:munit-in-studio.adoc[]
-* xref:munit-in-acb.adoc[]
+* xref:munit-test-concept.adoc[]
+* xref:munit-cookbook.adoc[]
+* xref:studio::test-with-munit-in-studio.adoc[]
+* xref:anypoint-code-builder::int-test-munit.adoc[]
