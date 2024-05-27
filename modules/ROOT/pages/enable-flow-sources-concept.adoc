@@ -2,14 +2,15 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 :keywords: munit, test, flow sources
 :flow_name: http-example-flow
 :port: 1234
 :payload: 'Hello World!'
 
-The Enable Flow Sources element within the MUnit test tells MUnit which flow sources to load and execute for the test.
+The `Enable Flow Sources` element within the MUnit test tells MUnit which flow sources to load and execute for the test.
 
-By default, MUnit does not start any of the event sources (flow sources such as triggers, and listeners). You must configure which flow sources must start for your tests.
+By default, MUnit doesn't start any of the event sources (flow sources such as triggers and listeners). You must configure which flow sources must start for your tests.
 
 Assume that your application has a flow with an HTTP listener that returns a specific payload:
 
@@ -25,7 +26,7 @@ Assume that your application has a flow with an HTTP listener that returns a spe
 </flow>
 ----
 
-For MUnit to be able to invoke that listener you must enable the `http-example-flow` in your `enable-flow-source` property within your MUnit test:
+For MUnit to be able to invoke that listener, you must enable the `http-example-flow` in your `enable-flow-source` property within your MUnit test:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
@@ -49,16 +50,7 @@ For MUnit to be able to invoke that listener you must enable the `http-example-f
 </munit:test>
 ----
 
-If the `{flow_name}` value is not listed as an enabled flow source, your MUnit test fails because it cannot initialize the HTTP listener configuration.
+If the `{flow_name}` value isn't listed as an enabled flow source, your MUnit test fails because it can't initialize the HTTP listener configuration.
 
-MUnit starts flow sources at the beginning of the test, and stops them at the end of the test. Flow sources are not executed during the before-suite/before-test, nor during the after-test/after-suite. +
-See xref:before-after-scopes-reference.adoc[Before/After scopes] for more information.
-
-== Enable Flow Sources from Anypoint Studio
-
-You can define flow sources using the *Mule Properties* view of your MUnit test in Studio:
-
-image::enable-flow-sources-concept.png["Flow sources defined using the Mule Properties view in Studio."]
-
-. Click *Add*.
-. Select the name of the flow you want to enable from the *Name of the flow* drop-down menu.
+MUnit starts flow sources at the beginning of the test and stops them at the end of the test. Flow sources aren't executed during the before-suite/before-test, nor during the after-test/after-suite. +
+See xref:before-after-scopes-reference.adoc[Before/After scopes] for additional information.
