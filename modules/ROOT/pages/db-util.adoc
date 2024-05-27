@@ -1,17 +1,20 @@
-= Database
+= Installing a Database Server
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-database-server.adoc
+:page-deployment-options: acb-ide, studio-ide
 
-To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You could also have a dedicated external database server for testing, but your Maven project would not be portable -- a third party would need to install the testing database server to compile your project.
+To test a piece of code that connects with a database server, you must install a database server in your local environment to run the tests. You can also have a dedicated external database server for testing, but your Maven project can't be portable. If so, a third party must install the testing database server to compile your project.
 
 To make it easier for you to test database connections, MUnit allows you to implement a database server in your local environment.
 
 == Install the MUnit DB Server Module
 
-. From Anypoint Studio, go to the *Mule Palette* and *Search in Exchange...*.
-. In the search bar look for *MUnit Utils Database Server*, and add the module to your project.
+To install the MUnit DB Server Module, you must:
+
+. Look for the *MUnit Utils Database Server* module in Exchange.
+. Add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -27,7 +30,7 @@ To make it easier for you to test database connections, MUnit allows you to impl
 +
 The MUnit DB server artifact in your `pom` file must have the `test` scope.
 . The `h2` dependency used for the database is a shared library. +
-You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in the `mule-maven-plugin`.
+You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in `mule-maven-plugin`.
 +
 [source,xml,linenums]
 ----
@@ -71,10 +74,10 @@ You must add the dependency to your `pom.xml` file and list it as a `sharedLibra
 |Defines the name of the in-memory DB.
 
 | `sqlFile`
-|Specifies the path of the SQL file that defines the DB structure/contents. This parameter is used to create the DB at startup. See the <<db-structure-sql,Defining the DB Structure from an SQL File>> section for more information.
+|Specifies the path of the SQL file that defines the DB structure/contents. Use this parameter to create the DB at startup. See the <<db-structure-sql,Defining the DB Structure from an SQL File>> section for additional information.
 
 | `csv`
-|Specifies the path of the-comma separated file used to define the DB structure/contents. This parameter is used to create the DB at startup. See <<db-structure-csv,Defining the DB Structure from a CSV File>> section for more information.
+|Specifies the path of the comma-separated file used to define the DB structure/contents. Use this parameter to create the DB at startup. See <<db-structure-csv,Defining the DB Structure from a CSV File>> section for additional information.
 
 | `connectionStringParameters`
 | Defines the connection string for your database. You can concatenate the parameters with a semicolon.
@@ -83,12 +86,12 @@ You must add the dependency to your `pom.xml` file and list it as a `sharedLibra
 
 == Define the DB Structure
 
-There are two different ways to define the structure and content of your database:
+You can define the structure and content of your database in two different ways:
 
 * SQL
 * CSV
 
-The MUnit DB server is based on H2. Complex structures, index and join commands may not work properly.
+The MUnit DB server is based on H2. Complex structures, index and join commands can present issues.
 
 [[db-structure-sql]]
 === Defining the DB Structure from an SQL File
@@ -107,8 +110,8 @@ To define the DB structure and content from an SQL file, you must provide a vali
 
 To define your DB structure based on a CSV file:
 
-* The name of the table is the name of the file (in the example below, `customers`).
-* The name of the columns are the headers of your CSV file.
+* The name of the table is the name of the file (in the following example, `customers`).
+* The names of the columns are the headers of your CSV file.
 
 [source,xml,linenums]
 ----
@@ -136,7 +139,7 @@ The DB server utility has two processors to interact with your DB server:
 
 The MUnit DB Server allows you to validate that the results of a query are as expected.
 
-To do this, you use the `validate-that` operation. Set the `results` property to CSV with rows separated by a newline character (`\n`), as shown below.
+To do this, you use the `validate-that` operation. Set the `results` property to CSV with rows separated by a newline character (`\n`), as follows:
 
 [source,xml,linenums]
 ----
@@ -146,9 +149,9 @@ query="SELECT * FROM jobtitlelookup WHERE JOBTITLE='Developer';" returns="&quot;
 
 === Execute
 
-MUnit DB Server enables you to execute instructions to the in-memory databases so that you can add or remove registries before a test and verify that your data was stored correctly.
+With MUnit DB Server, you can execute instructions to the in-memory databases to add or remove registries before a test and verify that your data is correctly stored.
 
-Use a DB Server connector with the `execute` operation to insert the new values to the table (`Culinary Team Member,10,HIR`), then use another DB Server connector with an `execute query` operation to retrieve all values from the table (including the newly added ones) and check the payload using a logger component to store the payload:
+Use a DB Server connector with the `execute` operation to insert the new values to the table (`Culinary Team Member,10,HIR`). Then use another DB Server connector with an `execute query` operation to retrieve all values from the table (including the newly added ones). Finally, check the payload using a logger component to store the payload:
 
 [source,xml,linenums]
 ----
