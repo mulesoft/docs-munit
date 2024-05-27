@@ -3,10 +3,11 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-suite.adoc, munit-test-reference.adoc
+:page-deployment-options: acb-ide, studio-ide
 
 == MUnit Test Suite
 
-The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as you need. Each MUnit test suite file is a collection of MUnit tests, and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as needed. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
@@ -14,7 +15,7 @@ An MUnit test suite can contain any combination of the following components:
 * Before/After Tests
 * MUnit tests
 
-Each MUnit test suite is, behind the scenes, no different than a Mule configuration file. You can use several of the Mule top level elements such as flow, sub-flow, and scripts.
+Each MUnit test suite is similar to a Mule configuration file. You can use several of the Mule top-level elements such as flow, sub-flow, and scripts.
 
 === MUnit Configuration
 
@@ -51,8 +52,7 @@ To ignore a whole suite from running, you can use the `ignore` attribute of the 
 
 ==== Minimum Mule Version
 
-To specify that a suite should run if the Mule version that is equal or newer than a specific version, use the
-`minMuleVersion` attribute of the configuration:
+To specify that a suite must run if the Mule version is equal to or newer than a specific version, use the `minMuleVersion` attribute of the configuration:
 
 [source,xml]
 ----
@@ -62,9 +62,9 @@ To specify that a suite should run if the Mule version that is equal or newer th
 [[munit-test]]
 == MUnit Test
 
-An MUnit test is the basic processor of an MUnit test suite. It represents each test scenario you want to try.
+An MUnit test is the basic processor of an MUnit test suite and it represents the scenario to test.
 
-The MUnit test is divided in three scopes:
+Three optional scopes divide MUnit tests:
 
 [%header,cols="20,80"]
 |===
@@ -79,8 +79,6 @@ The MUnit test is divided in three scopes:
 | Validation
 | The validation scope contains all the validations for the results of the execution scope.
 |===
-
-These scopes are optional.
 
 [source,xml,linenums]
 ----
@@ -112,41 +110,41 @@ image::munit-test-concept-9c736.png[munit-test]
 |Name |Description
 
 |`name`
-| Defines the name of the test. The name must be unique inside the test suite. +
+| Defines the name of the test. The name must be unique in the test suite. +
 This attribute is mandatory.
 
 |`description`
-|Describes the scenario being tested.
+|Describes the scenario to test.
 
 |`ignore`
-|Defines if the test should be ignored. If not present, the test is not ignored.
+|Defines if the test must be ignored. If not present, the test isn't ignored.
 
 |`tags`
-|Comma separated list of tags to assign to the test.
+|Comma-separated list of tags to assign to the test.
 
 |`expectedErrorType`
-|Defines the error Type that should be received after the execution of this test.
+|Defines the error Type to receive after executing the test.
 
 |`expectedException`
-|Defines the exception that should be received after the execution of this test.
+|Defines the exception to receive after executing the test.
 
 |`expectedErrorDescription`
-|Defines the error description that should be received after the execution of this test.
+|Defines the error description to receive after executing the test.
 
 |`timeOut`
-|Defines maximum time in milliseconds that the test can run before failing.
+|Defines the maximum time in milliseconds that the test can run before failing.
 
 |===
 
 ==== MUnit Test Description Attribute
 
-In MUnit, you must write a description for your test. Ideally, you should write a useful, representative description of the scenario you are testing. This description displays in the test console before running the test, and also in the reports. The more representative the description, the easier to read and troubleshoot any failures.
+In MUnit, you must write a description for your test. The description must be useful and representative of the tested scenario. This description displays in the test console before running the test, and also in the reports. The more representative the description, the easier to read and troubleshoot any failures.
 
 ==== Ignore a Test
 
-There may be scenarios where you need to shut down a test. Whether this be because the test is failing or because it has inconvenient side effects. MUnit allows you to ignore a specific test so that you don't have to manually comment out the code.
+You can find scenarios where you must shut down a test. Whether the test is failing or it has inconvenient side effects, you can ignore a specific test so that you don't manually comment out the code.
 
-You can ignore any of your tests by adding the ignore boolean to the test definition:
+You can ignore any of your tests by adding the `ignore` boolean to the test definition:
 
 [source,xml,linenums]
 ----
@@ -158,13 +156,9 @@ You can ignore any of your tests by adding the ignore boolean to the test defini
 
 The default value for the ignore attribute is `false`.
 
-In Anypoint Studio, you can check the *Ignore Test* option.
+You can also use expressions to ignore a test based on your current Mule version or on your current operating system:
 
-image::munit-test-concept-de4c9.png[ignore-test]
-
-You can also use expressions to ignore a test based on your current mule version or on your current operating system:
-
-.Ignore a Test Based on Operating System
+.Ignore a Test Based on the Operating System
 [source,xml]
 ----
 <munit:test name="linux-ignore-test" ignore="#[Munit::osEqualTo('Mac OS X')]">
@@ -176,12 +170,11 @@ You can also use expressions to ignore a test based on your current mule version
 <munit:test name="mule-version-ignore-test" ignore="#[Munit::muleVersionPriorTo('4.1.4')]">
 ----
 
-This test will be ignored if the Mule version is prior to `4.1.4`. Other possible functions are `muleVersionEqualTo` and
-`muleVersionNewerThan`.
+MUnit ignores this test if the Mule version is earlier than `4.1.4`. Other possible functions are `muleVersionEqualTo` and `muleVersionNewerThan`.
 
 ==== Test TimeOut Attribute
 
-Each MUnit test automatically fails if it takes more than 2 minutes to complete. Use the `timeOut` attribute to set a custom maximum time --in milliseconds-- that the test can run before failing:
+An MUnit test automatically fails if it takes more than 2 minutes to complete. Use the `timeOut` attribute to set a custom maximum time --in milliseconds-- that the test can run before failing:
 
 [source,xml,linenums]
 ----
@@ -195,7 +188,7 @@ Each MUnit test automatically fails if it takes more than 2 minutes to complete.
 
 ==== Test Tag Attribute
 
-MUnit allows you to tag your tests, so you can choose to run tests under a specific tag. For example:
+You can tag your tests and choose to run tests under a specific tag. For example:
 
 [source,xml,linenums]
 ----
@@ -208,12 +201,12 @@ MUnit allows you to tag your tests, so you can choose to run tests under a speci
 </munit:test>
 ----
 
-.In Anypoint Studio, you can define tags in the proper field.
-image::munit-test-concept-c2d9f.png[test-tags]
+.In Anypoint Studio, you can define tags in the *Tags* field.
+image::munit-test-concept-c2d9f.png["Tags field highlighted in Studio."]
 
 ==== MUnit Test Expected Error and Exception Attributes
 
-Assume that you want to validate that the flow or sub-flow you are testing fails and throws a specific error. MUnit allows you to add the attributes `expectedErrorType`, `expectException`, and `expectedErrorDescription`, as follows:
+If you want to validate that the flow or sub-flow you're testing fails and throws a specific error, you can add the attributes `expectedErrorType`, `expectException`, and `expectedErrorDescription` as follows:
 
 [source,xml,linenums]
 ----
@@ -227,10 +220,10 @@ Assume that you want to validate that the flow or sub-flow you are testing fails
 ----
 
 .A visual representation on Anypoint Studio
-image::munit-test-concept-e7280.png[]
+image::munit-test-concept-e7280.png["Failure Expectation section highlighted in Studio."]
 
-* The `expectedErrorType` attribute expects an error ID defined inside the application being tested. +
-This attribute allows you to validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test does not run.
+* The `expectedErrorType` attribute expects an error ID defined in the tested application. +
+With this attribute, you can validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test doesn't run.
 +
 [source,xml,linenums]
 ----
@@ -241,13 +234,13 @@ This attribute allows you to validate that a defined error type in your applicat
 </munit:test>
 ----
 +
-This Error Type test expects that an FTP operation will throw an `FTP:ILLEGAL_PATH` error. +
-If none of your flows are using an FTP connector, then the error type is not defined within your application and the test will not run.
+This Error Type test expects that an FTP operation throws an `FTP:ILLEGAL_PATH` error. +
+If none of your flows are using an FTP connector, then the error type isn't defined within your application and the test doesn't run.
 +
-ErrorTypes that belong to the Mule Runtime do not need to be typified. For example, `MULE:RETRY_EXHAUSTED` can be defined as simply `RETRY_EXHAUSTED`.
+You mustn't typify `ErrorTypes` that belong to the Mule Runtime. For example, you can define `MULE:RETRY_EXHAUSTED` as `RETRY_EXHAUSTED`.
 
 * The attribute `expectException` expects a literal exception class name. +
-You must provide the canonical class name of the exception that you expect. MUnit then validates that the underlying cause for the exception thrown is of the exact same type of the class name you are expecting.
+You must provide the canonical class name of the exception that you expect. MUnit then validates that the underlying cause for the exception thrown is of the same type of the class name you're expecting.
 +
 [source,xml,linenums]
 ----
@@ -260,8 +253,8 @@ You must provide the canonical class name of the exception that you expect. MUni
 +
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 
-* The attribute expectedErrorDescription expects an error description. +
-This attribute allows you to validate that an error is thrown and this error has description that is equals or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
+* The attribute `expectedErrorDescription` expects an error description. +
+With this attribute, you can validate that an error is thrown and the error has a description that is equal to or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
 +
 [source,xml,linenums]
 ----
@@ -274,11 +267,11 @@ This attribute allows you to validate that an error is thrown and this error has
 
 == Before and After Scopes
 
-As with other testing frameworks, MUnit provides a set of scopes that allow you to add processing or actions to run before and/or after the entire MUnit test or MUnit test suite execute:
+As with other testing frameworks, MUnit provides a set of scopes so you can add processing or actions to run before and after the entire MUnit test or MUnit test suite executes:
 
 * Before and After Suite Scopes.
 * Before and After Test Scopes.
 
-The ID field for each component must be unique across all your application. The before and after scopes cannot share the same name between them, nor have the same name as any flow in your application.
+The ID field for each component must be unique across all your applications. The before and after scopes can't share the same name, nor have the same name as any flow in your application.
 
-See xref:before-after-scopes-reference.adoc[Before/After scopes] reference for more information.
+See xref:before-after-scopes-reference.adoc[] reference for additional information.
