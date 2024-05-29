@@ -26,7 +26,7 @@ Assume that your application has a flow with an HTTP listener that returns a spe
 </flow>
 ----
 
-For MUnit to be able to invoke that listener, you must enable the `http-example-flow` in your `enable-flow-source` property within your MUnit test:
+For MUnit to invoke that listener, enable the `http-example-flow` in your `enable-flow-source` property within your MUnit test:
 
 [source,xml,linenums,subs="verbatim,attributes"]
 ----
