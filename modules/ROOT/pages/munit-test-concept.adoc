@@ -52,7 +52,7 @@ To ignore a whole suite from running, you can use the `ignore` attribute of the 
 
 ==== Minimum Mule Version
 
-To specify that a suite must run if the Mule version is equal to or newer than a specific version, use the `minMuleVersion` attribute of the configuration:
+Specify the minimum required Mule version to run a test suite by defining the `minMuleVersion` attribute of the configuration:
 
 [source,xml]
 ----
