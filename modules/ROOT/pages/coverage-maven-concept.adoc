@@ -142,7 +142,7 @@ To define the required coverage levels:
 ----
 
 <1> Each value represents a percentage. +
-If a percentage isn't defined, it defaults to *-1*, which indicates that no requirements are defined for said level so the build doesn't fail due to low coverage.
+If a percentage isn't defined, it defaults to *-1*, which sets no requirements for said level so the build doesn't fail due to low coverage.
 
 If you define coverage levels but set the property `failBuild` to `false`, and then the levels aren't reached, a warning shows up in the MUnit Coverage summary:
 
