@@ -7,7 +7,7 @@ endif::[]
 
 == MUnit Test Suite
 
-The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can have as many MUnit test suite files as needed. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
+The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can use multiple MUnit test suite files. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
 
 An MUnit test suite can contain any combination of the following components:
 
