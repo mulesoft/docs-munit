@@ -144,7 +144,7 @@ MUnit tests require a description. The description must be useful and representa
 
 You can find scenarios where you must shut down a test. Whether the test is failing or it has inconvenient side effects, you can ignore a specific test so that you don't manually comment out the code.
 
-You can ignore any of your tests by adding the `ignore` boolean to the test definition:
+To ignore a test, add the `ignore` boolean to its definition:
 
 [source,xml,linenums]
 ----
