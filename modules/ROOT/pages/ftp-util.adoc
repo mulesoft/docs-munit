@@ -41,7 +41,7 @@ The FTP server module takes the following parameters:
 This value must be unique.
 
 |`port` |Defines the port on which the FTP server listens.
-|`anonymous` | (Boolean) Sets anonymous access to the FTP server. If you set `anonymous` to `true`, you mustn't set a password to access the FTP server when using the `anonymous` username. +
+|`anonymous` | (Boolean) Sets anonymous access to the FTP server. If you set `anonymous` to `true`, don't set a password to access the FTP server when using the `anonymous` username. +
 The default value is `true`.
 
 |`secure` |(Boolean) Defines the FTP protocol. If you set the `secure` parameter to `true`, the server behaves as an SFTP server and connections must be authenticated. If you set the `secure` parameter to `false`, the server behaves as an FTP server and allows either authenticated or anonymous connections. +
