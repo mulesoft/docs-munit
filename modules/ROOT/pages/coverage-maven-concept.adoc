@@ -101,7 +101,7 @@ To enable the report generation, add the following configuration:
 
 You can choose to have either none, one, or all the report types added to your configuration.
 
-To configure, for example, the JSON report generation, you must add the following configuration to your `pom.xml` file:
+To configure, for example, the JSON report generation, add the following configuration to your `pom.xml` file:
 
 [source,xml,linenums]
 ----
