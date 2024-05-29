@@ -138,7 +138,7 @@ This attribute is mandatory.
 
 ==== MUnit Test Description Attribute
 
-In MUnit, you must write a description for your test. The description must be useful and representative of the tested scenario. This description displays in the test console before running the test, and also in the reports. The more representative the description, the easier to read and troubleshoot any failures.
+MUnit tests require a description. The description must be useful and representative of the tested scenario. This description shows in the test console before running the test, and also in the reports. The more representative the description, the easier it is to read and troubleshoot failures.
 
 ==== Ignore a Test
 
