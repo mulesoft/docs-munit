@@ -139,7 +139,7 @@ The DB server utility has two processors to interact with your DB server:
 
 The MUnit DB Server allows you to validate that the results of a query are as expected.
 
-To do this, you use the `validate-that` operation. Set the `results` property to CSV with rows separated by a newline character (`\n`), as follows:
+To validate that the results of a query are as expected, use the `validate-that` operation. Set the `results` property to CSV with rows separated by a newline character (`\n`), as follows:
 
 [source,xml,linenums]
 ----
