@@ -147,7 +147,7 @@ query="SELECT * FROM jobtitlelookup WHERE JOBTITLE='Developer';" returns="&quot;
 
 === Execute
 
-With MUnit DB Server, you can execute instructions to the in-memory databases to add or remove registries before a test and verify that your data is correctly stored.
+Execute instructions for the in-memory databases to add or remove registries before a test and verify that your data is correctly stored using MUnit DB Server.
 
 Use a DB Server connector with the `execute` operation to insert the new values to the table (`Culinary Team Member,10,HIR`). Then use another DB Server connector with an `execute query` operation to retrieve all values from the table (including the newly added ones). Finally, check the payload using a logger component to store the payload:
 
