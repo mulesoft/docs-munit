@@ -57,7 +57,7 @@ The MUnit FTP server artifact in your POM file must have the `test` scope.
 
 == Define the FTP Server
 
-To define the FTP server, you must change the FTP server attributes as follows:
+To define the FTP server, change the FTP server attributes as follows:
 
 [source,xml,linenums]
 <ftpserver:config name="MUnit_FTP_Server_Config">
