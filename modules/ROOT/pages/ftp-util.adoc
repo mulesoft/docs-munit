@@ -5,7 +5,7 @@ endif::[]
 :page-aliases: munit-ftp-server.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You can also have a dedicated external FTP server for testing, but your Maven project can't be portable. A third party must install the testing FTP server to compile your project.
+To test a piece of code that connects with an FTP server, install an FTP server in your local environment to run the tests. You can also use a dedicated external FTP server for testing, but your Maven project can't be portable. A third party must install the testing FTP server to compile your project.
 
 To test the FTP connections, you can implement an FTP server in your local environment with MUnit.
 
