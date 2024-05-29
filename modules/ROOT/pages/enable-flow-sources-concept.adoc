@@ -8,7 +8,7 @@ endif::[]
 :port: 1234
 :payload: 'Hello World!'
 
-The `Enable Flow Sources` element within the MUnit test tells MUnit which flow sources to load and execute for the test.
+The `Enable Flow Sources` element within the MUnit test instructs MUnit which flow sources to load and execute for the test.
 
 By default, MUnit doesn't start any of the event sources (flow sources such as triggers and listeners). You must configure which flow sources must start for your tests.
 
