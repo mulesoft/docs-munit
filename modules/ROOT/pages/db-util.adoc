@@ -30,7 +30,7 @@ To install the MUnit DB Server Module, you must:
 +
 The MUnit DB server artifact in your `pom` file must have the `test` scope.
 . The `h2` dependency used for the database is a shared library. +
-You must add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in `mule-maven-plugin`.
+Add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in `mule-maven-plugin`.
 +
 [source,xml,linenums]
 ----
