@@ -223,7 +223,7 @@ To validate that a flow or sub-flow you're testing fails and throws a specific e
 image::munit-test-concept-e7280.png["Failure Expectation section highlighted in Studio."]
 
 * The `expectedErrorType` attribute expects an error ID defined in the tested application. +
-With this attribute, you can validate that a defined error type in your application is thrown. If you define an `errorType` that does not exist in your application, the test doesn't run.
+This attribute validates that your application throws a defined error type. If you define an `errorType` that does not exist in your application, the test doesn't run.
 +
 [source,xml,linenums]
 ----
