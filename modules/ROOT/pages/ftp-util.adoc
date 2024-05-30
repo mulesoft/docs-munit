@@ -2,7 +2,6 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: munit-ftp-server.adoc
 
 To test a piece of code that connects with an FTP server, you must install an FTP server in your local environment to run the tests. You could also have a dedicated external FTP server for testing, but your Maven project would not be portable -- a third party would need to install the testing FTP server to compile your project.
 
