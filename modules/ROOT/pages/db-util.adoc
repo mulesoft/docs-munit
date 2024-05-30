@@ -11,7 +11,7 @@ To make it easier for you to test database connections, MUnit allows you to impl
 
 == Install the MUnit DB Server Module
 
-To install the MUnit DB Server Module, you must:
+To install the MUnit DB Server Module:
 
 . Look for the *MUnit Utils Database Server* module in Exchange.
 . Add the module to your project:
