@@ -254,7 +254,7 @@ You must provide the canonical class name of the exception that you expect. MUni
 If you define that your test expects an exception and none is thrown, the test fails immediately.
 
 * The attribute `expectedErrorDescription` expects an error description. +
-With this attribute, you can validate that an error is thrown and the error has a description that is equal to or contains the expected error description. If you define that your test expects an error and none is thrown or the error thrown description doesn't match, the test fails immediately.
+This attribute validates that your application throws an error and the error has a description that is equal to or contains the expected error description. If you define that your test expects an error and none is thrown or the error description doesn't match, the test fails immediately.
 +
 [source,xml,linenums]
 ----
