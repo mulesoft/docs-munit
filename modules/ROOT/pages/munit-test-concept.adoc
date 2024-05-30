@@ -206,7 +206,7 @@ image::munit-test-concept-c2d9f.png["Tags field highlighted in Studio."]
 
 ==== MUnit Test Expected Error and Exception Attributes
 
-If you want to validate that the flow or sub-flow you're testing fails and throws a specific error, you can add the attributes `expectedErrorType`, `expectException`, and `expectedErrorDescription` as follows:
+To validate that a flow or sub-flow you're testing fails and throws a specific error, add the `expectedErrorType`, `expectException`, and `expectedErrorDescription` attributes as follows:
 
 [source,xml,linenums]
 ----
