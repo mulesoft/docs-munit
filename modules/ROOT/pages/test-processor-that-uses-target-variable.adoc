@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 When you test a processor that stores its result in a target variable, ensure that the assertions check the content of the stored variable. If you mock the processor, define a value for the target variable.
 

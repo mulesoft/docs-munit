@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :keywords: munit, testing, unit testing
 :page-aliases: spy-processor-concept.adoc
+:page-deployment-options: acb-ide, studio-ide
 
 The *Spy Processor* enables you to spy on what happens before and after an event processor is called. +
 This enables you to validate, for example that a selected Mule Event reaches a specific event processor containing a specific payload or variable.

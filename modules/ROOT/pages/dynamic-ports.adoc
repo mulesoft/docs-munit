@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 The Dynamic Ports global element allows you to bind a free port to a property. It searches for a free port available and can be narrowed to a specific range.
 

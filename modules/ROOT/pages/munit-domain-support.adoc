@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 MUnit allows you to test applications that run referencing a Mule Domain. +
 MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account:

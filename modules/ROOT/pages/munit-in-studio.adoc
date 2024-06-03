@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: studio-ide
 
 MUnit is fully integrated with Anypoint Studio. You can use the Studio graphical interface to:
 
@@ -12,4 +13,6 @@ MUnit is fully integrated with Anypoint Studio. You can use the Studio graphical
 
 == See Also
 
-* xref:munit-scaffold-test-task.adoc[Scaffold a Template for an MUnit Test from an API Specification]
+* xref:munit-scaffold-test-task.adoc[]
+* xref:test-recorder.adoc[]
+

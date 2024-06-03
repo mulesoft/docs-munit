@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 As your tests suites start to get bigger and more complex, it’s a good practice to externalize some parts of the test code, not only so that you can keep the code clean and organized but also to reuse the files that you need to mock for your tests.
 

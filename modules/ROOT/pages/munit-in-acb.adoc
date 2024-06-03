@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide
 
 MUnit is integrated with Anypoint Code Builder and you can:
 
@@ -9,7 +10,3 @@ MUnit is integrated with Anypoint Code Builder and you can:
 * Run your tests
 * View test results
 * Debug your tests
-
-== See Also
-
-* xref:munit-in-studio.adoc[]

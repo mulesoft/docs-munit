@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and later
 :keywords: munit, testing, unit testing
+:page-deployment-options: acb-ide, studio-ide
 
 MUnit matchers are a set of DataWeave functions to define assertion conditions for any value in an expression.
 

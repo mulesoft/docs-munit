@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 Suppose you have a processor inside a `foreach` scope and you want to provide different values on each iteration:
 
