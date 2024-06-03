@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 Assume that you have the following flow that obtains data from an external API and you need to consume it from a test environment when executing your MUnit tests:
 

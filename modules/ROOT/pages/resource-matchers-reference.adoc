@@ -1,4 +1,5 @@
 = Resource Matchers
+:page-deployment-options: acb-ide, studio-ide
 
 == getResourceAsStream(String)
 

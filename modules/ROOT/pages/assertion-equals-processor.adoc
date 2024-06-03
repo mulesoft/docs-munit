@@ -3,6 +3,7 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: assert-equals-processor.adoc
+:page-deployment-options: acb-ide, studio-ide
 
 The Assert Equals processor allows you to run assertions in order to validate the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs.
 

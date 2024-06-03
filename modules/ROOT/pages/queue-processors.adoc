@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing, queue
+:page-deployment-options: acb-ide, studio-ide
 
 The Queue event processors allow you to manage temporary queues during your test runs.
 

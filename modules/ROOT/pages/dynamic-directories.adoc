@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 When managing files and folders during a test, MUnit provides the `munit.temporary.directory` property to reference a temporary directory. You can create files and folders inside this directory to use in your tests.
 

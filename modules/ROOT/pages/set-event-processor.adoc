@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
+:page-deployment-options: acb-ide, studio-ide
 
 The Set Event Processor allows you to define a Mule Event. +
 This message processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.

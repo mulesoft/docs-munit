@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and later
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
+:page-deployment-options: acb-ide, studio-ide
 
 The *Run Custom event processor* enables you to assert the Mule event content against a custom assertion.
 

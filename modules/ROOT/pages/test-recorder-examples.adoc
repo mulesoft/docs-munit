@@ -2,6 +2,7 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: studio-ide
 :page-partial:
 
 The following example shows you how to import to Anypoint Studio an existing project from Anypoint Exchange and then record the flow processing to create a unit test for the flows.

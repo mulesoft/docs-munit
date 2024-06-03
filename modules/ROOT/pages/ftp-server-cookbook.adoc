@@ -1,9 +1,10 @@
-= Configuring FTP Server Utility in an MUnit Test
+= Configuring the FTP Server Utility in an MUnit Test
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
-Assume that you want to test the following Mule application:
+If you want to test the following Mule application:
 
 [source,xml,linenums]
 ----
@@ -31,12 +32,14 @@ ftp.user=max
 ftp.password=munittest
 ----
 
-The username field cannot be empty. If you do not have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to `true`.
+The username field can't be empty. If you don't have a username-password pair, set the username to `anonymous` and don't set any password. By default, the `anonymous` attribute is set to `true`.
 
 == Install the FTP Server
 
-. From Anypoint Studio, go to the *Mule Palette* view and locate *Search in Exchange...*.
-. In the search bar look for *MUnit Utils FTP Server* and add the module to your project:
+To install the FTP server:
+
+. Look for the *MUnit Utils FTP Server* module in Exchange.
+. Add the module to your project:
 +
 [source,xml,linenums]
 ----
@@ -52,33 +55,20 @@ The username field cannot be empty. If you do not have a username-password pair,
 +
 The MUnit FTP server artifact in your POM file must have the `test` scope.
 
-
 == Define the FTP Server
 
-. In your Studio canvas, go to the *Global Elements* tab and select your *MUnit FTP Server Config* element.
-. Click *Edit* and complete the fields:
-+
-[%header%autowidth.spread,cols="a,a"]
-|===
-| Attribute | Value
-| Name | `MUnit_FTP_Server_Config`
-| Port | `${ftp.port}`
-| Username | `${ftp.user}`
-| Password | `${ftp.password}`
-| Secure | `true`
-| homeDir | `${app.home}`
-|===
-+
+To define the FTP server, change the FTP server attributes as follows:
+
 [source,xml,linenums]
-----
 <ftpserver:config name="MUnit_FTP_Server_Config">
     <ftpserver:connection port="${ftp.port}" username="${ftp.user}" password="${ftp.password}" secure="true" homeDir="${app.home}"/>
+----
 </ftpserver:config>
 ----
 
 == Run the Test
 
-After configuring the FTP server you can run the test:
+After configuring the FTP server, you can run the test:
 
 [source,xml,linenums]
 ----
@@ -92,7 +82,7 @@ After configuring the FTP server you can run the test:
 </munit:test>
 ----
 
-This FTP accepts any user, so there is no need to set up a user database or list.
+This FTP accepts any user, so you must not set up a user database or list.
 
 == See Also
 

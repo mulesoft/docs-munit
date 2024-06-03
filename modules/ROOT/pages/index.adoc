@@ -1,13 +1,14 @@
-= Overview
+= MUnit Overview
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :page-aliases: 4.2@mule-runtime::migration-munit-assert-processor-changes.adoc, 4.2@mule-runtime::migration-munit-mock-processor-changes.adoc, 4.2@mule-runtime::migration-munit.adoc, 4.1@mule-runtime::migration-munit-assert-processor-changes.adoc, 4.1@mule-runtime::migration-munit-mock-processor-changes.adoc, 4.1@mule-runtime::migration-munit.adoc
+:page-deployment-options: acb-ide, studio-ide
 
-MUnit is a Mule application testing framework that allows you to easily build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
+Build automated tests for your integrations and APIs with MUnit. MUnit is a Mule application testing framework that provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
 
-MUnit version 3.0 works with all Mule versions since 4.3.
+MUnit version 3.0 and later works with all Mule versions since 4.3.
 
 With MUnit you can:
 
@@ -17,19 +18,18 @@ With MUnit you can:
 * Verify processor calls
 * Enable or ignore particular tests
 * Tag tests
-* Check visual coverage in Studio
 * Generate coverage reports
 
-MUnit is fully integrated with Anypoint Studio, allowing you to create, design and run MUnit tests just like you would Mule applications.
+You can create, design, and run MUnit tests in Anypoint Studio and Anypoint Code Builder.
 
-MUnit is divided in two main sub modules:
+MUnit has two main sub modules:
 
 * MUnit
 * MUnit Tools
 
-Each module has its own dependency:
+Each module has its dependency:
 
-.MUnit Dependencies
+== MUnit Dependencies
 [source,xml,linenums]
 ----
 <dependency>
@@ -41,8 +41,7 @@ Each module has its own dependency:
 </dependency>
 ----
 
-
-.MUnit Tools dependencies
+== MUnit Tools Dependencies
 [source,xml,linenums]
 ----
 <dependency>
@@ -56,4 +55,7 @@ Each module has its own dependency:
 
 == See Also
 
-* xref:event-processors.adoc[MUnit Event Processors]
+* xref:munit-test-concept.adoc[]
+* xref:munit-cookbook.adoc[]
+* xref:studio::test-with-munit-in-studio.adoc[]
+* xref:anypoint-code-builder::int-test-munit.adoc[]

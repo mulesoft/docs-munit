@@ -2,9 +2,9 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:page-deployment-options: acb-ide, studio-ide
 
 Assume that you want to both test the following flow triggered by a Scheduler component and validate that your flow is being triggered correctly:
-
 
 [source,xml]
 ----
