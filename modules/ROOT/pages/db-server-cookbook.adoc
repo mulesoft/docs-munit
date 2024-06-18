@@ -163,5 +163,5 @@ This test validates that the query run in your production code is correct and th
 == See Also
 
 * xref:db-util.adoc[Database Util]
-* xref:anypoint-code-builder::acb-commands.adoc[Add Modules to Your Test in Anypoint Code Builder]
+* xref:anypoint-code-builder::ref-acb-commands.adoc[Add Modules to Your Test in Anypoint Code Builder]
 * xref:studio::add-modules-in-studio-to.adoc[Add Modules to Your Test in Anypoint Studio]
