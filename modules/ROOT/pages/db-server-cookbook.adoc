@@ -100,6 +100,8 @@ The MUnit DB server artifact in your POM file must have the `test` scope.
 </plugin>
 ----
 
+The *h2* dependency enhances MUnit tests by allowing the simulation of database interactions using an in-memory, lightweight, and fast database. This setup ensures tests are both isolated and repeatable.
+
 == Define the MUnit DB Server
 
 Define the database server by creating the *global-configs.xml* file and defining the MUnit DB Server Config element.
