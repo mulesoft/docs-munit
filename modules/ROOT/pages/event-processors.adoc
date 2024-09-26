@@ -2,7 +2,6 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: message-processors.adoc
 :page-deployment-options: acb-ide, studio-ide
 
 MUnit has a set of dedicated event processors to validate, assert, and mock the content and status of the Mule event so you can run automatic tests against your Mule applications.
