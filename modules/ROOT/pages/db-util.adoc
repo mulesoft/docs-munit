@@ -2,7 +2,6 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: munit-database-server.adoc
 :page-deployment-options: acb-ide, studio-ide
 
 To test a piece of code that connects with a database server, install a database server in your local environment to run the tests. You can also use a dedicated external database server for testing, but your Maven project can't be portable. If so, a third party must install the testing database server to compile your project.
