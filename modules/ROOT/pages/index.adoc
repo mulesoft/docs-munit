@@ -61,5 +61,5 @@ Each module has its dependency:
 
 * xref:munit-test-concept.adoc[]
 * xref:munit-cookbook.adoc[]
-* xref:studio::test-with-munit-in-studio.adoc[Testing Your Mule Projects with MUnit in Studio]
+* xref:studio::test-with-munit-in-studio.adoc[Testing Projects with MUnit in Studio]
 * xref:anypoint-code-builder::int-test-munit.adoc[Testing Projects with MUnit in Anypoint Code Builder]
