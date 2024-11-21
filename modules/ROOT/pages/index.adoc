@@ -35,11 +35,13 @@ Each module has its dependency:
 <dependency>
 	<groupId>com.mulesoft.munit</groupId>
 	<artifactId>munit-runner</artifactId>
-	<version>2.3.0</version>
+	<version>LATEST_VERSION</version> //<!--1-->
 	<classifier>mule-plugin</classifier>
 	<scope>test</scope>
 </dependency>
 ----
+[calloutlist]
+.. Check the xref:munit-release-notes.adoc[] to get the *LATEST_VERSION*.
 
 == MUnit Tools Dependencies
 [source,xml,linenums]
@@ -47,11 +49,13 @@ Each module has its dependency:
 <dependency>
 	<groupId>com.mulesoft.munit</groupId>
 	<artifactId>munit-tools</artifactId>
-	<version>2.3.0</version>
+	<version>LATEST_VERSION</version> //<!--1-->
 	<classifier>mule-plugin</classifier>
 	<scope>test</scope>
 </dependency>
 ----
+[calloutlist]
+.. Check the xref:munit-release-notes.adoc[] to get the *LATEST_VERSION*.
 
 == See Also
 
