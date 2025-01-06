@@ -4,6 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
+:page-aliases: example-testing-apikit.adoc, logging-in-munit.adoc, munit-database-server.adoc, munit-examples.adoc, munit-ftp-server.adoc, munit-short-tutorial.adoc, munit-utils.adoc, run-and-wait-scope.adoc, testing-sap.adoc, using-munit-in-anypoint-studio.adoc
 
 MUnit is a Mule application testing framework that allows you to easily build automated tests for your integrations and APIs. It provides a full suite of integration and unit test capabilities, and is fully integrated with Maven and Surefire for integration with your continuous deployment environment.
 
