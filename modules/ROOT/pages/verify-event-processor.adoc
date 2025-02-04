@@ -4,7 +4,6 @@ include::_attributes.adoc[]
 endif::[]
 :version-info: 2.0 and newer
 :keywords: munit, testing, unit testing
-:page-aliases: verify-message-processor.adoc
 :page-deployment-options: acb-ide, studio-ide
 
 The Verify Event processor allows you to verify if a processor was called.
