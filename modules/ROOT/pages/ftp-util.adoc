@@ -13,7 +13,7 @@ To test the FTP connections, you can implement an FTP server in your local envir
 
 To install the MUnit FTP server module:
 
-. Look for the *MUnit Utils FTP Server* module in Exchange.
+. Look for the *MUnit Utils FTP Server* module.
 . Add the module to your project:
 +
 [source,xml,linenums]
