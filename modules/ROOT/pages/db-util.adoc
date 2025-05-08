@@ -61,6 +61,9 @@ Add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in `m
 </plugin>
 ----
 
+[NOTE]
+The *MuleSoft DB Server* module is located at https://repository.mulesoft.org/nexus/content/repositories/releases/com/mulesoft/munit/utils/munit-dbserver-module/[MuleSoft Nexus repository]. Previous versions of this module available at Anypoint Exchange are deprecated.
+
 == Attributes Reference
 
 [%header%autowidth.spread]
