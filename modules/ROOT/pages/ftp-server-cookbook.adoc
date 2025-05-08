@@ -56,7 +56,7 @@ To install the FTP server:
 The MUnit FTP server artifact in your POM file must have the `test` scope.
 
 [NOTE]
-The *MuleSoft FTP Server* module is located at https://repository.mulesoft.org/nexus/content/repositories/releases/com/mulesoft/munit/utils/munit-ftpserver-module/[MuleSoft Nexus repository]. Previous versions of this module available at Anypoint Exchange are deprecated.
+The *MuleSoft FTP Server* module is located at https://repository.mulesoft.org/nexus/content/repositories/releases/com/mulesoft/munit/utils/munit-ftpserver-module/[MuleSoft Nexus repository]. The *MuleSoft FTP Server* module version 3 and later are compatible with Java 17. Previous versions of this module available at Anypoint Exchange are deprecated.
 
 == Define the FTP Server
 
