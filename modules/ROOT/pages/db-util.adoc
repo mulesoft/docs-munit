@@ -13,7 +13,7 @@ To make it easier for you to test database connections, MUnit allows you to impl
 
 To install the MUnit DB Server Module:
 
-. Look for the *MUnit Utils Database Server* module in Exchange.
+. Look for the *MUnit Utils Database Server* module.
 . Add the module to your project in the `pom.xml` file:
 +
 [source,xml,linenums]
@@ -60,6 +60,9 @@ Add the dependency to your `pom.xml` file and list it as a `sharedLibrary` in `m
     </configuration>
 </plugin>
 ----
+
+[NOTE]
+The *MUnit DB Server* module is located at https://repository.mulesoft.org/nexus/content/repositories/releases/com/mulesoft/munit/utils/munit-dbserver-module/[MuleSoft Nexus repository]. The *MUnit DB Server* module version 3 and later is compatible with Java 17. Previous versions of this module available at Anypoint Exchange are deprecated.
 
 == Attributes Reference
 
