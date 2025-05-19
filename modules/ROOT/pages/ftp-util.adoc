@@ -22,12 +22,15 @@ To install the MUnit FTP server module:
 <dependency>
     <groupId>com.mulesoft.munit.utils</groupId>
     <artifactId>munit-ftpserver-module</artifactId>
-    <version>2.0.1</version>
+    <version>LATEST_VERSION</version> //<!--1-->
     <classifier>mule-plugin</classifier>
     <scope>test</scope>
 </dependency>
 ----
 +
+[calloutlist]
+.. Check the https://repository.mulesoft.org/nexus/content/repositories/releases/com/mulesoft/munit/utils/munit-ftpserver-module/[MuleSoft Nexus repository] to get the *LATEST_VERSION*.
+
 The MUnit FTP server artifact in your POM file must have the `test` scope.
 
 [NOTE]
