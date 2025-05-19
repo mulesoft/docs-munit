@@ -38,7 +38,7 @@ The username field can't be empty. If you don't have a username-password pair, s
 
 To install the FTP server:
 
-. Look for the *MUnit Utils FTP Server* module in Exchange.
+. Look for the *MUnit Utils FTP Server* module.
 . Add the module to your project:
 +
 [source,xml,linenums]
@@ -54,6 +54,9 @@ To install the FTP server:
 ----
 +
 The MUnit FTP server artifact in your POM file must have the `test` scope.
+
+[NOTE]
+The *MUnit FTP Server* module is located at https://repository.mulesoft.org/nexus/content/repositories/releases/com/mulesoft/munit/utils/munit-ftpserver-module/[MuleSoft Nexus repository]. The *MUnit FTP Server* module version 3 and later is compatible with Java 17. Previous versions of this module available at Anypoint Exchange are deprecated.
 
 == Define the FTP Server
 

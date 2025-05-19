@@ -359,7 +359,7 @@ import dw::tests::Asserts
 
 ==== must(T, Array<(value: T) -> Matcher<T> | MatcherResult | Boolean>): MatcherResult
 
-This function allows to assert a value with with a list of Matcher of Expressions
+This function allows to assert a value with a list of Matcher of Expressions
 
 .Example
 
