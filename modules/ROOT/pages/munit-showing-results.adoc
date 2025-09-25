@@ -2,7 +2,6 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: faq-how-to-read-munit-test-results.adoc
 :page-deployment-options: acb-ide, studio-ide
 
 This section briefly explains how to read the MUnit console logs.
