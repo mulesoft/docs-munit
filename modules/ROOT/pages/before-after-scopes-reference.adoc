@@ -2,7 +2,6 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-aliases: before-after-scopes-concept.adoc
 :page-deployment-options: acb-ide, studio-ide
 
 [[before-suite-scope]]
