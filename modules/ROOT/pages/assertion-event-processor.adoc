@@ -33,7 +33,7 @@ Or you can also check if the payload is null using the `nullValue()` matcher.
 
 See xref:munit-matchers.adoc[MUnit Matchers] for more information.
 
-If these assertion fails, the processor throws a `java.lang.AssertionError`.
+If these assertion fails, the processor throws a `MUNIT-TOOLS:ASSERTION_ERROR`.
 
 == See Also
 
