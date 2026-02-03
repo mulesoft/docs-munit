@@ -11,4 +11,4 @@ if that point is reached.
 ----
 
 The message field is optional and defines the error message to print when the assertion fails.
-The processor throws a `java.lang.AssertionError`.
+The processor throws a `MUNIT-TOOLS:ASSERTION_ERROR`.

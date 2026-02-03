@@ -63,7 +63,7 @@ And then use it in your Assert-Expression processor:
 </munit-tools:assert>
 ----
 
-If this assertion fails, the processor throws a `java.lang.AssertionError`.
+If this assertion fails, the processor throws a `MUNIT-TOOLS:ASSERTION_ERROR`.
 
 [WARNING]
 --

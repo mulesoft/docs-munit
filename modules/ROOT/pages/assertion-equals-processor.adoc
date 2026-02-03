@@ -28,4 +28,4 @@ If the `expected` attribute is a String, you can specify the literal value witho
 ----
 
 
-If this assertion fails, the processor throws a `java.lang.AssertionError`.
+If this assertion fails, the processor throws a `MUNIT-TOOLS:ASSERTION_ERROR`.
