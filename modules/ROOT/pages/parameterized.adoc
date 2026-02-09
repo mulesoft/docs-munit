@@ -80,6 +80,27 @@ For example, if you have a test that sets a payload for a flow and expects a res
 </mule>
 ----
 
+== Access Parameters from DataWeave
+
+Use the DataWeave `p()` function to access parameter values inside DataWeave expressions, concatenate parameter values with other strings, perform comparisons or calculations, and use parameters in complex DataWeave transformations.
+
+For example, you can use the `p()` function to validate that the payload contains the expected value:
+
+.Accessing Parameters with the p() Function
+[source,xml,linenums]
+----
+<munit:test name="validateGreeting">
+    <munit:behavior>
+        <set-payload value="#['Hello, ' ++ p('name') ++ ' ' ++ p('lastname')]"/>
+    </munit:behavior>
+    <munit:validation>
+        <munit-tools:assert-that 
+          expression="#[payload contains p('name')]" 
+          is="#[MunitTools::equalTo(true)]"/>
+    </munit:validation>
+</munit:test>
+----
+
 == Parameterization from File
 
 To use the same parameterized values on different test suites, you must save your parameterizations values in a YAML file in the `/test/resources` directory of your Mule application project:
@@ -124,3 +145,7 @@ You can combine both methods to add parameterized values to a test suite:
 ----
 
 If you define the same parameterization key in a YAML file and your test suite configuration, the test suite parameterization overrides your YAML parameterization.
+
+== See Also
+
+* xref:dataweave::dw-mule-functions-p.adoc[]
