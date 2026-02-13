@@ -84,7 +84,7 @@ For example, if you have a test that sets a payload for a flow and expects a res
 
 Use the DataWeave `p()` function to access parameter values inside DataWeave expressions, concatenate parameter values with other strings, perform comparisons or calculations, and use parameters in complex DataWeave transformations.
 
-For example, use the `p()` function to validate that the payload contains the expected value:
+Using the parameterization from the first example, the following test uses `p()` to build a greeting message and validate that the payload contains the expected name:
 
 .Accessing Parameters with the p() Function
 [source,xml,linenums]
