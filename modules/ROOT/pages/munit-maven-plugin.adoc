@@ -590,12 +590,14 @@ You can specify the runtime version in which the applications you test run.
     <artifactId>munit-maven-plugin</artifactId>
     <configuration>
       ...
-      <runtimeVersion>4.2.2</runtimeVersion>
+      <munit.runtimeversion>4.2.2</munit.runtimeversion>
       ...
     </configuration>
   </plugin>
 </plugins>
 ----
+
+The `munit.runtimeversion` property replaces the deprecated `runtimeVersion` property. The `runtimeVersion` property remains supported. If you use `runtimeVersion`, MUnit displays a warning message that indicates the property is deprecated and that you must migrate to `munit.runtimeversion`.
 
 == Specify the JVM
 
@@ -810,11 +812,17 @@ Its default value is `false`.
 |Directory where the MUnit tests reside. +
 Its default value is `${project.build.directory}/test-mule/munit`.
 
-|`runtimeVersion`
+|`munit.runtimeversion`
 |String
 |Version of the Mule runtime +
 When you run your tests from Maven, this value comes from the `minMuleVersion` parameter in the `mule-artifact.json` file. +
 To modify the Mule runtime version used to run your MUnit tests, see xref:runtime-patching.adoc[Runtime Patching].
+
+|`runtimeVersion` (deprecated)
+|String
+|Deprecated alias for `munit.runtimeversion`. +
+This property remains supported for backward compatibility. +
+When you use this property, MUnit displays a warning message and instructs you to migrate to `munit.runtimeversion`.
 
 |runtimeProduct
 |String
