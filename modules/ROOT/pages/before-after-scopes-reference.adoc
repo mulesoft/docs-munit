@@ -36,7 +36,7 @@ Use a Before Suite scope to set up state that every test in the suite shares, su
 </munit:test>
 ----
 
-NOTE:
+[NOTE]
 The `before-suite` scope is located outside the MUnit test, so the insert runs once before the first test instead of once per test.
 
 When you place a before-suite in the Anypoint Studio canvas, the scope locates outside the MUnit test.
@@ -71,7 +71,7 @@ Use an After Suite scope to tear down whatever the Before Suite created, so the 
 </munit:after-suite>
 ----
 
-NOTE:
+[NOTE]
 The `after-suite` scope is located outside the MUnit test, so the cleanup runs once after the last test completes.
 
 When you place an after-suite in the Anypoint Studio canvas, the scope locates outside the MUnit test.
@@ -107,7 +107,7 @@ Use a Before Test scope to set up state that each test needs individually, such 
 </munit:test>
 ----
 
-NOTE:
+[NOTE]
 The `before.test` scope is located outside the MUnit test, so each test starts from the same record and variable value without repeating the setup in every test.
 
 When you place a before-test in the Anypoint Studio canvas, the scope locates outside the MUnit test.
@@ -142,7 +142,7 @@ Use an After Test scope to undo what the Before Test created, so one test doesn'
 </munit:after-test>
 ----
 
-NOTE:
+[NOTE]
 The `after.test` scope is located outside the MUnit test, so the cleanup runs after each test rather than once after the suite.
 
 When you place an after-test in the Anypoint Studio canvas, the scope locates outside the MUnit test.
