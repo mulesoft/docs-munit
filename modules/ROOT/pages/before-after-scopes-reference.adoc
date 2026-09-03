@@ -16,7 +16,7 @@ For example, suppose you have an MUnit Test Suite file with four tests. The code
 [NOTE]
 You can only use one Before Suite scope per MUnit test suite.
 
-Use a Before Suite scope to set up state that every test in the suite shares, such as seeding an in-memory database, starting a server utility, or storing values that the tests read. The example seeds a table in the MUnit database server so that all tests query the same data:
+Use a Before Suite scope to set up state that every test in the suite shares, such as seeding an in-memory database, starting a server utility, or storing values that the tests read. In the example, the `jobtitlelookup.csv` file creates the table and its initial contents when the database server starts, and the Before Suite adds one shared row that all tests in the suite query:
 
 .Before Suite example
 [source,xml,linenums]
@@ -26,13 +26,13 @@ Use a Before Suite scope to set up state that every test in the suite shares, su
     connectionStringParameters="MODE=MySQL" />
 </dbserver:config>
 
-<munit:before-suite name="before-suite" description="Seeds the test database for the whole suite">
+<munit:before-suite name="before-suite" description="Adds a shared row for the whole suite">
   <dbserver:execute config-ref="MUnit_DB_Server_Config"
-    sql="INSERT INTO jobtitlelookup VALUES ('Developer','10','DEV');" />
+    sql="INSERT INTO jobtitlelookup VALUES ('Support Engineer','10','SUP');" />
 </munit:before-suite>
 
 <munit:test name="munit.test" description="Test">
-  <!-- Every test in this suite can query the seeded row -->
+  <!-- Every test in this suite can query the row added by the before-suite -->
 </munit:test>
 ----
 
@@ -51,14 +51,14 @@ For instance, let's suppose you have an MUnit Test Suite File with four tests. T
 [NOTE]
 You can only use one After Suite scope per MUnit test suite.
 
-Use an After Suite scope to tear down whatever the Before Suite created, so the next suite run starts from a clean state. The example removes the row that the Before Suite inserted:
+Use an After Suite scope to tear down whatever the Before Suite created, so the next suite run starts from a clean state. The example removes only the row that the Before Suite added, leaving the contents loaded from the CSV file untouched:
 
 .After Suite example
 [source,xml,linenums]
 ----
-<munit:before-suite name="before.suite" description="Seeds the test database for the whole suite">
+<munit:before-suite name="before.suite" description="Adds a shared row for the whole suite">
   <dbserver:execute config-ref="MUnit_DB_Server_Config"
-    sql="INSERT INTO jobtitlelookup VALUES ('Developer','10','DEV');" />
+    sql="INSERT INTO jobtitlelookup VALUES ('Support Engineer','10','SUP');" />
 </munit:before-suite>
 
 <munit:test name="munit.test" description="Test">
@@ -67,7 +67,7 @@ Use an After Suite scope to tear down whatever the Before Suite created, so the 
 
 <munit:after-suite name="after.suite" description="Removes the data created for the suite">
   <dbserver:execute config-ref="MUnit_DB_Server_Config"
-    sql="DELETE FROM jobtitlelookup WHERE JOBTITLEID='DEV';" />
+    sql="DELETE FROM jobtitlelookup WHERE JOBTITLEID='SUP';" />
 </munit:after-suite>
 ----
 
