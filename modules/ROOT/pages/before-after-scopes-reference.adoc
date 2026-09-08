@@ -16,19 +16,28 @@ For example, suppose you have an MUnit Test Suite file with four tests. The code
 [NOTE]
 You can only use one Before Suite scope per MUnit test suite.
 
+Use a Before Suite scope to set up state that every test in the suite shares, such as seeding an in-memory database, starting a server utility, or storing values that the tests read. In the example, the `jobtitlelookup.csv` file creates the table and its initial contents when the database server starts, and the Before Suite adds one shared row that all tests in the suite query:
+
 .Before Suite example
 [source,xml,linenums]
 ----
-<munit:before-suite name="before-suite" description="Executes a before suite">
-  <!-- some mule code here -->
-</munit:before-suite >
+<dbserver:config name="MUnit_DB_Server_Config">
+  <dbserver:connection csv="jobtitlelookup.csv" database="DATABASE_NAME"
+    connectionStringParameters="MODE=MySQL" />
+</dbserver:config>
+
+<munit:before-suite name="before-suite" description="Adds a shared row for the whole suite">
+  <dbserver:execute config-ref="MUnit_DB_Server_Config"
+    sql="INSERT INTO jobtitlelookup VALUES ('Support Engineer','10','SUP');" />
+</munit:before-suite>
 
 <munit:test name="munit.test" description="Test">
-  <!-- some more mule code here -->
+  <!-- Every test in this suite can query the row added by the before-suite -->
 </munit:test>
 ----
 
-Note that the `before-suite` is located outside the MUnit test. One instance in which the MUnit Before Suite is useful is when you need to set up a test environment before all tests run.
+[NOTE]
+The `before-suite` scope is located outside the MUnit test, so the insert runs once before the first test instead of once per test.
 
 When you place a before-suite in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
@@ -42,23 +51,28 @@ For instance, let's suppose you have an MUnit Test Suite File with four tests. T
 [NOTE]
 You can only use one After Suite scope per MUnit test suite.
 
+Use an After Suite scope to tear down whatever the Before Suite created, so the next suite run starts from a clean state. The example removes only the row that the Before Suite added, leaving the contents loaded from the CSV file untouched:
+
 .After Suite example
 [source,xml,linenums]
 ----
-<munit:before-suite name="before.suite" description="A description">
-  <!-- some mule code here -->
-</munit:before-suite >
+<munit:before-suite name="before.suite" description="Adds a shared row for the whole suite">
+  <dbserver:execute config-ref="MUnit_DB_Server_Config"
+    sql="INSERT INTO jobtitlelookup VALUES ('Support Engineer','10','SUP');" />
+</munit:before-suite>
 
 <munit:test name="munit.test" description="Test">
   <!-- some more mule code here -->
 </munit:test>
 
-<munit:after-suite  name="after.suite" description="A description">
-  <!-- some Mule code here -->
-</munit:after-suite >
+<munit:after-suite name="after.suite" description="Removes the data created for the suite">
+  <dbserver:execute config-ref="MUnit_DB_Server_Config"
+    sql="DELETE FROM jobtitlelookup WHERE JOBTITLEID='SUP';" />
+</munit:after-suite>
 ----
 
-Note that the after-suite is located outside the MUnit test. One instance in which the MUnit After Suite is useful is when you need to tear down a test environment after the whole test runs.
+[NOTE]
+The `after-suite` scope is located outside the MUnit test, so the cleanup runs once after the last test completes.
 
 When you place an after-suite in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
@@ -72,21 +86,31 @@ For instance, let's suppose you have an MUnit Test Suite file with four tests. T
 [NOTE]
 You can only use one Before Test scope per MUnit test suite.
 
+Use a Before Test scope to set up state that each test needs individually, such as inserting a record, creating a file, or setting a variable that the test consumes. The following example inserts a record and sets the variable that the flow under test reads:
+
 .Before Test example
 [source,xml,linenums]
 ----
-<munit:before-test name="before.test" description="A description">
-  <!-- some mule code here -->
+<munit:before-test name="before.test" description="Creates the record each test needs">
+  <dbserver:execute config-ref="MUnit_DB_Server_Config"
+    sql="INSERT INTO jobtitlelookup VALUES ('Culinary Team Member','10','HIR');" />
+  <set-variable variableName="jobid" value="HIR" />
 </munit:before-test>
 
 <munit:test name="munit.test" description="Test">
-  <!-- some more mule code here -->
+  <munit:execution>
+    <flow-ref name="selectFlow" />
+  </munit:execution>
+  <munit:validation>
+    <munit-tools:assert-equals actual="#[vars.job]" expected="Culinary Team Member" />
+  </munit:validation>
 </munit:test>
 ----
 
-Note that the `before.test` is located outside the MUnit test. One instance in which the MUnit Before Test is useful is when you need to set up a test environment before each test run, like creating a file or setting a variable that will be consumed in each test.
+[NOTE]
+The `before.test` scope is located outside the MUnit test, so each test starts from the same record and variable value without repeating the setup in every test.
 
-When you place an before-test in the Anypoint Studio canvas, the scope locates outside the MUnit test.
+When you place a before-test in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
 [[after-test-scope]]
 == After Test Scope
@@ -98,23 +122,28 @@ For instance, let's suppose you have an MUnit Test Suite file with four tests. T
 [NOTE]
 You can only use one After Test scope per MUnit test suite.
 
+Use an After Test scope to undo what the Before Test created, so one test doesn't leave data behind that affects the next one. The following example deletes the record that the Before Test inserted:
+
 .After Test example
 [source,xml,linenums]
 ----
-<munit:before-test name="before.test" description="A description">
-  <!-- some mule code here -->
+<munit:before-test name="before.test" description="Creates the record each test needs">
+  <dbserver:execute config-ref="MUnit_DB_Server_Config"
+    sql="INSERT INTO jobtitlelookup VALUES ('Culinary Team Member','10','HIR');" />
 </munit:before-test>
 
 <munit:test name="munit.test" description="Test">
   <!-- some more mule code here -->
 </munit:test>
 
-<munit:after-test  name="after.test" description="A description">
-  <!-- some mule code here -->
+<munit:after-test name="after.test" description="Removes the record created for the test">
+  <dbserver:execute config-ref="MUnit_DB_Server_Config"
+    sql="DELETE FROM jobtitlelookup WHERE JOBTITLEID='HIR';" />
 </munit:after-test>
 ----
 
-Note that the `after.test` is located outside the MUnit test. One instance in which the MUnit After test is useful is when you need to tear down a test environment after the whole test runs.
+[NOTE]
+The `after.test` scope is located outside the MUnit test, so the cleanup runs after each test rather than once after the suite.
 
 When you place an after-test in the Anypoint Studio canvas, the scope locates outside the MUnit test.
 
@@ -176,3 +205,11 @@ When you place an after-test in the Anypoint Studio canvas, the scope locates ou
 |Describes the actions performed.
 
 |===
+
+== See Also
+
+* xref:munit-test-concept.adoc[]
+* xref:db-util.adoc[]
+* xref:db-server-cookbook.adoc[]
+* xref:ftp-util.adoc[]
+* xref:enable-flow-sources-concept.adoc[]
