@@ -5,6 +5,8 @@ endif::[]
 :page-aliases: munit-suite.adoc, munit-test-reference.adoc
 :page-deployment-options: acb-ide, studio-ide
 
+An MUnit test suite is an XML file that contains MUnit tests organized into behavior, execution, and validation scopes. Use test suite files in the src/test/munit directory to define, configure, and run automated tests against your Mule application flows.
+
 == MUnit Test Suite
 
 The base file in MUnit is the test suite file, an XML file located in the `src/test/munit` directory of your Mule application project. You can use multiple MUnit test suite files. Each MUnit test suite file is a collection of MUnit tests and runs independently from other MUnit test suites.
@@ -172,7 +174,7 @@ You can also use expressions to ignore a test based on your current Mule version
 
 MUnit ignores this test if the Mule version is earlier than `4.1.4`. Other possible functions are `muleVersionEqualTo` and `muleVersionNewerThan`.
 
-==== Test TimeOut Attribute
+==== Test Timeout Attribute
 
 An MUnit test automatically fails if it takes more than 2 minutes to complete. Use the `timeOut` attribute to set a custom maximum time --in milliseconds-- that the test can run before failing:
 

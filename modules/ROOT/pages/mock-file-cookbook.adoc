@@ -1,12 +1,10 @@
-= Mocking Resources for Your Tests
+= Mock Resources for MUnit Tests with DataWeave
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-As your tests suites start to get bigger and more complex, it’s a good practice to externalize some parts of the test code, not only so that you can keep the code clean and organized but also to reuse the files that you need to mock for your tests.
-
-You can leverage DataWeave to mock your test code, either by creating DataWeave scripts or by using variables in a DataWeave module.
+Externalize mock data for MUnit tests using DataWeave scripts or modules to keep your test code clean and reusable. Use DataWeave files or variables in a DataWeave module to centralize mocked payloads and responses.
 
 == Mock Files Using DataWeave File
 

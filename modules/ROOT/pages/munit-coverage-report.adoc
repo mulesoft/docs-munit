@@ -1,11 +1,11 @@
-= Coverage
+= MUnit Coverage Report
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: faq-how-munit-coverage.adoc, to-disable-coverage-studio.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The MUnit Coverage feature provides a measurement of how much of a Mule application has been executed by a set of MUnit tests by counting the amount of event processors executed. This allows you to obtain a quality standard for your application, and provides metrics for:
+The MUnit Coverage feature measures how much of a Mule application is executed by a set of MUnit tests by counting event processors. Use it to track application, resource, and flow coverage metrics and enforce quality standards.
 
 * Application overall coverage: An average of the items below.
 * Resource coverage: Refers to each Mule configuration file under src/main/mule.

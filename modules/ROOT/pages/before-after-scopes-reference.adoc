@@ -1,15 +1,16 @@
-= Before and After Scopes
+= MUnit Before and After Scopes
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: before-after-scopes-concept.adoc
 :page-deployment-options: acb-ide, studio-ide
 
+MUnit Before and After scopes let you run setup and teardown code at the suite or test level in a MUnit test suite. Use Before scopes to prepare shared state and After scopes to clean it up, so each test starts and ends in a controlled state.
+
 [[before-suite-scope]]
 == Before Suite Scope
 
-The MUnit Before Suite contains code that is meant to be executed before the whole suite.
-The Before Suite has one execution rule: Run before all the tests, just once.
+The MUnit Before Suite scope runs once before all tests in the suite.
 
 For example, suppose you have an MUnit Test Suite file with four tests. The code inside an MUnit Before Suite runs just once, before your four tests.
 
@@ -44,7 +45,7 @@ When you place a before-suite in the Anypoint Studio canvas, the scope locates o
 [[after-suite-scope]]
 == After Suite Scope
 
-The MUnit After Suite is a scope. It can contain code that is meant to be executed after the whole suite. The After suite has one execution rule: Run after all the tests, just once.
+The MUnit After Suite scope runs once after all tests in the suite complete.
 
 For instance, let's suppose you have an MUnit Test Suite File with four tests. The code inside an MUnit After Suite, runs just once, after all your tests.
 
@@ -79,7 +80,7 @@ When you place an after-suite in the Anypoint Studio canvas, the scope locates o
 [[before-test-scope]]
 == Before Test Scope
 
-The MUnit Before Test Scope contains code that is meant to be executed before each test. Each Before Test scope follows the same execution rule: Run before each test.
+The MUnit Before Test scope runs before each individual test in the suite.
 
 For instance, let's suppose you have an MUnit Test Suite file with four tests. The code inside an MUnit Before test runs before each of your four tests; it runs four times.
 
@@ -115,7 +116,7 @@ When you place a before-test in the Anypoint Studio canvas, the scope locates ou
 [[after-test-scope]]
 == After Test Scope
 
-The MUnit After Test Scope contains code that is meant to be executed after each test. Each After Test scope follows the same execution rule: Run after each test.
+The MUnit After Test scope runs after each individual test in the suite completes.
 
 For instance, let's suppose you have an MUnit Test Suite file with four tests. The code inside an MUnit After Test runs after each of your four tests; it runs four times.
 

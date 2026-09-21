@@ -1,4 +1,4 @@
-= Spy Event Processor
+= MUnit Spy Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,10 +6,7 @@ endif::[]
 :page-aliases: spy-processor-concept.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The *Spy Processor* enables you to spy on what happens before and after an event processor is called. +
-This enables you to validate, for example that a selected Mule Event reaches a specific event processor containing a specific payload or variable.
-
-Setting a spy processor tells MUnit to run a set of instructions (usually assertions or verifications) before and/or after the execution of the spied event processor.
+The MUnit Spy event processor observes a specified event processor during a MUnit test, running assertions or verifications before and after the processor executes without modifying the original Mule event. Use it to validate the state of the event at specific points in a flow.
 
 Assume that you have this configuration:
 

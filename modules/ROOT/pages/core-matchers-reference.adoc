@@ -1,8 +1,10 @@
-= Core Matchers Reference
+= MUnit Core Matchers Reference
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+MUnit core matchers are general-purpose matcher functions for use with the Assert That processor in a MUnit test. Use them to check for null values, media types, encodings, and logical combinations of other matchers.
 
 == nullValue()
 

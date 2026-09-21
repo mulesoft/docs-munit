@@ -1,10 +1,10 @@
-= Test Domain-Based Applications
+= Test MUnit Domain-Based Applications
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: studio-ide
 
-MUnit 2.x enables you to write MUnit test suites for your Mule applications that share their resources with a Mule domain, without you performing any additional configuration. To understand how this works, it is helpful to consider a specific scenario populated with actual values, and then use those values in steps that illustrate how to write such a test.
+Test Mule applications that share resources with a Mule domain using MUnit, without additional configuration. Follow a step-by-step example using a domain-based HTTP listener application to see how MUnit resolves shared global configurations automatically.
 
 == Example Domain-Based Mule Application to Be Tested
 
@@ -92,7 +92,7 @@ Note that this application does not define an `http:listener-config` global elem
 
 =====
 
-== Write an MUnit Test of the Example Domain-Based Application
+== Write an MUnit Test for a Domain-Based Application
 
 Because the Mule domain is a dependency of the Mule application, MUnit can start the Mule domain to retrieve the necessary global elements configuration for the application that it's testing.
 

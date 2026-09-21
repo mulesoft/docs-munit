@@ -1,4 +1,4 @@
-= Run Custom Event Processor
+= MUnit Run Custom Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,7 +6,7 @@ endif::[]
 :keywords: mule, esb, tests, qa, quality assurance, verify, functional testing, unit testing, stress testing
 :page-deployment-options: acb-ide, studio-ide
 
-The *Run Custom event processor* enables you to assert the Mule event content against a custom assertion.
+The MUnit Run Custom event processor runs a custom Java assertion class against a Mule event during a MUnit test. Use it when built-in matchers are not sufficient and you need to implement custom validation logic in Java.
 
 To add the *Run Custom processor* to your project, add the following dependency to your `pom.xml` file:
 

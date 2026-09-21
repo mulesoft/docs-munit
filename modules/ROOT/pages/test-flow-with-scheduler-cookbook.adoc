@@ -1,8 +1,10 @@
-= Testing a Flow with a Scheduler Source
+= Test a Flow with a Scheduler Source in MUnit
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+Test a Mule flow triggered by a Scheduler component in MUnit by enabling flow sources and using the verify-call processor to confirm the flow executes. Wrap verify-call inside an until-successful scope to handle timing variations in the Scheduler.
 
 Assume that you want to both test the following flow triggered by a Scheduler component and validate that your flow is being triggered correctly:
 

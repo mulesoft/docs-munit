@@ -1,10 +1,12 @@
-= Testing and Mocking Errors
+= Test and Mock Errors in MUnit
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-== Expect an Error in your Test
+Test and mock error handling in MUnit by configuring expected error types, using mock-when to simulate errors, or setting errors directly on the Mule event. Use these techniques to validate on-error-continue and on-error-propagate scopes in your flows.
+
+== Expect an Error in Your Test
 
 During the execution of a flow, components may throw errors which might be expected for the use case
 being tested. In these cases, you want to specify that your test expects a particular error type or exception.

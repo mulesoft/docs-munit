@@ -1,13 +1,10 @@
-= Using Coverage in Studio
+= Run MUnit Coverage Reports in Anypoint Studio
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: studio-ide
 
-You can run a coverage report from Anypoint Studio.
-
-The following configurations apply only when you execute your MUnit tests in Studio. They do not apply when running tests from Maven in a CI/CD environment. +
-To run coverage reports from Maven see xref:coverage-maven-concept.adoc[].
+Run MUnit coverage reports in Anypoint Studio to see which flows and event processors your tests cover. These configurations apply only when running MUnit tests in Studio, not from Maven in a CI/CD environment.
 
 == Enable Coverage Reports in Anypoint Studio
 

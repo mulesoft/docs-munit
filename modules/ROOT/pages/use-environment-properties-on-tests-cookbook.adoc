@@ -1,8 +1,10 @@
-= Testing with Environment Properties
+= Test MUnit Flows with Environment Properties
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+Configure environment-specific properties in MUnit tests by extracting HTTP configuration values into separate properties files for each environment. Use the MUnit Maven plugin to load the correct properties file when running tests against a QA or production API endpoint.
 
 Assume that you have the following flow that obtains data from an external API and you need to consume it from a test environment when executing your MUnit tests:
 

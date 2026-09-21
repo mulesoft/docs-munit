@@ -2,14 +2,10 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
-:page-deployment-options: studio-ide
 
-MUnit is fully integrated with Anypoint Studio. You can use the Studio graphical interface to:
+MUnit is fully integrated with Anypoint Studio, letting you create, design, run, debug, and view results of MUnit tests directly from the IDE. You can configure tests visually on the canvas or write XML in the editor, and view test results and coverage metrics from the MUnit panel.
 
-* Create and design MUnit tests
-* Run your tests
-* View test results and coverage
-* Debug your tests
+For full instructions, see xref:studio::test-with-munit-in-studio.adoc[Testing Projects with MUnit in Studio].
 
 == See Also
 

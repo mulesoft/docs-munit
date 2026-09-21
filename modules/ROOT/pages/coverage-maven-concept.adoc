@@ -1,15 +1,14 @@
-= Maven Configuration for Coverage
+= Configure MUnit Coverage in Maven
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-partial:
+:version-info: 2.0 and later
 :page-deployment-options: acb-ide, studio-ide
 
 // tag::coverage-report[]
 
-From MUnit 2.x and later, the coverage report goal is integrated with the Maven reporting section. MUnit generates coverage reports during the Maven `site` lifecycle, during the `coverage-report` goal.
-
-The following configurations apply if you execute your MUnit tests using the Maven plugin. They don't apply when running tests from Anypoint Code Builder or Anypoint Studio.
+Configure MUnit coverage reports in Maven by adding the munit-maven-plugin to your pom.xml and enabling the coverage-report goal. Coverage reports are generated during the Maven site lifecycle and are not available when running tests from Anypoint Code Builder or Anypoint Studio.
 
 .MUnit Coverage - Sample Maven configuration
 [source,xml,linenums]
@@ -116,7 +115,7 @@ To configure, for example, the JSON report generation, add the following configu
 
 // end::report-types[]
 
-== Set up a Minimum Coverage Level
+== Set Up a Minimum Coverage Level
 
 One of the features of MUnit Coverage is to fail the build if a certain coverage level isn't reached.
 

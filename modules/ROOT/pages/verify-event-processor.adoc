@@ -1,4 +1,4 @@
-= Verify Event Processor
+= MUnit Verify Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,13 +7,7 @@ endif::[]
 :page-aliases: verify-message-processor.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The Verify Event processor allows you to verify if a processor was called.
-
-For example, you can validate if a specific processor has been called with a particular set of attributes a specific number of times.
-
-When defining a verification, you are telling MUnit to fail a test if the verification is not successful.
-
-You can define verifications over any processor, even if you haven't created a mock for it.
+The MUnit Verify event processor validates that a specified event processor was called a certain number of times during a MUnit test. Use it to confirm that your flow executed the expected processors with the expected attributes, even without creating a mock for them.
 
 [source,xml,linenums]
 ----

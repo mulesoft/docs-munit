@@ -1,8 +1,10 @@
-= String Matchers Reference
+= MUnit String Matchers Reference
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+MUnit String matchers are matcher functions for asserting conditions on String expressions during a MUnit test. Use them with the Assert That processor to check for substrings, prefixes, suffixes, empty values, and case-insensitive equality.
 
 == containsString(String)
 

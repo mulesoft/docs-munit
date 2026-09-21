@@ -1,4 +1,4 @@
-= Set Event Processor
+= MUnit Set Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,8 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing
 :page-deployment-options: acb-ide, studio-ide
 
-The Set Event Processor allows you to define a Mule Event. +
-This message processor is normally used at the beginning of an MUnit test, to define the first message to send to the flow being tested.
+The MUnit Set Event processor defines the initial Mule event, including payload, attributes, and variables that a MUnit test sends to the flow under test. Use it at the beginning of an MUnit test to set up the input conditions for your flow.
 
 The example below shows how to define a simple payload of a Mule Message:
 

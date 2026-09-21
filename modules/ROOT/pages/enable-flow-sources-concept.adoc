@@ -1,4 +1,4 @@
-= Enable Flow Sources
+= Enable Flow Sources in MUnit
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -8,9 +8,7 @@ endif::[]
 :port: 1234
 :payload: 'Hello World!'
 
-The `Enable Flow Sources` element within the MUnit test instructs MUnit which flow sources to load and execute for the test.
-
-By default, MUnit doesn't start any of the event sources (flow sources such as triggers and listeners). You must configure which flow sources must start for your tests.
+The MUnit Enable Flow Sources element specifies which flow sources, such as HTTP listeners and triggers, start and run during a MUnit test. By default, MUnit does not start any event sources, you must explicitly configure which ones to enable for each test.
 
 Assume that your application has a flow with an HTTP listener that returns a specific payload:
 

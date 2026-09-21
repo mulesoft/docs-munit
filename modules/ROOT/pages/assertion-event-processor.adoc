@@ -1,4 +1,4 @@
-= Assert That Event Processor
+= MUnit Assert That Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,7 +7,7 @@ endif::[]
 :page-aliases: assertion-message-processor.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The Assert That event processor allows you to run assertions to validate the state of a Mule event's content. You can use the Assert That processor to validate the Mule event after the production code runs.
+The MUnit Assert That event processor validates the state of a Mule event's content during a MUnit test using DataWeave MUnit matchers. Use it to assert conditions on any value in an expression after production code runs.
 
 The Assert That processor uses a set of DataWeave functions called `MUnit matchers` to define the assertion conditions for any value in an expression.
 

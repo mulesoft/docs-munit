@@ -1,4 +1,4 @@
-= Mock When Event Processor
+= MUnit Mock When Event Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,7 +7,7 @@ endif::[]
 :page-aliases: mock-message-processor.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The *Mock When* processor enables you to mock an event processor when it matches the defined name and attributes.
+The MUnit Mock When processor intercepts a specified event processor during a MUnit test and returns a configured response instead of executing the real operation. Use it to isolate the flow under test from external dependencies such as HTTP requests, database calls, or web service operations.
 
 For example, you can use the *Mock Event* processor to mock a POST request with a mocked payload:
 

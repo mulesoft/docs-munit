@@ -1,8 +1,10 @@
-= Comparable Matchers Reference
+= MUnit Comparable Matchers Reference
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+MUnit Comparable matchers are matcher functions that assert comparison conditions on values during a MUnit test. Use them with the Assert That processor to check if a value is greater than, less than, equal to, or close to an expected value.
 
 [NOTE]
 `Comparable` is a DataWeave type that represents all the types that can be compared to each other. +
@@ -50,6 +52,8 @@ is="#[MunitTools::greaterThanOrEqualTo(|2017-08-09|)]"/>
 ----
 
 == lessThan(Comparable)
+
+Checks that the expression is less than the specified value.
 
 .Example
 [source,xml,linenums]

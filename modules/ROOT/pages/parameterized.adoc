@@ -1,4 +1,4 @@
-= Parameterized
+= MUnit Parameterized Test Suites
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,7 +7,7 @@ endif::[]
 :page-aliases: munit-parameterized-suite.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-A parameterized test suite runs the same tests but with different inputs.
+MUnit parameterized test suites run the same tests multiple times with different input values, reducing duplication in your test code. Define parameterizations inline in the test suite configuration or load them from a YAML file in your project's test resources.
 
 The test suite parameterization is defined at a configuration level as follows:
 

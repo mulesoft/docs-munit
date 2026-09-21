@@ -1,13 +1,11 @@
-= Installing a Database Server
+= Install the MUnit Database Server Module
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-database-server.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-To test a piece of code that connects with a database server, install a database server in your local environment to run the tests. You can also use a dedicated external database server for testing, but your Maven project can't be portable. If so, a third party must install the testing database server to compile your project.
-
-To make it easier for you to test database connections, MUnit allows you to implement a database server in your local environment.
+Install the MUnit Database Server module to run MUnit tests against an in-memory H2 database without an external database server. This makes your Maven project portable and your database tests isolated and repeatable.
 
 == Install the MUnit DB Server Module
 
@@ -99,7 +97,7 @@ You can define the structure and content of your database in two different ways:
 The MUnit DB server is based on H2. Complex structures, index and join commands can present issues.
 
 [[db-structure-sql]]
-=== Defining the DB Structure from an SQL File
+=== Define the DB Structure from an SQL File
 
 To define the DB structure and content from an SQL file, you must provide a valid set of ANSI SQL DDL (Data Definition Language) instructions in your MUnit suite file. For example, `my-munit-suite.xml`.
 
@@ -111,7 +109,7 @@ To define the DB structure and content from an SQL file, you must provide a vali
 ----
 
 [[db-structure-csv]]
-=== Define the DB Structure From a CSV File
+=== Define the DB Structure from a CSV File
 
 To define your DB structure in your MUnit suite file based on a CSV file:
 

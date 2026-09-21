@@ -1,8 +1,10 @@
-= Configuring the Database Server Utility in an MUnit Test
+= Configure the MUnit Database Server Utility
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+Configure the MUnit Database Server utility to run MUnit tests against an in-memory database without connecting to an external database server. Use it to test Mule flows that interact with a database connector in an isolated and repeatable way.
 
 If you want to test the following Mule application:
 
