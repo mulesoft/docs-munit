@@ -3,6 +3,6 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-MUnit is integrated with Anypoint Code Builder, letting you create, design, run, debug, and view results of MUnit tests directly from the IDE. You can generate test structures from flows, configure tests visually on the canvas, or write XML directly in the code editor. A dedicated Testing panel lets you run all suites, individual suites, or specific test cases and view results alongside coverage metrics.
+MUnit is integrated with Anypoint Code Builder, letting you create, design, run, debug, and view results of MUnit tests directly from the IDE. You can generate test structures from flows, configure tests visually on the canvas, or write XML directly in the code editor. A dedicated Testing panel lets you run all suites, individual suites, or specific test cases, and view results alongside coverage metrics.
 
 For full instructions, see xref:anypoint-code-builder::int-test-munit.adoc[Testing Projects with MUnit in Anypoint Code Builder].
