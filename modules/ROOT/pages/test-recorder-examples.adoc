@@ -1,11 +1,11 @@
-= Recording a Test from an Exchange Example
+= Record an MUnit Test from an Anypoint Exchange Example
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: studio-ide
 :page-partial:
 
-The following example shows you how to import to Anypoint Studio an existing project from Anypoint Exchange and then record the flow processing to create a unit test for the flows.
+Record an MUnit test in Anypoint Studio by importing an existing project from Anypoint Exchange and capturing flow processing with the MUnit test recorder. This example uses the Login Form Using the HTTP Connector project.
 
 == Prerequisite
 

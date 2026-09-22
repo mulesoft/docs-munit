@@ -1,8 +1,10 @@
-= Configuring the FTP Server Utility in an MUnit Test
+= Configure the MUnit FTP Server Utility
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+Configure the MUnit FTP Server utility to run MUnit tests against an in-memory FTP server without connecting to an external FTP server. Use it to test Mule flows that interact with FTP or SFTP connectors in an isolated environment.
 
 If you want to test the following Mule application:
 

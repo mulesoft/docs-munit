@@ -1,10 +1,10 @@
-= Dynamic Ports
+= MUnit Dynamic Ports
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-The Dynamic Ports global element allows you to bind a free port to a property. It searches for a free port available and can be narrowed to a specific range.
+The MUnit Dynamic Ports element binds a free port to a property at test runtime, preventing port conflicts when running MUnit tests in parallel. You can optionally restrict the port search to a specific range using min and max values.
 
 For example, a dynamic port would look something like this:
 

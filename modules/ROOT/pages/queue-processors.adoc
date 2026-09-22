@@ -1,4 +1,4 @@
-= Queue Event Processors
+= MUnit Queue Event Processors
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -6,9 +6,7 @@ endif::[]
 :keywords: munit, testing, unit testing, queue
 :page-deployment-options: acb-ide, studio-ide
 
-The Queue event processors allow you to manage temporary queues during your test runs.
-
-All queues are emptied as soon as the test ends.
+MUnit Queue event processors manage temporary in-memory queues during MUnit test runs, letting you enqueue and dequeue values to test asynchronous flows. All queues are cleared automatically when each test ends.
 
 [[queue]]
 == Queue

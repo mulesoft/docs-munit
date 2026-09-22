@@ -1,8 +1,10 @@
-= Iterable and Map Matchers Reference
+= MUnit Iterable and Map Matchers Reference
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+MUnit Iterable and Map matchers are matcher functions for asserting conditions on collections and maps during a MUnit test. Use them with the Assert That processor to check items, keys, values, and sizes of iterables and maps.
 
 == everyItem(Matcher)
 

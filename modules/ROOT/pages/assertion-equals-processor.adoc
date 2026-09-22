@@ -1,11 +1,11 @@
-= Assert Equals
+= MUnit Assert Equals Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: assert-equals-processor.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The Assert Equals processor allows you to run assertions in order to validate the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs.
+The MUnit Assert Equals processor validates that two values are equal during a MUnit test. Use it to check the state of a Mule Event's payload or variables after production code runs.
 
 For example, to assert that a payload is equal to a certain value, you can configure the Assert-Equals processor the following way:
 

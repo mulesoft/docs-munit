@@ -1,12 +1,10 @@
-= Using Utility Classes From a Test
+= Use Utility Classes in MUnit Tests
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-When developing test cases, you might want to use custom Java classes located in `src/test/java`. You can use Java classes through DataWeave or through Java Module.
-
-When using custom classes, the package of the class must be exported in the `mule-artifact.json` file:
+Use custom Java utility classes located in `src/test/java` in your MUnit tests through DataWeave or the Java Module. Export the class package in your `mule-artifact.json` file to make it available during test execution.
 
 [source, json]
 ----

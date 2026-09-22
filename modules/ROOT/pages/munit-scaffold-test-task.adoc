@@ -1,11 +1,9 @@
-= Scaffold a Template for an MUnit Test from an API Specification
+= Scaffold an MUnit Test Suite from an API Specification
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-You can use APIkit to automatically generate an empty structure for an MUnit test suite based on your API specification.
-
-Because your Mule project is generated using APIkit, you can use APIkit to automatically scaffold an empty MUnit test suite, based on the endpoints described in your API specification. Scaffolding does not generate the test itself, but generates a tool to help you start writing the test.
+Use APIkit to scaffold an empty MUnit test suite structure based on the endpoints defined in your API specification. Scaffolding generates the test suite file but not the individual tests, giving you a starting point for writing your MUnit tests.
 
 To create this empty test suite:
 

@@ -1,16 +1,14 @@
-= Storage Event Processors
+= MUnit Storage Event Processors
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: storage-processors.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The Storage processors allows you to manage temporary storage during  your tests.
-
-All storage is cleared as soon as the test ends.
+MUnit Storage event processors manage temporary key-value storage during a MUnit test, letting you store, retrieve, and remove data across test steps. All stored data is cleared automatically when each test ends.
 
 [[store-operation]]
-== Store operation
+== Store Operation
 
 Stores the given data associated with the given key. If `value` not set, it defaults to the `payload`.
 
@@ -22,7 +20,7 @@ Stores the given data associated with the given key. If `value` not set, it defa
 ----
 
 [[retrieve-operation]]
-== Retrieve operation
+== Retrieve Operation
 
 Retrieves the data associated with the given key
 
@@ -32,7 +30,7 @@ Retrieves the data associated with the given key
 ----
 
 [[remove-operation]]
-== Remove operation
+== Remove Operation
 
 Removes and returns the data associated with the given key
 
@@ -42,7 +40,7 @@ Removes and returns the data associated with the given key
 ----
 
 [[clear-stored-data-operation]]
-== Clear stored data operation
+== Clear Stored Data Operation
 
 Clears all stored data
 

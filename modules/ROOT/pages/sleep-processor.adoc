@@ -1,10 +1,10 @@
-= Sleep Processor
+= MUnit Sleep Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-The Sleep processor allows you to pause your test for a specific time. You can use this processor to simulate a delay in the processing of the flow:
+The MUnit Sleep processor pauses a MUnit test for a specified duration, simulating processing delays in the flow under test. Use it to test time-dependent behavior or introduce controlled waits between test steps.
 
 [source,xml,linenums]
 ----

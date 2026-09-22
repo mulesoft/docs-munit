@@ -1,8 +1,7 @@
-= Fail Event Processor
+= MUnit Fail Event Processor
 :page-deployment-options: acb-ide, studio-ide
 
-The Fail Event Processor allows you to fail your test on purpose. This is useful to validate that a test should fail
-if that point is reached.
+The MUnit Fail event processor forces a MUnit test to fail at a specific point in the flow, which is useful for validating that certain code paths are never reached. Use it to catch unexpected execution paths during testing.
 
 [source,xml,linenums]
 ----

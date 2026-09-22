@@ -1,13 +1,11 @@
-= FTP Utils
+= Install the MUnit FTP Server Module
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: munit-ftp-server.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-To test a piece of code that connects with an FTP server, install an FTP server in your local environment to run the tests. You can also use a dedicated external FTP server for testing, but your Maven project can't be portable. A third party must install the testing FTP server to compile your project.
-
-To test the FTP connections, you can implement an FTP server in your local environment with MUnit.
+Install the MUnit FTP Server module to run MUnit tests against an in-memory FTP or SFTP server without an external server. This makes your Maven project portable and your FTP-based tests isolated and repeatable.
 
 == Install the MUnit FTP Server Module
 

@@ -1,10 +1,10 @@
-= Testing a Processor That Stores Data in a Target Variable
+= Test MUnit Processors That Use Target Variables
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-When you test a processor that stores its result in a target variable, ensure that the assertions check the content of the stored variable. If you mock the processor, define a value for the target variable.
+When testing a processor that stores its result in a target variable in MUnit, assert the content of the stored variable rather than the payload. If you mock the processor, define the target variable value in the mock configuration.
 
 == Example Test of a Target Variable from an HTTP Request Operation
 
@@ -48,7 +48,7 @@ You can create an MUnit test to assert that the stored variable contains, for ex
 
 If you want to test the behavior of this app without making the HTTP request, you can mock the processor and the stored target variable.
 
-=== Mock a Processor that Stores Data in a Target Variable
+=== Mock a Processor That Stores Data in a Target Variable
 
 The following test mocks the HTTP request and the resulting target variable from the previous Mule app example, and then asserts that the stored HTTP status code is `200`:
 

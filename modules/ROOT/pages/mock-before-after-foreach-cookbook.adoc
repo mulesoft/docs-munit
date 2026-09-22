@@ -1,8 +1,10 @@
-= Mocking a Message Before and Inside a Foreach Processor
+= Mock Messages Before and Inside a Foreach Processor in MUnit
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
+
+Mock processors inside a foreach scope in MUnit to return different payloads on each iteration. Use the mock-when processor with a then-call operation to delegate mock responses to a separate flow that evaluates the foreach counter.
 
 Suppose you have a processor inside a `foreach` scope and you want to provide different values on each iteration:
 

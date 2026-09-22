@@ -5,7 +5,7 @@ endif::[]
 :page-aliases: faq-how-to-read-munit-test-results.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-This section briefly explains how to read the MUnit console logs.
+MUnit console logs report test results in three states: successful build, failed build, and build error. Use the MUnit Run Summary at the end of each run to quickly identify the number of tests, failures, errors, and skipped tests.
 
 .Successful Build
 [source,console,linenums]

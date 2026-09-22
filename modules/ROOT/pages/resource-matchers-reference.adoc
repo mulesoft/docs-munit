@@ -1,5 +1,7 @@
-= Resource Matchers
+= MUnit Resource Matchers Reference
 :page-deployment-options: acb-ide, studio-ide
+
+MUnit resource matchers are utility functions that read test resource files and create Mule messages during a MUnit test. Use them to load file contents as streams, strings, or byte arrays, and to inspect queue sizes in your test validations.
 
 == getResourceAsStream(String)
 

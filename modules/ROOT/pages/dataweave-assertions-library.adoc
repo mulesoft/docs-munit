@@ -1,9 +1,11 @@
-= DataWeave Assertions Library
+= MUnit DataWeave Assertions Library
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: weave-assertions.adoc
 :page-deployment-options: acb-ide, studio-ide
+
+The MUnit DataWeave Assertions Library is a set of DataWeave matcher functions for writing assertions in MUnit tests. Use it with the Assert Expression processor to validate values such as strings, numbers, arrays, and objects using DataWeave syntax.
 
 == dw::test::Asserts
 

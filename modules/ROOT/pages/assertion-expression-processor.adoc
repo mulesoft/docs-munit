@@ -1,11 +1,11 @@
-= Assert Expression
+= MUnit Assert Expression Processor
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 :page-aliases: assert-expression-processor.adoc
 :page-deployment-options: acb-ide, studio-ide
 
-The Assert Expression processor allows you evaluate a Dataweave expression that asserts the state of a Mule Event's content. This processor can be used to validate the Mule Event after the production code runs, using the xref:dataweave-assertions-library.adoc[DataWeave Assertions Library].
+The MUnit Assert Expression processor evaluates DataWeave expressions to validate a Mule event's content during a MUnit test, using the DataWeave Assertions Library. Use it when you need DataWeave-native assertions or want to create custom matchers with the DataWeave Assertions Library.
 
 For example, to assert that a payload is equal to a certain value, you can configure the Assert-Expression processor using the equalTo() matcher.
 
@@ -32,7 +32,7 @@ The DW assertions library allows you to assert the state of the Mule Event's con
 ----
 
 
-== Create your own Matcher
+== Create Your Own Matcher
 
 To create your own matcher, you can add DW files to your `src/test/resources` folder. For example, a file called
 `MyMatcher.dwl` with the following content:

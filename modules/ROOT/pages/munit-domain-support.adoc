@@ -4,8 +4,7 @@ include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-MUnit allows you to test applications that run referencing a Mule Domain. +
-MUnit support for domain based applications is designed to require the minimum change of code from your end to implement it. However if your Mule Application depends on a Mule Domain, there are a few considerations to take into account:
+MUnit supports testing Mule applications that reference a Mule domain, with minimal code changes required. Before running domain-based tests, ensure your domain is in your workspace, folder names match artifact IDs, and domain resources are installed in your M2 repository.
 
 * When working in Anypoint Studio, your Mule Domain must always be part of your workspace.
 * Your Folder must have the same name as your artifact. +

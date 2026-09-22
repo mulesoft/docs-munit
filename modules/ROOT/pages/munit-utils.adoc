@@ -4,15 +4,13 @@ include::_attributes.adoc[]
 endif::[]
 :page-deployment-options: acb-ide, studio-ide
 
-One of the main problems of testing production code are external system connections.
-
-MUnit provides a set of utilities for you to write your tests in a portable way and mock external system connections from your tests.
+MUnit Utils are utilities that let you mock external system connections in MUnit tests, making your test suites portable and independent from external infrastructure. Use them to implement in-memory database and FTP servers, or manage temporary queues during test runs.
 
 [%header%autowidth.spread,cols="a,a"]
 |===
 | Utility | Description
-| xref:db-util.adoc[Database] | Implement a DB server in your local environment to test connections.
-| xref:ftp-util.adoc[FTP] | Implement an FTP server in your local environment to test connections.
+| xref:db-util.adoc[] | Implement a DB server in your local environment to test connections.
+| xref:ftp-util.adoc[] | Implement an FTP server in your local environment to test connections.
 | xref:queue-processors.adoc[Queue Event Processors] | Manage temporary queues during your test runs.
 |===
 
