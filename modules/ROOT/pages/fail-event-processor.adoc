@@ -1,7 +1,7 @@
 = MUnit Fail Event Processor
 :page-deployment-options: acb-ide, studio-ide
 
-The MUnit Fail event processor forces a MUnit test to fail at a specific point in the flow, useful for validating that certain code paths are never reached. Use it to catch unexpected execution paths during testing.
+The MUnit Fail event processor forces a MUnit test to fail at a specific point in the flow, which is useful for validating that certain code paths are never reached. Use it to catch unexpected execution paths during testing.
 
 [source,xml,linenums]
 ----
