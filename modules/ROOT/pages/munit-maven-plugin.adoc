@@ -530,6 +530,37 @@ You can also configure this from the `pom.xml` configuration:
 
 You can specify more than one tag by separating them with a comma.
 
+=== Fail When No Tests Run
+
+By default, MUnit fails the Maven build if it can't find any MUnit test suites or if no tests run from the discovered suites. This behavior helps ensure that applications in a CI pipeline include and run MUnit tests.
+
+To allow a build to succeed when no MUnit tests run, set `munitFailIfNoTests` to `false` in the MUnit Maven Plugin configuration:
+
+.Allow builds with no MUnit tests
+[source,xml,linenums]
+----
+<plugins>
+  <plugin>
+      <groupId>com.mulesoft.munit.tools</groupId>
+      <artifactId>munit-maven-plugin</artifactId>
+      <configuration>
+      ...
+      <munitFailIfNoTests>false</munitFailIfNoTests>
+      ...
+    </configuration>
+  </plugin>
+</plugins>
+----
+
+You can also disable this behavior from the command line:
+
+[source,console]
+----
+mvn clean test -Dmunit.failIfNoTests=false
+----
+
+Use this setting only when no MUnit tests are expected to run. Maven's `skipTests` parameter and MUnit's `skipMunitTests` parameter skip MUnit test execution and don't run this validation.
+
 === Skip All Tests
 
 MUnit leverages the same mechanism as Maven. To skip tests, you must use the `skipTests` parameter:
@@ -819,6 +850,11 @@ Its default value is `true`.
 |`munitTags`
 |String
 |Name of the MUnit tags. Tests tagged with these names run.
+
+|`munitFailIfNoTests`
+|boolean
+|Fails the Maven build if no MUnit test suites are found or no tests run from the discovered suites. +
+Its default value is `true`.
 
 |`skipMunitTests`
 |boolean
