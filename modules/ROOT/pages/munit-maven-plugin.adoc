@@ -644,7 +644,7 @@ You can specify the runtime version in which the applications you test run.
     <artifactId>munit-maven-plugin</artifactId>
     <configuration>
       ...
-      <runtimeVersion>4.2.2</runtimeVersion>
+      <munit.runtimeVersion>4.2.2</munit.runtimeVersion>
       ...
     </configuration>
   </plugin>

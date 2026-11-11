@@ -27,7 +27,7 @@ By default, MUnit runs against the Mule version corresponding to the `minMuleVer
         </execution>
     </executions>
     <configuration>
-      <runtimeVersion>4.3.0-20200727</runtimeVersion> //<1>
+      <munit.runtimeVersion>4.3.0-20200727</munit.runtimeVersion> //<1>
     </configuration>
 </plugin>
 ----
