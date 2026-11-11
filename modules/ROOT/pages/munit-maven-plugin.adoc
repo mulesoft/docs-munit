@@ -873,7 +873,7 @@ Its default value is `false`.
 |Directory where the MUnit tests reside. +
 Its default value is `${project.build.directory}/test-mule/munit`.
 
-|`runtimeVersion`
+|`munit.runtimeVersion`
 |String
 |Version of the Mule runtime +
 When you run your tests from Maven, this value comes from the `minMuleVersion` parameter in the `mule-artifact.json` file. +
