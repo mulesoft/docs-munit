@@ -9,7 +9,7 @@ Patch the embedded Mule runtime engine version that MUnit uses to run tests, ove
 [[maven]]
 == Patch MUnit Using Maven
 
-By default, MUnit runs against the Mule version corresponding to the `minMuleVersion` defined in the `mule-artifact.json` file. You can override this version by using the `munit.runtimeversion` property in the `munit-maven-plugin` artifact configuration:
+By default, MUnit runs against the Mule version corresponding to the `minMuleVersion` defined in the `mule-artifact.json` file. You can override this version by setting the `runtimeVersion` parameter in the `munit-maven-plugin` artifact configuration:
 
 [source,xml,linenums]
 ----
@@ -27,13 +27,15 @@ By default, MUnit runs against the Mule version corresponding to the `minMuleVer
         </execution>
     </executions>
     <configuration>
-      <munit.runtimeversion>4.3.0-20200727</munit.runtimeversion> //<1>
+      <runtimeVersion>4.3.0-20200727</runtimeVersion> //<1>
     </configuration>
 </plugin>
 ----
 <1> Be sure to replace the placeholder version in this example with your version, as provided by MuleSoft.
 
-The `munit.runtimeversion` property replaces the deprecated `runtimeVersion` property. The `runtimeVersion` property remains supported for backward compatibility. If you use `runtimeVersion`, MUnit displays a warning message that indicates the property is deprecated and that you must migrate to `munit.runtimeversion`.
+To set the version from the command line, use `-Dmunit.runtimeVersion=` (MUnit 3.7.2 and later).
+
+The `-DruntimeVersion` property is deprecated.
 
 [[studio]]
 == Patch MUnit Using Studio
@@ -46,7 +48,7 @@ By default, MUnit runs in Anypoint Studio with the Mule runtime engine version o
 +
 image::runtime-patching-studio.png["Patched Mule runtime version used for the test."]
 
-If you already set the `munit.runtimeversion` property in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
+If you already set the `runtimeVersion` parameter in the POM file of your project, click *Load configuration from POM file* to automatically load this version into the *Mule Runtime Version* field.
 
 
 == See Also
